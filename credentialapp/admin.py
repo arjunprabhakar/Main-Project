@@ -41,3 +41,4 @@ admin.site.register(reg_user,UserAdmin)
 admin.site.register(log_user)
 
 
+

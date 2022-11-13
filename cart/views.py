@@ -86,6 +86,7 @@ def add_wishlist(request,id):
             return redirect('view_wishlist')
     messages.success(request, 'Sign in..!!')
     return redirect(login)
+    
 
 
 #Wishlist View page
