@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+	<!-- Start Banner Area -->
+	 <section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Login/Register</h1>
+					<nav class="d-flex align-items-center">
+						<h6 style="color:#fff ;">**************************************</h6>
+						
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+    {% include 'alert.html' %}
+
+  <script>
+	  setTimeout(function(){
+	    if ($('#msg').length > 0){
+	      $('#msg').remove();
+	      }
+	    },4000)
+
+  </script>
+	<!--================Login Box Area =================-->
+	<script>
+		function validateform()
+		 {
+			 var a=document.getElementById('email').value.trim();
+			 var b=document.getElementById('pass').value.trim();
+			 if(a=="")
+                {
+                    document.getElementById('eml').innerHTML="**Please Enter Email";
+                    return false;
+                }
+				if(a.indexOf('@')<=0){
+                    document.getElementById('eml').innerHTML="**Invalid  Email Address";
+                    return false;
+                }     
+                if ((a.charAt(a.length-4)!='.') && (a.charAt(a.length-3)!='.')) {
+                    document.getElementById('eml').innerHTML="**Invalid  Email Address";
+                    return false;
+                }
+				if(b=="")
+                {
+                    document.getElementById('pss').innerHTML="**please enter Password";
+                    return false;
+                }
+		 }
+		 function onclear(){
+                document.getElementById('eml').innerHTML="";
+                document.getElementById('pss').innerHTML="";
+		 }
+		 </script>
+
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+
+					<div class="login_box_img">
+						<img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+						<div class="hover">
+							<h4>New to our website?</h4>
+							<!-- <p>There are advances being made in science and technology everyday, and a good example of this is the</p> -->
+							<a class="primary-btn" href="{% url 'register' %}">Create an Account</a>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Login to enter</h3>
+						<form class="row login_form" action="#" method="post" id="contactForm" novalidate="novalidate" onsubmit="return validateform();" >
+							{% csrf_token %}
+							<div class="col-md-12 form-group">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" onclick=" return onclear()">
+								<!-- <i class="bi bi-info-circle-fill"></i>
+								<i class="bi bi-exclamation-circle-fill"></i>	 -->
+								<span id="eml" style="color: red;"></span>
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="pass" name="pass" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" onclick=" return onclear()">
+								<!-- <i class="bi bi-info-circle-fill"></i>
+								<i class="bi bi-exclamation-circle-fill"></i> -->
+								<span id="pss" style="color: red;"></span>
+							</div>
+							<div class="col-md-12 form-group">
+							</div>
+							<div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Log In</button>
+								<a href="#" >Forgot Password?</a>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+{% endblock %}
+
