@@ -6,7 +6,8 @@ from urllib import response
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
+from django.db.models import Q
+from cart.models import Cart
 from category.models import Category, Subcategory
 from productapp.models import Product
 from .models import reg_user,log_user, user_address
@@ -67,15 +68,18 @@ def register(request):
         phone = request.POST.get('phn');
         pswd=sha256(password2.encode()).hexdigest()
 
-        if log_user.objects.filter(email=email).exists():
+        if log_user.objects.filter(email=email,status=True).exists():
+            messages.success(request, 'Email already exist....!!!!')
+            return redirect('login') 
+        elif log_user.objects.filter(email=email,status=False).exists():
             user=log_user.objects.get(email=email) 
             o=generateOTP()
             htmlgen = '<p>Your OTP is:'+o+'</p>'
             send_mail('OTP request',o,'Smart Store',[email], fail_silently=False, html_message=htmlgen)
             user.otp=o;
             user.save()
-            messages.success(request, 'Email already exist....!!!!')
-            return redirect('login')    
+            messages.success(request, 'Email already exist..Please Verify Email!!!!')
+            return redirect('verify_otp') 
         else:
             o=generateOTP()
             htmlgen = '<p>Your OTP is:'+o+'</p>'
@@ -127,7 +131,11 @@ def home(request):
         subcategory=Subcategory.objects.all()
         email = request.session['email']
         product=Product.objects.all()
-        return render(request,'home.html',{'email':email,'category':category,'subcategory':subcategory,'product':product})
+        cart=Cart.objects.filter(user_id=email)
+        cart_count=0
+        for i in cart:
+            cart_count=cart_count+ i.product_qty
+        return render(request,'home.html',{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'product':product})
     messages.success(request, ' Please Login!!')
     return redirect(login)
 
@@ -146,7 +154,11 @@ def profile(request):
         subcategory=Subcategory.objects.all()
         profile=reg_user.objects.all()
         address=user_address.objects.filter(user_id=email)
-        return render(request,"profile.html",{'email':email,'category':category,'subcategory':subcategory,'profile':profile,'address':address})
+        cart=Cart.objects.filter(user_id=email)
+        cart_count=0
+        for i in cart:
+            cart_count=cart_count+ i.product_qty
+        return render(request,"profile.html",{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'profile':profile,'address':address})
     messages.success(request, 'Sign in..!!')
     return redirect(login)
    
@@ -228,10 +240,83 @@ def change_password(request):
         return redirect('login')
 
 
+# Search 
+def searchbar(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            multiple_q = Q(Q(name__icontains=query) | Q( description__icontains=query))
+            products = Product.objects.filter(multiple_q) 
+            category=Category.objects.all()
+            subcategory=Subcategory.objects.all()
+            email = request.session['email']
+            return render(request, 'search.html', {'product':products,'category':category,'subcategory':subcategory,'email':email})
+        else:
+            messages.info(request, 'No search result!!!')
+            print("No information to show")
+    category=Category.objects.all()
+    subcategory=Subcategory.objects.all()
+    email = request.session['email']
+    return render(request, 'search.html', {'category':category,'subcategory':subcategory,'email':email})
 
-
-
-
+def category_product(request,id):
+    category=Category.objects.all()
+    subcategory=Subcategory.objects.all()
+    if "email" in request.session:
+        email = request.session['email']
+        product=Product.objects.filter(subcategory=id)
+        cart=Cart.objects.filter(user_id=email)
+        cart_count=0
+        for i in cart:
+            cart_count=cart_count+ i.product_qty
+        return render(request,'category.html',{'cart_count':cart_count,'product':product,'category':category,'subcategory':subcategory,'email':email})
+    else:
+        product=Product.objects.filter(subcategory=id)
+        return render(request,'category.html',{'product':product,'category':category,'subcategory':subcategory})
             
 
+# Forgot Password
+def forgotpassword(request):
+    if request.method =="POST":
+        email=request.POST.get('email')
+        if log_user.objects.filter(email=email).exists():
+            user=log_user.objects.get(email=email) 
+            o=generateOTP()
+            htmlgen = '<p>Your OTP is:'+o+'</p>'
+            send_mail('OTP request',o,'Smart Store',[email], fail_silently=False, html_message=htmlgen)
+            user.otp=o;
+            user.save()
+            request.session['email']=email 
+            messages.success(request, 'OTP is send to ..'+email+'...Please Verify')
+            return redirect('verify_forgot_otp')
+        else:
+            messages.success(request, 'Email Not Exist ...')
+            return redirect(login)
+    return render(request,'forgotpassword.html')
 
+def verify_forgot_otp(request):
+    if 'email' in request.session:
+        if request.method=='POST':
+            otps = request.POST.get('otp');
+            email = request.POST.get('email');
+            if log_user.objects.filter(email=email,otp=otps):
+                messages.success(request, 'OTP is Verified..Please Enter New Password...')
+                return redirect(new_password)
+            else:
+                 messages.success(request, 'Incorrcect OTP...')
+    session=request.session['email']
+    return render(request,'verify_forgot_otp.html',{'session':session})
+
+def new_password(request):
+    if 'email' in request.session:
+        if request.method=='POST':
+            password = request.POST.get('pswd');
+            pswd=sha256(password.encode()).hexdigest()
+            email = request.POST.get('email');
+            user=log_user.objects.get(email=email)
+            user.password=pswd
+            user.save()
+            messages.success(request, 'Password Updated Successfully ...')
+            return redirect(login)
+    session=request.session['email']
+    return render(request,'newpassword.html',{'session':session})

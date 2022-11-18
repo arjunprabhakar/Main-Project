@@ -64,17 +64,21 @@
 				
 				<div class="col-lg-6">
 					<div class="login_form_inner" >
-						<h3>Enter Email</h3>
-						<form class="row login_form"  action="{% url 'forgotpassword' %}" method="post" id="contactForm" novalidate="novalidate" onsubmit="return validateform();" >
+						<h3>Enter OTP</h3>
+						<form class="row login_form"  action="{% url 'verify_forgot_otp' %}" method="post" id="contactForm" novalidate="novalidate" onsubmit="return validateform();" >
 							{% csrf_token %}
+                            <div class="col-md-12 form-group">
+								<input type="tel" readonly class="form-control" id="otp" name="email" value="{{session}}" >
+								<span id="eml" style="color: red;"></span>
+							</div>
 							<div class="col-md-12 form-group">
-								<input type="tel" class="form-control" id="eml" name="email" placeholder="Enter Your Email" >
+								<input type="tel" class="form-control" id="otp" name="otp" placeholder="Enter OTP" >
 								<span id="eml" style="color: red;"></span>
 							</div>
 							<div class="col-md-12 form-group">
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="primary-btn">Send OTP</button>
+								<button type="submit" value="submit" class="primary-btn">Verify</button>
 							</div>
 						</form>
 					</div>

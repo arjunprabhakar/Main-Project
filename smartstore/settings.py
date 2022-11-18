@@ -140,3 +140,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587 
 EMAIL_USE_TLS = True 
 EMAIL_HOST_PASSWORD = "htqintrgjqqtfaqe"
+
+# For Razor pay Payment
+RAZOR_KEY_ID='rzp_test_kzXntxIiA7I74r'
+RAZOR_KEY_SECRET='lNoQ6icbxfYBaI3iDxHJJbYJ'

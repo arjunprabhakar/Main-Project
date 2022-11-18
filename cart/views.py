@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 from django.shortcuts import render,redirect
 from category.models import Category, Subcategory
-from credentialapp.models import log_user
+from credentialapp.models import log_user, user_address
 from productapp.models import Product
 from django.contrib import messages
 from credentialapp.views import login
@@ -18,6 +18,7 @@ def add_cart(request,id):
             if Cart.objects.filter( user_id =user,product_id=item).exists():
                 c_item=Cart.objects.get( user_id =user,product_id=item)
                 c_item.product_qty = c_item.product_qty + 1
+                c_item.save()
                 return redirect('view_cart')
             else:
                 product_qty = 1
@@ -61,12 +62,14 @@ def view_cart(request):
         total = 0
         for item in cart:
             total +=  item.product.price * item.product_qty
+        cart_count=0
+        for i in cart:
+            cart_count=cart_count+ i.product_qty
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
-        return render(request,"cart.html",{'cart':cart,'email':email,'total':total,'category':category,'subcategory':subcategory})
+        return render(request,"cart.html",{'cart_count':cart_count,'cart':cart,'email':email,'total':total,'category':category,'subcategory':subcategory})
     return redirect(login)
     
-
 # Remove Items From Cart
 def de_cart(request,id):
     Cart.objects.get(id=id).delete()
@@ -96,10 +99,33 @@ def view_wishlist(request):
         cart=Wishlist.objects.filter(user_id=email)
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
-        return render(request,"wishlist.html",{'cart':cart,'email':email,'category':category,'subcategory':subcategory})
+        cart=Cart.objects.filter(user_id=email)
+        cart_count=0
+        for i in cart:
+            cart_count=cart_count+ i.product_qty
+        return render(request,"wishlist.html",{'cart_count':cart_count,'cart':cart,'email':email,'category':category,'subcategory':subcategory})
     return redirect(login)
 
 # Remove Items From Wishlist
 def de_wishlist(request,id):
     Wishlist.objects.get(id=id).delete()
     return redirect('view_wishlist')
+
+
+def checkout(request):
+    if 'email' in request.session:
+        email = request.session['email']
+        address=user_address.objects.filter(user_id=email)
+        item=Cart.objects.filter(user_id=email)
+        total = 0
+        for i in item:
+            total +=  i.product.price * i.product_qty
+        category=Category.objects.all()
+        subcategory=Subcategory.objects.all()
+        email = request.session['email']
+        cart=Cart.objects.filter(user_id=email)
+        cart_count=0
+        for i in cart:
+            cart_count=cart_count+ i.product_qty
+        return render(request,"checkout.html",{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
+    return redirect(login)

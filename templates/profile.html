@@ -177,6 +177,74 @@
                             {% endif %}
                             {% endfor %}
 
+
+
+                            <script>
+                                
+                            function validateform()
+                            {
+                                var a=document.getElementById('oldpss').value.trim();
+                                var b=document.getElementById('pss').value.trim();
+                                var c=document.getElementById('cpss').value.trim();
+
+                                var passpatern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+                                if(a=="")
+                                {
+                                    document.getElementById('ops').style.display="block";
+                                    document.getElementById('ops').innerHTML="**please enter Confirm Password";
+                                    return false;
+                                }
+                                else{
+                                        document.getElementById('ops').style.display="none";            
+                                    }
+                                    
+                                if(b=="")
+                                {
+                                    document.getElementById('ps').style.display="block";
+                                    document.getElementById('ps').innerHTML="**please enter new Password";
+                                    return false;
+                                }
+
+                                if (!b.match(passpatern))
+                                {
+                                    document.getElementById('ps').style.display="block";
+                                    document.getElementById('ps').innerHTML="**Min length 8 | One Uppercase |One lowercase | One number";
+                                    return false;
+                                }
+                                else{
+                                        document.getElementById('ps').style.display="none";
+                                    }
+
+                                    if(c=="")
+                                {
+                                    document.getElementById('cps').style.display="block";
+                                    document.getElementById('cps').innerHTML="**please enter Confirm Password";
+                                    return false;
+                                }
+                                else{
+                                        document.getElementById('cps').style.display="none";
+                                        
+                                    }
+                                    if(b!=c)
+                                    {
+                                        document.getElementById('ps').style.display="block";
+                                        document.getElementById('ps').innerHTML="**Password doesn't match";
+                                        return false;
+                                    }
+                                    else{
+                                            document.getElementById('ps').style.display="none";
+                                            return true;
+                                        }
+
+                                }
+
+                            </script>
+
+
+
+
+
                               <div style="display:none;" id="passhides" style="display:none;">
                                 <form   class="row reg_form" action="{% url 'change_password' %}" method="post"  novalidate="novalidate" onsubmit="return validateform();">
                                     {% csrf_token %}
@@ -186,20 +254,22 @@
                                                 d.style.display = (d.style.display !== "none") ? "none" : "block";
                                             }
                                      </script>
+
                                          <div class="col-md-12 form-group" style="margin-top:10px;">
-                                            <table><tr><td><input type="password" class="form-control" id="oldpss" name="oldpass"  placeholder="Current Password" autocomplete="off" ></td></tr>
-                                                <tr><td><span id="ops" style="color: red;"></span></td></tr></table>
+                                            <table><tr><td><input type="password" class="form-control" id="oldpss" name="oldpass"  placeholder="Current Password" autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()"></td></tr>
+                                            </table><span id="ops" style="color: red;font-size:12px;"></span>
                                         </div>
                                         <div  class="col-md-12 form-group">
                                             <table style="margin-bottom:10px;">
-                                              <tr><td><input type="password" class="form-control" id="pss" name="pass"  placeholder="New Password" autocomplete="off" ></td>  
-                                                <td><input type="password" class="form-control" id="cpss" name="cpass"  placeholder="Confirm Password" autocomplete="off" ></td>
-                                               </tr>
-                                               <tr>
-                                                <td><span id="ps" style="color: red;"></span></td>
-                                                <td><span id="cps" style="color: red;"></span></td>
-                                               </tr> </table>
-                                               <input style="width:90px;border:none;color:#fff;background-color:rgb(250, 150, 0);border-radius:3px;height:36px;" type="submit" value="submit">
+                                              <tr><td><input type="password" class="form-control" id="pss" name="pass"  placeholder="New Password" autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()"></td>  
+                                                <td><input type="password" class="form-control" id="cpss" name="cpass"  placeholder="Confirm Password" autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()"></td>
+                                               </tr></table>
+
+                                               <table><tr>
+                                               <td><span id="ps" style="color:red;font-size:12px;"></span></td>
+                                               <td><span id="cps" style="color:red;font-size:12px;"></span></td>
+                                               </tr></table>
+                                               <input style="width:90px;border:none;color:#fff;background-color:rgb(250, 150, 0);border-radius:3px;height:36px;margin-top:6px;" type="submit" value="submit">
                                         </div>
                                         </form>
                                </div> 
@@ -243,31 +313,31 @@
                                     }
                              </script>
                                  <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="nam" name="fname"  placeholder="First Name" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" onclick=" return onclear()">
+                                    <input type="text" class="form-control" id="nam" name="fname"  placeholder="First Name" autocomplete="off" >
                                     <span id="nm" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="lnam" name="lname"  placeholder=" Last Name" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" onclick=" return onclear()">
+                                    <input type="text" class="form-control" id="lnam" name="lname"  placeholder=" Last Name" autocomplete="off" >
                                     <span id="lnm" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group " >   
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"  autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" onclick=" return onclear()">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"  autocomplete="off" >
                                     <span id="eml" style="color: red;margin-left: -140px;"></span>    
 								</div> 
                                 <div class="col-md-12 form-group">
-                                    <input type="tel" class="form-control" id="phone"  name="phn" placeholder="phone" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" onclick=" return onclear()">
+                                    <input type="tel" class="form-control" id="phone"  name="phn" placeholder="phone" autocomplete="off" >
                                     <span id="ph" style="color: red;margin-left: -140px;"></span>
 								</div>   
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="addr" name="hname"  placeholder="House Name" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" onclick=" return onclear()">
+                                    <input type="text" class="form-control" id="addr" name="hname"  placeholder="House Name" autocomplete="off" >
                                     <span id="ad" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="strt" name="street"  placeholder="Street" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'City'" onclick=" return onclear()">
+                                    <input type="text" class="form-control" id="strt" name="street"  placeholder="Street" autocomplete="off">
                                     <span id="str" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="city" name="city"  placeholder="City" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'City'" onclick=" return onclear()">
+                                    <input type="text" class="form-control" id="city" name="city"  placeholder="City" autocomplete="off">
                                     <span id="ct" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">

@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
+from credentialapp.models import log_user
 from smartstore.utils import unique_slug_generator
 from category.models import Category,Subcategory
 from smart_selects.db_fields import GroupedForeignKey
@@ -30,3 +31,13 @@ def slug_generator(sender,instance,*args,**kwargs):
     if not instance.slug:
         instance.slug=unique_slug_generator(instance)
 pre_save.connect(slug_generator,sender=Product)
+
+
+class tbl_Review(models.Model):
+    product=models.ForeignKey(Product, on_delete=models.CASCADE,editable=False)
+    user=models.ForeignKey(log_user, on_delete=models.CASCADE,editable=False)
+    review=models.TextField(max_length=800,blank=True)
+    rating=models.FloatField()
+    date=models.DateTimeField(auto_now_add=True,null=True)
+
+

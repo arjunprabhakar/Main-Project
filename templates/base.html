@@ -62,7 +62,7 @@
 							<ul class="dropdown-menu">
 								{% for subcategory in subcategory %}
                                 {% if category.id == subcategory.category_id %}
-								<li class="nav-item"><a class="nav-link" href="#">{{ subcategory.name }}</a>
+								<li class="nav-item"><a class="nav-link" href="{% url 'category_product' subcategory.id  %}">{{ subcategory.name }}</a>
 						          {% endif %}
 									{% endfor %}
 							</li>
@@ -88,6 +88,12 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="{% url 'view_cart' %}" class="cart"><span style="font-size: 22px;font-weight: bold;" class="bi bi-cart"></span></a></li>
+							{% if email in email %} 
+							<div style="background-color:rgb(255, 123, 0);width:25px;height:25px;border-radius:20px;text-align:center;margin-top:10px;">
+								<span style="color:#fff;font-weight:bold;font-size:13px;">{{cart_count}}</span>
+							</div>
+							{% endif %}
+
 							<li class="nav-item">
 								<button class="search"><span style="font-size: 20px;font-weight: bold;" class="lnr lnr-magnifier" id="search"></span></button>
 							</li>
@@ -98,8 +104,8 @@
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+				<form class="d-flex justify-content-between" action="{% url 'searchbar' %}">
+					<input type="text" name="query" class="form-control" id="search_input" placeholder="Search Here">
 					<button type="submit" class="btn"></button>
 					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
 				</form>
