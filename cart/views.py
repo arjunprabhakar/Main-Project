@@ -1,11 +1,13 @@
 from asyncio.windows_events import NULL
+from django.conf import settings
 from django.shortcuts import render,redirect
+import razorpay
 from category.models import Category, Subcategory
 from credentialapp.models import log_user, user_address
 from productapp.models import Product
 from django.contrib import messages
 from credentialapp.views import login
-from .models import Cart, Wishlist
+from .models import Cart, OrderPlaced, Payment, Wishlist
 from django.contrib import messages
 
 # Cart functions
@@ -120,6 +122,7 @@ def checkout(request):
         total = 0
         for i in item:
             total +=  i.product.price * i.product_qty
+        stotal=total * 100
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
         email = request.session['email']
@@ -127,5 +130,51 @@ def checkout(request):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,"checkout.html",{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
+        client = razorpay.Client(auth=(settings.RAZORPAY_API_KEY,settings.RAZORPAY_API_SECRET_KEY))
+        data = {
+        "amount": 100,
+        "currency": "INR",
+        }
+        payment_response = client.order.create(data=data)
+        print(payment_response)
+        # {'id': 'order_KiA1Iabwcd5AhC', 'entity': 'order', 'amount': 100, 'amount_paid': 0, 'amount_due': 100, 'currency': 'INR', 'receipt': None, 'offer_id': None, 'status': 'created', 'attempts': 0, 'notes': [], 'created_at': 1668918385}
+        order_id = payment_response['id']
+        request.session['order_id'] = order_id
+        order_status = payment_response['status']
+        email = request.session['email']
+        users=log_user.objects.get(email=email)
+        if order_status == 'created':
+            payment = Payment(person=users,amount=total,razorpay_order_id = order_id,razorpay_payment_status = order_status)
+        payment.save()
+        return render(request,"checkout.html",{'stotal':stotal,'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
     return redirect(login)
+
+def payment_done(request):
+    order_id=request.session['order_id']
+    payment_id = request.GET.get('payment_id')
+    print(payment_id)
+    payment=Payment.objects.get(razorpay_order_id = order_id)
+    payment.paid = True
+    payment.razorpay_payment_id = payment_id
+    payment.save()
+    # customer=Address_Book.objects.get(user=request.user,status=True)
+    email = request.session['email']
+    person=log_user.objects.get(email=email)
+    cart=Cart.objects.filter(user=email)
+    # item = Product.objects.get(product=product, id=item_id)
+    for c in cart:
+        OrderPlaced(user=person,product=c.product,quantity=c.product_qty,payment=payment,is_ordered=True).save()
+        c.delete()
+    return redirect(payment_success)
+
+# Payment Success Page
+def payment_success(request): 
+    if 'email' in request.session:
+        email=request.session['email']
+        address=user_address.objects.filter(user_id=email)
+        order=OrderPlaced.objects.filter(user_id=email)
+        category=Category.objects.all()
+        subcategory=Subcategory.objects.all()
+        return render(request,"Payment_Success.html",{'email':email,'address':address,'order':order,'category':category,'subcategory':subcategory})
+    else:
+        return redirect(login)

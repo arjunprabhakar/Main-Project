@@ -23,7 +23,7 @@ def demo(request):
     subcategory=Subcategory.objects.all()
     product=Product.objects.all()
     return render(request,"index.html",{'category':category,'subcategory':subcategory,'product':product})
-
+# Login Form
 def login(request):
     request.session.flush()
     if 'email' in request.session:
@@ -78,6 +78,7 @@ def register(request):
             send_mail('OTP request',o,'Smart Store',[email], fail_silently=False, html_message=htmlgen)
             user.otp=o;
             user.save()
+            request.session['email']=email 
             messages.success(request, 'Email already exist..Please Verify Email!!!!')
             return redirect('verify_otp') 
         else:
@@ -86,7 +87,6 @@ def register(request):
             send_mail('OTP request',o,'Smart Store',[email], fail_silently=False, html_message=htmlgen)
             log=log_user(email=email,password=pswd,otp=o)
             log.save()
-
             userid=log_user.objects.get(email=email)
             user=reg_user(email_id=userid.email,name=username,lname=lastname,phone_no=phone)           
             user.save()  
@@ -139,14 +139,14 @@ def home(request):
     messages.success(request, ' Please Login!!')
     return redirect(login)
 
-# Customer Logout
+#Customer Logout
 def logout(request):
     if 'email' in request.session:
         request.session.flush()
     return redirect(login)
     messages.success(request, 'Logout!!!')
 
-    #profile page
+#profile page
 def profile(request):
     if 'email' in request.session:
         email = request.session['email']
@@ -161,7 +161,8 @@ def profile(request):
         return render(request,"profile.html",{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'profile':profile,'address':address})
     messages.success(request, 'Sign in..!!')
     return redirect(login)
-   
+
+# Add Shipping Address
 def useraddress(request):
     if request.method=='POST':
         fname=request.POST.get('fname');
@@ -217,6 +218,7 @@ def de_address(request,id):
     user_address.objects.get(id=id).delete()
     return redirect('profile')
 
+# Change Password
 def change_password(request):
     if 'email' in request.session:
         email=request.session['email']
@@ -240,7 +242,7 @@ def change_password(request):
         return redirect('login')
 
 
-# Search 
+# Product Search 
 def searchbar(request):
     if request.method == 'GET':
         query = request.GET.get('query')
@@ -259,6 +261,7 @@ def searchbar(request):
     email = request.session['email']
     return render(request, 'search.html', {'category':category,'subcategory':subcategory,'email':email})
 
+# Category wise product filtering
 def category_product(request,id):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
@@ -274,7 +277,6 @@ def category_product(request,id):
         product=Product.objects.filter(subcategory=id)
         return render(request,'category.html',{'product':product,'category':category,'subcategory':subcategory})
             
-
 # Forgot Password
 def forgotpassword(request):
     if request.method =="POST":
@@ -294,6 +296,7 @@ def forgotpassword(request):
             return redirect(login)
     return render(request,'forgotpassword.html')
 
+# Verify forgot password OTP
 def verify_forgot_otp(request):
     if 'email' in request.session:
         if request.method=='POST':
@@ -307,6 +310,7 @@ def verify_forgot_otp(request):
     session=request.session['email']
     return render(request,'verify_forgot_otp.html',{'session':session})
 
+# New Password via Forgot Password
 def new_password(request):
     if 'email' in request.session:
         if request.method=='POST':

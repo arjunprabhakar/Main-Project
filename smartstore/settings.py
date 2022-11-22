@@ -142,5 +142,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = "htqintrgjqqtfaqe"
 
 # For Razor pay Payment
-RAZOR_KEY_ID='rzp_test_kzXntxIiA7I74r'
-RAZOR_KEY_SECRET='lNoQ6icbxfYBaI3iDxHJJbYJ'
+RAZORPAY_API_KEY='rzp_test_kzXntxIiA7I74r'
+RAZORPAY_API_SECRET_KEY='lNoQ6icbxfYBaI3iDxHJJbYJ'

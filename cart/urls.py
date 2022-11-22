@@ -12,5 +12,7 @@ urlpatterns = [
   path('view_wishlist',views.view_wishlist,name='view_wishlist'),
   path('de_wishlist/<int:id>/',views.de_wishlist,name='de_wishlist'),
   path('checkout',views.checkout,name='checkout'),
+  path('paymentdone/', views.payment_done, name='paymentdone'),
+  path('payment_success/', views.payment_success, name='payment_success'),
 
 ]

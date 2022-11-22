@@ -32,6 +32,8 @@
 	<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinFlat.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<!--    payment script-->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
@@ -75,7 +77,7 @@
 								<ul class="dropdown-menu">
 
 									<li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Account</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">My Order</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'payment_success' %}">My Order</a></li>
 									<li class="nav-item"><a class="nav-link" href="{%  url 'view_wishlist'%}"">wishlist</a></li>
 									{% if email in email %} 
 							        <li class="nav-item"><a class="nav-link" href="{%  url 'logout' %}">Log out</a></li>

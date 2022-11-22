@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- start banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Smart Store</h1>
+				<nav class="d-flex align-items-center">
+					<a href="category.html"></a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+	<!--================Order Details Area =================-->
+	<section class="order_details section_gap">
+		<div class="container">
+			<h3 class="title_confirmation" style="margin-top:-60px;">Order History</h3>
+			<div class="order_details_table" style="margin-top:-50px;">
+				<!-- <h2>Order Details</h2> -->
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col" style="font-weight:bold;">Product</th>
+								<th scope="col" style="font-weight:bold;">Quantity</th>
+								<th scope="col" style="font-weight:bold;">Price</th>
+								<th scope="col" style="font-weight:bold;">Order Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for i in order %}
+							<tr>
+								<td>
+									<p style="color:#000;">{{ i.product.name }}</p>
+								</td>
+								<td>
+									<h5 style="color:#000;">x {{i.quantity}}</h5>
+								</td>
+								<td>
+									<p style="color:#000;">{{i.product.price}}</p>
+								</td>
+								<td>
+									<p style="color:#000;">{{i.ordered_date}}</p>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Order Details Area =================-->
+	{% endblock %}

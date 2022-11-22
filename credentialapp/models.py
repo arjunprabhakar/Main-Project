@@ -9,6 +9,8 @@ class log_user(models.Model):
      password = models.CharField(max_length=200,default=1)
      otp = models.IntegerField(default=1)
      status = models.BooleanField(default=False)
+     def __str__(self):
+        return self.email
 
 #Customer Registration Table
 class reg_user(models.Model):

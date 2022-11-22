@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+
+from cart.models import OrderPlaced,Payment
+
+# from cart.models import Payment
+
+# # Register your models here.
+admin.site.register(Payment)
+admin.site.register(OrderPlaced)

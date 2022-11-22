@@ -25,7 +25,7 @@
             </div>
             <div class="billing_details">
 
-                <form action="#" method="post">
+                <form action="#" method="post" id="myform">
                 <div class="row">
                     <div class="col-lg-8">                
                         <div class="row contact_form" >
@@ -37,7 +37,6 @@
                                     <tr ><td><h4 style="color:red;font-weight:bold;">{{i.fname}}</h4></td><td><h4 style="color:red;font-weight:bold;"> {{i.lname}}</h4></td></tr> </table>
                                    <table style="margin-left:20px;">
                                     <tr><td><h4>Number:</h4></td><td><h4>{{i.phone_no}}</h4></td></tr>
-                                    <tr><td><h4>Email:</h4></td><td><h4>{{i.email}}</h4></td></tr>
                                     <tr><td><h4>Email:</h4></td><td><h4>{{i.email}}</h4></td></tr>
                                     <tr><td><h4>House:</h4></td><td><h4>{{i.hname}}</h4></td></tr>
                                     <tr><td><h4>Street:</h4></td><td><h4>{{i.street}}</h4></td></tr>
@@ -68,38 +67,36 @@
                     </div>
                 </div>
             </form>  
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
-            var options = {
-                "key": "rzp_test_kzXntxIiA7I74r", // Enter the Key ID generated from the Dashboard
-                "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": "INR",
-                "name": "Smart Store",
-                "description": "Test Transaction",
-                "image": "https://example.com/your_logo",
-                "order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "handler": function (response){
-                    // alert(response.razorpay_payment_id);
-                    // alert(response.razorpay_order_id);
-                    // alert(response.razorpay_signature)
+                var options = {
+                    "key": 'rzp_test_kzXntxIiA7I74r', // Enter the Key ID generated from the Dashboard
+                    "amount": "{{stotal}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": "INR",
+                    "name": "Smart-Store",
+                    "description": "Test Transaction",
+                    "image": "https://example.com/your_logo",
+                    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response){
+                        console.log("success")
+                        var form = document.getElementById["myform"];
+                        var a = response.razorpay_payment_id;
+                        window.location.href = 'http://127.0.0.1:8000/paymentdone?order_id=${response.razorpay_order_id}&cust_id=${response.customer}&payment_id='+a
 
-                    window.location.href='#'
-                },
-                "theme": {
-                    "color": "#3399cc"
+                    },
+                    "theme": {
+                        "color": "#3399cc"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response){
+                        alert(response.error.description);
+                });
+                document.getElementById('rzp-button1').onclick = function(e){
+                    console.log("button click");
+                    rzp1.open();
+                    e.preventDefault();
                 }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.on('payment.failed', function (response){
-                
-                    alert(response.error.description);
-                   
-            });
-            document.getElementById('rzp-button1').onclick = function(e){
-                rzp1.open();
-                e.preventDefault();
-            }
-            </script>
+                </script>
             
             </div>
         </div>
