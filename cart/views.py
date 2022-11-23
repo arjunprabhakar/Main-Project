@@ -164,6 +164,9 @@ def payment_done(request):
     # item = Product.objects.get(product=product, id=item_id)
     for c in cart:
         OrderPlaced(user=person,product=c.product,quantity=c.product_qty,payment=payment,is_ordered=True).save()
+        pro=Product.objects.get(id = c.product.id)
+        pro.stock=pro.stock - c.product_qty
+        pro.save()
         c.delete()
     return redirect(payment_success)
 

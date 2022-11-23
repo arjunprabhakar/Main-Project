@@ -25,20 +25,20 @@ export_users.short_description = 'Download Customer Details'
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display=['name','lname','phone_no']
+    list_display=['name','phone_no']
     actions = [export_users]
-    # def has_add_permission(self, request, obj=None):
-    #     return False
+    def has_add_permission(self, request, obj=None):
+        return False
 
-    # def has_change_permission(self, request, obj=None):
-    #     return False
+    def has_change_permission(self, request, obj=None):
+        return False
 
-    # def has_delete_permission(self, request, obj=None):
-    #     return False
+    def has_delete_permission(self, request, obj=None):
+        return False
     verbose_name_plural = "Customer Details"
 admin.site.register(reg_user,UserAdmin)
     
-admin.site.register(log_user)
+# admin.site.register(log_user)
 
 
 

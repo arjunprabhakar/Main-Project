@@ -251,15 +251,21 @@ def searchbar(request):
             products = Product.objects.filter(multiple_q) 
             category=Category.objects.all()
             subcategory=Subcategory.objects.all()
-            email = request.session['email']
-            return render(request, 'search.html', {'product':products,'category':category,'subcategory':subcategory,'email':email})
+            if 'email' in request.session:
+                email = request.session['email']
+                return render(request, 'search.html', {'product':products,'category':category,'subcategory':subcategory,'email':email})
+            else:
+              return render(request, 'search.html', {'product':products,'category':category,'subcategory':subcategory})  
         else:
             messages.info(request, 'No search result!!!')
             print("No information to show")
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
-    email = request.session['email']
-    return render(request, 'search.html', {'category':category,'subcategory':subcategory,'email':email})
+    if 'email' in request.session:
+        email = request.session['email']
+        return render(request, 'search.html', {'category':category,'subcategory':subcategory,'email':email})
+    else:
+        return render(request, 'search.html', {'category':category,'subcategory':subcategory})
 
 # Category wise product filtering
 def category_product(request,id):

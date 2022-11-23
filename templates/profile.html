@@ -114,9 +114,7 @@
                                             document.getElementById('ps').style.display="none";
                                             return true;
                                         }
-
                                 }
-
                             </script>
                               <div style="display:none;" id="passhides" style="display:none;">
                                 <form   class="row reg_form" action="{% url 'change_password' %}" method="post"  novalidate="novalidate" onsubmit="return validateform();">
@@ -148,6 +146,7 @@
                                </div> 
 
     
+
                             <div style="font-size:25px;" id="hideaddress">
                                 <h3 style="margin-top: 20px;">Shipping Address</h3>
                                 {% for i in address %}
@@ -172,10 +171,149 @@
 				</div>
                 <!-- End of Profile View  -->
                 <!-- Add Address Area -->
+                <script>
+                    function validateforms()
+                    {
+                    var a=document.getElementById('fnm').value.trim();
+                    var b=document.getElementById('lnm').value.trim();
+                    var c=document.getElementById('email').value.trim();
+                    var d=document.getElementById('phn').value.trim();
+                    var e=document.getElementById('addr').value.trim();
+                    var f=document.getElementById('strt').value.trim();
+                    var g=document.getElementById('city').value.trim();
+                    var h=document.getElementById('dist').value.trim();
+                    var i=document.getElementById('pcode').value.trim();
+
+                    // Patterns
+                    var expr = /^[6-9]\d{9}$/;
+
+                    // Conditions
+                    if(a=="")
+                    {
+                        document.getElementById('fn').style.display="block";
+                        document.getElementById('fn').innerHTML="**Please Enter First Name";
+                        return false;
+                    }
+                    if (/[^a-zA-Z^\s]/.test(a))
+                    {
+                        document.getElementById('fn').style.display="block";
+                        document.getElementById('fn').innerHTML="**Only Alphabets Allowed";
+                        return false;
+                    }else{
+                        document.getElementById('fn').style.display="none";
+                    }
+                    if(b=="")
+                    {
+                        document.getElementById('ln').style.display="block";
+                        document.getElementById('ln').innerHTML="**Please Enter Last Name";
+                        return false;
+                    }
+                    if (/[^a-zA-Z^\s]/.test(b))
+                    {
+                        document.getElementById('ln').style.display="block";
+                        document.getElementById('ln').innerHTML="**Only Alphabets Allowed";
+                        return false;
+                    }else{
+                        document.getElementById('ln').style.display="none"; 
+                    }
+                    if(c=="")
+                    { 
+                        document.getElementById('eml').style.display="block";
+                        document.getElementById('eml').innerHTML="**Please Enter Email";
+                        return false;
+                    }  
+                    if(c.indexOf('@')<=0){
+                        document.getElementById('eml').style.display="block";
+                        document.getElementById('eml').innerHTML="**Invalid  Email Address";
+                        return false;
+                    }     
+                    if ((c.charAt(c.length-4)!='.') && (c.charAt(c.length-3)!='.')) {
+                        document.getElementById('eml').style.display="block";
+                        document.getElementById('eml').innerHTML="**Invalid  Email Address";
+                        return false;
+                    }else{
+                        document.getElementById('eml').style.display="none";
+                    }
+                    if(d==""){
+                        document.getElementById('ph').style.display = "block";
+                        document.getElementById('ph').innerHTML="**PleaseEnter  phone number";
+                        return false;
+                     }
+                    if(d!="" && expr.test(d)==false){
+                        document.getElementById('ph').style.display= "block";
+                        document.getElementById('ph').innerHTML ="Invalid Phone number";
+                        return false;
+                    }else{
+                        document.getElementById('ph').style.display = "none";
+                       }
+                    if(e=="")
+                    {
+                        document.getElementById('ad').style.display="block";
+                        document.getElementById('ad').innerHTML="**Please Enter House Name";
+                        return false;
+                    }else{
+                        document.getElementById('ad').style.display = "none";
+                       }
+                    if(f=="")
+                    {
+                        document.getElementById('str').style.display="block";
+                        document.getElementById('str').innerHTML="**Please Enter Street";
+                        return false;
+                    }else{
+                        document.getElementById('str').style.display = "none";
+                       }
+                    if(g=="")
+                    {
+                        document.getElementById('ct').style.display="block";
+                        document.getElementById('ct').innerHTML="**Please Enter City";
+                        return false;
+                    }else{
+                        document.getElementById('ct').style.display = "none";
+                     
+                       }
+                	
+                    if(i=="")
+                    {
+                        document.getElementById('pin').style.display="block";
+                        document.getElementById('pin').innerHTML="**Please Enter PostalCode";
+                        return false;
+                    } 
+                    if(i.length>6||i.length<6){
+                        document.getElementById('pin').style.display="block";
+                        document.getElementById('pin').innerHTML="**Enter 6 digit valid Code";
+                        return false;
+                    }
+                   
+                    if (!/^[0-9]+$/.test(i))
+                    {
+                        document.getElementById('pin').style.display="block";
+                        document.getElementById('pin').innerHTML="**Only Numbers Allowed";
+                        return false;
+                    }else{
+                        document.getElementById('pin').style.display="none";
+                    }    
+                    if(h=="")
+                    {
+                        document.getElementById('dst').style.display="block";
+                        document.getElementById('dst').innerHTML="**Please select District";
+                        return false;
+                    }
+                    else{
+                        document.getElementById('dst').style.display="none";
+                        return true; 
+
+                    }
+                }     
+                
+                function onclears(){
+                    document.getElementById('dst').innerHTML="";
+                }
+                </script>
+
 				<div class="col-lg-6">
 					<div class="reg_form_inner" id="showmehideme" style="display:none;">
 						<h3></h3>
-						<form   class="row reg_form" action="{% url 'useraddress' %}" method="post"  novalidate="novalidate" >
+						<form   class="row reg_form" action="{% url 'useraddress' %}" method="post"  novalidate="novalidate" onsubmit="return validateforms();">
 							{% csrf_token %}
 
                             <h3></h3>
@@ -186,51 +324,50 @@
                                     }
                              </script>
                                  <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="nam" name="fname"  placeholder="First Name" autocomplete="off" >
-                                    <span id="nm" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="fnm" name="fname"  placeholder="First Name" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                    <span id="fn" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="lnam" name="lname"  placeholder=" Last Name" autocomplete="off" >
-                                    <span id="lnm" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="lnm" name="lname"  placeholder=" Last Name" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                    <span id="ln" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group " >   
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"  autocomplete="off" >
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                     <span id="eml" style="color: red;margin-left: -140px;"></span>    
 								</div> 
                                 <div class="col-md-12 form-group">
-                                    <input type="tel" class="form-control" id="phone"  name="phn" placeholder="phone" autocomplete="off" >
+                                    <input type="tel" class="form-control" maxlength="10" minlength="10" id="phn"  name="phn" placeholder="phone" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                     <span id="ph" style="color: red;margin-left: -140px;"></span>
 								</div>   
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="addr" name="hname"  placeholder="House Name" autocomplete="off" >
+                                    <input type="text" class="form-control" id="addr" name="hname"  placeholder="House Name" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                     <span id="ad" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="strt" name="street"  placeholder="Street" autocomplete="off">
+                                    <input type="text" class="form-control" id="strt" name="street"  placeholder="Street" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                     <span id="str" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="city" name="city"  placeholder="City" autocomplete="off">
+                                    <input type="text" class="form-control" id="city" name="city"  placeholder="City" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                     <span id="ct" style="color: red;margin-left: -140px;"></span>
 								</div>
-                                <div class="col-md-12 form-group">
-                                <select  class="form-control" name="district" id="dist"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'District'" onclick=" return onclear()">
-                                    <option value="">Select District</option>
-                                    <option value="Kannur">Kannur</option>
+                              
+                                <div class="col-md-12 form-group" style="width:300px;">
+                                <select required class="form-control" name="district" id="dist" onkeyup=" return validateforms();"  onclick=" return onclears();">
+                                    <option  value="">Select District</option>
                                     <option value="Kozhikode">Kozhikode</option>
                                     <option value="Malapuram">Malapuram</option>
                                     <option value="Thrissur">Thrissur</option>
                                     <option value="Ernakulam">Ernakulam</option>
-                                    <option value="Idukki">Idukki</option>
                                     <option value="Kottayam">Kottayam</option>
-                                    <option value="Alapuzha">Alapuzha</option>
                                 </select>
 								<span id="dst" style="color: red;"></span>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="tel" class="form-control" id="pcode" value="{{profile.pincode}}" name="pin" placeholder="Postal Code" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Postal Code'" onclick=" return onclear()">
+                                    <input type="tel" class="form-control" id="pcode" maxlength="6" minlength="6" name="pin" placeholder="Postal Code" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                     <span id="pin" style="color: red;margin-left: -140px;"></span>
 								</div>
+                              
 							<div class="col-md-12 form-group">
 								<input type="submit" value="submit" name="btn" class="primary-btn">
 							</div>
@@ -240,11 +377,150 @@
                     <!-- End of profile Add Address -->
 
 
+                    <script>
+                        function validateformss()
+                        {
+                        var a=document.getElementById('fnms').value.trim();
+                        var b=document.getElementById('lnms').value.trim();
+                        var c=document.getElementById('emails').value.trim();
+                        var d=document.getElementById('phns').value.trim();
+                        var e=document.getElementById('addrs').value.trim();
+                        var f=document.getElementById('strts').value.trim();
+                        var g=document.getElementById('citys').value.trim();
+                        var h=document.getElementById('dists').value.trim();
+                        var i=document.getElementById('pcodes').value.trim();
+    
+                        // Patterns
+                        var expr = /^[6-9]\d{9}$/;
+    
+                        // Conditions
+                        if(a=="")
+                        {
+                            document.getElementById('fns').style.display="block";
+                            document.getElementById('fns').innerHTML="**Please Enter First Name";
+                            return false;
+                        }
+                        if (/[^a-zA-Z^\s]/.test(a))
+                        {
+                            document.getElementById('fns').style.display="block";
+                            document.getElementById('fns').innerHTML="**Only Alphabets Allowed";
+                            return false;
+                        }else{
+                            document.getElementById('fns').style.display="none";
+                        }
+                        if(b=="")
+                        {
+                            document.getElementById('lns').style.display="block";
+                            document.getElementById('lns').innerHTML="**Please Enter Last Name";
+                            return false;
+                        }
+                        if (/[^a-zA-Z^\s]/.test(b))
+                        {
+                            document.getElementById('lns').style.display="block";
+                            document.getElementById('lns').innerHTML="**Only Alphabets Allowed";
+                            return false;
+                        }else{
+                            document.getElementById('lns').style.display="none"; 
+                        }
+                        if(c=="")
+                        { 
+                            document.getElementById('emls').style.display="block";
+                            document.getElementById('emls').innerHTML="**Please Enter Email";
+                            return false;
+                        }  
+                        if(c.indexOf('@')<=0){
+                            document.getElementById('emls').style.display="block";
+                            document.getElementById('emls').innerHTML="**Invalid  Email Address";
+                            return false;
+                        }     
+                        if ((c.charAt(c.length-4)!='.') && (c.charAt(c.length-3)!='.')) {
+                            document.getElementById('emls').style.display="block";
+                            document.getElementById('emls').innerHTML="**Invalid  Email Address";
+                            return false;
+                        }else{
+                            document.getElementById('emls').style.display="none";
+                        }
+                        if(d==""){
+                            document.getElementById('phs').style.display = "block";
+                            document.getElementById('phs').innerHTML="**PleaseEnter  phone number";
+                            return false;
+                         }
+                        if(d!="" && expr.test(d)==false){
+                            document.getElementById('phs').style.display= "block";
+                            document.getElementById('phs').innerHTML ="Invalid Phone number";
+                            return false;
+                        }else{
+                            document.getElementById('phs').style.display = "none";
+                           }
+                        if(e=="")
+                        {
+                            document.getElementById('ads').style.display="block";
+                            document.getElementById('ads').innerHTML="**Please Enter House Name";
+                            return false;
+                        }else{
+                            document.getElementById('ads').style.display = "none";
+                           }
+                        if(f=="")
+                        {
+                            document.getElementById('strs').style.display="block";
+                            document.getElementById('strs').innerHTML="**Please Enter Street";
+                            return false;
+                        }else{
+                            document.getElementById('strs').style.display = "none";
+                           }
+                        if(g=="")
+                        {
+                            document.getElementById('cts').style.display="block";
+                            document.getElementById('cts').innerHTML="**Please Enter City";
+                            return false;
+                        }else{
+                            document.getElementById('cts').style.display = "none";
+                         
+                           }
+                        
+                        if(i=="")
+                        {
+                            document.getElementById('pins').style.display="block";
+                            document.getElementById('pins').innerHTML="**Please Enter PostalCode";
+                            return false;
+                        } 
+                        if(i.length>6||i.length<6){
+                            document.getElementById('pins').style.display="block";
+                            document.getElementById('pins').innerHTML="**Enter 6 digit valid Code";
+                            return false;
+                        }
+                       
+                        if (!/^[0-9]+$/.test(i))
+                        {
+                            document.getElementById('pins').style.display="block";
+                            document.getElementById('pins').innerHTML="**Only Numbers Allowed";
+                            return false;
+                        }else{
+                            document.getElementById('pins').style.display="none";
+                        }    
+                        if(h=="")
+                        {
+                            document.getElementById('dsts').style.display="block";
+                            document.getElementById('dsts').innerHTML="**Please select District";
+                            return false;
+                        }
+                        else{
+                            document.getElementById('dsts').style.display="none";
+                            return true; 
+    
+                        }
+                    }     
+                    
+                    function onclearss(){
+                        document.getElementById('dst').innerHTML="";
+                    }
+                    </script>
+
                     <!-- Profile Address Edit Area -->
                     <div class="reg_form_inner" id="hideme" style="display: none;">
 						<h3></h3>
                         {% for i in address %}
-						<form   class="row reg_form" action="{% url 'edit_address' %}" method="post"  novalidate="novalidate" >
+						<form   class="row reg_form" action="{% url 'edit_address' %}" method="post"  novalidate="novalidate" onsubmit="return validateformss();">
 							{% csrf_token %}
 
                             <h3></h3>
@@ -255,50 +531,47 @@
                                     }
                              </script>
                                  <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="nam" name="fname"  value="{{i.fname}}" placeholder="First Name" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" onclick=" return onclear()">
-                                    <span id="nm" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="fnms" name="fname"  value="{{i.fname}}" placeholder="First Name" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="fns" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="lnam" name="lname"  value="{{i.lname}}" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" onclick=" return onclear()">
-                                    <span id="lnm" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="lnms" name="lname"  value="{{i.lname}}" autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="lns" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group " >   
-                                    <input type="email" class="form-control" id="email" name="email" value="{{i.email}}"  autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" onclick=" return onclear()">
-                                    <span id="eml" style="color: red;margin-left: -140px;"></span>    
+                                    <input type="email" class="form-control" id="emails" name="email" value="{{i.email}}"  autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="emls" style="color: red;margin-left: -140px;"></span>    
 								</div> 
                                 <div class="col-md-12 form-group">
-                                    <input type="tel" class="form-control" id="phone"  name="phn" value="{{i.phone_no}}" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" onclick=" return onclear()">
-                                    <span id="ph" style="color: red;margin-left: -140px;"></span>
+                                    <input type="tel" class="form-control" id="phns" maxlength="10" minlength="10" name="phn" value="{{i.phone_no}}" autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="phs" style="color: red;margin-left: -140px;"></span>
 								</div>   
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="addr" name="hname"  value="{{i.hname}}" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" onclick=" return onclear()">
-                                    <span id="ad" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="addrs" name="hname"  value="{{i.hname}}" autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="ads" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="strt" name="street"  value="{{i.street}}" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'City'" onclick=" return onclear()">
-                                    <span id="str" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="strts" name="street"  value="{{i.street}}" autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="strs" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                    <input type="text" class="form-control" id="city" name="city"  value="{{i.city}}" autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'City'" onclick=" return onclear()">
-                                    <span id="ct" style="color: red;margin-left: -140px;"></span>
+                                    <input type="text" class="form-control" id="citys" name="city"  value="{{i.city}}" autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="cts" style="color: red;margin-left: -140px;"></span>
 								</div>
                                 <div class="col-md-12 form-group">
-                                <select  class="form-control" name="district" id="dist"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'District'" onclick=" return onclear()">
+                                <select  class="form-control" name="district" id="dists" onkeyup=" return validateformss();"  onclick=" return onclearss();">
                                     <option value="{{i.district}}">{{i.district}}</option>
-                                    <option value="Kannur">Kannur</option>
                                     <option value="Kozhikode">Kozhikode</option>
                                     <option value="Malapuram">Malapuram</option>
                                     <option value="Thrissur">Thrissur</option>
                                     <option value="Ernakulam">Ernakulam</option>
-                                    <option value="Idukki">Idukki</option>
                                     <option value="Kottayam">Kottayam</option>
-                                    <option value="Alapuzha">Alapuzha</option>
                                 </select>
-								<span id="dst" style="color: red;"></span>
+								<span id="dsts" style="color: red;"></span>
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <input type="tel" class="form-control" id="pcode" value="{{i.pin}}" name="pin"  autocomplete="off" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Postal Code'" onclick=" return onclear()">
-                                    <span id="pin" style="color: red;margin-left: -140px;"></span>
+                                    <input type="tel" class="form-control" id="pcodes" maxlength="6" minlength="6" value="{{i.pin}}" name="pin"  autocomplete="off" onblur="return validateformss()" onKeyUp="return validateformss()">
+                                    <span id="pins" style="color: red;margin-left: -140px;"></span>
 								</div>
 							<div class="col-md-12 form-group">
 								<input type="submit" value="submit" name="btn" class="primary-btn">

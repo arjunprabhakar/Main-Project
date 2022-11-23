@@ -1,8 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-
 #Login Table
 class log_user(models.Model):
      email= models.EmailField(max_length=200,primary_key=True,unique=True)

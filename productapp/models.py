@@ -39,5 +39,6 @@ class tbl_Review(models.Model):
     review=models.TextField(max_length=800,blank=True)
     rating=models.FloatField()
     date=models.DateTimeField(auto_now_add=True,null=True)
-
+    class Meta:
+            verbose_name_plural = "Reviews"
 

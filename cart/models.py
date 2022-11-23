@@ -55,3 +55,6 @@ class OrderPlaced(models.Model):
 
     def _str_(self):
         return self.customer.fname
+    
+    class Meta:
+        verbose_name_plural = "Order Details"
