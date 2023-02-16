@@ -98,14 +98,14 @@ def add_wishlist(request,id):
 def view_wishlist(request):  
     if 'email' in request.session:
         email = request.session['email']
-        cart=Wishlist.objects.filter(user_id=email)
+        carts=Wishlist.objects.filter(user_id=email)
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
         cart=Cart.objects.filter(user_id=email)
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,"wishlist.html",{'cart_count':cart_count,'cart':cart,'email':email,'category':category,'subcategory':subcategory})
+        return render(request,"wishlist.html",{'cart_count':cart_count,'carts':carts,'cart':cart,'email':email,'category':category,'subcategory':subcategory})
     return redirect(login)
 
 # Remove Items From Wishlist

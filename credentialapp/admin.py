@@ -10,23 +10,23 @@ import csv
 # Register your models here.
 from credentialapp.models import reg_user,log_user
 
-def export_users(modeladmin, request, queryset):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="Users.csv"'
-    writer = csv.writer(response)
-    writer.writerow(['Name','Phone No'])
-    reg_user = queryset.values_list('name', 'phone_no')
-    for user in reg_user:
-        writer.writerow(user)
-    return response
-export_users.short_description = 'Download Customer Details'
+# def export_users(modeladmin, request, queryset):
+#     response = HttpResponse(content_type='text/csv')
+#     response['Content-Disposition'] = 'attachment; filename="Users.csv"'
+#     writer = csv.writer(response)
+#     writer.writerow(['Name','Phone No'])
+#     reg_user = queryset.values_list('name', 'phone_no')
+#     for user in reg_user:
+#         writer.writerow(user)
+#     return response
+# export_users.short_description = 'Download Customer Details'
 
 
 
 
 class UserAdmin(admin.ModelAdmin):
     list_display=['name','phone_no']
-    actions = [export_users]
+    # actions = [export_users]
     def has_add_permission(self, request, obj=None):
         return False
 

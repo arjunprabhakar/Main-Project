@@ -30,11 +30,11 @@
 
     <!--================Cart Area =================-->
     <section class="cart_area">
-        {% if not cart %}
+        {% if not carts %}
         
             <div style="height:300px;text-align: center;">
                   <h2 style="font-family: sans-serif;color: rgb(246, 86, 12);">Wishlist is Empty !!!!</h2><br>
-                  <a class="gray_btn" href="{%  url 'home'%}" ">Continue Shopping</a>
+                  <a class="gray_btn" href="{%  url 'home'%}" >Continue Shopping</a>
             </div>
                 </div>
                   {% else %}
@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
                            
-                            {%for cart in cart %}
+                            {%for cart in carts %}
                             {% if cart.user_id == email %}
                             <tr>
                                 <td>
@@ -68,7 +68,7 @@
                                 </td>
                                 <td>
                                     <a href="{%  url 'add_cart' cart.product.id %}"><button style="border:none; background-color:rgb(249, 144, 7);width:120px;height:35px;border-radius: 3px;">Add to Cart</button></a>
-                                    <a style="margin-left:10px ;" href="{%  url 'de_wishlist' cart.id %}""><button style="border:none; background-color:rgb(249, 144, 7);width:80px;height:35px;border-radius: 3px;">Remove</button></a>
+                                    <a style="margin-left:10px ;" href="{%  url 'de_wishlist' cart.id %}"><button style="border:none; background-color:rgb(249, 144, 7);width:80px;height:35px;border-radius: 3px;">Remove</button></a>
                                 </td>
                             </tr>                          
                             {% endif %}

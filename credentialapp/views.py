@@ -23,6 +23,7 @@ def demo(request):
     subcategory=Subcategory.objects.all()
     product=Product.objects.all()
     return render(request,"index.html",{'category':category,'subcategory':subcategory,'product':product})
+
 # Login Form
 def login(request):
     request.session.flush()
