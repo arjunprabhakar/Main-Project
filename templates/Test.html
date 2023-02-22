@@ -247,18 +247,21 @@
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">First Name</label>
                                                       <input type="text" class="form-control" style="width:280px;" id="fnm" name="fname"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="fn" style="color: red;margin-left: -140px;"></span>
                                                    </div>
                                                 </td>     
                                                 <td>
                                                 <div class="form-group">
                                                    <label style="font-weight:bold;">Last Name</label>
                                                    <input type="text" class="form-control" style="width:280px;" id="lnm" name="lname"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                   <span id="ln" style="color: red;margin-left: -140px;"></span>
                                                 </div>
                                                 </td>
                                                 <td>
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">Phone Number</label>
                                                       <input type="tel" class="form-control" style="width:280px;" maxlength="10" minlength="10" id="phn"  name="phn" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="ph" style="color: red;margin-left: -140px;"></span>
                                                    </div>
                                                    </td>
                                              </tr>
@@ -302,7 +305,7 @@
                                                    </div>
                                                 </td> 
                                                 <td>                                              
-                                                   <div style="margin-top:10px;">                                                     
+                                                   <div style="margin-top:-12px;">                                                     
                                                          <select  name="district" id="dist" onkeyup=" return validateforms();"  onclick=" return onclears();" >
                                                             <option value="">Select District</option>
                                                             <option value="Ernakulam">Ernakulam</option>
