@@ -22,7 +22,7 @@ def demo(request):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
     product=Product.objects.all()
-    return render(request,"index.html",{'category':category,'subcategory':subcategory,'product':product})
+    return render(request,"Test.html",{'category':category,'subcategory':subcategory,'product':product})
 
 # Login Form
 def login(request):
