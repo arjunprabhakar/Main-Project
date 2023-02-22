@@ -232,6 +232,146 @@
                         </div>
                         <!-- End Of Change Password Form -->
 
+
+
+                        <script>
+                           function validateforms()
+                           {
+                           var a=document.getElementById('fnm').value.trim();
+                           var b=document.getElementById('lnm').value.trim();
+                           var c=document.getElementById('email').value.trim();
+                           var d=document.getElementById('phn').value.trim();
+                           var e=document.getElementById('addr').value.trim();
+                           var f=document.getElementById('strt').value.trim();
+                           var g=document.getElementById('city').value.trim();
+                           var h=document.getElementById('dist').value.trim();
+                           var i=document.getElementById('pcode').value.trim();
+       
+                           // Patterns
+                           var expr = /^[6-9]\d{9}$/;
+       
+                           // Conditions
+                           if(a=="")
+                           {
+                               document.getElementById('fn').style.display="block";
+                               document.getElementById('fn').innerHTML="**Please Enter First Name";
+                               return false;
+                           }
+                           if (/[^a-zA-Z^\s]/.test(a))
+                           {
+                               document.getElementById('fn').style.display="block";
+                               document.getElementById('fn').innerHTML="**Only Alphabets Allowed";
+                               return false;
+                           }else{
+                               document.getElementById('fn').style.display="none";
+                           }
+                           if(b=="")
+                           {
+                               document.getElementById('ln').style.display="block";
+                               document.getElementById('ln').innerHTML="**Please Enter Last Name";
+                               return false;
+                           }
+                           if (/[^a-zA-Z^\s]/.test(b))
+                           {
+                               document.getElementById('ln').style.display="block";
+                               document.getElementById('ln').innerHTML="**Only Alphabets Allowed";
+                               return false;
+                           }else{
+                               document.getElementById('ln').style.display="none"; 
+                           }
+                           if(c=="")
+                           { 
+                               document.getElementById('eml').style.display="block";
+                               document.getElementById('eml').innerHTML="**Please Enter Email";
+                               return false;
+                           }  
+                           if(c.indexOf('@')<=0){
+                               document.getElementById('eml').style.display="block";
+                               document.getElementById('eml').innerHTML="**Invalid  Email Address";
+                               return false;
+                           }     
+                           if ((c.charAt(c.length-4)!='.') && (c.charAt(c.length-3)!='.')) {
+                               document.getElementById('eml').style.display="block";
+                               document.getElementById('eml').innerHTML="**Invalid  Email Address";
+                               return false;
+                           }else{
+                               document.getElementById('eml').style.display="none";
+                           }
+                           if(d==""){
+                               document.getElementById('ph').style.display = "block";
+                               document.getElementById('ph').innerHTML="**PleaseEnter  phone number";
+                               return false;
+                            }
+                           if(d!="" && expr.test(d)==false){
+                               document.getElementById('ph').style.display= "block";
+                               document.getElementById('ph').innerHTML ="Invalid Phone number";
+                               return false;
+                           }else{
+                               document.getElementById('ph').style.display = "none";
+                              }
+                           if(e=="")
+                           {
+                               document.getElementById('ad').style.display="block";
+                               document.getElementById('ad').innerHTML="**Please Enter House Name";
+                               return false;
+                           }else{
+                               document.getElementById('ad').style.display = "none";
+                              }
+                           if(f=="")
+                           {
+                               document.getElementById('str').style.display="block";
+                               document.getElementById('str').innerHTML="**Please Enter Street";
+                               return false;
+                           }else{
+                               document.getElementById('str').style.display = "none";
+                              }
+                           if(g=="")
+                           {
+                               document.getElementById('ct').style.display="block";
+                               document.getElementById('ct').innerHTML="**Please Enter City";
+                               return false;
+                           }else{
+                               document.getElementById('ct').style.display = "none";
+                            
+                              }
+                          
+                           if(i=="")
+                           {
+                               document.getElementById('pin').style.display="block";
+                               document.getElementById('pin').innerHTML="**Please Enter PostalCode";
+                               return false;
+                           } 
+                           if(i.length>6||i.length<6){
+                               document.getElementById('pin').style.display="block";
+                               document.getElementById('pin').innerHTML="**Enter 6 digit valid Code";
+                               return false;
+                           }
+                          
+                           if (!/^[0-9]+$/.test(i))
+                           {
+                               document.getElementById('pin').style.display="block";
+                               document.getElementById('pin').innerHTML="**Only Numbers Allowed";
+                               return false;
+                           }else{
+                               document.getElementById('pin').style.display="none";
+                           }    
+                           if(h=="")
+                           {
+                               document.getElementById('dst').style.display="block";
+                               document.getElementById('dst').innerHTML="**Please select District";
+                               return false;
+                           }
+                           else{
+                               document.getElementById('dst').style.display="none";
+                               return true; 
+       
+                           }
+                       }     
+                       
+                       function onclears(){
+                           document.getElementById('dst').innerHTML="";
+                       }
+                       </script>
                         <!-- Add Shipping Address Form -->
                         <div id="address_tab" class="tab-pane fade">
                            <div class="card">
