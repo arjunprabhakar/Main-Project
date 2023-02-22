@@ -21,7 +21,16 @@
 	</section>
   </script>
   <!-- ################### End Of Banner Area ############### -->
+  {% include 'alert.html' %}
 
+  <script>
+      setTimeout(function(){
+        if ($('#msg').length > 0){
+          $('#msg').remove();
+          }
+        },4000)
+  
+  </script>
 
    <body >
       <div class="main-wrapper" style="margin-left:-170px;"> 
@@ -39,27 +48,28 @@
                               </a>
                            </div>
                            <div class="col ml-md-n2 profile-user-info">
-                              <h4 class="user-name mb-0">John Doe</h4>
-                              <h6 class="text-muted">UI/UX Design Team</h6>
-                              <div class="user-Location"><i class="fas fa-map-marker-alt"></i> Florida, United States</div>
-                              <div class="about-text">Lorem ipsum dolor sit amet.</div>
+
+                              <h4 class="user-name mb-0">{{user.name}} {{user.lname}}</h4>
+                              <div class="user-Location">{{user.email_id}}</div>
+                              <div class="about-text">{{user.phone_no}}</div>
+                              <!-- <i class="fas fa-map-marker-alt"></i> -->
                            </div>
                            
                         </div>
                      </div>
-                     <div class="profile-menu">
-                        <ul class="nav nav-tabs nav-tabs-solid">
-                           <li class="nav-item">
-                              <a class="nav-link active" data-toggle="tab" href="#per_details_tab">About</a>
+                     <div class="profile-menu" >
+                        <ul class="nav nav-tabs nav-tabs-solid" >
+                           <li class="nav-item" style="margin-left:400px;">
+                              <a class="nav-link active" data-toggle="tab" href="#per_details_tab">Shipping Address</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" data-toggle="tab" href="#password_tab">Password</a>
-                           </li>
-                           <li class="nav-item">
-                              <a class="nav-link" data-toggle="tab" href="#address_tab">Shipping Address</a>
+                              <a class="nav-link" data-toggle="tab" href="#address_tab">Add Address</a>
                            </li>
                            <li class="nav-item">
                               <a class="nav-link" data-toggle="tab" href="#order_tab">My Order</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" data-toggle="tab" href="#password_tab">Change Password</a>
                            </li>
                         </ul>
                      </div>
@@ -126,6 +136,69 @@
                            </div>
                         </div>
 
+
+
+
+
+                        <script>
+                                
+                           function validateform()
+                           {
+                               var a=document.getElementById('oldpss').value.trim();
+                               var b=document.getElementById('pss').value.trim();
+                               var c=document.getElementById('cpss').value.trim();
+
+                               var passpatern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+                               if(a=="")
+                               {
+                                   document.getElementById('ops').style.display="block";
+                                   document.getElementById('ops').innerHTML="**please enter Confirm Password";
+                                   return false;
+                               }
+                               else{
+                                       document.getElementById('ops').style.display="none";            
+                                   }
+                                   
+                               if(b=="")
+                               {
+                                   document.getElementById('ps').style.display="block";
+                                   document.getElementById('ps').innerHTML="**please enter new Password";
+                                   return false;
+                               }
+
+                               if (!b.match(passpatern))
+                               {
+                                   document.getElementById('ps').style.display="block";
+                                   document.getElementById('ps').innerHTML="**Min length 8 | One Uppercase |One lowercase | One number";
+                                   return false;
+                               }
+                               else{
+                                       document.getElementById('ps').style.display="none";
+                                   }
+
+                                   if(c=="")
+                               {
+                                   document.getElementById('cps').style.display="block";
+                                   document.getElementById('cps').innerHTML="**please enter Confirm Password";
+                                   return false;
+                               }
+                               else{
+                                       document.getElementById('cps').style.display="none";
+                                       
+                                   }
+                                   if(b!=c)
+                                   {
+                                       document.getElementById('ps').style.display="block";
+                                       document.getElementById('ps').innerHTML="**Password doesn't match";
+                                       return false;
+                                   }
+                                   else{
+                                           document.getElementById('ps').style.display="none";
+                                           return true;
+                                       }
+                               }
+                           </script>
                         <!-- Change Password Form -->
                         <div id="password_tab" class="tab-pane fade">
                            <div class="card">
@@ -133,18 +206,22 @@
                                  <h5 class="card-title">Change Password</h5>
                                  <div class="row">
                                     <div class="col-md-10 col-lg-6">
-                                       <form>
+                                       <form action="{% url 'change_password' %}" method="post"  novalidate="novalidate" onsubmit="return validateform();">
+                                          {% csrf_token %}
                                           <div class="form-group">
                                              <label>Old Password</label>
-                                             <input type="password" class="form-control">
+                                             <input type="password" class="form-control" id="oldpss" name="oldpass"   autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()">
+                                             <span id="ops" style="color: red;font-size:12px;">
                                           </div>
                                           <div class="form-group">
                                              <label>New Password</label>
-                                             <input type="password" class="form-control">
+                                             <input type="password" class="form-control" id="pss" name="pass"   autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()">
+                                             <span id="ps" style="color:red;font-size:12px;">
                                           </div>
                                           <div class="form-group">
                                              <label>Confirm Password</label>
-                                             <input type="password" class="form-control">
+                                             <input type="password" class="form-control" id="cpss" name="cpass"  autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()">
+                                             <span id="cps" style="color:red;font-size:12px;">
                                           </div>
                                           <button class="btn btn-primary" type="submit">Save Changes</button>
                                        </form>
@@ -162,52 +239,84 @@
                                  <h5 class="card-title">Add Shipping Address</h5>
                                  <div class="row">
                                     <div class="col-md-10 col-lg-6">
-                                       <form>
-
+                                       <form action="{% url 'useraddress' %}" method="post"  novalidate="novalidate" onsubmit="return validateforms();">
+                                          {% csrf_token %}
                                           <table>
                                              <tr>
                                                 <td>
                                                    <div class="form-group">
-                                                      <label style="font-weight:bold;">House Name</label>
-                                                      <input type="text" class="form-control" style="width:280px;">
+                                                      <label style="font-weight:bold;">First Name</label>
+                                                      <input type="text" class="form-control" style="width:280px;" id="fnm" name="fname"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                                    </div>
-                                                </td>
+                                                </td>     
                                                 <td>
                                                 <div class="form-group">
-                                                   <label style="font-weight:bold;">Landmark</label>
-                                                   <input type="text" class="form-control" style="width:280px;">
+                                                   <label style="font-weight:bold;">Last Name</label>
+                                                   <input type="text" class="form-control" style="width:280px;" id="lnm" name="lname"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
                                                 </div>
                                                 </td>
+                                                <td>
+                                                   <div class="form-group">
+                                                      <label style="font-weight:bold;">Phone Number</label>
+                                                      <input type="tel" class="form-control" style="width:280px;" maxlength="10" minlength="10" id="phn"  name="phn" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                   </div>
+                                                   </td>
+                                             </tr>
+
+                                             <tr>
+                                                <td>
+                                                   <div class="form-group">
+                                                      <label style="font-weight:bold;">Email</label>
+                                                      <input type="text" class="form-control" id="email" name="email"   autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                   </div>
+                                                </td>
+                                                <td>                                              
+                                                   <div class="form-group">
+                                                      <label style="font-weight:bold;">House Name</label>
+                                                      <input type="text"  class="form-control" id="addr" name="hname" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="ad" style="color: red;margin-left: -140px;"></span>                                                      
+                                                   </div>
+                                                </td> 
+                                                <td>                                              
+                                                   <div class="form-group">
+                                                      <label style="font-weight:bold;">Street</label>
+                                                      <input type="text"  class="form-control" id="strt" name="street" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="str" style="color: red;margin-left: -140px;"></span>
+                                                   </div>
+                                                </td>                                                                       
                                              </tr>
                                              <tr>
                                                 <td>
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">City</label>
-                                                      <input type="text" class="form-control">
+                                                      <input type="text" class="form-control" id="city" name="city" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="ct" style="color: red;margin-left: -140px;"></span>
                                                    </div>
                                                 </td>
                                                 <td>                                              
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">Pin</label>
-                                                      <input type="tel" maxlength="6" class="form-control">
+                                                      <input type="tel"  class="form-control" id="pcode" maxlength="6" minlength="6" name="pin"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="pin" style="color: red;margin-left: -140px;"></span>                                                  
+                                                   </div>
+                                                </td> 
+                                                <td>                                              
+                                                   <div style="margin-top:10px;">                                                     
+                                                         <select  name="district" id="dist" onkeyup=" return validateforms();"  onclick=" return onclears();" >
+                                                            <option value="">Select District</option>
+                                                            <option value="Ernakulam">Ernakulam</option>
+                                                            <option value="Kozhikode">Kozhikode</option>
+                                                            <option value="Thrissur">Thrissur</option>
+                                                            <option value="Kottayam">Kottayam</option>
+                                                         </select> 
+                                 								<span id="dst" style="color: red;"></span>                                                  
                                                    </div>
                                                 </td>                                                                       
                                              </tr>
-                                            <tr>
-                                             <td></td>
-                                             <td>    
-                                                <select id="#" name="#" >
-                                                   <option  >Select District</option>
-                                                   <option>Ernakulam</option>
-                                                   <option>Kozhikode</option>
-                                                   <option>Thrissur</option>
-                                                   <option>Kottayam</option>
-                                                </select> 
-                                          </td>
-                                            </tr>
+                                                                                                              
                                              </table>
 
-                                          <button class="btn btn-primary" type="submit">Save Changes</button>
+                                          <button class="btn btn-primary" style="background-color:#ffa826;border:none;" type="submit">Save Changes</button>
                                        </form>
                                     </div>
                                  </div>

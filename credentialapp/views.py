@@ -22,7 +22,7 @@ def demo(request):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
     product=Product.objects.all()
-    return render(request,"Test.html",{'category':category,'subcategory':subcategory,'product':product})
+    return render(request,"index.html",{'category':category,'subcategory':subcategory,'product':product})
 
 # Login Form
 def login(request):
@@ -153,13 +153,14 @@ def profile(request):
         email = request.session['email']
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
-        profile=reg_user.objects.all()
+        user=reg_user.objects.get(email_id=email)
         address=user_address.objects.filter(user_id=email)
         cart=Cart.objects.filter(user_id=email)
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,"profile.html",{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'profile':profile,'address':address})
+        data={'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'user':user}
+        return render(request,"Test.html",data)
     messages.success(request, 'Sign in..!!')
     return redirect(login)
 
