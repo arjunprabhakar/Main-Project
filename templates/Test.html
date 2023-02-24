@@ -223,7 +223,7 @@
                                              <input type="password" class="form-control" id="cpss" name="cpass"  autocomplete="off" onblur="return validateform()" onKeyUp="return validateform()">
                                              <span id="cps" style="color:red;font-size:12px;">
                                           </div>
-                                          <button class="btn btn-primary" type="submit">Save Changes</button>
+                                          <button class="btn btn-primary" type="submit" style="background-color:#ffa826;border:none;">Save Changes</button>
                                        </form>
                                     </div>
                                  </div>
@@ -387,21 +387,21 @@
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">First Name</label>
                                                       <input type="text" class="form-control" style="width:280px;" id="fnm" name="fname"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="fn" style="color: red;margin-left: -140px;"></span>
+                                                      <span id="fn" style="color: red;"></span>
                                                    </div>
                                                 </td>     
                                                 <td>
                                                 <div class="form-group">
                                                    <label style="font-weight:bold;">Last Name</label>
                                                    <input type="text" class="form-control" style="width:280px;" id="lnm" name="lname"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                   <span id="ln" style="color: red;margin-left: -140px;"></span>
+                                                   <span id="ln" style="color: red;"></span>
                                                 </div>
                                                 </td>
                                                 <td>
                                                    <div class="form-group">
-                                                      <label style="font-weight:bold;">Phone Number</label>
-                                                      <input type="tel" class="form-control" style="width:280px;" maxlength="10" minlength="10" id="phn"  name="phn" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="ph" style="color: red;margin-left: -140px;"></span>
+                                                      <label style="font-weight:bold;">Email</label>
+                                                      <input type="text" class="form-control" id="email" value="{{user.email_id}}" name="email"  style="width:280px;"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="eml" style="color: red;"></span>    
                                                    </div>
                                                    </td>
                                              </tr>
@@ -409,23 +409,23 @@
                                              <tr>
                                                 <td>
                                                    <div class="form-group">
-                                                      <label style="font-weight:bold;">Email</label>
-                                                      <input type="text" class="form-control" id="email" name="email"   autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="eml" style="color: red;margin-left: -140px;"></span>    
+                                                      <label style="font-weight:bold;">Phone Number</label>
+                                                      <input type="tel" class="form-control"  maxlength="10" value="{{user.phone_no}}" minlength="10" id="phn"  name="phn" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
+                                                      <span id="ph" style="color: red;"></span>
                                                    </div>
                                                 </td>
                                                 <td>                                              
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">House Name</label>
                                                       <input type="text"  class="form-control" id="addr" name="hname" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="ad" style="color: red;margin-left: -140px;"></span>                                                      
+                                                      <span id="ad" style="color: red;"></span>                                                      
                                                    </div>
                                                 </td> 
                                                 <td>                                              
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">Street</label>
                                                       <input type="text"  class="form-control" id="strt" name="street" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="str" style="color: red;margin-left: -140px;"></span>
+                                                      <span id="str" style="color: red;"></span>
                                                    </div>
                                                 </td>                                                                       
                                              </tr>
@@ -434,19 +434,19 @@
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">City</label>
                                                       <input type="text" class="form-control" id="city" name="city" autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="ct" style="color: red;margin-left: -140px;"></span>
+                                                      <span id="ct" style="color: red;"></span>
                                                    </div>
                                                 </td>
                                                 <td>                                              
                                                    <div class="form-group">
                                                       <label style="font-weight:bold;">Pin</label>
                                                       <input type="tel"  class="form-control" id="pcode" maxlength="6" minlength="6" name="pin"  autocomplete="off" onblur="return validateforms()" onKeyUp="return validateforms()">
-                                                      <span id="pin" style="color: red;margin-left: -140px;"></span>                                                  
+                                                      <span id="pin" style="color: red;"></span>                                                  
                                                    </div>
                                                 </td> 
                                                 <td>                                              
                                                    <div style="margin-top:-12px;">                                                     
-                                                         <select  name="district" id="dist" onkeyup=" return validateforms();"  onclick=" return onclears();" >
+                                                         <select  name="district" id="dist" onclick=" return onclears();" >
                                                             <option value="">Select District</option>
                                                             <option value="Ernakulam">Ernakulam</option>
                                                             <option value="Kozhikode">Kozhikode</option>
@@ -490,7 +490,7 @@
                                              <label>Confirm Password</label>
                                              <input type="password" class="form-control">
                                           </div>
-                                          <button class="btn btn-primary" type="submit">Save Changes</button>
+                                          <button class="btn btn-primary" type="submit" style="background-color:#ffa826;border:none;">Save Changes</button>
                                        </form>
                                     </div>
                                  </div>
