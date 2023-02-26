@@ -9,7 +9,10 @@ from django.contrib import messages
 from credentialapp.views import login
 from .models import Cart, OrderPlaced, Payment, Wishlist
 from django.contrib import messages
-
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.generic import View
+from .utils import render_to_pdf
 # Cart functions
 def add_cart(request,id):
     if 'email' in request.session:
@@ -181,3 +184,28 @@ def payment_success(request):
         return render(request,"Payment_Success.html",{'email':email,'address':address,'order':order,'category':category,'subcategory':subcategory})
     else:
         return redirect(login)
+    
+
+# For Product Order Bill 
+def get(request,id,*args, **kwargs,):
+    if 'email' in request.session:   
+        email=request.session['email'] 
+        place = OrderPlaced.objects.get(id=id)
+        date=place.payment.created_at
+        orders=OrderPlaced.objects.filter(user_id=email,payment__created_at=date)
+        total=0
+        for o in orders:
+            total=total+(o.product.price*o.quantity)
+        # addrs=user_address.objects.get(user_id=request.user.id)
+        data = {
+            "total":total,
+            "orders":orders,
+        }
+        pdf = render_to_pdf('report.html',data)
+        if pdf:
+            response=HttpResponse(pdf,content_type='application/pdf')
+            filename = "Bill"
+            content = "inline; filename= %s" %(filename)
+            response['Content-Disposition']=content
+            return response
+        return HttpResponse("Page Not Found")
