@@ -22,6 +22,11 @@ from credentialapp.models import reg_user,log_user
 # export_users.short_description = 'Download Customer Details'
 
 
+admin.site.register(log_user)
+
+
+
+
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -38,7 +43,7 @@ class UserAdmin(admin.ModelAdmin):
     verbose_name_plural = "Customer Details"
 admin.site.register(reg_user,UserAdmin)
     
-# admin.site.register(log_user)
+
 
 
 
