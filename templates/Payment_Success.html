@@ -30,6 +30,7 @@
 								<th scope="col" style="font-weight:bold;">Quantity</th>
 								<th scope="col" style="font-weight:bold;">Price</th>
 								<th scope="col" style="font-weight:bold;">Order Date</th>
+								<th scope="col" style="font-weight:bold;">Bill</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -46,6 +47,9 @@
 								</td>
 								<td>
 									<p style="color:#000;">{{i.ordered_date}}</p>
+								</td>
+								<td>
+									<button style="border-radius:5px;background-color:rgba(255, 153, 0, 0.852);color:#fff;border:none;font-weight:bold;height:30px;">Download Bill</button>
 								</td>
 							</tr>
 							{% endfor %}

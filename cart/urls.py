@@ -14,5 +14,5 @@ urlpatterns = [
   path('checkout',views.checkout,name='checkout'),
   path('paymentdone/', views.payment_done, name='paymentdone'),
   path('payment_success/', views.payment_success, name='payment_success'),
-
+  path('pdf/<int:id>/', views.get,name='pdf')
 ]
