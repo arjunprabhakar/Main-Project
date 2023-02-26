@@ -49,3 +49,4 @@ admin.site.unregister(Group)
 admin.site.site_header = "Smart Store"
 admin.site.site_title = "Smart Store"
 admin.site.index_title = "Smart Store"
+

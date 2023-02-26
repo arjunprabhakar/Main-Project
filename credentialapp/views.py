@@ -39,10 +39,8 @@ def login(request):
             email=user_details.email
             request.session['email']=email
             messages.success(request, 'Login successfully..!! Welcome to smartstore')
-            return redirect('home')
-           
+            return redirect('home')          
         else:
-            print("Invalid")
             messages.success(request, 'Email or Password Incorrect..!!')
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()

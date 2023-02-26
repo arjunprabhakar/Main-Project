@@ -1,14 +1,42 @@
+from django.conf import settings
 from django.contrib import admin
-
-# Register your models here.
 from django.contrib import admin
 import decimal, csv
 from django.http import HttpResponse
 from django.db.models import F
 import csv
-
-# Register your models here.
+from django.core.mail import send_mail
 from credentialapp.models import reg_user,log_user
+from hashlib import sha256
+from django.template.loader import render_to_string
+import re
+
+
+class ServiceAdmin(admin.ModelAdmin):
+    verbose_name_plural = "Add Servicer"
+    exclude = ('otp','type','status',)
+    list_display=['email']
+     
+    def save_model(self, request, obj, form, change):
+        password1 =obj.password
+        password = sha256(obj.password.encode()).hexdigest()
+        obj.password=password
+        obj.type=1
+        obj.status=1
+        super().save_model(request, obj, form, change)
+        # send Mail
+        subject="SmartStore"
+        from_email=settings.EMAIL_HOST_USER
+        recepient_list = [obj.email]
+        htmlgen = 'Welcome to SmartStore...! \n Your Login Credential Is \n Email:'+obj.email+'\n Password:'+password1+'\nLogin Here : http://127.0.0.1:8000/login/'
+        send_mail(subject,htmlgen,from_email,recepient_list)
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.filter(type=1)
+        return qs
+    
+admin.site.register(log_user,ServiceAdmin)
+
 
 # def export_users(modeladmin, request, queryset):
 #     response = HttpResponse(content_type='text/csv')
@@ -20,11 +48,6 @@ from credentialapp.models import reg_user,log_user
 #         writer.writerow(user)
 #     return response
 # export_users.short_description = 'Download Customer Details'
-
-
-admin.site.register(log_user)
-
-
 
 
 
@@ -42,6 +65,9 @@ class UserAdmin(admin.ModelAdmin):
         return False
     verbose_name_plural = "Customer Details"
 admin.site.register(reg_user,UserAdmin)
+    
+
+
     
 
 

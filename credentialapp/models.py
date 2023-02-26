@@ -1,14 +1,19 @@
 from django.db import models
+from django.core.validators import RegexValidator
+
 
 
 #Login Table
 class log_user(models.Model):
      email= models.EmailField(max_length=200,primary_key=True,unique=True)
-     password = models.CharField(max_length=200,default=1)
+     password = models.CharField(max_length=200,default=1 )
      otp = models.IntegerField(default=1)
+     type = models.IntegerField(default=0)
      status = models.BooleanField(default=False)
      def __str__(self):
         return self.email
+     class Meta:
+        verbose_name_plural = "Service"
 
 #Customer Registration Table
 class reg_user(models.Model):
@@ -19,9 +24,8 @@ class reg_user(models.Model):
 
     def __str__(self):
         return self.name
-
     class Meta:
-        verbose_name_plural = "Customer Details"
+        verbose_name_plural = "Customer "
 
     
 #Customer Address Table
