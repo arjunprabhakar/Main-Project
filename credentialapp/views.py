@@ -353,7 +353,8 @@ def Service(request):
     if 'email' in request.session:
         email=request.session['email']
         user=log_user.objects.get(email=email)
-        data={'user':user}
+        data={'user':user,
+              'email':email,}
         return render(request,"Service/Service_Index.html",data)
     else:
         return redirect(login)
@@ -391,6 +392,33 @@ def Service_Details(request):
             img = request.FILES.get('img');
             Servicer_Details(user_id=email,fname=fname,lname=lname,phone_no=phone,hname=hname,
                              street=street,city=city,district=district,pin=pin,image=img).save()
+            return redirect(Service_Profile)
+    else:
+        return redirect(login)
+    
+# Servicer Details Edit
+def Service_Details_Update(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        if request.method=='POST':
+            fname = request.POST.get('fname');
+            lname = request.POST.get('lname');
+            phone = request.POST.get('phone');
+            hname = request.POST.get('hname');
+            street = request.POST.get('street');
+            city = request.POST.get('city');
+            district = request.POST.get('district');
+            pin = request.POST.get('pin');
+            user=Servicer_Details.objects.get(user_id=email)
+            user.fname=fname
+            user.lname=lname
+            user.phone_no=phone
+            user.hname=hname
+            user.street=street
+            user.city=city
+            user.district=district
+            user.pin=pin
+            user.save()
             return redirect(Service_Profile)
     else:
         return redirect(login)

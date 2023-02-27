@@ -25,5 +25,6 @@ urlpatterns = [
     path('Service/', views.Service, name='Service'),
     path('Service_Profile/', views.Service_Profile, name='Service_Profile'),
     path('Service_Details/', views.Service_Details, name='Service_Details'),
+    path('Service_Details_Update/', views.Service_Details_Update, name='Service_Details_Update'),
 
 ]
