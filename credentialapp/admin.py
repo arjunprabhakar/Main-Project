@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.db.models import F
 import csv
 from django.core.mail import send_mail
-from credentialapp.models import reg_user,log_user
+from credentialapp.models import Servicer_Details, reg_user,log_user
 from hashlib import sha256
 from django.template.loader import render_to_string
 import re
@@ -36,6 +36,7 @@ class ServiceAdmin(admin.ModelAdmin):
         return qs
     
 admin.site.register(log_user,ServiceAdmin)
+admin.site.register(Servicer_Details)
 
 
 # def export_users(modeladmin, request, queryset):

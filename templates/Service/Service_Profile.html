@@ -33,9 +33,10 @@
 
 								<!-- User Image -->
 									<img
-										src="{% static 'vendors/images/photo1.jpg' %}"
+										src="{{user.image.url}}"
 										alt=""
 										class="avatar-photo"
+										style="width:150px;height:150px"
 									/>
 									<div
 										class="modal fade"
@@ -69,9 +70,9 @@
 										</div>
 									</div>
 								</div>
-								<h5 class="text-center h5 mb-0">Ross C. Lopez</h5>
+								<h5 class="text-center h5 mb-0">{{user.fname}} {{user.lname}}</h5>
 								<p class="text-center text-muted font-14">
-									Lorem ipsum dolor sit amet
+									Technician
 								</p>
 								<div class="profile-info">
 									<h5 class="mb-20 h5 text-blue">Details</h5>
@@ -82,16 +83,17 @@
 										</li>
 										<li>
 											<span>Phone Number:</span>
-											619-229-0054
+											{{user.phone_no}}
 										</li>
 										<li>
 											<span>District:</span>
-											America
+											{{user.district}}
 										</li>
 										<li>
 											<span>Address:</span>
-											1807 Holden Street<br />
-											San Diego, CA 92115
+											{{user.hname}}<br/>
+											{{user.street}} <br/>
+											{{user.city}},Pin:{{user.pin}}
 										</li>
 									</ul>
 								</div>

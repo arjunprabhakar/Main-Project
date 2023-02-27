@@ -363,8 +363,10 @@ def Service(request):
 def Service_Profile(request):
     if 'email' in request.session:
         email=request.session['email']
+        user=Servicer_Details.objects.get(user_id=email)
         data={
-            'email':email
+            'email':email,
+            'user':user,
         }
         return render(request,"Service/Service_Profile.html",data)
     else:
@@ -385,7 +387,6 @@ def Service_Details(request):
             district = request.POST.get('district');
             pin = request.POST.get('pin');
             img = request.FILES.get('img');
-            print(img,"******************************************")
             Servicer_Details(user_id=email,fname=fname,lname=lname,phone_no=phone,hname=hname,
                              street=street,city=city,district=district,pin=pin,image=img).save()
             return redirect(Service_Profile)
