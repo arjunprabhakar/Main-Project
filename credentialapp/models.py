@@ -65,6 +65,5 @@ class Servicer_Details(models.Model):
     image=models.ImageField(upload_to='Service',blank=True)
 
 
-
     def __str__(self):
         return self.fname

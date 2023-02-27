@@ -205,7 +205,14 @@
 							data-toggle="dropdown"
 						>
 							<span class="user-icon">
+								{% for i in user %}
+								{% if count == 1 %}
+								<img src="{{i.image.url}}" alt="" />
+								{% else %}
 								<img src="{% static 'vendors/images/photo1.jpg' %}" alt="" />
+
+								{% endif %}
+								{% endfor %}
 							</span>
 							<span class="user-name">Ross C. Lopez</span>
 						</a>

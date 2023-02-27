@@ -363,10 +363,12 @@ def Service(request):
 def Service_Profile(request):
     if 'email' in request.session:
         email=request.session['email']
-        user=Servicer_Details.objects.get(user_id=email)
+        user=Servicer_Details.objects.filter(user_id=email)
+        count=Servicer_Details.objects.filter(user_id=email).count()
         data={
             'email':email,
             'user':user,
+            'count':count
         }
         return render(request,"Service/Service_Profile.html",data)
     else:
