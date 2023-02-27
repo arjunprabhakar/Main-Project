@@ -1,0 +1,229 @@
+
+{% extends 'Service/Service_Base.html' %}
+{% load static %}
+{% block content %}
+		<div class="mobile-menu-overlay"></div>
+
+		<div class="main-container">
+			
+			<div class="xs-pd-20-10 pd-ltr-20">
+				<div class="card-box pd-20 height-100-p mb-30">
+					<div class="row align-items-center">
+						<div class="col-md-4">
+							<img src="{% static 'vendors/images/banner-img.png' %}" alt="" />
+						</div>
+						<div class="col-md-8">
+							<h4 class="font-20 weight-500 mb-10 text-capitalize">
+								Welcome
+								<div class="weight-600 font-30 text-blue">{{user}}!</div>
+							</h4>
+							<p class="font-18 max-width-600">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
+								hic non repellendus debitis iure, doloremque assumenda. Autem
+								modi, corrupti, nobis ea iure fugiat, veniam non quaerat
+								mollitia animi error corporis.
+							</p>
+						</div>
+					</div>
+				</div>
+				
+
+				<div class="row pb-10">
+					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark">75</div>
+									<div class="font-14 text-secondary weight-500">
+										Request Pending
+									</div>
+								</div>
+								<div class="widget-icon">
+									<div class="icon" data-color="#00eccf">
+										<i class="icon-copy  ti-list"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark">124</div>
+									<div class="font-14 text-secondary weight-500">
+										 Request Accepted
+									</div>
+								</div>
+								<div class="widget-icon">
+									<div class="icon" data-color="#ff5b5b">
+										<span class="icon-copy ti-list"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark">400+</div>
+									<div class="font-14 text-secondary weight-500">
+										Our Products
+									</div>
+								</div>
+								<div class="widget-icon">
+									<div class="icon">
+										<i
+											class="icon-copy ti-list"
+											aria-hidden="true"
+										></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+						<div class="card-box height-100-p widget-style3">
+							<div class="d-flex flex-wrap">
+								<div class="widget-data">
+									<div class="weight-700 font-24 text-dark">₹50,000</div>
+									<div class="font-14 text-secondary weight-500">Earning</div>
+								</div>
+								<div class="widget-icon">
+									<div class="icon" data-color="#09cc06">
+										<i class="icon-copy fa fa-money" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Servive Request Table Start -->
+				<div class="card-box mb-30">
+					<!-- <div class="pd-20">
+						<h4 class="text-blue h4">Data Table Simple</h4>
+						<p class="mb-0">
+							you can find more options
+							<a
+								class="text-primary"
+								href="https://datatables.net/"
+								target="_blank"
+								>Click Here</a
+							>
+						</p>
+					</div> -->
+					<div class="pb-20">
+						<table class="data-table table stripe hover nowrap">
+							<thead>
+								<tr>
+									<th  style="font-weight:bold;">Customer</th>
+									<th  style="font-weight:bold;">Requested Date</th>
+									<th  style="font-weight:bold;">Waranty Expired</th>
+									<th  style="font-weight:bold;">Type</th>
+									<th  style="font-weight:bold;">Brand</th>
+									<th  style="font-weight:bold;">Bill</th>
+									<th  style="font-weight:bold;" class="datatable-nosort">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="table-plus">Gloria F. Mead</td>
+									<td>25</td>
+									<td>Sagittarius</td>
+									<td>2829 Trainer Avenue</td>
+									<td>29-03-2018</td>
+									<td>File</td>
+									<td>
+										<div class="dropdown">
+											<a
+												class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+												href="#"
+												role="button"
+												data-toggle="dropdown"
+											>
+												<i class="dw dw-more"></i>
+											</a>
+											<div
+												class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+											>
+												<a class="dropdown-item" href="#"
+													><i class="dw dw-eye"></i> View</a
+												>
+												<a class="dropdown-item" href="#"
+													><i class="dw dw-edit2"></i> Edit</a
+												>
+												<a class="dropdown-item" href="#"
+													><i class="dw dw-delete-3"></i> Delete</a
+												>
+											</div>
+										</div>
+									</td>
+								</tr>
+								
+								
+								
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- Simple Datatable End -->
+
+				<div class="title pb-20 pt-20">
+					<h2 class="h3 mb-0">*********************************************************************************************</h2>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 mb-20">
+						<div  class="card-box d-block mx-auto pd-20 text-secondary">
+							<div class="img pb-30">
+								<img src="{% static 'vendors/images/medicine-bro.svg' %}" alt="" />
+							</div>
+							<div class="content">
+								<h3 class="h4">Services</h3>
+								<p class="max-width-200">
+									We provide superior health care in a compassionate maner
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-20">
+						<div class="card-box d-block mx-auto pd-20 text-secondary">
+							<div class="img pb-30">
+								<img src="{% static 'vendors/images/remedy-amico.svg' %}" alt="" />
+							</div>
+							<div class="content">
+								<h3 class="h4">Medications</h3>
+								<p class="max-width-200">
+									Look for prescription and over-the-counter drug information.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-20">
+						<div class="card-box d-block mx-auto pd-20 text-secondary">
+							<div class="img pb-30">
+								<img src="{% static 'vendors/images/paper-map-cuate.svg' %}" alt="" />
+							</div>
+							<div class="content">
+								<h3 class="h4">Locations</h3>
+								<p class="max-width-200">
+									Convenient locations when and where you need them.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="footer-wrap pd-20 mb-20 card-box">
+					Smart Store
+				</div>
+			</div>
+		</div>
+	
+{% endblock %}
+	
+		

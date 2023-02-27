@@ -48,3 +48,23 @@ class user_address(models.Model):
     # class Meta:
     #     verbose_name_plural = "Customer Details"
 
+
+
+
+#Customer Address Table
+class Servicer_Details(models.Model):
+    user=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
+    fname = models.CharField(max_length=200,verbose_name='First Name',null=True)
+    lname = models.CharField(max_length=200,verbose_name='Last Name',null=True)
+    phone_no = models.CharField(max_length=200,null=True)
+    hname = models.CharField(max_length=200,null=True)
+    street = models.CharField(max_length=200,null=True)
+    city = models.CharField(max_length=200,null=True)
+    district=models.CharField(max_length=200,null=True)
+    pin=models.CharField(max_length=200,null=True)
+    image=models.ImageField(upload_to='Service',blank=True)
+
+
+
+    def __str__(self):
+        return self.fname

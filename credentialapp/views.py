@@ -10,7 +10,7 @@ from django.db.models import Q
 from cart.models import Cart
 from category.models import Category, Subcategory
 from productapp.models import Product
-from .models import reg_user,log_user, user_address
+from .models import Servicer_Details, reg_user,log_user, user_address
 from hashlib import sha256
 
 import math, random
@@ -33,13 +33,20 @@ def login(request):
         email=request.POST['email']
         password=request.POST['pass']
         password2 = sha256(password.encode()).hexdigest()
-        user=log_user.objects.filter(email=email,password=password2,status=True)
+        user=log_user.objects.filter(email=email,password=password2,status=True,type=0)
+        user2=log_user.objects.filter(email=email,password=password2,status=True,type=1)
         if user:
             user_details=log_user.objects.get(email=email,password=password2)
             email=user_details.email
             request.session['email']=email
             messages.success(request, 'Login successfully..!! Welcome to smartstore')
-            return redirect('home')          
+            return redirect('home')
+        elif user2:
+            user_details=log_user.objects.get(email=email,password=password2,type=1)
+            email=user_details.email
+            request.session['email']=email
+            messages.success(request, 'Login successfully..!! Welcome to smartstore Service Team')
+            return redirect('Service')     
         else:
             messages.success(request, 'Email or Password Incorrect..!!')
     category=Category.objects.all()
@@ -330,3 +337,57 @@ def new_password(request):
             return redirect(login)
     session=request.session['email']
     return render(request,'newpassword.html',{'session':session})
+
+
+
+
+
+
+
+
+#  ******************************************* Service Module Functions ******************************
+
+
+# Service Home Page
+def Service(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        user=log_user.objects.get(email=email)
+        data={'user':user}
+        return render(request,"Service/Service_Index.html",data)
+    else:
+        return redirect(login)
+    
+
+# Service Profile
+def Service_Profile(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        data={
+            'email':email
+        }
+        return render(request,"Service/Service_Profile.html",data)
+    else:
+        return redirect(login)
+    
+
+# Servicer Details Add
+def Service_Details(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        if request.method=='POST':
+            fname = request.POST.get('fname');
+            lname = request.POST.get('lname');
+            phone = request.POST.get('phone');
+            hname = request.POST.get('hname');
+            street = request.POST.get('street');
+            city = request.POST.get('city');
+            district = request.POST.get('district');
+            pin = request.POST.get('pin');
+            img = request.FILES.get('img');
+            print(img,"******************************************")
+            Servicer_Details(user_id=email,fname=fname,lname=lname,phone_no=phone,hname=hname,
+                             street=street,city=city,district=district,pin=pin,image=img).save()
+            return redirect(Service_Profile)
+    else:
+        return redirect(login)

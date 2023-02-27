@@ -20,4 +20,10 @@ urlpatterns = [
     path('verify_forgot_otp/', views.verify_forgot_otp, name='verify_forgot_otp'),
     path('new_password/', views.new_password, name='new_password'),
 
+
+    # Service Module URLS
+    path('Service/', views.Service, name='Service'),
+    path('Service_Profile/', views.Service_Profile, name='Service_Profile'),
+    path('Service_Details/', views.Service_Details, name='Service_Details'),
+
 ]
