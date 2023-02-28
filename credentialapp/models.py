@@ -67,7 +67,6 @@ class Servicer_Details(models.Model):
         return self.fname
 
 
-
 # Service Modules
 class Servicer_Product(models.Model):
     user=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
@@ -76,9 +75,10 @@ class Servicer_Product(models.Model):
     model = models.CharField(max_length=200,null=True)
     model_no = models.CharField(max_length=200,null=True)
     waranty = models.CharField(max_length=200,null=True)
-    city = models.CharField(max_length=200,null=True)
     issues=models.CharField(max_length=300,null=True)
     bill=models.FileField(upload_to='Bill',blank=True)
+    date=models.DateTimeField(auto_now_add=True,null=True)
+
 
 
   

@@ -10,7 +10,7 @@ from django.db.models import Q
 from cart.models import Cart
 from category.models import Category, Subcategory
 from productapp.models import Product
-from .models import Servicer_Details, reg_user,log_user, user_address
+from .models import Servicer_Details, Servicer_Product, reg_user,log_user, user_address
 from hashlib import sha256
 
 import math, random
@@ -365,8 +365,11 @@ def View_Service(request):
             model = request.POST.get('model');
             model_no = request.POST.get('model_no');
             waranty = request.POST.get('waranty');
-            img = request.FILES.get('bill');
+            bill = request.FILES.get('bill');
             issue = request.POST.get('issue');
+            Servicer_Product(user_id=user,category=cat,brand=brand,
+                             model=model,model_no=model_no,waranty=waranty,bill=bill,issues=issue).save()
+            return redirect(View_Service)
         data={
             'user':user,
             'category':category,
@@ -388,8 +391,10 @@ def Service(request):
     if 'email' in request.session:
         email=request.session['email']
         user=log_user.objects.get(email=email)
+        rqst=Servicer_Product.objects.all()
         data={'user':user,
-              'email':email,}
+              'email':email,
+              'rqst':rqst}
         return render(request,"Service/Service_Index.html",data)
     else:
         return redirect(login)

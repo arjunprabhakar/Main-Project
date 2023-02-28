@@ -124,16 +124,19 @@
 									<th  style="font-weight:bold;">Waranty Expired</th>
 									<th  style="font-weight:bold;">Type</th>
 									<th  style="font-weight:bold;">Brand</th>
+									<th  style="font-weight:bold;">Model</th>
 									<th  style="font-weight:bold;">Bill</th>
 									<th  style="font-weight:bold;" class="datatable-nosort">Action</th>
 								</tr>
 							</thead>
 							<tbody>
+								{% for i in rqst %}
 								<tr>
-									<td class="table-plus">Gloria F. Mead</td>
-									<td>25</td>
-									<td>Sagittarius</td>
-									<td>2829 Trainer Avenue</td>
+									<td class="table-plus">{{i.user_id}}</td>
+									<td>{{i.date}}</td>
+									<td>{{i.waranty}}</td>
+									<td>{{i.category}}</td>
+									<td>29-03-2018</td>
 									<td>29-03-2018</td>
 									<td>File</td>
 									<td>
@@ -162,6 +165,7 @@
 										</div>
 									</td>
 								</tr>
+								{% endfor %}
 							</tbody>
 						</table>
 					</div>
@@ -223,3 +227,22 @@
 {% endblock %}
 	
 		
+
+
+
+<div class="col-lg-4 col-md-6 col-sm-12 mb-30">
+	<div class="pd-20 card-box text-center height-100-p">
+		<h5 class="pt-20 h5 mb-30">
+			A message with custom width, padding and background
+		</h5>
+		<div class="max-width-200 mx-auto">
+			<button
+				type="button"
+				class="btn mb-20 btn-primary btn-block"
+				id="custom-padding-width-alert"
+			>
+				Click me
+			</button>
+		</div>
+	</div>
+</div>
