@@ -79,58 +79,31 @@
 
                               <div class="col-lg-9">
                                  <div class="card">
-                                    <div class="card-body" >
+                                    <div class="card-body" style="height:auto;">
                                        <h5 class="card-title d-flex justify-content-between">
-                                          <span>Personal Details</span>
+                                          <span style="font-weight:bold;">Shipping Address</span>
                                        </h5>
-                                       <div class="row" >
-                                          <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
-                                          <p class="col-sm-9">John Doe</p>
-                                       </div>
-                                       <div class="row">
-                                          <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Date of Birth</p>
-                                          <p class="col-sm-9">24 Jul 1983</p>
-                                       </div>
-                                       <div class="row">
-                                          <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
-                                          <p class="col-sm-9"><a href="https://preschool.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711b1e191f151e14311409101c011d145f121e1c">[email&#160;protected]</a></p>
-                                       </div>
-                                       <div class="row">
-                                          <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Mobile</p>
-                                          <p class="col-sm-9">305-310-5857</p>
-                                       </div>
-                                       <div class="row">
-                                          <p class="col-sm-3 text-muted text-sm-right mb-0">Address</p>
-                                          <p class="col-sm-9 mb-0">4663 Agriculture Lane,<br>
-                                             Miami,<br>
-                                             Florida - 33165,<br>
-                                             United States.
-                                          </p>
-                                       </div>
+
+                                       <div class="col-md-1 mb-2" style="display:inline;margin-left:10px;">
+
+                                          {% for i in address %}
+                                         
+                                          <div class="blue-box" style="text-align: left;background-color:rgb(255, 179, 0);width:auto;display:inline-block;height:auto;">
+                                             <h4 style="color:#fff;font-weight:bold;">Address-{{forloop.counter}}</h4>
+                                             <a href="{% url 'de_address' i.id %}" style="color:#000;margin-left:150px;"><span class="bi bi-trash"></span></a>
+                                            <P>{{i.fname}} {{i.lname}}</P>
+                                            <p>{{i.phone_no}}</p>
+                                            <p>{{i.email}}</p>
+                                            <p>{{i.hname}}(HO),{{i.street}}</p>
+                                            <p>{{i.city}},{{i.district}}</p>
+                                            <p>Pin : {{i.pin}}</p>
+
+                                          </div>
+                                          {% endfor %}
+                                          
+                                        </div>
                                     </div>
 
-                                    
-                                 </div>
-                              </div>
-
-
-                              <div class="col-lg-3">                 
-                                 <div class="card">
-                                    <div class="card-body">
-                                       <h5 class="card-title d-flex justify-content-between">
-                                          <span>Skills </span>
-                                       </h5>
-                                       <div class="skill-tags">
-                                          <span>Html5</span>
-                                          <span>CSS3</span>
-                                          <span>WordPress</span>
-                                          <span>Javascript</span>
-                                          <span>Android</span>
-                                          <span>iOS</span>
-                                          <span>Angular</span>
-                                          <span>PHP</span>
-                                       </div>
-                                    </div>
                                  </div>
                               </div>
                            </div>
@@ -354,18 +327,19 @@
                                return false;
                            }else{
                                document.getElementById('pin').style.display="none";
-                           }    
-                           if(h=="")
-                           {
-                               document.getElementById('dst').style.display="block";
-                               document.getElementById('dst').innerHTML="**Please select District";
-                               return false;
-                           }
-                           else{
-                               document.getElementById('dst').style.display="none";
                                return true; 
+                           }    
+                           // if(h=="")
+                           // {
+                           //     document.getElementById('dst').style.display="block";
+                           //     document.getElementById('dst').innerHTML="**Please select District";
+                           //     return false;
+                           // }
+                           // else{
+                           //     document.getElementById('dst').style.display="none";
+                           //     return true; 
        
-                           }
+                           // }
                        }     
                        
                        function onclears(){
@@ -477,21 +451,7 @@
                                  <h5 class="card-title">View Order</h5>
                                  <div class="row">
                                     <div class="col-md-10 col-lg-6">
-                                       <form>
-                                          <div class="form-group">
-                                             <label>Old Password</label>
-                                             <input type="password" class="form-control">
-                                          </div>
-                                          <div class="form-group">
-                                             <label>New Password</label>
-                                             <input type="password" class="form-control">
-                                          </div>
-                                          <div class="form-group">
-                                             <label>Confirm Password</label>
-                                             <input type="password" class="form-control">
-                                          </div>
-                                          <button class="btn btn-primary" type="submit" style="background-color:#ffa826;border:none;">Save Changes</button>
-                                       </form>
+                                       <h1>My Order</h1>
                                     </div>
                                  </div>
                               </div>

@@ -164,7 +164,12 @@ def profile(request):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        data={'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'user':user}
+        data={'cart_count':cart_count,
+              'email':email,
+              'category':category,
+              'subcategory':subcategory,
+              'address':address,
+              'user':user}
         return render(request,"Test.html",data)
     messages.success(request, 'Sign in..!!')
     return redirect(login)
@@ -183,11 +188,16 @@ def useraddress(request):
         pin = request.POST.get('pin');
         print(fname)
         if 'email' in request.session:
-            user=request.session['email'] 
-            address=user_address(user_id=user,fname=fname,lname=lname,email=email,phone_no=phone,hname=hname,street=street,city=city,district=district,pin=pin)
-            address.save()
-            messages.success(request, 'Address Added Successfully...')
-            return redirect('profile')
+            user=request.session['email']
+            count=user_address.objects.filter(user_id=user).count() 
+            if count >= 3:
+                messages.success(request, 'Please Remove The Existing Address then add new address..!')
+                return redirect(profile)
+            else:
+                address=user_address(user_id=user,fname=fname,lname=lname,email=email,phone_no=phone,hname=hname,street=street,city=city,district=district,pin=pin)
+                address.save()
+                messages.success(request, 'Address Added Successfully...')
+                return redirect('profile')
         return redirect('profile')
 
 # Edit Address
@@ -339,6 +349,31 @@ def new_password(request):
     return render(request,'newpassword.html',{'session':session})
 
 
+
+
+
+# *********************************** Customer Service Functions **********************************
+
+def View_Service(request):
+    if 'email' in request.session:
+        user=request.session['email']
+        category=Category.objects.all()
+       
+        if request.method=='POST':
+            cat = request.POST.get('category');
+            brand = request.POST.get('brand');
+            model = request.POST.get('model');
+            model_no = request.POST.get('model_no');
+            waranty = request.POST.get('waranty');
+            img = request.FILES.get('bill');
+            issue = request.POST.get('issue');
+        data={
+            'user':user,
+            'category':category,
+        }
+        return render(request,"Customer_Service/Service.html",data)
+    else:
+        return redirect(login)
 
 
 

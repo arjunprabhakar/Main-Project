@@ -21,6 +21,12 @@ urlpatterns = [
     path('new_password/', views.new_password, name='new_password'),
 
 
+# Customer Service URLS
+    path('View_Service/', views.View_Service, name='View_Service'),
+
+
+
+
     # Service Module URLS
     path('Service/', views.Service, name='Service'),
     path('Service_Profile/', views.Service_Profile, name='Service_Profile'),
