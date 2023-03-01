@@ -13,7 +13,7 @@ class log_user(models.Model):
      def __str__(self):
         return self.email
      class Meta:
-        verbose_name_plural = "Service"
+        verbose_name_plural = "Service Team"
 
 #Customer Registration Table
 class reg_user(models.Model):
@@ -65,6 +65,8 @@ class Servicer_Details(models.Model):
     image=models.ImageField(upload_to='Service',blank=True)
     def __str__(self):
         return self.fname
+    class Meta:
+        verbose_name_plural = "Service Team Details"
 
 
 # Service Modules

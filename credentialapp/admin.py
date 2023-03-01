@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.db.models import F
 import csv
 from django.core.mail import send_mail
-from credentialapp.models import Servicer_Details, reg_user,log_user
+from credentialapp.models import Servicer_Details, Servicer_Product, reg_user,log_user
 from hashlib import sha256
 from django.template.loader import render_to_string
 import re
@@ -36,7 +36,8 @@ class ServiceAdmin(admin.ModelAdmin):
         return qs
     
 admin.site.register(log_user,ServiceAdmin)
-admin.site.register(Servicer_Details)
+# admin.site.register(Servicer_Product)
+
 
 
 # def export_users(modeladmin, request, queryset):
@@ -67,6 +68,20 @@ class UserAdmin(admin.ModelAdmin):
     verbose_name_plural = "Customer Details"
 admin.site.register(reg_user,UserAdmin)
     
+
+class UserAdmin(admin.ModelAdmin):
+    list_display=['fname']
+    # actions = [export_users]
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+    verbose_name_plural = "Customer Details"
+admin.site.register(Servicer_Details,UserAdmin)
 
 
     

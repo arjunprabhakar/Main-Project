@@ -26,7 +26,7 @@ class Payment(models.Model):
     razorpay_order_id = models.CharField(max_length=100,blank=True,null=True)
     razorpay_payment_id = models.CharField(max_length=100,blank=True,null=True)
     razorpay_payment_status = models.CharField(max_length=100,blank=True,null=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
     token=models.IntegerField(default=673456)
 

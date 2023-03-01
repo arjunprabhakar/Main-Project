@@ -18,10 +18,10 @@
 								<div class="weight-600 font-30 text-blue">{{user}}!</div>
 							</h4>
 							<p class="font-18 max-width-600">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
+								<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
 								hic non repellendus debitis iure, doloremque assumenda. Autem
 								modi, corrupti, nobis ea iure fugiat, veniam non quaerat
-								mollitia animi error corporis.
+								mollitia animi error corporis. -->
 							</p>
 						</div>
 					</div>
@@ -125,8 +125,7 @@
 									<th  style="font-weight:bold;">Type</th>
 									<th  style="font-weight:bold;">Brand</th>
 									<th  style="font-weight:bold;">Model</th>
-									<th  style="font-weight:bold;">Bill</th>
-									<th  style="font-weight:bold;" class="datatable-nosort">Action</th>
+									<!-- <th  style="font-weight:bold;" class="datatable-nosort">Action</th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -136,10 +135,9 @@
 									<td>{{i.date}}</td>
 									<td>{{i.waranty}}</td>
 									<td>{{i.category}}</td>
-									<td>29-03-2018</td>
-									<td>29-03-2018</td>
-									<td>File</td>
-									<td>
+									<td>{{i.brand}}</td>
+									<td>{{i.model}}</td>
+									<!-- <td>
 										<div class="dropdown">
 											<a
 												class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -163,7 +161,7 @@
 												>
 											</div>
 										</div>
-									</td>
+									</td> -->
 								</tr>
 								{% endfor %}
 							</tbody>
@@ -180,12 +178,12 @@
 					<div class="col-md-4 mb-20">
 						<div  class="card-box d-block mx-auto pd-20 text-secondary">
 							<div class="img pb-30">
-								<img src="{% static 'vendors/images/medicine-bro.svg' %}" alt="" />
+								<img src="{% static 'vendors/images/aaaa.png' %}" alt="" />
 							</div>
 							<div class="content">
 								<h3 class="h4">Services</h3>
 								<p class="max-width-200">
-									We provide superior health care in a compassionate maner
+									<!-- We provide superior health care in a compassionate maner -->
 								</p>
 							</div>
 						</div>
@@ -193,12 +191,12 @@
 					<div class="col-md-4 mb-20">
 						<div class="card-box d-block mx-auto pd-20 text-secondary">
 							<div class="img pb-30">
-								<img src="{% static 'vendors/images/remedy-amico.svg' %}" alt="" />
+								<img src="{% static 'vendors/images/bbbb.jpg' %}" alt="" />
 							</div>
 							<div class="content">
-								<h3 class="h4">Medications</h3>
+								<h3 class="h4">Services</h3>
 								<p class="max-width-200">
-									Look for prescription and over-the-counter drug information.
+									<!-- Look for prescription and over-the-counter drug information. -->
 								</p>
 							</div>
 						</div>
@@ -211,7 +209,7 @@
 							<div class="content">
 								<h3 class="h4">Locations</h3>
 								<p class="max-width-200">
-									Convenient locations when and where you need them.
+									<!-- Convenient locations when and where you need them. -->
 								</p>
 							</div>
 						</div>

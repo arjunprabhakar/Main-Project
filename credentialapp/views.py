@@ -398,6 +398,7 @@ def Service(request):
         return render(request,"Service/Service_Index.html",data)
     else:
         return redirect(login)
+
     
 
 # Service Profile

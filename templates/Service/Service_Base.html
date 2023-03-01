@@ -215,13 +215,13 @@
 							<a class="dropdown-item" href="{% url 'Service_Profile' %}"
 								><i class="dw dw-user1"></i> Profile</a
 							>
-							<a class="dropdown-item" href="profile.html"
+							<!-- <a class="dropdown-item" href="profile.html"
 								><i class="dw dw-settings2"></i> Setting</a
 							>
 							<a class="dropdown-item" href="faq.html"
 								><i class="dw dw-help"></i> Help</a
-							>
-							<a class="dropdown-item" href="login.html"
+							> -->
+							<a class="dropdown-item" href="{% url 'logout' %}"
 								><i class="dw dw-logout"></i> Log Out</a
 							>
 						</div>
@@ -403,7 +403,7 @@
 
 		<div class="left-side-bar">
 			<div class="brand-logo">
-				<a href="index.html">
+				<a href="#">
 					<h3  display: inline-block;>Smart</h3><h3 class="dark-logo" display: inline-block; style="color:rgb(255, 123, 0);margin-left:3px;;">Store</h3>
 
 				</a>
@@ -415,7 +415,7 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle">
+							<a href="{% url 'Service' %}" class="dropdown-toggle">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>					
