@@ -247,7 +247,7 @@ def change_password(request):
             pswd=sha256(old_password.encode()).hexdigest()
 
             if pswd == user.password:
-                user.password=new_pswd
+                user.password=new_pswd 
                 user.save()
                 print("Password updated Successfully")
                 messages.success(request, 'Password updated Successfully...')

@@ -140,18 +140,23 @@
           <table>
             <tr>
               <td>
-                Customer Name : <br>{{shipping.fname}}<br><br>
-                Customer Email :<br> {{shipping.email}}
+                {% for i in address|slice:":1" %}
+
+                Customer Name : <br>{{i.fname}} {{i.lname}}<br><br>
+                Customer Email :<br> {{i.email}}
+                {% endfor %}
 
               </td>
 
               <td>
+                {% for i in address|slice:":1" %}
                 Customer Mobile :<br>
-                {{shipping.phone_no}}<br><br>
-                  Shipment Addres :<br> {{shipping.hname}}<br>
-                  {{shipping.street}}<br> 
-                  {{shipping.district}}<br>
-                  {{shipping.pin}}<br>
+                {{i.phone_no}}<br><br>
+                  Shipment Addres :<br> {{i.hname}}<br>
+                  {{i.street}}<br> 
+                  {{i.district}}<br>
+                  {{i.pin}}<br>
+                  {% endfor %}
                   
 
               </td>
@@ -160,9 +165,6 @@
         </td>
       </tr>
 
-
-      <!-- <tr class="information">
-        <td colspan="2"> -->
           <table>
             <tr>
               <td>Sl.No</td>
@@ -185,7 +187,7 @@
               <tr>
                 <td colspan="4" align="right"> Order Status : Paid</td>
                 
-              </tr> -->
+              </tr> 
 
           </table>
         </td>

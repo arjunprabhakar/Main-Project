@@ -193,6 +193,7 @@ def get(request,id,*args, **kwargs,):
         place = OrderPlaced.objects.get(id=id)
         date=place.payment.created_at
         orders=OrderPlaced.objects.filter(user_id=email,payment__created_at=date)
+        address=user_address.objects.filter(user_id=email)
         total=0
         for o in orders:
             total=total+(o.product.price*o.quantity)
@@ -200,6 +201,8 @@ def get(request,id,*args, **kwargs,):
         data = {
             "total":total,
             "orders":orders,
+            "address":address,
+
         }
         pdf = render_to_pdf('report.html',data)
         if pdf:
