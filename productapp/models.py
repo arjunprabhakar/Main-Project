@@ -13,12 +13,14 @@ class Product(models.Model):
     name=models.CharField(max_length=251,unique=True)
     slug=models.SlugField(max_length=250,unique=True,editable=False)
     description=models.TextField(blank=True)
-    price=models.DecimalField(max_digits=20,decimal_places=2)
+    original_price=models.DecimalField(max_digits=20,decimal_places=2,null=True)
+    selling_price=models.DecimalField(max_digits=20,decimal_places=2,null=True)
     image=models.ImageField(upload_to='product',blank=True)
     stock=models.IntegerField()
     available=models.BooleanField(default=True)
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
+    percentage=models.IntegerField(default=1)
 
     class Meta:
         ordering=('name',)
@@ -31,6 +33,20 @@ def slug_generator(sender,instance,*args,**kwargs):
     if not instance.slug:
         instance.slug=unique_slug_generator(instance)
 pre_save.connect(slug_generator,sender=Product)
+
+
+
+
+class Productgallery(models.Model):
+    product=models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
+    image=models.ImageField(upload_to='store/products', max_length=255)
+
+    def str(self):
+        return self.product.product_name
+
+    class Meta:
+        verbose_name='Product Gallery'
+        verbose_name_plural='Product gallery'
 
 
 class tbl_Review(models.Model):

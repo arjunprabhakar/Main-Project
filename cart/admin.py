@@ -10,14 +10,15 @@ from cart.models import OrderPlaced,Payment
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display=['user','product']
-    def has_add_permission(self, request, obj=None):
-        return False
+    # list_display=['user','product']
+    # def has_add_permission(self, request, obj=None):
+    #     return False
 
-    def has_change_permission(self, request, obj=None):
-        return False
+    # def has_change_permission(self, request, obj=None):
+    #     return False
 
-    def has_delete_permission(self, request, obj=None):
-        return False
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
     verbose_name_plural = "Order Details"
 admin.site.register(OrderPlaced,UserAdmin)
+admin.site.register(Payment,UserAdmin)

@@ -27,7 +27,7 @@ def add_cart(request,id):
                 return redirect('view_cart')
             else:
                 product_qty = 1
-                price= item.price * product_qty
+                price= item.selling_price * product_qty
                 new_cart=Cart(user_id=user,product_id=item.id,product_qty=product_qty,price=price)
                 new_cart.save()
                 return redirect('view_cart')
@@ -41,7 +41,7 @@ def plusqty(request,id):
     for cart in cart:   
         if cart.product.stock > cart.product_qty:
             cart.product_qty +=1
-            cart.price=cart.product_qty * cart.product.price
+            cart.price=cart.product_qty * cart.product.selling_price
             cart.save()
             return redirect('view_cart')
         # messages.success(request, 'Out of Stock')
@@ -53,7 +53,7 @@ def minusqty(request,id):
     for cart in cart:
         if cart.product_qty > 1 :
             cart.product_qty -=1
-            cart.price=cart.product_qty * cart.product.price
+            cart.price=cart.product_qty * cart.product.selling_price
             cart.save()
             return redirect('view_cart')
         return redirect('view_cart')
@@ -66,7 +66,7 @@ def view_cart(request):
         cart=Cart.objects.filter(user_id=email)
         total = 0
         for item in cart:
-            total +=  item.product.price * item.product_qty
+            total +=  item.product.selling_price * item.product_qty
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
@@ -124,7 +124,7 @@ def checkout(request):
         item=Cart.objects.filter(user_id=email)
         total = 0
         for i in item:
-            total +=  i.product.price * i.product_qty
+            total +=  i.product.selling_price * i.product_qty
         stotal=total * 100
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
@@ -196,7 +196,7 @@ def get(request,id,*args, **kwargs,):
         address=user_address.objects.filter(user_id=email)
         total=0
         for o in orders:
-            total=total+(o.product.price*o.quantity)
+            total=total+(o.product.selling_price*o.quantity)
         # addrs=user_address.objects.get(user_id=request.user.id)
         data = {
             "total":total,

@@ -19,67 +19,133 @@
 <!-- End banner Area -->
 
 	<!--================Single Product Area =================-->
-	{% for product in product %}
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
-					
 					<div class="s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" style="width:450px ;height:450px" src="{{product.image.url}}" alt="">
+							<img class="img-fluid" src="{{product.image.url}}" alt="">
 						</div>
+						{% for i in image %}
 						<div class="single-prd-item">
-							<img class="img-fluid" style="width:450px ;height:450px" src="{{product.image.url}}" alt="">
+							<img class="img-fluid" src="{{i.image.url}}" alt="">
 						</div>
-						<!-- <div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{% static 'img/category/s-p1.jpg' %}" alt="">
-						</div> -->
+						{% endfor %}
+						
 					</div>
 				</div>
-				
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<h3>{{product.name}}</h3>
-						<h2>Rs: {{product.price}}</h2>
+						<h2>₹{{product.selling_price}}</h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : {{product.category.name}}</a></li>
-							<li><a href="#"><span>Stock</span> : {{product.stock}} left</a></li>
+							<li><a class="active" href="#"><span>Category</span> : {{product.category}}</a></li>
+							<li><a href="#"><span>Stock</span> : {{product.stock}}</a></li>
 						</ul>
 						<p>{{product.description}}</p>
-						<!-- <div class="product_count">
-							<label for="qty">Quantity:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div> -->
+						
 						<div class="card_area d-flex align-items-center">
 							<a class="primary-btn" href="{%  url 'add_cart' product.id %}">Add to Cart</a>
 							<a class="icon_btn" href="{%  url 'add_wishlist' product.id %}"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
 					</div>
 				</div>
-			
 			</div>
 		</div>
 	</div>
-	{%endfor%}
 	<!--================End Single Product Area =================-->
+
 	<!--================Product Description Area =================-->
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+					 aria-selected="false">Specification</a>
+				</li>
+				
 				<li class="nav-item">
 					<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					 aria-selected="false">Reviews</a>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
+				
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>
+										<h5>Width</h5>
+									</td>
+									<td>
+										<h5>128mm</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>Height</h5>
+									</td>
+									<td>
+										<h5>508mm</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>Depth</h5>
+									</td>
+									<td>
+										<h5>85mm</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>Weight</h5>
+									</td>
+									<td>
+										<h5>52gm</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>Quality checking</h5>
+									</td>
+									<td>
+										<h5>yes</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>Freshness Duration</h5>
+									</td>
+									<td>
+										<h5>03days</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>When packeting</h5>
+									</td>
+									<td>
+										<h5>Without touch of hand</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>Each Box contains</h5>
+									</td>
+									<td>
+										<h5>60pcs</h5>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
 				<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
 					<div class="row">
 						<div class="col-lg-6">
@@ -90,25 +156,25 @@
 										<h4>{{total_rate}}</h4>
 										<h6>({{count}} -Reviews)</h6>
 									</div>
-								</div>		
+								</div>
+								<div class="col-6">
+									<div class="rating_list">
+										
+									</div>
+								</div>
 							</div>
-							<div class="review_list">
-								{% for i in review %}
+							<div class="review_list" style="margin-top:5%;">
+								{% for i in user_review %}
 								<div class="review_item">
-
-									<div class="media">
+									<div class="media" >
 										<div class="d-flex">
-											<img src="img/product/review-1.png" alt="">
+											<img src="{% static 'img/product/review-1.png' %}" alt="">
 										</div>
-
-										<div class="media-body">
-											<h4>{{i.user.email}}</h4>
-											{% if i.rating == 1 %}
-											<i class="fa fa-star" ></i>
-											{% elif i.rating == 2 %}
+										<div class="media-body" style="margin-left:-15px;">
+											<h4>{{i.user}}</h4>
+											{% if i.rating == 5 %}
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-											{% elif i.rating == 3 %}
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -117,27 +183,62 @@
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-											{% else%}
+											{% elif i.rating == 3 %}
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
+											{% elif i.rating == 2 %}
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-										    {% endif %}
-
+											{% else %}
+											<i class="fa fa-star"></i>
+											{% endif %}
 										</div>
 									</div>
-										<p style="margin-left:14px;">{{i.review}}</p>
-								</div>	
+									<p style="color:#000;">{{i.review}}</p>
+								</div>
 								{% endfor %}
 
+								{% for i in review %}
+								<div class="review_item">
+									<div class="media" >
+										<div class="d-flex">
+											<img src="{% static 'img/product/review-1.png' %}" alt="">
+										</div>
+										<div class="media-body" style="margin-left:-15px;">
+											<h4>{{i.user}}</h4>
+											{% if i.rating == 5 %}
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											{% elif i.rating == 4 %}
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											{% elif i.rating == 3 %}
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											{% elif i.rating == 2 %}
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											{% else %}
+											<i class="fa fa-star"></i>
+											{% endif %}
+										</div>
+									</div>
+									<p style="color:#000;">{{i.review}}</p>
+								</div>
+								{% endfor %}
+								
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="review_box">
-								{% for i in product %}
-								<form class="row contact_form" action="{% url 'review' i.id %}" method="post" id="contactForm" novalidate="novalidate">
-								{% endfor %}
+								<form class="row contact_form" action="{% url 'review' product.id %}" method="post" id="contactForm" novalidate="novalidate">
 								{% csrf_token %}
 								<h4>Add a Review</h4>
 								<p  style="font-weight:bold;margin-top:30px;">Your Rating</p>
@@ -190,5 +291,7 @@
 			</div>
 		</div>
 	</section>
-		<!--================ End Product Description Area =================-->
+	<!--================End Product Description Area =================-->
+
 	{% endblock %}
+	

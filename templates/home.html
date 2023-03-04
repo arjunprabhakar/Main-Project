@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% block content %}
-<!-- start banner Area -->
+
+
+
+<body>
+    <!-- start banner Area -->
 <section class="banner-area organic-breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 			<div class="col-first">
 				<h1>Smart Store</h1>
 				<nav class="d-flex align-items-center">
-<!--						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>-->
 					<a href="category.html"></a>
 				</nav>
 			</div>
@@ -16,6 +20,8 @@
 	</div>
 </section>
 <!-- End banner Area -->
+
+<!-- For Alert Message -->
 {% include 'alert.html' %}
 
 <script>
@@ -26,129 +32,102 @@
 	  },4000)
 
 </script>
+<!-- End Alert -->
 
-<div class="container">
-	<div class="row">
-		<div class="col-xl-3 col-lg-4 col-md-5">
-			<div class="sidebar-categories">
-				<div class="head">Browse Categories</div>
-				
-				<ul class="main-categories">
-					
-					{% for category in category %}
-					<li class="main-nav-list"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">{{ category.name }}</a>
-						
-						<ul class="dropdown-menu">
-							{% for subcategory in subcategory %}
-                                {% if category.id == subcategory.category_id %}
-							<li class="main-nav-list child"><a href="#">{{ subcategory.name }}<span class="number"></span></a></li>
-								{% endif %}
-								{% endfor %}
-							
-						</ul>
-					</li>
-					{% endfor %}
-				</ul>
-					
-			</div>	
-		</div>
-		<div class="col-xl-9 col-lg-8 col-md-7">
-			<!-- Start Filter Bar -->
-			<div class="filter-bar d-flex flex-wrap align-items-center">
-				<div class="sorting">
-					<select>
-						<option value="1">Default sorting</option>
-						<option value="1">Default sorting</option>
-						<option value="1">Default sorting</option>
-					</select>
-				</div>
-				<div class="sorting mr-auto">
-					<select>
-						<option value="1">Show 12</option>
-						<option value="1">Show 12</option>
-						<option value="1">Show 12</option>
-					</select>
-				</div>
-				<div class="pagination">
-					<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-					<a href="#">6</a>
-					<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-				</div>
-			</div>
-			<!-- End Filter Bar -->
-			<!-- Start Best Seller -->
-           
 
-			<section class="lattest-product-area pb-40 category-list">
-				<div class="row">
-					<!-- single product -->
-					{% for product in product %}
-					<div class="col-lg-4 col-md-6" >
-						<div class="single-product" style="border: 2px solid #969696;">
-							<a href="{%  url 'singleproduct' product.id %}"> <img class="img-fluid" src="{{product.image.url}}" alt="" style="width:300px; height:250px;"></a>
-							<div class="product-details" style="margin-left: 5px;">
-								<h6>{{product.name}} | {{product.description}}</h6>
-								<div class="price">
-									<h5 style="color: red;margin-left: 70px;">₹{{product.price}}</h5>
-									<!-- <h6 class="l-through">$210.00</h6> -->
+    <div class="page-wrapper">
+        
+            <div class="page-content" style="margin-left:-24%;">
+                <div class="container">
+        			<div class="toolbox">
+        				
+
+                        <div class="toolbox-center">
+                            <div class="toolbox-info">
+                                Showing <span>12 of 56</span> Products
+                            </div><!-- End .toolbox-info -->
+                        </div><!-- End .toolbox-center -->
+
+        				<div class="toolbox-right">
+        					<div class="toolbox-sort">
+        						<label for="sortby">Sort by:</label>
+        						<div class="select-custom">
+									<select name="sortby" id="sortby" class="form-control">
+										<option value="popularity" selected="selected">Most Popular</option>
+										<option value="rating">Most Rated</option>
+										<option value="date">Date</option>
+									</select>
 								</div>
-								<div class="prd-bottom" style="margin-left: 50px;">
+        					</div><!-- End .toolbox-sort -->
+        				</div><!-- End .toolbox-right -->
+        			</div><!-- End .toolbox -->
 
-									<a href="{%  url 'add_cart' product.id %}"  class="social-info">
-										<span class="lnr lnr-cart"></span>
-										<p class="hover-text">+ cart</p>
-									</a>
-									<a href="{%  url 'add_wishlist' product.id %}" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<!-- <a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">Purchase</p>
-									</a> -->
-									<a href="{%  url 'singleproduct' product.id %}"class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					{% endfor %}
-					<!-- single product -->
-					
-				</div>
-			</section>
-			<!-- End Best Seller -->
-			<!-- Start Filter Bar -->
-			<div class="filter-bar d-flex flex-wrap align-items-center">
-				<div class="sorting mr-auto">
-					<select>
-						<option value="1">Show 12</option>
-						<option value="1">Show 12</option>
-						<option value="1">Show 12</option>
-					</select>
-				</div>
-				<div class="pagination">
-					<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-					<a href="#">6</a>
-					<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-				</div>
-			</div>
-			<!-- End Filter Bar -->
-		</div>
-	</div>
-</div>
+                    <div class="products">
+                        <div class="row">
+                            
 
-<!-- Start related-product Area -->
+                           
+                            {% for i in product %}
+                            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                                <div class="product">
+                                    <figure class="product-media">
+                                        <span class="product-label label-sale">{{i.percentage}}% off</span>
+                                        <a href="{%  url 'singleproduct' i.id %}">
+                                            <img src="{{i.image.url}}" style="height: 280px;;" alt="Product image" class="product-image">
+                                        </a>
+                                        <div class="product-action-vertical">
+                                            <a href="{%  url 'add_wishlist' i.id %}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                        </div><!-- End .product-action -->
+                                        <div class="product-action action-icon-top">
+                                            <a style="color:#000;font-weight:bold;" href="{%  url 'add_cart' i.id %}" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        </div><!-- End .product-action -->
+                                    </figure><!-- End .product-media -->
+                                    <div class="product-body">
+                                        <div class="product-cat">
+                                            <a href="#">{{i.category}}</a>
+                                        </div><!-- End .product-cat -->
+                                        <h3 class="product-title"><a href="product.html">{{i.name}}</a></h3><!-- End .product-title -->
+                                        <div class="product-price">
+                                            <span class="new-price">₹{{i.selling_price}}</span>
+                                            <span class="old-price">₹{{i.original_price}}</span>
+                                        </div><!-- End .product-price -->
+                                        <div class="ratings-container">
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 40%;"></div><!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                            <span class="ratings-text">( 4 Reviews )</span>
+                                        </div><!-- End .rating-container -->
+                                     
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                            {% endfor %}
+                        </div><!-- End .row -->
+                        <div class="load-more-container text-center">
+                            <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>
+                        </div><!-- End .load-more-container -->
+                    </div><!-- End .products -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+    </div><!-- End .page-wrapper -->
+    
+    
+
+    <!-- Plugins JS File -->
+    <script src="{% static 'test/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/jquery.hoverIntent.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/superfish.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/wNumb.js' %}"></script>
+    <script src="{% static 'test/assets/js/bootstrap-input-spinner.js' %}"></script>
+    <script src="{% static 'test/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'test/assets/js/nouislider.min.js' %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static 'test/assets/js/main.js' %}"></script>
+</body>
+
 
 {% endblock %}
