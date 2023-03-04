@@ -3,7 +3,7 @@ from category.models import Category, Subcategory
 from credentialapp.views import login
 from django.contrib import messages
 from productapp.models import Product, Productgallery, tbl_Review
-
+from django.db.models import Sum
 # Single product View .
 def singleproduct(request,id):
     category=Category.objects.all()
@@ -13,7 +13,7 @@ def singleproduct(request,id):
     count=tbl_Review.objects.filter(product=id).count()
     if "email" in request.session:
         email = request.session['email']
-        user_review=tbl_Review.objects.filter(user_id=email)
+        user_review=tbl_Review.objects.filter(user_id=email,product=id)
         rate=tbl_Review.objects.filter(product=id)
         rating=0
         for i in rate:
@@ -64,14 +64,14 @@ def review(request,id):
         if request.method =="POST":
             review=request.POST.get('message');
             rate=request.POST.get('rate');
-            email=tbl_Review.objects.filter(user_id=user)
+            email=tbl_Review.objects.filter(user_id=user,product=id)
             if email :
-                messages.success(request, 'vgg')
                 return redirect(singleproduct,product.id)
             else:
-                review=tbl_Review(user_id=user,product_id=product.id,review=review,rating=rate) 
+                review=tbl_Review(user_id=user,product_id=product.id,review=review,rating=rate)
                 review.save()
-                messages.success(request, 'ff')
+                sum = tbl_Review.objects.filter(product_id=product.id).aggregate(Sum('rating'))['rating__sum']
+                
                 return redirect(singleproduct,product.id)
     else:
         return redirect(login)

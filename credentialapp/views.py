@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from cart.models import Cart
 from category.models import Category, Subcategory
-from productapp.models import Product
+from productapp.models import Product, tbl_Review
 from .models import Servicer_Details, Servicer_Product, reg_user,log_user, user_address
 from hashlib import sha256
 
@@ -137,6 +137,7 @@ def home(request):
         subcategory=Subcategory.objects.all()
         email = request.session['email']
         product=Product.objects.all()
+        review=tbl_Review.objects.all()
         cart=Cart.objects.filter(user_id=email)
         cart_count=0
         for i in cart:
