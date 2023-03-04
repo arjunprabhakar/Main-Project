@@ -48,7 +48,7 @@ class UserAdmin(admin.ModelAdmin):
 
     # def has_change_permission(self, request, obj=None):
     #     return False
-
+# ddd
     # def has_delete_permission(self, request, obj=None):
     #     return False
     verbose_name_plural = "Product Reviews"
