@@ -22,3 +22,7 @@ class UserAdmin(admin.ModelAdmin):
     verbose_name_plural = "Order Details"
 admin.site.register(OrderPlaced,UserAdmin)
 admin.site.register(Payment,UserAdmin)
+
+
+
+

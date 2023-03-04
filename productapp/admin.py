@@ -42,10 +42,6 @@ admin.site.register(Product,ProductAdmin)
 # admin.site.register(tbl_Review)
 
 
-
-
-
-
 class UserAdmin(admin.ModelAdmin):
     list_display=['product','review','rating','date']
     # def has_add_permission(self, request, obj=None):
