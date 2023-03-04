@@ -39,7 +39,6 @@ class ProductAdmin(admin.ModelAdmin):
         obj.percentage=percentage
         super().save_model(request, obj, form, change)
 admin.site.register(Product,ProductAdmin)
-# admin.site.register(tbl_Review)
 
 
 class UserAdmin(admin.ModelAdmin):
