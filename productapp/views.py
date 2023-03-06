@@ -4,6 +4,10 @@ from credentialapp.views import login
 from django.contrib import messages
 from productapp.models import Product, Productgallery, tbl_Review
 from django.db.models import Sum
+
+
+
+
 # Single product View .
 def singleproduct(request,id):
     category=Category.objects.all()

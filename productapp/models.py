@@ -46,7 +46,7 @@ class Productgallery(models.Model):
 
     class Meta:
         verbose_name='Product Gallery'
-        verbose_name_plural='Product gallery'
+        verbose_name_plural='Product gallery'
 
 
 class tbl_Review(models.Model):

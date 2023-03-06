@@ -1,0 +1,33 @@
+/* Change the background color of the table */
+#changelist table {
+    background-color:#fff;
+  }
+  
+  /* Change the background color of the table header */
+  #changelist table thead {
+    background-color: #ffaa00;
+  }
+  #result_list td.field-Name {
+    color: #fff;
+}
+  /* Change the background color of the table rows */
+  #changelist table tbody tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  
+  /* Change the background color of the table rows when hovered over */
+  #changelist table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+
+  .changelist table tbody td {
+    background-color: #ddd;
+    color: #000;
+}
+.changelist  body  {
+    background-color: #bc1212;
+    color: #000;
+}
+body {
+    background-color: #ff990069; /* Replace with your desired color */
+}
