@@ -145,3 +145,4 @@ EMAIL_HOST_PASSWORD = "kpxtnqfficiaxyna"
 # For Razor pay Payment
 RAZORPAY_API_KEY='rzp_test_kzXntxIiA7I74r'
 RAZORPAY_API_SECRET_KEY='lNoQ6icbxfYBaI3iDxHJJbYJ'
+
