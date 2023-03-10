@@ -12,8 +12,9 @@ from django.db.models import Sum
 def singleproduct(request,id):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
-    email = request.session['email']
-    review=tbl_Review.objects.filter(product=id).exclude(user_id=email)
+    # email = request.session['email']
+    # review=tbl_Review.objects.filter(product=id).exclude(user_id=email)
+    review=tbl_Review.objects.filter(product=id)
     count=tbl_Review.objects.filter(product=id).count()
     if "email" in request.session:
         email = request.session['email']
