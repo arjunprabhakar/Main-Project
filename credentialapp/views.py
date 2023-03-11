@@ -10,7 +10,7 @@ from django.db.models import Q
 from cart.models import Cart
 from category.models import Category, Subcategory
 from productapp.models import Product, tbl_Review
-from .models import Servicer_Details, Servicer_Product, reg_user,log_user, user_address
+from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, user_address
 from hashlib import sha256
 
 import math, random
@@ -394,8 +394,8 @@ def Service(request):
         user=log_user.objects.get(email=email)
         user_details=Servicer_Details.objects.filter(user_id=email)
         status=Servicer_Details.objects.get(user_id=email)
-        rqst=Servicer_Product.objects.all()
-
+        rqst=Servicer_Product.objects.filter(status=0)
+        accepted_rqst=tbl_Accepted_product.objects.filter(Servicer_id=email,status=0)
         data={'user':user,
               'email':email,
               'rqst':rqst,
@@ -473,9 +473,32 @@ def Service_Details_Update(request):
     else:
         return redirect(login)
     
-
+# Servicer main page for the  Accepted request 
 def Service_Product(request):
     if 'email' in request.session:
-        return render(request,"Service/Service_Product.html")
+        email=request.session['email']
+        user=tbl_Accepted_product.objects.filter(Servicer_id=email,status=0)
+        if user:
+            data={
+                'user':user,
+            }
+            return render(request,"Service/Service_Product.html",data)
+        else:
+            messages.success(request, 'You have no active work...!!')
+            return redirect(Service)
     else:
         return redirect(login)
+
+
+# Servicer Accept Request
+def Accept_Request(request,id):
+    if 'email' in request.session:
+        user=request.session['email']
+        tbl_Accepted_product(Servicer_id=user,product_id=id).save()
+        rqst=Servicer_Product.objects.get(id=id)
+        rqst.status=1
+        rqst.save()
+        return redirect(Service_Product)
+    else:
+        return redirect(login)
+    

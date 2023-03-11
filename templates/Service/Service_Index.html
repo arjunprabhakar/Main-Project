@@ -140,7 +140,17 @@
 						</div>
 					</div>
 				</div>
-				{% if status.status == 0 %}
+				{% if status.status != 0 %}
+				<div>
+					ffff
+				</div>
+
+				{% elif not accepted_rqst %}
+				<div>
+					aaaa
+				</div>
+
+				{% else %}
 				<!-- Servive Request Table Start -->
 				<div class="card-box mb-30">
 					<div class="pb-20">
@@ -190,21 +200,13 @@
 									<button type="button" class="btn btn-success">Download</button>
 									</td>
 									<td>
-										<button type="button" class="btn btn-danger">Accept</button>
+										<a href="{% url 'Accept_Request' i.id %}"><button type="button" class="btn btn-danger">Accept</button></a>
 										</td>
 								</tr>
 								{% endfor %}
 							</tbody>
 						</table>
 					</div>
-				</div>
-				{% else %}
-				<div>
-					
-
-
-
-
 				</div>
 				{% endif %}
 

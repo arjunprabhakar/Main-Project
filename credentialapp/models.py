@@ -73,7 +73,7 @@ class Servicer_Details(models.Model):
         verbose_name_plural = "Service Team Details"
 
 
-# Service Modules
+# Customer request for service 
 class Servicer_Product(models.Model):
     user=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
     category = models.CharField(max_length=200,null=True)
@@ -85,6 +85,20 @@ class Servicer_Product(models.Model):
     bill=models.FileField(upload_to='Bill',blank=True)
     date=models.DateTimeField(auto_now_add=True,null=True)
     status=models.BooleanField(default=0)
+
+
+# Servicer Accepted Product
+class tbl_Accepted_product(models.Model):
+    Servicer=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
+    product=models.ForeignKey(Servicer_Product,on_delete=models.CASCADE)
+    status=models.BooleanField(default=0)
+    accepted_date=models.DateTimeField(auto_now_add=True,null=True)
+
+
+
+
+
+
 
 
 

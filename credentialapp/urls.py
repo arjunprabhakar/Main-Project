@@ -33,5 +33,6 @@ urlpatterns = [
     path('Service_Details/', views.Service_Details, name='Service_Details'),
     path('Service_Details_Update/', views.Service_Details_Update, name='Service_Details_Update'),
     path('Service_Product/', views.Service_Product, name='Service_Product'),
+    path('Accept_Request/<int:id>/', views.Accept_Request, name='Accept_Request'),
 
 ]
