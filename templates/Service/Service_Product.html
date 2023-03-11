@@ -115,11 +115,14 @@
                                                         </div>
                                                         <div class="tab-pane fade" id="profile" role="tabpanel">
                                                             <div class="pd-20">
+                                                                {% for i in user %}
                                                                 <div class="reset-options pt-30 text-center">
-                                                                    <button class="btn btn-danger" id="reset-settings">
+                                                                   <a href="{% url 'download_pdf' i.product.id %}"><button class="btn btn-danger" id="reset-settings">
                                                                         Download Bill
                                                                     </button>
+                                                                </a>
                                                                 </div>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane fade" id="contact" role="tabpanel">
@@ -575,7 +578,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="footer-wrap pd-20 mb-20 card-box" style="font-weight:bold;color:rgb(255, 106, 0);">
+				<div class="footer-wrap pd-20 mb-20 card-box" style="font-weight:bold;color:rgb(255, 106, 0);margin-top:60px;">
 					Smart Store
 				</div>
 			</div>

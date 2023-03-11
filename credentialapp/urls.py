@@ -34,5 +34,5 @@ urlpatterns = [
     path('Service_Details_Update/', views.Service_Details_Update, name='Service_Details_Update'),
     path('Service_Product/', views.Service_Product, name='Service_Product'),
     path('Accept_Request/<int:id>/', views.Accept_Request, name='Accept_Request'),
-
+    path('download_pdf/<int:id>/', views.download_pdf, name='download_pdf'),
 ]

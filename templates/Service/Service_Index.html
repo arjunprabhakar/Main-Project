@@ -2,6 +2,9 @@
 {% extends 'Service/Service_Base.html' %}
 {% load static %}
 {% block content %}
+
+
+
 		<div class="mobile-menu-overlay"></div>
 
 		<div class="main-container">
@@ -20,10 +23,7 @@
 								<div class="weight-600 font-30 text-blue">{{user}}!</div>
 							</h4>
 							<p class="font-18 max-width-600">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-								hic non repellendus debitis iure, doloremque assumenda. Autem
-								modi, corrupti, nobis ea iure fugiat, veniam non quaerat
-								mollitia animi error corporis.
+						
 							</p>
 						</div>
 					</div>
@@ -49,6 +49,7 @@
 				{% endfor %}
 				{% endif %}
 				
+
 				{% if not user_details %}
 
 				<div class="card-box pd-20 height-100-p mb-30" style="text-align: center;">
@@ -140,17 +141,21 @@
 						</div>
 					</div>
 				</div>
-				{% if status.status != 0 %}
-				<div>
-					ffff
-				</div>
 
-				{% elif not accepted_rqst %}
-				<div>
-					aaaa
-				</div>
 
-				{% else %}
+				<!-- For alert Message -->
+				{% include 'alert.html' %}
+
+				<script>
+					setTimeout(function(){
+					if ($('#msg').length > 0){
+						$('#msg').remove();
+						}
+					},4000)
+
+				</script>
+
+				{% if status.status == 0 %}
 				<!-- Servive Request Table Start -->
 				<div class="card-box mb-30">
 					<div class="pb-20">
@@ -190,14 +195,14 @@
 											<div
 												class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 											>
-												<p>dfghjkgfd fghj ghjk ghjk ghj ghjk rtfghjkhjrtyjtyrtyuity</p>
+												<p>{{i.issues}}</p>
 												
 											</div>
 										</div>
 
 									</td>
 									<td>
-									<button type="button" class="btn btn-success">Download</button>
+									<a href="{% url 'download_pdf' i.id %}"><button type="button" class="btn btn-success">Download</button></a>
 									</td>
 									<td>
 										<a href="{% url 'Accept_Request' i.id %}"><button type="button" class="btn btn-danger">Accept</button></a>
@@ -207,6 +212,14 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+				{% else %}
+				<div>
+					
+
+
+
+
 				</div>
 				{% endif %}
 
@@ -260,7 +273,7 @@
 					</div>
 				</div>
 
-				<div class="footer-wrap pd-20 mb-20 card-box">
+				<div class="footer-wrap pd-20 mb-20 card-box" >
 					Smart Store
 				</div>
 			</div>

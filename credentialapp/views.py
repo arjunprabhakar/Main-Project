@@ -400,7 +400,8 @@ def Service(request):
               'email':email,
               'rqst':rqst,
               'user_details':user_details,
-              'status':status}
+              'status':status,
+              'accepted_rqst':accepted_rqst}
         return render(request,"Service/Service_Index.html",data)
     else:
         return redirect(login)
@@ -494,11 +495,26 @@ def Service_Product(request):
 def Accept_Request(request,id):
     if 'email' in request.session:
         user=request.session['email']
-        tbl_Accepted_product(Servicer_id=user,product_id=id).save()
-        rqst=Servicer_Product.objects.get(id=id)
-        rqst.status=1
-        rqst.save()
-        return redirect(Service_Product)
+        servicer=tbl_Accepted_product.objects.filter(Servicer_id=user,status=0)
+        if servicer:
+            messages.success(request, 'Accept only one task at a time..!')
+            return redirect(Service)
+        else:
+            tbl_Accepted_product(Servicer_id=user,product_id=id).save()
+            rqst=Servicer_Product.objects.get(id=id)
+            rqst.status=1
+            rqst.save()
+            messages.success(request, 'Service request accepted successfully..!')
+            return redirect(Service_Product)
     else:
         return redirect(login)
     
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+
+
+def download_pdf(request, id):
+    pdf_file = get_object_or_404(Servicer_Product, id=id)
+    return FileResponse(pdf_file.bill, as_attachment=True)
+
+
