@@ -1,0 +1,614 @@
+
+{% extends 'Service/Service_Base.html' %}
+{% load static %}
+{% block content %}
+		<div class="mobile-menu-overlay"></div>
+
+		<div class="main-container">
+			<div class="pd-ltr-20 xs-pd-20-10">
+				<div class="min-height-200px">
+					<div class="page-header">
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="title">
+									<h4>Profile</h4>
+								</div>
+								<nav aria-label="breadcrumb" role="navigation">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="index.html">Home</a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">
+											Profile
+										</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+							<div class="pd-20 card-box height-100-p">
+								
+							
+								<div class="profile-info">
+									<h5 class="mb-20 h4 " style="color: rgb(255, 153, 0);text-align: center;">Accepted Product Details</h5>
+									
+                                    <div class="row clearfix" style="width:220%;">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
+                                            <div class="pd-20 card-box">
+                                                <div class="tab">
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a
+                                                                class="nav-link active text-blue"
+                                                                data-toggle="tab"
+                                                                href="#home"
+                                                                role="tab"
+                                                                aria-selected="true"
+                                                                >Details</a
+                                                            >
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a
+                                                                class="nav-link text-blue"
+                                                                data-toggle="tab"
+                                                                href="#profile"
+                                                                role="tab"
+                                                                aria-selected="false"
+                                                                >Bill</a
+                                                            >
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a
+                                                                class="nav-link text-blue"
+                                                                data-toggle="tab"
+                                                                href="#contact"
+                                                                role="tab"
+                                                                aria-selected="false"
+                                                                >Issue</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div
+                                                            class="tab-pane fade show active"
+                                                            id="home"
+                                                            role="tabpanel"
+                                                        >
+                                                            <div  style="display: inline-block;margin-top:30px;">
+                                                               <h6>Category :</h6>
+                                                            </div>
+                                                            <div style="display: inline-block;">
+                                                                <h7>Laptop</h7>
+                                                            </div><br>
+                                                            <div style="display: inline-block;margin-top:10px;">
+                                                                <h6>Brand :</h6>
+                                                             </div>
+                                                             <div style="display: inline-block;">
+                                                                 <h7>HP</h7>
+                                                             </div><br>
+                                                             <div style="display: inline-block;margin-top:10px;">
+                                                                <h6>Model :</h6>
+                                                             </div>
+                                                             <div style="display: inline-block;">
+                                                                 <h7>EliteBook</h7>
+                                                             </div><br>
+                                                             <div style="display: inline-block;margin-top:10px;">
+                                                                <h6>Model No :</h6>
+                                                             </div>
+                                                             <div style="display: inline-block;">
+                                                                 <h7>AQW123</h7>
+                                                             </div><br>
+                                                             <div style="display: inline-block;margin-top:10px;">
+                                                                <h6>Waranty :</h6>
+                                                             </div>
+                                                             <div style="display: inline-block;">
+                                                                 <h7>Expired</h7>
+                                                             </div>
+                                                          
+                                                           
+
+                                                        </div>
+                                                        <div class="tab-pane fade" id="profile" role="tabpanel">
+                                                            <div class="pd-20">
+                                                                <div class="reset-options pt-30 text-center">
+                                                                    <button class="btn btn-danger" id="reset-settings">
+                                                                        Download Bill
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="contact" role="tabpanel">
+                                                            <div class="pd-20">
+                                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                                elit, sed do eiusmod tempor incididunt ut labore et
+                                                                dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                                nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+							<div class="card-box height-100-p overflow-hidden">
+								<div class="profile-tab height-100-p">
+									<div class="tab height-100-p">
+										<ul class="nav nav-tabs customtab" role="tablist">
+											<li class="nav-item">
+												<a
+													class="nav-link active"
+													data-toggle="tab"
+													href="#timeline"
+													role="tab"
+													>Status</a
+												>
+											</li>
+											<li class="nav-item">
+												<a
+													class="nav-link"
+													data-toggle="tab"
+													href="#tasks"
+													role="tab"
+													>Add Status</a
+												>
+											</li>
+											<li class="nav-item">
+												<a
+													class="nav-link"
+													data-toggle="tab"
+													href="#setting"
+													role="tab"
+													>Chat With Customer</a
+												>
+											</li>
+										</ul>
+										<div class="tab-content">
+											<!-- Timeline Tab start -->
+											<div
+												class="tab-pane fade show active"
+												id="timeline"
+												role="tabpanel"
+											>
+												<div class="pd-20">
+													<div class="profile-timeline">
+														<div class="timeline-month">
+															<h5>August, 2020</h5>
+														</div>
+														<div class="profile-timeline-list">
+															<ul>
+																
+																<li>
+																	<div class="date">10 Aug</div>
+																	<div class="task-name">
+																		<i class="ion-ios-chatboxes"></i> Task Added
+																	</div>
+																	<p>
+																		Lorem ipsum dolor sit amet, consectetur
+																		adipisicing elit.
+																	</p>
+																	<div class="task-time">09:30 am</div>
+																</li>
+                                                                <li>
+																	<div class="date">10 Aug</div>
+																	<div class="task-name">
+																		<i class="ion-ios-chatboxes"></i> Task Added
+																	</div>
+																	<p>
+																		Lorem ipsum dolor sit amet, consectetur
+																		adipisicing elit.
+																	</p>
+																	<div class="task-time">09:30 am</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Timeline Tab End -->
+											<!-- Tasks Tab start -->
+											<div class="tab-pane fade" id="tasks" role="tabpanel">
+												<div class="pd-20 profile-task-wrap">
+													<div class="container pd-0">
+														<!-- Open Task start -->
+														<div class="task-title row align-items-center">
+														
+															<div class="col-md-4 col-sm-12 text-right">
+																<a
+																	href="task-add"
+																	data-toggle="modal"
+																	data-target="#task-add"
+																	class="bg-light-blue btn text-blue weight-500"
+																	><i class="ion-plus-round"></i> Add Status</a
+																>
+															</div>
+														</div>
+                                                        <div class="profile-task-list pb-30">
+															<ul>
+																<li>
+																	<div
+																		class="custom-control custom-checkbox mb-5"
+																	>
+																	</div>
+																	Add Your Daily Work Status 
+																	<div class="task-assign">
+																		The status can viewd by the customer
+																		
+																	</div>
+																</li>
+															</ul>
+														</div>
+														
+														<!-- Open Task End -->
+														<!-- add task popup start -->
+														<div
+															class="modal fade customscroll"
+															id="task-add"
+															tabindex="-1"
+															role="dialog"
+														>
+															<div
+																class="modal-dialog modal-dialog-centered"
+																role="document"
+															>
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5
+																			class="modal-title"
+																			id="exampleModalLongTitle"
+																		>
+																			Update Status
+																		</h5>
+																		<button
+																			type="button"
+																			class="close"
+																			data-dismiss="modal"
+																			aria-label="Close"
+																			data-toggle="tooltip"
+																			data-placement="bottom"
+																			title=""
+																			data-original-title="Close Modal"
+																		>
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body pd-0">
+																		<div class="task-list-form">
+																			<ul>
+																				<li>
+																					<form>
+																						<div class="form-group row">
+																							<label class="col-md-4"
+																								>Status Heading</label
+																							>
+																							<div class="col-md-8">
+																								<input
+																									type="text"
+																									class="form-control"
+																								/>
+																							</div>
+																						</div>
+																						<div class="form-group row">
+																							<label class="col-md-4"
+																								>Status Message</label
+																							>
+																							<div class="col-md-8">
+																								<textarea
+																									class="form-control"
+																								></textarea>
+																							</div>
+																						</div>
+																						
+																						
+																					</form>
+																				</li>
+																				
+																			</ul>
+																		</div>
+																		
+																	</div>
+																	<div class="modal-footer">
+																		<button
+																			type="button"
+																			class="btn btn-primary"
+																		>
+																			Add
+																		</button>
+																		<button
+																			type="button"
+																			class="btn btn-secondary"
+																			data-dismiss="modal"
+																		>
+																			Close
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- add task popup End -->
+													</div>
+												</div>
+											</div>
+											<div
+												class="tab-pane fade height-100-p"
+												id="setting"
+												role="tabpanel"
+											>
+
+
+                                            <!-- Chat Area Start -->
+                                            <div class="col-lg-9 col-md-8 col-sm-12" >
+                                                <div class="chat-detail" style="width:800px;">
+                                                    <div class="chat-profile-header clearfix">
+                                                        <div class="left">
+                                                            <div class="clearfix">
+                                                                <div class="chat-profile-photo">
+                                                                    <img src="{% static 'vendors/images/profile-photo.jpg' %}" alt="" />
+                                                                </div>
+                                                                <div class="chat-profile-name">
+                                                                    <h3>Rachel Curtis</h3>
+                                                                    <!-- <span>New York, USA</span> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right text-right">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="chat-box">
+                                                        <div class="chat-desc customscroll">
+                                                            <ul>
+                                                                <li class="clearfix admin_chat">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>Maybe you already have additional info?</p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix admin_chat">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>
+                                                                            It is to early to provide some kind of estimation
+                                                                            here. We need user stories.
+                                                                        </p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>
+                                                                            We are just writing up the user stories now so
+                                                                            will have requirements for you next week. We are
+                                                                            just writing up the user stories now so will have
+                                                                            requirements for you next week.
+                                                                        </p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>
+                                                                            Essentially the brief is for you guys to build an
+                                                                            iOS and android app. We will do backend and web
+                                                                            app. We have a version one mockup of the UI,
+                                                                            please see it attached. As mentioned before, we
+                                                                            would simply hand you all the assets for the UI
+                                                                            and you guys code. If you have any early questions
+                                                                            please do send them on to myself. Ill be in touch
+                                                                            in coming days when we have requirements prepared.
+                                                                            Essentially the brief is for you guys to build an
+                                                                            iOS and android app. We will do backend and web
+                                                                            app. We have a version one mockup of the UI,
+                                                                            please see it attached. As mentioned before, we
+                                                                            would simply hand you all the assets for the UI
+                                                                            and you guys code. If you have any early questions
+                                                                            please do send them on to myself. Ill be in touch
+                                                                            in coming days when we have.
+                                                                        </p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix admin_chat">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>Maybe you already have additional info?</p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix admin_chat">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>
+                                                                            It is to early to provide some kind of estimation
+                                                                            here. We need user stories.
+                                                                        </p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>
+                                                                            We are just writing up the user stories now so
+                                                                            will have requirements for you next week. We are
+                                                                            just writing up the user stories now so will have
+                                                                            requirements for you next week.
+                                                                        </p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <p>
+                                                                            Essentially the brief is for you guys to build an
+                                                                            iOS and android app. We will do backend and web
+                                                                            app. We have a version one mockup of the UI,
+                                                                            please see it attached. As mentioned before, we
+                                                                            would simply hand you all the assets for the UI
+                                                                            and you guys code. If you have any early questions
+                                                                            please do send them on to myself. Ill be in touch
+                                                                            in coming days when we have requirements prepared.
+                                                                            Essentially the brief is for you guys to build an
+                                                                            iOS and android app. We will do backend and web
+                                                                            app. We have a version one mockup of the UI,
+                                                                            please see it attached. As mentioned before, we
+                                                                            would simply hand you all the assets for the UI
+                                                                            and you guys code. If you have any early questions
+                                                                            please do send them on to myself. Ill be in touch
+                                                                            in coming days when we have.
+                                                                        </p>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix upload-file">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <div class="upload-file-box clearfix">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="{% static 'vendors/images/upload-file-img.jpg' %}"
+                                                                                    alt=""
+                                                                                />
+                                                                                <div class="overlay">
+                                                                                    <a href="#">
+                                                                                        <span
+                                                                                            ><i class="fa fa-angle-down"></i
+                                                                                        ></span>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <h3>Big room.jpg</h3>
+                                                                                <a href="#">Download</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="clearfix upload-file admin_chat">
+                                                                    <span class="chat-img">
+                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
+                                                                    </span>
+                                                                    <div class="chat-body clearfix">
+                                                                        <div class="upload-file-box clearfix">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="{% static 'vendors/images/upload-file-img.jpg' %}"
+                                                                                    alt=""
+                                                                                />
+                                                                                <div class="overlay">
+                                                                                    <a href="#">
+                                                                                        <span
+                                                                                            ><i class="fa fa-angle-down"></i
+                                                                                        ></span>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <h3>Big room.jpg</h3>
+                                                                                <a href="#">Download</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="chat_time">09:40PM</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="chat-footer">
+                                                           
+                                                            <div class="chat_text_area">
+                                                                <textarea placeholder="Type your message…"></textarea>
+                                                            </div>
+                                                            <div class="chat_send">
+                                                                <button class="btn btn-link" type="submit">
+                                                                    <i class="icon-copy ion-paper-airplane"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+											</div>
+											<!-- Setting Tab End -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						
+						
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer-wrap pd-20 mb-20 card-box" style="font-weight:bold;color:rgb(255, 106, 0);">
+					Smart Store
+				</div>
+			</div>
+		</div>
+	
+		<script>
+			window.addEventListener("DOMContentLoaded", function () {
+				var image = document.getElementById("image");
+				var cropBoxData;
+				var canvasData;
+				var cropper;
+
+				$("#modal")
+					.on("shown.bs.modal", function () {
+						cropper = new Cropper(image, {
+							autoCropArea: 0.5,
+							dragMode: "move",
+							aspectRatio: 3 / 3,
+							restore: false,
+							guides: false,
+							center: false,
+							highlight: false,
+							cropBoxMovable: false,
+							cropBoxResizable: false,
+							toggleDragModeOnDblclick: false,
+							ready: function () {
+								cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
+							},
+						});
+					})
+					.on("hidden.bs.modal", function () {
+						cropBoxData = cropper.getCropBoxData();
+						canvasData = cropper.getCanvasData();
+						cropper.destroy();
+					});
+			});
+		</script>
+		{% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+from category.models import Category
+
 
 
 #Login Table
@@ -54,6 +56,7 @@ class user_address(models.Model):
 #Customer Address Table
 class Servicer_Details(models.Model):
     user=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
     fname = models.CharField(max_length=200,verbose_name='First Name',null=True)
     lname = models.CharField(max_length=200,verbose_name='Last Name',null=True)
     phone_no = models.CharField(max_length=200,null=True)
@@ -63,6 +66,7 @@ class Servicer_Details(models.Model):
     district=models.CharField(max_length=200,null=True)
     pin=models.CharField(max_length=200,null=True)
     image=models.ImageField(upload_to='Service',blank=True)
+    status=models.BooleanField(default=0)
     def __str__(self):
         return self.fname
     class Meta:
@@ -80,6 +84,9 @@ class Servicer_Product(models.Model):
     issues=models.CharField(max_length=300,null=True)
     bill=models.FileField(upload_to='Bill',blank=True)
     date=models.DateTimeField(auto_now_add=True,null=True)
+    status=models.BooleanField(default=0)
+
+
 
 
 

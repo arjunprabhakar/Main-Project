@@ -72,15 +72,15 @@ admin.site.register(reg_user,UserAdmin)
 class UserAdmin(admin.ModelAdmin):
     list_display=['fname']
     # actions = [export_users]
-    def has_add_permission(self, request, obj=None):
-        return False
+    # def has_add_permission(self, request, obj=None):
+    #     return False
 
-    def has_change_permission(self, request, obj=None):
-        return False
+    # def has_change_permission(self, request, obj=None):
+    #     return False
 
-    def has_delete_permission(self, request, obj=None):
-        return False
-    verbose_name_plural = "Customer Details"
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
+    # verbose_name_plural = "Customer Details"
 admin.site.register(Servicer_Details,UserAdmin)
 
 

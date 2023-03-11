@@ -74,8 +74,8 @@
 								</div>
 								{% for user in user %}
 								<h5 class="text-center h5 mb-0">{{user.fname}} {{user.lname}}</h5>
-								<p class="text-center text-muted font-14">
-									Technician
+								<p class="text-center text-muted font-14" style="color:red;">
+									{{user.category.name}} Technician 
 								</p>
 								<div class="profile-info">
 									<h5 class="mb-20 h5 text-blue">Details</h5>
@@ -177,7 +177,7 @@
 											{% else %}
 											<li class="nav-item">
 												<a
-													class="nav-link"
+													class="nav-link active"
 													data-toggle="tab"
 													href="#setting"
 													role="tab"
@@ -187,7 +187,7 @@
 											{% endif %}
 											<li class="nav-item">
 												<a
-													class="nav-link"
+													class="nav-link "
 													data-toggle="tab"
 													href="#tasks"
 													role="tab"
@@ -197,11 +197,11 @@
 										</ul>
 										<div class="tab-content">
 											<!-- Timeline Tab start -->
-											<div
+											<!-- <div
 												class="tab-pane fade show active"
 												id="timeline"
 												role="tabpanel"
-											>
+											> -->
 												<!-- <div class="pd-20">
 													<div class="profile-timeline">
 														<div class="timeline-month">
@@ -329,7 +329,7 @@
 														</div>
 													</div>
 												</div> -->
-											</div>
+											<!-- </div> -->
 											<!-- Timeline Tab End -->
 											<!-- Password Tab start -->
 											<div class="tab-pane fade" id="tasks" role="tabpanel">
@@ -372,9 +372,11 @@
 												</div>
 											</div>
 											<!-- Tasks Tab End -->
-											<!-- Setting Tab start -->
+
+											{% if not user %}
+											<!-- Add Details Tab start -->
 											<div
-												class="tab-pane fade height-100-p"
+												class="tab-pane fade height-100-p show active"
 												id="setting"
 												role="tabpanel"
 											>
@@ -429,6 +431,20 @@
 																		type="file"
 																		name="img"
 																	/>
+																</div>
+																<div class="form-group">
+																	<label>Specialised Category</label>
+																	<select
+																		class="selectpicker form-control form-control-lg"
+																		data-style="btn-outline-secondary btn-lg"
+																		title="Not Chosen"
+																		name="category"
+																	>
+																	
+																	{% for i in category %}
+																		<option value="{{i.id}}">{{i.name}}</option>
+																		{% endfor %}
+																	</select>
 																</div>
 															
 															
@@ -489,19 +505,18 @@
 																		<option>Ernakulam</option>
 																	</select>
 																</div>
-
-																
 															</li>
+															
 														</ul>
 													</form>
 												</div>
 											</div>
 											<!-- Setting Tab End -->
-
+											{% else %}
 
 											<!-- Edit Details Area -->
 											<div
-												class="tab-pane fade height-100-p"
+												class="tab-pane fade height-100-p show active"
 												id="edittab"
 												role="tabpanel"
 											>
@@ -553,7 +568,20 @@
 
 																	/>
 																</div>
+																<div class="form-group">
+																	<label>Specialised Category</label>
+																	<select
+																		class="selectpicker form-control form-control-lg"
+																		data-style="btn-outline-secondary btn-lg"
+																		name="category"
+																	>
+																	<option value="{{user.category_id}}">{{user.category.name}}</option>
 															
+																	{% for i in category %}
+																		<option value="{{i.id}}">{{i.name}}</option>
+																		{% endfor %}
+																	</select>
+																</div>
 															
 															
 																<div class="form-group mb-0">
@@ -629,7 +657,7 @@
 												</div>
 											</div>
 					<!-- End of Edit Details  -->
-
+											{% endif %}
 
 										</div>
 									</div>

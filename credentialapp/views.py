@@ -392,10 +392,15 @@ def Service(request):
     if 'email' in request.session:
         email=request.session['email']
         user=log_user.objects.get(email=email)
+        user_details=Servicer_Details.objects.filter(user_id=email)
+        status=Servicer_Details.objects.get(user_id=email)
         rqst=Servicer_Product.objects.all()
+
         data={'user':user,
               'email':email,
-              'rqst':rqst}
+              'rqst':rqst,
+              'user_details':user_details,
+              'status':status}
         return render(request,"Service/Service_Index.html",data)
     else:
         return redirect(login)
@@ -405,13 +410,15 @@ def Service(request):
 # Service Profile
 def Service_Profile(request):
     if 'email' in request.session:
+        category=Category.objects.all()
         email=request.session['email']
         user=Servicer_Details.objects.filter(user_id=email)
         count=Servicer_Details.objects.filter(user_id=email).count()
         data={
             'email':email,
             'user':user,
-            'count':count
+            'count':count,
+            'category':category,
         }
         return render(request,"Service/Service_Profile.html",data)
     else:
@@ -426,6 +433,7 @@ def Service_Details(request):
             fname = request.POST.get('fname');
             lname = request.POST.get('lname');
             phone = request.POST.get('phone');
+            category = request.POST.get('category');
             hname = request.POST.get('hname');
             street = request.POST.get('street');
             city = request.POST.get('city');
@@ -433,7 +441,7 @@ def Service_Details(request):
             pin = request.POST.get('pin');
             img = request.FILES.get('img');
             Servicer_Details(user_id=email,fname=fname,lname=lname,phone_no=phone,hname=hname,
-                             street=street,city=city,district=district,pin=pin,image=img).save()
+                             street=street,city=city,district=district,pin=pin,image=img,category_id=category).save()
             return redirect(Service_Profile)
     else:
         return redirect(login)
@@ -462,5 +470,12 @@ def Service_Details_Update(request):
             user.pin=pin
             user.save()
             return redirect(Service_Profile)
+    else:
+        return redirect(login)
+    
+
+def Service_Product(request):
+    if 'email' in request.session:
+        return render(request,"Service/Service_Product.html")
     else:
         return redirect(login)

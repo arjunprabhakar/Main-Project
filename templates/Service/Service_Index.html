@@ -7,6 +7,8 @@
 		<div class="main-container">
 			
 			<div class="xs-pd-20-10 pd-ltr-20">
+
+				{% if not user_details %}
 				<div class="card-box pd-20 height-100-p mb-30">
 					<div class="row align-items-center">
 						<div class="col-md-4">
@@ -18,26 +20,65 @@
 								<div class="weight-600 font-30 text-blue">{{user}}!</div>
 							</h4>
 							<p class="font-18 max-width-600">
-								<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
 								hic non repellendus debitis iure, doloremque assumenda. Autem
 								modi, corrupti, nobis ea iure fugiat, veniam non quaerat
-								mollitia animi error corporis. -->
+								mollitia animi error corporis.
 							</p>
 						</div>
 					</div>
 				</div>
+				{% else %}
+				{% for i in user_details %}
+				<div class="card-box pd-20 height-100-p mb-30">
+					<div class="row align-items-center">
+						<div class="col-md-4">
+							<img src="{% static 'vendors/images/banner-img.png' %}" alt="" />
+						</div>
+						<div class="col-md-8">
+							<h4 class="font-20 weight-500 mb-10 text-capitalize">
+								Welcome
+								<div class="weight-600 font-30 text-blue">{{i.fname}}{{i.lname}}</div>
+							</h4>
+							<p class="font-18 max-width-600">
+								{{i.category.name}} Technician 
+							</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% endif %}
 				
+				{% if not user_details %}
 
+				<div class="card-box pd-20 height-100-p mb-30" style="text-align: center;">
+					<div class="row align-items-center" >
+						
+						<div class="col-md-8" > 
+							<h5>
+								Add your profile Details,then you will receve the product service requests
+							</h5>
+							<a href="{% url 'Service_Profile' %}" style="color:red;font-weight:bold;">Click here</a>
+						</div>
+					</div>
+				</div>
+
+				{% else %}
 				<div class="row pb-10">
+					
 					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">75</div>
+								<a href="{% url 'Service_Product' %}">
+									<div class="weight-700 font-24 text-dark">Active Work</div>
 									<div class="font-14 text-secondary weight-500">
-										Request Pending
+										----------------------
 									</div>
+								</a>
+
 								</div>
+
 								<div class="widget-icon">
 									<div class="icon" data-color="#00eccf">
 										<i class="icon-copy  ti-list"></i>
@@ -99,45 +140,34 @@
 						</div>
 					</div>
 				</div>
-
-
+				{% if status.status == 0 %}
 				<!-- Servive Request Table Start -->
 				<div class="card-box mb-30">
-					<!-- <div class="pd-20">
-						<h4 class="text-blue h4">Data Table Simple</h4>
-						<p class="mb-0">
-							you can find more options
-							<a
-								class="text-primary"
-								href="https://datatables.net/"
-								target="_blank"
-								>Click Here</a
-							>
-						</p>
-					</div> -->
 					<div class="pb-20">
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-									<th  style="font-weight:bold;">Customer</th>
+									<th  style="font-weight:bold;">Sl No</th>
 									<th  style="font-weight:bold;">Requested Date</th>
 									<th  style="font-weight:bold;">Waranty Expired</th>
 									<th  style="font-weight:bold;">Type</th>
 									<th  style="font-weight:bold;">Brand</th>
 									<th  style="font-weight:bold;">Model</th>
+									<th  style="font-weight:bold;">Issue</th>
+									<th  style="font-weight:bold;">Bill</th>
 									<!-- <th  style="font-weight:bold;" class="datatable-nosort">Action</th> -->
 								</tr>
 							</thead>
 							<tbody>
 								{% for i in rqst %}
 								<tr>
-									<td class="table-plus">{{i.user_id}}</td>
+									<td class="table-plus">{{forloop.counter}}</td>
 									<td>{{i.date}}</td>
 									<td>{{i.waranty}}</td>
 									<td>{{i.category}}</td>
 									<td>{{i.brand}}</td>
 									<td>{{i.model}}</td>
-									<!-- <td>
+									<td>
 										<div class="dropdown">
 											<a
 												class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -145,31 +175,43 @@
 												role="button"
 												data-toggle="dropdown"
 											>
-												<i class="dw dw-more"></i>
+												Click here
 											</a>
 											<div
 												class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 											>
-												<a class="dropdown-item" href="#"
-													><i class="dw dw-eye"></i> View</a
-												>
-												<a class="dropdown-item" href="#"
-													><i class="dw dw-edit2"></i> Edit</a
-												>
-												<a class="dropdown-item" href="#"
-													><i class="dw dw-delete-3"></i> Delete</a
-												>
+												<p>dfghjkgfd fghj ghjk ghjk ghj ghjk rtfghjkhjrtyjtyrtyuity</p>
+												
 											</div>
 										</div>
-									</td> -->
+
+									</td>
+									<td>
+									<button type="button" class="btn btn-success">Download</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger">Accept</button>
+										</td>
 								</tr>
 								{% endfor %}
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<!-- Simple Datatable End -->
+				{% else %}
+				<div>
+					
 
+
+
+
+				</div>
+				{% endif %}
+
+
+
+				<!-- Simple Datatable End -->
+				{% endif %}
 				<div class="title pb-20 pt-20">
 					<h2 class="h3 mb-0" style="color:#fff;">*********************************************************************************************</h2>
 				</div>
