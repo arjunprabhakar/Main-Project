@@ -524,6 +524,7 @@ def Service_Status(request,id):
             status_head = request.POST.get('status_head');
             status_msg = request.POST.get('status_msg');
             tbl_Accepted_product_status(Servicer_id=id,status_head=status_head,status_message=status_msg).save()
+            return redirect(Service_Product)
     else:
         return redirect(login)
 

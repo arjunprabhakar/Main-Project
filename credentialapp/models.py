@@ -100,6 +100,7 @@ class tbl_Accepted_product_status(models.Model):
     Servicer=models.ForeignKey(tbl_Accepted_product,on_delete=models.CASCADE,verbose_name='Email')
     status_head = models.CharField(max_length=200,null=True)
     status_message = models.CharField(max_length=200,null=True)
+    date=models.DateTimeField(auto_now_add=True,null=True)
     status = models.BooleanField(default=0)
     
 
