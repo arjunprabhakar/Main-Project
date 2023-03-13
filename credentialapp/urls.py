@@ -35,4 +35,5 @@ urlpatterns = [
     path('Service_Product/', views.Service_Product, name='Service_Product'),
     path('Accept_Request/<int:id>/', views.Accept_Request, name='Accept_Request'),
     path('download_pdf/<int:id>/', views.download_pdf, name='download_pdf'),
+    path('Service_Status/<int:id>/', views.Service_Status, name='Service_Status'),
 ]

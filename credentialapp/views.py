@@ -10,7 +10,7 @@ from django.db.models import Q
 from cart.models import Cart
 from category.models import Category, Subcategory
 from productapp.models import Product, tbl_Review
-from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, user_address
+from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status, user_address
 from hashlib import sha256
 
 import math, random
@@ -517,4 +517,13 @@ def download_pdf(request, id):
     pdf_file = get_object_or_404(Servicer_Product, id=id)
     return FileResponse(pdf_file.bill, as_attachment=True)
 
+def Service_Status(request,id):
+    if 'email' in request.session:
+        user=request.session['email']
+        if request.method=='POST':
+            status_head = request.POST.get('status_head');
+            status_msg = request.POST.get('status_msg');
+            tbl_Accepted_product_status(Servicer_id=id,status_head=status_head,status_message=status_msg).save()
+    else:
+        return redirect(login)
 

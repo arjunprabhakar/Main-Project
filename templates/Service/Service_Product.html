@@ -286,8 +286,10 @@
 																		<div class="task-list-form">
 																			<ul>
 																				<li>
-																					<form>
-																						<div class="form-group row">
+                                                                                    {% for i in user %}
+																					<form action="{% url 'Service_Status' i.id %}" method="post">
+							                                                            {% csrf_token %}
+                                                                                        <div class="form-group row">
 																							<label class="col-md-4"
 																								>Status Heading</label
 																							>
@@ -295,6 +297,7 @@
 																								<input
 																									type="text"
 																									class="form-control"
+                                                                                                    name="status_head"
 																								/>
 																							</div>
 																						</div>
@@ -305,33 +308,28 @@
 																							<div class="col-md-8">
 																								<textarea
 																									class="form-control"
+                                                                                                    name="status_msg"
 																								></textarea>
 																							</div>
 																						</div>
-																						
+																						<div class="modal-footer">
+                                                                                            <input type="submit"
+                                                                                                value="submit"
+                                                                                                class="btn btn-primary"
+                                                                                            >
+                                                                                               
+                                                                                        
+                                                                                        </div>
 																						
 																					</form>
+                                                                                    {% endfor %}
 																				</li>
 																				
 																			</ul>
 																		</div>
 																		
 																	</div>
-																	<div class="modal-footer">
-																		<button
-																			type="button"
-																			class="btn btn-primary"
-																		>
-																			Add
-																		</button>
-																		<button
-																			type="button"
-																			class="btn btn-secondary"
-																			data-dismiss="modal"
-																		>
-																			Close
-																		</button>
-																	</div>
+																	
 																</div>
 															</div>
 														</div>
