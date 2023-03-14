@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.db.models import F
 import csv
 from django.core.mail import send_mail
-from credentialapp.models import Servicer_Details, Servicer_Product, reg_user,log_user
+from credentialapp.models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product_status
 from hashlib import sha256
 from django.template.loader import render_to_string
 import re
@@ -82,6 +82,7 @@ class UserAdmin(admin.ModelAdmin):
     #     return False
     # verbose_name_plural = "Customer Details"
 admin.site.register(Servicer_Details,UserAdmin)
+admin.site.register(tbl_Accepted_product_status)
 
 
     

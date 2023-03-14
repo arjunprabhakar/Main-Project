@@ -183,33 +183,26 @@
 												<div class="pd-20">
 													<div class="profile-timeline">
 														<div class="timeline-month">
-															<h5>August, 2020</h5>
+															<!-- <h5>August, 2020</h5> -->
 														</div>
 														<div class="profile-timeline-list">
 															<ul>
-																
+                                                                {% for i in status %}
+																{% for y in user %}
+                                                                {% if i.Servicer_id == y.id %}
 																<li>
-																	<div class="date">10 Aug</div>
+																	<div class="date">{{i.date|date:"jS M" }}</div>
 																	<div class="task-name">
-																		<i class="ion-ios-chatboxes"></i> Task Added
+																		<i class="ion-ios-chatboxes"></i>{{i.status_head}}
 																	</div>
 																	<p>
-																		Lorem ipsum dolor sit amet, consectetur
-																		adipisicing elit.
+																		{{i.status_message}}
 																	</p>
-																	<div class="task-time">09:30 am</div>
+																	<div class="task-time">{{i.date|date:"g:i A" }}</div>
 																</li>
-                                                                <li>
-																	<div class="date">10 Aug</div>
-																	<div class="task-name">
-																		<i class="ion-ios-chatboxes"></i> Task Added
-																	</div>
-																	<p>
-																		Lorem ipsum dolor sit amet, consectetur
-																		adipisicing elit.
-																	</p>
-																	<div class="task-time">09:30 am</div>
-																</li>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                {% endfor %}
 															</ul>
 														</div>
 													</div>

@@ -13,6 +13,10 @@ from productapp.models import Product, tbl_Review
 from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status, user_address
 from hashlib import sha256
 
+# For Pdf Download
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+
 import math, random
 from django.core.mail import send_mail
 
@@ -479,9 +483,11 @@ def Service_Product(request):
     if 'email' in request.session:
         email=request.session['email']
         user=tbl_Accepted_product.objects.filter(Servicer_id=email,status=0)
+        status=tbl_Accepted_product_status.objects.order_by('-id')
         if user:
             data={
                 'user':user,
+                'status':status,
             }
             return render(request,"Service/Service_Product.html",data)
         else:
@@ -489,6 +495,7 @@ def Service_Product(request):
             return redirect(Service)
     else:
         return redirect(login)
+
 
 
 # Servicer Accept Request
@@ -509,10 +516,11 @@ def Accept_Request(request,id):
     else:
         return redirect(login)
     
-from django.http import FileResponse
-from django.shortcuts import get_object_or_404
 
 
+
+
+# pdf bill download by servicer
 def download_pdf(request, id):
     pdf_file = get_object_or_404(Servicer_Product, id=id)
     return FileResponse(pdf_file.bill, as_attachment=True)
