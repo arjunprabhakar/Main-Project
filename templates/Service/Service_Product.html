@@ -110,7 +110,28 @@
                                                                  <h7>Expired</h7>
                                                              </div>
                                                           {% endfor %}
+
+                                                          <script>
+                                                            function hide(){
+                                                                document.getElementById('confirm').style.display="block";
+                                                            }
+                                                          </script>
                                                            
+                                                        <br><div class="reset-options pt-30 text-center" >
+                                                            <a href="#"><button class="btn btn-primary" id="reset-settings" onclick="return hide()">
+                                                                 Finish Work
+                                                             </button>
+                                                         </a>
+                                                         </div>
+
+                                                         <div class="reset-options pt-30 text-center" id="confirm" style="display:inline-block;display: none;">
+                                                            <a href="#"><button class="btn btn-danger" id="reset-settings" >
+                                                                 Confirm
+                                                             </button>
+                                                         </a>
+                                                         </div>
+
+
 
                                                         </div>
                                                         <div class="tab-pane fade" id="profile" role="tabpanel">

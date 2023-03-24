@@ -168,6 +168,14 @@
 								<div class="widget-icon" onclick="return hideme()">
 									<div class="icon" data-color="#00eccf">
 										<i class="icon-copy  ti-arrow-right"></i>
+										<script>
+											function hideme(){
+												document.getElementById('adddiv').style.display="none";
+												document.getElementById('request').style.display="none";
+												document.getElementById('formdiv').style.display="block";
+						
+											} 
+										</script>
 									</div>
 								</div>
 							</div>
@@ -177,27 +185,23 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">View Request Status</div>
+									<div class="weight-700 font-24 text-dark">View Request's</div>
 									<div class="font-14 text-secondary weight-500">
 										______________________________________
 									</div>
 								</div>
-								<div class="widget-icon"  >
+								<div class="widget-icon" onclick="return showrequest()" >
 									<div class="icon" data-color="#ff5b5b">
 										<span class="icon-copy ti-arrow-right"></span>
-								
+
 										<script>
-											function hideme(){
-												// var a=document.getElementById('adddiv').value.trim();
-												// var b=document.getElementById('formdiv').value.trim();
+											function showrequest(){
 												document.getElementById('adddiv').style.display="none";
-												document.getElementById('formdiv').style.display="block";
+												document.getElementById('formdiv').style.display="none";
+												document.getElementById('request').style.display="block";
 						
 											} 
 										</script>
-									
-									
-									
 									</div>
 								</div>
 							</div>
@@ -227,8 +231,10 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">₹50,000</div>
-									<div class="font-14 text-secondary weight-500">Earning</div>
+									<div class="weight-700 font-24 text-dark">Chat with Servicer</div>
+									<div class="font-14 text-secondary weight-500">
+										______________________________________
+									</div>
 								</div>
 								<div class="widget-icon">
 									<div class="icon" data-color="#09cc06">
@@ -264,7 +270,7 @@
 							<div class="img pb-30">
 								<img src="{% static 'vendors/images/bbbb.jpg' %}" style="height: 420px;" alt="" />
 							</div>
-							<div class="content">
+							<div class="content" >
 								<h3 class="h4">Service</h3>
 								<p class="max-width-200">
 									<!-- Look for prescription and over-the-counter drug information. -->
@@ -280,14 +286,15 @@
 							<div class="content">
 								<h3 class="h4">Locations</h3>
 								<p class="max-width-200">
-									<!-- Convenient locations when and where you need them. -->
 								</p>
 							</div>
 						</div>
 					</div>
 				</div>
-                <div class="pd-20 card-box mb-30" style="display:none;" id="formdiv">
-                    
+
+
+				<!--********************************* New Service Request Form ******************************** -->
+                     <div class="pd-20 card-box mb-30" style="display:none;" id="formdiv">
                     <div class="wizard-content">
                         <form action="{% url 'View_Service' %}" class="tab-wizard wizard-circle wizard" enctype="multipart/form-data" method="post">
 						{% csrf_token %}    
@@ -373,15 +380,95 @@
                                     value="Submit"
                                 />
                             </div>
-                        
-                            <!-- Step 4 -->
-                            
                         </form>
                     </div>
                 </div>
+		<!-- ****************************** End of new service request form ******************************  -->
 
 
 
+
+
+		<!-- ************************ View Request Table ***************************  -->
+		<div class="pd-20 card-box mb-30" id="request" style="display: none;">
+			<div class="clearfix mb-20">
+			</div>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Sl No</th>
+							<th scope="col">Category</th>
+							<th scope="col">Brand</th>
+							<th scope="col">Requested Date</th>
+							<th scope="col">Status</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						<tr class="table-danger">
+							<th scope="row">1</th>
+							<td>Laptop</td>
+							<td>HP</td>
+							<td>12-01-2022</td>
+							<td style="color:green;">Accepted</td>
+							<td><span class="badge badge-success">Chat With Servicer</span></td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="collapse collapse-box" id="contextual-table">
+				<div class="code-box">
+					<div class="clearfix">
+						<a
+							href="javascript:;"
+							class="btn btn-primary btn-sm code-copy pull-left"
+							data-clipboard-target="#contextual-table-code"
+							><i class="fa fa-clipboard"></i> Copy Code</a
+						>
+						<a
+							href="#contextual-table"
+							class="btn btn-primary btn-sm pull-right"
+							rel="content-y"
+							data-toggle="collapse"
+							role="button"
+							><i class="fa fa-eye-slash"></i> Hide Code</a
+						>
+					</div>
+					<pre><code class="xml copy-pre" id="contextual-table-code">
+					<div class="table-responsive">
+					<table class="table table-striped">
+					<tbody>
+					<tr class="table-active"><td></td></tr>
+					<tr class="table-primary"><td></td></tr>
+					<tr class="table-secondary"><td></td></tr>
+					<tr class="table-success"><td></td></tr>
+					<tr class="table-danger"><td></td></tr>
+					<tr class="table-warning"><td></td></tr>
+					<tr class="table-info"><td></td></tr>
+					<tr class="table-light"><td></td></tr>
+					<tr class="table-dark"><td></td></tr>
+					</tbody>
+					</table>
+					</div>
+				</code></pre>
+				</div>
+			</div>
+		</div>
+
+		<!-- ********************* End of view Service ******************* -->
+
+
+
+
+		<!-- *********************** Chat with servicer Area ************************* -->
+		
+
+		
+
+		<!-- ********************* End of servicer Chat ******************************* -->
 
 
 
