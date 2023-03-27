@@ -73,10 +73,20 @@ def review(request,id):
             if email :
                 return redirect(singleproduct,product.id)
             else:
+                 # Perform sentiment analysis
+                from nltk.sentiment.vader import SentimentIntensityAnalyzer
+                sid = SentimentIntensityAnalyzer()
+                scores = sid.polarity_scores(review)
+                polarity_score = scores['compound']                
+                # Update product sentiment score
+                num_reviews = tbl_Review.objects.filter(product_id=product.id).count()
+                avg_score = (product.sentiment_score * num_reviews + polarity_score) / (num_reviews + 1)
+                product.sentiment_score = avg_score
+                product.save()
                 review=tbl_Review(user_id=user,product_id=product.id,review=review,rating=rate)
                 review.save()
                 sum = tbl_Review.objects.filter(product_id=product.id).aggregate(Sum('rating'))['rating__sum']
                 
-                return redirect(singleproduct,product.id)
+            return redirect(singleproduct,product.id)
     else:
         return redirect(login)

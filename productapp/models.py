@@ -21,7 +21,7 @@ class Product(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
     percentage=models.IntegerField(default=1)
-
+    sentiment_score=models.FloatField(default=0) 
     class Meta:
         ordering=('name',)
         verbose_name='product'

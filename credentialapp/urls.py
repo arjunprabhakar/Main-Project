@@ -36,9 +36,4 @@ urlpatterns = [
     path('Accept_Request/<int:id>/', views.Accept_Request, name='Accept_Request'),
     path('download_pdf/<int:id>/', views.download_pdf, name='download_pdf'),
     path('Service_Status/<int:id>/', views.Service_Status, name='Service_Status'),
-
-
-    # Sentiment Analysys
-    path('my_form/', views.my_form, name='my_form'),
-    path('result/', views.my_form_post, name='my-form-post'),
 ]
