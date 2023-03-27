@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import search_products
 
 urlpatterns = [
     path('',views.demo,name='demo'),
@@ -15,6 +16,7 @@ urlpatterns = [
     path('generateOTP',views.generateOTP,name='generateOTP'),
     path('verify_otp',views.verify_otp,name='verify_otp'),
     path('searchbar/', views.searchbar, name='searchbar'),
+    path('search/', search_products, name='search_products'),
     path('category_product/<int:id>/', views.category_product, name='category_product'),
     path('forgotpassword/', views.forgotpassword, name='forgotpassword'),
     path('verify_forgot_otp/', views.verify_forgot_otp, name='verify_forgot_otp'),

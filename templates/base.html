@@ -41,6 +41,123 @@
     <link rel="stylesheet" href="{% static 'test/assets/css/plugins/nouislider/nouislider.css' %}">
 	<!--    payment script-->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+	<style>
+
+		#search_bar_input {
+			border-radius: 5px;
+			border: 1px solid grey;
+			padding: 10px 5px;
+			margin-left: 40px;
+			margin-top: 5px;
+		}
+		
+		#search_bar_input:focus {
+			padding-left: 10px;
+			transition: 0.3s all ease-in-out;
+		}
+		
+		#search_bar_searchbtn {
+			padding: 10px 15px;
+			margin-left: 10px;
+			margin-top: 5px;
+			border: 1px solid grey;
+			border-radius: 5px;
+			color: grey;
+			cursor: pointer;
+		}
+		
+		#search_bar_searchbtn:hover {
+			border: 1px solid grey;
+			background-color: rgb(99, 84, 84);
+			border-radius: 5px;
+			color: #94d924;
+			cursor: pointer;
+			transition: 0.3s all ease-in-out;
+		}
+		
+		.display-box {
+			position: absolute;
+			max-height: 350px;
+			overflow-y: scroll;
+			background: rgb(255, 255, 255);
+			overflow-x: hidden;
+			width: 80%;
+			margin-left: 40px;
+			margin-top:2px;
+			font-size: 13px;
+			border-radius: 0px 0px 5px 5px;
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5), 0 1px 20px rgba(0, 0, 0, 0.0) inset;
+		}
+		
+		.display-box::-webkit-scrollbar {
+			width: 10px;
+		}
+		
+		.display-box::-webkit-scrollbar-thumb {
+			background: #94d924;
+			border-radius: 5px;
+			height: 100px;
+			scroll-behavior: smooth;
+		}
+		
+		.display-box::-webkit-scrollbar-thumb:hover {
+			background: #94d924;
+		}
+		
+		.hide {
+			display: none;
+		}
+		
+		.show {
+			display: block;
+		}
+		
+		.display_row {
+			margin: 5 px 0px;
+		}
+		
+
+		.db_pname {
+			margin-left:-100px;
+			font-size: 20px;
+			font-weight: bold;
+			color: black;
+		}
+		
+		.db_img img {
+			max-width: 60px;
+			max-height: 60px;
+			border-radius: 0px;
+			padding: 2px;
+			margin-top: -40px;
+			margin-right: -100px;
+		}
+		
+		
+			.avatar {
+		  vertical-align: middle;
+		  width: 80px;
+		  height: 80px;
+		  border-radius: 50%;
+                        }
+              .sample{
+				margin-left: 220px;
+				color:red;
+				height: 50px;
+				margin-top: 100px;
+				background-color: #fff;
+				width: 300px;
+				font-size: 20px;
+				font-weight: bold;
+			  }          
+                        
+                        
+                        
+         </style>
+
+
+
 </head>
 
 <body>
@@ -113,15 +230,51 @@
 			</nav>
 		</div>
 		<div class="search_input" id="search_input_box">
-			<div class="container">
+			<div class="container" style="height: 200px;">
 				<form class="d-flex justify-content-between" action="{% url 'searchbar' %}">
-					<input type="text" name="query" class="form-control" id="search_input" placeholder="Search Here">
+					<input type="text" name="query" class="form-control" id="search-query" placeholder="Search Here">
 					<button type="submit" class="btn"></button>
 					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
 				</form>
+				<div id="product-recommendations" style="padding: 10px;"></div>
+
 			</div>
 		</div>
+
 	</header>
+
+
+
+	<script>
+		const searchInput = document.getElementById('search-query');
+		const productContainer = document.getElementById('product-recommendations');
+	
+		searchInput.addEventListener('input', () => {
+			const query = searchInput.value.trim();
+			if (query.length >= 1) {
+				const url = `{% url 'search_products' %}?query=${query}`;
+				fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						const productHTML = data.products.map(p => `
+						<div class="db_pname" style="margin-left:-100px;">
+						<a href="${p.url}">
+							 ${p.name}
+						</a>
+						</div>
+						<div class="db_img">   
+						<img src="${p.image_url}" alt="${p.name}">
+						</div>   
+						`).join('');
+						productContainer.innerHTML = productHTML;
+					});
+			} else {
+				productContainer.innerHTML = '';
+			}
+		});
+	</script>
+
+
 	<!-- End Header Area -->
 
   {% block content %}
@@ -195,6 +348,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
 	<script src="{% static 'assets/js/script.js' %}"></script>
 
+
+
+
+
+
+
+	
 
 </body>
 

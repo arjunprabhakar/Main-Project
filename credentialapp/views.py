@@ -289,6 +289,59 @@ def searchbar(request):
     else:
         return render(request, 'search.html', {'category':category,'subcategory':subcategory})
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+from django.http import JsonResponse
+from django.conf import settings
+from django.db.models import Q
+from django.urls import reverse
+
+
+def search_products(request):
+    query = request.GET.get('query')
+    if query:
+        multiple_q = Q(Q(name__icontains=query))
+        products = Product.objects.filter(multiple_q)
+    else:
+        products = Product.objects.none()
+        print("*************************")
+    product_list = []
+    for p in products:
+        product = {
+            'id': p.id,
+            'name': p.name,
+            # 'image_url': None,
+            'url': request.build_absolute_uri(reverse('singleproduct', args=[p.id])),
+        }
+        if p.image:
+            image_url = settings.MEDIA_URL + str(p.image)
+            product['image_url'] = request.build_absolute_uri(image_url)
+            
+        product_list.append(product)
+
+    return JsonResponse({'products': product_list})
+
+
+
+
+
+
+
+
+
+
+
 # Category wise product filtering
 def category_product(request,id):
     category=Category.objects.all()
@@ -535,7 +588,6 @@ def Service_Status(request,id):
             return redirect(Service_Product)
     else:
         return redirect(login)
-
 
 
 
