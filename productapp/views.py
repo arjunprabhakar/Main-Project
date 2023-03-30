@@ -70,9 +70,10 @@ def review(request,id):
             review=request.POST.get('message');
             rate=request.POST.get('rate');
             email=tbl_Review.objects.filter(user_id=user,product=id)
-            if email :
-                return redirect(singleproduct,product.id)
-            else:
+            # if email :
+            #     return redirect(singleproduct,product.id)
+            # else:
+            if 'email' in request.session:
                  # Perform sentiment analysis
                 from nltk.sentiment.vader import SentimentIntensityAnalyzer
                 sid = SentimentIntensityAnalyzer()
