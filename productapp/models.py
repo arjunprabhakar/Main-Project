@@ -53,9 +53,27 @@ class tbl_Review(models.Model):
     product=models.ForeignKey(Product, on_delete=models.CASCADE,editable=False)
     user=models.ForeignKey(log_user, on_delete=models.CASCADE,editable=False)
     review=models.TextField(max_length=800,blank=True)
+    positive_score = models.DecimalField(max_digits=3, decimal_places=2, null=True)
+    negative_score = models.DecimalField(max_digits=3, decimal_places=2, null=True)
+    neutral_score = models.DecimalField(max_digits=3, decimal_places=2, null=True)
     rating=models.FloatField()
     date=models.DateTimeField(auto_now_add=True,null=True)
     class Meta:
             verbose_name_plural = "Reviews"
 
-       
+
+
+
+class Sentiment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    num_reviews = models.IntegerField()
+    avg_score = models.FloatField(default=0)
+    avg_pos_score = models.FloatField(default=0)
+    avg_neg_score = models.FloatField(default=0)
+    avg_neu_score = models.FloatField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'Sentiments'
+
+    def __str__(self):
+        return f'Sentiment for {self.product.name}'
