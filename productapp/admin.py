@@ -201,7 +201,7 @@ class SentimentInline(admin.TabularInline):
 
         # create a bar plot with positive and negative scores
         fig, ax = plt.subplots()
-        ax.bar(['Positive', 'Negative','neutral'], [avg_pos_score, avg_neg_score, avg_neu_score], color=['red', 'blue','green'])
+        ax.bar(['Positive', 'Negative','Neutral'], [avg_pos_score, avg_neg_score, avg_neu_score], color=['red', 'blue','green'])
         # ax.hist([positive_score, negative_score], bins=10, color=['green', 'red'])
         # set the title and labels
         ax.set_title('Sentiment Analysis')
