@@ -8,7 +8,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph,PageBreak
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph,PageBreak,Spacer
 
 
 
@@ -84,10 +84,14 @@ def generate_sales_report(modeladmin, request, queryset):
 
     # Create a list of tuples with the data you want to include in the report
     report_data = []
+    total_amount = 0
+    serial_number = 1
     for order_placed in order_placed_list:
         payment = payment_list.filter(orderplaced=order_placed).first()
-        report_data.append((order_placed.user.email, order_placed.product.name, order_placed.quantity, payment.amount))
-
+        ordered_date_str = datetime.strftime(order_placed.ordered_date, "%Y-%m-%d")
+        report_data.append((serial_number, order_placed.product.name, order_placed.quantity, payment.amount,ordered_date_str))
+        total_amount += payment.amount
+        serial_number += 1
     # Create a PDF file with the report data
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="sales_report.pdf"'
@@ -106,36 +110,35 @@ def generate_sales_report(modeladmin, request, queryset):
     header = Paragraph("Smart Store", header_style)
     elements.append(header)
     elements.append(Paragraph("", header_style))
-    report_header_style = ParagraphStyle(name="header", 
-                                          fontSize=16, 
-                                          textColor=colors.HexColor("#3D3D3D"),
-                                          alignment=1,
-                                          marginTop=30,
-                                          marginBottom=20)
-    report_header = Paragraph("Sales Report", report_header_style)
-    elements.append(report_header)
+   
 
-    elements.append(Paragraph("", report_header_style))
-    
-    elements.append(PageBreak())
+    elements.append(Spacer(1, 20))
     # Add the table
-    data = [["Email", "Product", "Quantity", "Amount"]]
-    for email, product, quantity, amount in report_data:
-        data.append([email, product, str(quantity), str(amount)])
+    data = [["Sl No","Product", "Quantity", "Amount","Order date"]]
+    for serial_number,product, quantity, amount,ordered_date in report_data:
+        data.append([serial_number,product, str(quantity), str(amount),ordered_date])
+    total_amount_style = ParagraphStyle(name="total_amount", textColor=colors.red,fontSize=12)
+    data.append(["", "","","Total Amount :",Paragraph(str(total_amount), total_amount_style)])
     table_style = TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#F2F2F2")),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor("#3D3D3D")),
-        ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 14),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor("#FFFFFF")),
-        ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor("#3D3D3D")),
-        ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
-        ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-        ('FONTSIZE', (0, 1), (-1, -1), 12),
-        ('BOTTOMPADDING', (0, 1), (-1, -1), 8),
-        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor("#D9D9D9")),
+          ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#F2F2F2")),
+    ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor("#3D3D3D")),
+    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, 0), 14),
+    ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+    ('BACKGROUND', (0, 1), (-1, -2), colors.HexColor("#FFFFFF")),
+    ('TEXTCOLOR', (0, 1), (-1, -2), colors.HexColor("#3D3D3D")),
+    ('ALIGN', (0, 1), (-1, -2), 'CENTER'),
+    ('FONTNAME', (0, 1), (-1, -2), 'Helvetica'),
+    ('FONTSIZE', (0, 1), (-1, -2), 12),
+    ('BOTTOMPADDING', (0, 1), (-1, -2), 8),
+    ('GRID', (0, 0), (-1, -2), 1, colors.HexColor("#D9D9D9")),
+    ('BACKGROUND', (0, -1), (-1, -1), colors.HexColor("#F2F2F2")),
+    ('TEXTCOLOR', (0, -1), (-1, -1), colors.HexColor("#3D3D3D")),
+    ('ALIGN', (0, -1), (-1, -1), 'CENTER'),
+    ('FONTNAME', (0, -1), (-1, -1), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, -1), (-1, -1), 14),
+    ('BOTTOMPADDING', (0, -1), (-1, -1), 12),
     ])
     table = Table(data)
     table.setStyle(table_style)
@@ -144,7 +147,7 @@ def generate_sales_report(modeladmin, request, queryset):
     pdf_canvas.build(elements)
 
     return response
-generate_sales_report.short_description = "Download sales report as PDF"
+generate_sales_report.short_description = "Download sales report"
 
 
 
@@ -176,8 +179,28 @@ class UserAdmin(admin.ModelAdmin):
         return False
 admin.site.register(OrderPlaced,UserAdmin)
 
-admin.site.register(Payment)
+
+class PaymentAdmin(admin.ModelAdmin):
 
 
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+admin.site.register(Payment,PaymentAdmin)
+
+
+# admin.py
+# admin.py
+
+from django.http import HttpResponse
+from .views import my_page
+
+def render_my_page(request):
+    return HttpResponse(my_page(request))
 
 

@@ -212,3 +212,113 @@ def get(request,id,*args, **kwargs,):
             response['Content-Disposition']=content
             return response
         return HttpResponse("Page Not Found")
+    
+
+
+# views.py
+
+# from django.shortcuts import render
+# import matplotlib.pyplot as plt
+# from django.db.models import Count
+# from django.shortcuts import render
+# from .models import OrderPlaced
+# from django.db.models.functions import TruncDate
+# import base64
+# import io
+
+# def my_page(request):
+#     # Your view code here
+#     orders_by_date = OrderPlaced.objects.filter(is_ordered=True).annotate(date=TruncDate('ordered_date')).values('date').annotate(count=Count('id'))
+#     dates = [d['date'] for d in orders_by_date]
+#     counts = [d['count'] for d in orders_by_date]
+#     plt.plot(dates, counts)
+#     plt.title('Sales Graph')
+#     plt.xlabel('Date')
+#     plt.ylabel('Number of Orders')
+#     plt.xticks(rotation=45)
+#     plt.tight_layout()
+#     graph = plt.gcf()
+#     buf = io.BytesIO()
+#     graph.savefig(buf, format='png')
+#     buf.seek(0)
+#     graph_image = base64.b64encode(buf.read()).decode('utf-8')
+#     plt.close()
+#     context = {'graph_image': graph_image}
+#     context = {
+#         'graph_image': graph_image
+#     }
+#     return render(request, 'my_template.html', context)
+import io
+import base64
+
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+from django.shortcuts import render
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+
+from .models import OrderPlaced
+
+from django.db.models.functions import TruncDate
+from django.db.models import Count
+import io
+import base64
+import matplotlib.pyplot as plt
+
+from django.db.models.functions import TruncDate
+from django.db.models import Count
+import matplotlib.pyplot as plt
+import base64
+import io
+from .models import OrderPlaced
+
+def my_page(request):
+    # # Query the database for the number of products sold on each date
+    # orders_by_date = OrderPlaced.objects.filter(is_ordered=True).annotate(date=TruncDate('ordered_date')).values('date').annotate(count=Count('product'))
+
+    # # Extract the dates and product counts from the queryset
+    # dates = [d['date'] for d in orders_by_date]
+    # counts = [d['count'] for d in orders_by_date]
+
+    # # Get the unique dates from the orders_by_date queryset
+    # unique_dates = list(set([d['date'] for d in orders_by_date]))
+
+    # # Create a dictionary to map the unique dates to their corresponding counts
+    # count_dict = {date: 0 for date in unique_dates}
+    # for d, c in zip(dates, counts):
+    #     count_dict[d] = c
+
+    # # Create a list of dates that have a non-zero count
+    # filtered_dates = [d for d in unique_dates if count_dict[d] > 0]
+
+    # # Create a list of counts for the filtered dates
+    # filtered_counts = [count_dict[d] for d in filtered_dates]
+    # # Create a bar graph using Matplotlib with the filtered dates and counts
+    # plt.bar(filtered_dates, filtered_counts, width=2)
+
+    # # Set the x-axis ticks to the filtered dates
+    # plt.xticks(filtered_dates, rotation=5)
+
+    # # Set the graph title and axis labels
+    # plt.title('Product Sales Graph')
+    # plt.xlabel('Date')
+    # plt.ylabel('Number of Products Sold')
+
+    # # Ensure the graph fits within the figure and generate a PNG image
+    # plt.tight_layout()
+    # graph = plt.gcf()
+    # buf = io.BytesIO()
+    # graph.savefig(buf, format='png')
+    # buf.seek(0)
+    # graph_image = base64.b64encode(buf.read()).decode('utf-8')
+    # plt.close()
+
+    # # Pass the PNG image as a base64-encoded string to the template
+    # context = {'graph_image': graph_image}
+    data=1
+    data={'data':data}
+    return render(request, 'my_template.html',data)
+
+

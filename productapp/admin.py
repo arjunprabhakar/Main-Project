@@ -185,6 +185,7 @@ class ReviewInline(admin.TabularInline):
     
 
 class SentimentInline(admin.TabularInline):
+    verbose_name = 'Sentiment Analysy'
     def has_add_permission(self, request, obj=None):
         return False
     model=Sentiment
@@ -192,7 +193,6 @@ class SentimentInline(admin.TabularInline):
     can_delete = False
     fields = ('sentiment_graph',)
     readonly_fields = ('sentiment_graph',)
-    
 
     def sentiment_graph(self, obj):
         avg_pos_score = obj.avg_pos_score
@@ -229,7 +229,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable=['selling_price','stock']
     search_fields = ('name', 'description')
     list_per_page=5
-    exclude = ('percentage',)
+    exclude = ('percentage','sentiment_score',)
     list_filter = (DateRangeFilter,)
 
     def sentiment_score(self, obj):
@@ -266,4 +266,3 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
-admin.site.register(tbl_Review)

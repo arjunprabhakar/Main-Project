@@ -114,17 +114,24 @@
                                                           <script>
                                                             function hide(){
                                                                 document.getElementById('confirm').style.display="block";
+                                                                document.getElementById('aa').style.display="none";
                                                             }
                                                           </script>
                                                            
-                                                        <br><div class="reset-options pt-30 text-center" >
-                                                            <a href="#"><button class="btn btn-primary" id="reset-settings" onclick="return hide()">
+                                                        <br><div class="reset-options pt-30 text-center"  id="aa">
+                                                            <a href="#"><button class="btn btn-primary" style="display: block;" id="reset-settings" onclick="return hide()">
                                                                  Finish Work
                                                              </button>
                                                          </a>
                                                          </div>
 
                                                          <div class="reset-options pt-30 text-center" id="confirm" style="display:inline-block;display: none;">
+                                                            <div >
+                                                                <textarea class="form-control" placeholder="Enter Details"></textarea>
+                                                            </div><br>
+                                                            <div >
+                                                                <input type="text" class="form-control" placeholder="Enter Total Amount"/>
+                                                            </div><br>
                                                             <a href="#"><button class="btn btn-danger" id="reset-settings" >
                                                                  Confirm
                                                              </button>
@@ -184,7 +191,7 @@
 													>Add Status</a
 												>
 											</li>
-											<li class="nav-item">
+											<!-- <li class="nav-item">
 												<a
 													class="nav-link"
 													data-toggle="tab"
@@ -192,7 +199,7 @@
 													role="tab"
 													>Chat With Customer</a
 												>
-											</li>
+											</li> -->
 										</ul>
 										<div class="tab-content">
 											<!-- Timeline Tab start -->
