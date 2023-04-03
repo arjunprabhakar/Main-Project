@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .admin import render_my_page
 
 urlpatterns = [
 
@@ -16,5 +15,5 @@ urlpatterns = [
   path('paymentdone/', views.payment_done, name='paymentdone'),
   path('payment_success/', views.payment_success, name='payment_success'),
   path('pdf/<int:id>/', views.get,name='pdf'),
-   path('render_my_page/', render_my_page,name='render_my_page'),
+  path('sales_report/', views.sales_report, name='sales_report'),
 ]

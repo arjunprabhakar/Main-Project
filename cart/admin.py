@@ -198,9 +198,9 @@ admin.site.register(Payment,PaymentAdmin)
 # admin.py
 
 from django.http import HttpResponse
-from .views import my_page
+from .views import sales_report
 
-def render_my_page(request):
-    return HttpResponse(my_page(request))
+def sales_report(request):
+    return HttpResponse(sales_report(request))
 
 

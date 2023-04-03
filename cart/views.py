@@ -273,52 +273,54 @@ import matplotlib.pyplot as plt
 import base64
 import io
 from .models import OrderPlaced
+from datetime import datetime, timezone
+from django.db.models import Sum
 
-def my_page(request):
-    # # Query the database for the number of products sold on each date
-    # orders_by_date = OrderPlaced.objects.filter(is_ordered=True).annotate(date=TruncDate('ordered_date')).values('date').annotate(count=Count('product'))
 
-    # # Extract the dates and product counts from the queryset
-    # dates = [d['date'] for d in orders_by_date]
-    # counts = [d['count'] for d in orders_by_date]
 
-    # # Get the unique dates from the orders_by_date queryset
-    # unique_dates = list(set([d['date'] for d in orders_by_date]))
 
-    # # Create a dictionary to map the unique dates to their corresponding counts
-    # count_dict = {date: 0 for date in unique_dates}
-    # for d, c in zip(dates, counts):
-    #     count_dict[d] = c
+def sales_report(request):
+    current_month = datetime.now().month
+    category = request.GET.get('category')
+    if category == '1000' :
+        orders = OrderPlaced.objects.all()
+    else:
+        orders = OrderPlaced.objects.filter(product__category=category, is_ordered=True)
 
-    # # Create a list of dates that have a non-zero count
-    # filtered_dates = [d for d in unique_dates if count_dict[d] > 0]
 
-    # # Create a list of counts for the filtered dates
-    # filtered_counts = [count_dict[d] for d in filtered_dates]
-    # # Create a bar graph using Matplotlib with the filtered dates and counts
-    # plt.bar(filtered_dates, filtered_counts, width=2)
+    product_data = {}
+    for order in orders:
+        product_name = order.product.name
+        product_total = order.total_cost() * order.quantity
+        if product_name in product_data:
+            product_data[product_name]['quantity'] += order.quantity
+            product_data[product_name]['total'] += product_total
+        else:
+            product_data[product_name] = {
+                'quantity': order.quantity,
+                'total': product_total,
+            }
 
-    # # Set the x-axis ticks to the filtered dates
-    # plt.xticks(filtered_dates, rotation=5)
+    data = []
+    for name, values in product_data.items():
+        data.append({
+            'name': name,
+            'quantity': values['quantity'],
+            'total': values['total'],
+        })
 
-    # # Set the graph title and axis labels
-    # plt.title('Product Sales Graph')
-    # plt.xlabel('Date')
-    # plt.ylabel('Number of Products Sold')
+    total_sales = sum([item['total'] for item in data])
+    datas=1
+    category=Category.objects.all()
+    context = {
+        'product_data': data,
+        'total_sales': total_sales,
+        'data':datas,
+        'category':category,
+    }
+    return render(request, 'sales_analysis.html', context)
 
-    # # Ensure the graph fits within the figure and generate a PNG image
-    # plt.tight_layout()
-    # graph = plt.gcf()
-    # buf = io.BytesIO()
-    # graph.savefig(buf, format='png')
-    # buf.seek(0)
-    # graph_image = base64.b64encode(buf.read()).decode('utf-8')
-    # plt.close()
 
-    # # Pass the PNG image as a base64-encoded string to the template
-    # context = {'graph_image': graph_image}
-    data=1
-    data={'data':data}
-    return render(request, 'my_template.html',data)
+
 
 
