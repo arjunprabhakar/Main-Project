@@ -281,7 +281,14 @@ from django.db.models import Sum
 
 def sales_report(request):
     current_month = datetime.now().month
+    type1 = request.GET.get('category_option')
+    type2 = request.GET.get('single_option')
+    type3 = request.GET.get('custom_option')
     category = request.GET.get('category')
+    sinle_date = request.GET.get('single_date')
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    
     if category == '1000' :
         orders = OrderPlaced.objects.all()
     else:
