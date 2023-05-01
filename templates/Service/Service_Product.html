@@ -27,159 +27,30 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
-							<div class="pd-20 card-box height-100-p">
-								
-							
-								<div class="profile-info">
-									<h5 class="mb-20 h4 " style="color: rgb(255, 153, 0);text-align: center;">Accepted Product Details</h5>
-									
-                                    <div class="row clearfix" style="width:220%;">
-                                        <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                                            <div class="pd-20 card-box">
-                                                <div class="tab">
-                                                    <ul class="nav nav-tabs" role="tablist">
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link active text-blue"
-                                                                data-toggle="tab"
-                                                                href="#home"
-                                                                role="tab"
-                                                                aria-selected="true"
-                                                                >Details</a
-                                                            >
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link text-blue"
-                                                                data-toggle="tab"
-                                                                href="#profile"
-                                                                role="tab"
-                                                                aria-selected="false"
-                                                                >Bill</a
-                                                            >
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link text-blue"
-                                                                data-toggle="tab"
-                                                                href="#contact"
-                                                                role="tab"
-                                                                aria-selected="false"
-                                                                >Issue</a
-                                                            >
-                                                        </li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div
-                                                            class="tab-pane fade show active"
-                                                            id="home"
-                                                            role="tabpanel"
-                                                        >
-                                                            
-                                                        {% for i in user %}
-                                                            <div  style="display: inline-block;margin-top:30px;">
-                                                               <h6>Category :</h6>
-                                                            </div>
-                                                            <div style="display: inline-block;">
-                                                                <h7>{{i.product.category}}</h7>
-                                                            </div><br>
-                                                            <div style="display: inline-block;margin-top:10px;">
-                                                                <h6>Brand :</h6>
-                                                             </div>
-                                                             <div style="display: inline-block;">
-                                                                 <h7>{{i.product.brand}}</h7>
-                                                             </div><br>
-                                                             <div style="display: inline-block;margin-top:10px;">
-                                                                <h6>Model :</h6>
-                                                             </div>
-                                                             <div style="display: inline-block;">
-                                                                 <h7>{{i.product.model}}</h7>
-                                                             </div><br>
-                                                             <div style="display: inline-block;margin-top:10px;">
-                                                                <h6>Model No :</h6>
-                                                             </div>
-                                                             <div style="display: inline-block;">
-                                                                 <h7>{{i.product.model_no}}</h7>
-                                                             </div><br>
-                                                             <div style="display: inline-block;margin-top:10px;">
-                                                                <h6>Waranty :</h6>
-                                                             </div>
-                                                             
-                                                             <div style="display: inline-block;color:red;">
-                                                                 <h7>Expired</h7>
-                                                             </div>
-                                                          {% endfor %}
-
-                                                          <script>
-                                                            function hide(){
-                                                                document.getElementById('confirm').style.display="block";
-                                                                document.getElementById('aa').style.display="none";
-                                                            }
-                                                          </script>
-                                                           
-                                                        <br><div class="reset-options pt-30 text-center"  id="aa">
-                                                            <a href="#"><button class="btn btn-primary" style="display: block;" id="reset-settings" onclick="return hide()">
-                                                                 Finish Work
-                                                             </button>
-                                                         </a>
-                                                         </div>
-
-                                                         <div class="reset-options pt-30 text-center" id="confirm" style="display:inline-block;display: none;">
-                                                            <div >
-                                                                <textarea class="form-control" placeholder="Enter Details"></textarea>
-                                                            </div><br>
-                                                            <div >
-                                                                <input type="text" class="form-control" placeholder="Enter Total Amount"/>
-                                                            </div><br>
-                                                            <a href="#"><button class="btn btn-danger" id="reset-settings" >
-                                                                 Confirm
-                                                             </button>
-                                                         </a>
-                                                         </div>
-
-
-
-                                                        </div>
-                                                        <div class="tab-pane fade" id="profile" role="tabpanel">
-                                                            <div class="pd-20">
-                                                                {% for i in user %}
-                                                                <div class="reset-options pt-30 text-center">
-                                                                   <a href="{% url 'download_pdf' i.product.id %}"><button class="btn btn-danger" id="reset-settings">
-                                                                        Download Bill
-                                                                    </button>
-                                                                </a>
-                                                                </div>
-                                                                {% endfor %}
-                                                            </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="contact" role="tabpanel">
-                                                            {% for i in user %}
-                                                            <div class="pd-20">
-                                                               {{i.product.issues}}
-                                                            </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</div>
-						</div>
-                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
-							<div class="card-box height-100-p overflow-hidden">
+						
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30" >
+							<div class="card-box height-100-p overflow-hidden" style="width: 1010px;">
 								<div class="profile-tab height-100-p">
 									<div class="tab height-100-p">
 										<ul class="nav nav-tabs customtab" role="tablist">
+											
+											
 											<li class="nav-item">
 												<a
 													class="nav-link active"
 													data-toggle="tab"
-													href="#timeline"
+													href="#setting"
 													role="tab"
-													>Status</a
+													>Product Details</a
+												>
+											</li>
+                                            <li class="nav-item">
+												<a
+													class="nav-link"
+													data-toggle="tab"
+													href="#edittab"
+													role="tab"
+													>Issues</a
 												>
 											</li>
 											<li class="nav-item">
@@ -188,406 +59,185 @@
 													data-toggle="tab"
 													href="#tasks"
 													role="tab"
-													>Add Status</a
+													>Service Bill</a
 												>
 											</li>
-											<!-- <li class="nav-item">
-												<a
-													class="nav-link"
-													data-toggle="tab"
-													href="#setting"
-													role="tab"
-													>Chat With Customer</a
-												>
-											</li> -->
+
+                                            
 										</ul>
 										<div class="tab-content">
-											<!-- Timeline Tab start -->
-											<div
-												class="tab-pane fade show active"
-												id="timeline"
-												role="tabpanel"
-											>
-												<div class="pd-20">
-													<div class="profile-timeline">
-														<div class="timeline-month">
-															<!-- <h5>August, 2020</h5> -->
-														</div>
-														<div class="profile-timeline-list">
-															<ul>
-                                                                {% for i in status %}
-																{% for y in user %}
-                                                                {% if i.Servicer_id == y.id %}
-																<li>
-																	<div class="date">{{i.date|date:"jS M" }}</div>
-																	<div class="task-name">
-																		<i class="ion-ios-chatboxes"></i>{{i.status_head}}
-																	</div>
-																	<p>
-																		{{i.status_message}}
-																	</p>
-																	<div class="task-time">{{i.date|date:"g:i A" }}</div>
-																</li>
-                                                                {% endif %}
-                                                                {% endfor %}
-                                                                {% endfor %}
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Timeline Tab End -->
-											<!-- Tasks Tab start -->
+											
 											<div class="tab-pane fade" id="tasks" role="tabpanel">
 												<div class="pd-20 profile-task-wrap">
 													<div class="container pd-0">
-														<!-- Open Task start -->
-														<div class="task-title row align-items-center">
-														
-															<div class="col-md-4 col-sm-12 text-right">
-																<a
-																	href="task-add"
-																	data-toggle="modal"
-																	data-target="#task-add"
-																	class="bg-light-blue btn text-blue weight-500"
-																	><i class="ion-plus-round"></i> Add Status</a
-																>
-															</div>
-														</div>
-                                                        <div class="profile-task-list pb-30">
-															<ul>
-																<li>
-																	<div
-																		class="custom-control custom-checkbox mb-5"
-																	>
-																	</div>
-																	Add Your Daily Work Status 
-																	<div class="task-assign">
-																		The status can viewd by the customer
-																		
-																	</div>
-																</li>
-															</ul>
-														</div>
-														
-														<!-- Open Task End -->
-														<!-- add task popup start -->
-														<div
-															class="modal fade customscroll"
-															id="task-add"
-															tabindex="-1"
-															role="dialog"
-														>
-															<div
-																class="modal-dialog modal-dialog-centered"
-																role="document"
-															>
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<h5
-																			class="modal-title"
-																			id="exampleModalLongTitle"
-																		>
-																			Update Status
-																		</h5>
-																		<button
-																			type="button"
-																			class="close"
-																			data-dismiss="modal"
-																			aria-label="Close"
-																			data-toggle="tooltip"
-																			data-placement="bottom"
-																			title=""
-																			data-original-title="Close Modal"
-																		>
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																	</div>
-																	<div class="modal-body pd-0">
-																		<div class="task-list-form">
-																			<ul>
-																				<li>
-                                                                                    {% for i in user %}
-																					<form action="{% url 'Service_Status' i.id %}" method="post">
-							                                                            {% csrf_token %}
-                                                                                        <div class="form-group row">
-																							<label class="col-md-4"
-																								>Status Heading</label
-																							>
-																							<div class="col-md-8">
-																								<input
-																									type="text"
-																									class="form-control"
-                                                                                                    name="status_head"
-																								/>
-																							</div>
-																						</div>
-																						<div class="form-group row">
-																							<label class="col-md-4"
-																								>Status Message</label
-																							>
-																							<div class="col-md-8">
-																								<textarea
-																									class="form-control"
-                                                                                                    name="status_msg"
-																								></textarea>
-																							</div>
-																						</div>
-																						<div class="modal-footer">
-                                                                                            <input type="submit"
-                                                                                                value="submit"
-                                                                                                class="btn btn-primary"
-                                                                                            >
-                                                                                               
-                                                                                        
-                                                                                        </div>
-																						
-																					</form>
-                                                                                    {% endfor %}
-																				</li>
-																				
-																			</ul>
-																		</div>
-																		
-																	</div>
-																	
+                                                        <form method="post" action="#">
+                                                        <ul class="profile-edit-list row">
+															<li class="weight-500 col-md-6">
+																<h4 class="text-blue h5 mb-20">
+																</h4>
+																<div class="form-group">
+																	<label>Spare Part Name</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="text"
+																	/>
 																</div>
-															</div>
-														</div>
-														<!-- add task popup End -->
+                                                                <div class="form-group mb-0">
+																	<input
+																		type="submit"
+																		class="btn btn-primary"
+																		value="Submit"
+																	/>
+																</div>
+                                                            </li>
+
+															<li class="weight-500 col-md-6">
+																<h4 class="text-blue h5 mb-20">
+																</h4>
+																<div class="form-group">
+																	<label>Amount</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="text"
+																	/>
+																</div>
+															</li>
+														</ul>
+                                                    </form>
 													</div>
 												</div>
 											</div>
+											<!-- Tasks Tab End -->
+
+											<!-- Add Details Tab start -->
 											<div
-												class="tab-pane fade height-100-p"
+												class="tab-pane fade height-100-p show active"
 												id="setting"
 												role="tabpanel"
 											>
+												<div class="profile-setting">
+                                                    {% for i in product %}
+                                                    <ul class="profile-edit-list row">
+															<li class="weight-500 col-md-6">
+																<h4 class="text-blue h5 mb-20">
+																</h4>
+																<div class="form-group">
+																	<label>Category</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="text"
+																		value="{{i.product.category}}"
+                                                                        readonly
+																	/>
+																</div>
+															
+																<div class="form-group">
+																	<label>Model</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="tel"
+																		value="{{i.product.model}}"
+																		readonly
+																	/>
+																</div>
+																<div class="form-group">
+																	<label>Waranty</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="tel"
+																		value="{{i.product.waranty}}"
+                                                                        readonly
+																	/>
+																</div>
+
+                                                                <div class="form-group">
+																	<label>Download SmartStore Purchase Bill ---></label>
+                                                                    <a href="{% url 'download_pdf' i.product.id %}" style="color: red;">Click here</a>
+																</div>
 
 
-                                            <!-- Chat Area Start -->
-                                            <div class="col-lg-9 col-md-8 col-sm-12" >
-                                                <div class="chat-detail" style="width:800px;">
-                                                    <div class="chat-profile-header clearfix">
-                                                        <div class="left">
-                                                            <div class="clearfix">
-                                                                <div class="chat-profile-photo">
-                                                                    <img src="{% static 'vendors/images/profile-photo.jpg' %}" alt="" />
-                                                                </div>
-                                                                <div class="chat-profile-name">
-                                                                    <h3>Rachel Curtis</h3>
-                                                                    <!-- <span>New York, USA</span> -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="right text-right">
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-box">
-                                                        <div class="chat-desc customscroll">
-                                                            <ul>
-                                                                <li class="clearfix admin_chat">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>Maybe you already have additional info?</p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix admin_chat">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>
-                                                                            It is to early to provide some kind of estimation
-                                                                            here. We need user stories.
-                                                                        </p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>
-                                                                            We are just writing up the user stories now so
-                                                                            will have requirements for you next week. We are
-                                                                            just writing up the user stories now so will have
-                                                                            requirements for you next week.
-                                                                        </p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>
-                                                                            Essentially the brief is for you guys to build an
-                                                                            iOS and android app. We will do backend and web
-                                                                            app. We have a version one mockup of the UI,
-                                                                            please see it attached. As mentioned before, we
-                                                                            would simply hand you all the assets for the UI
-                                                                            and you guys code. If you have any early questions
-                                                                            please do send them on to myself. Ill be in touch
-                                                                            in coming days when we have requirements prepared.
-                                                                            Essentially the brief is for you guys to build an
-                                                                            iOS and android app. We will do backend and web
-                                                                            app. We have a version one mockup of the UI,
-                                                                            please see it attached. As mentioned before, we
-                                                                            would simply hand you all the assets for the UI
-                                                                            and you guys code. If you have any early questions
-                                                                            please do send them on to myself. Ill be in touch
-                                                                            in coming days when we have.
-                                                                        </p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix admin_chat">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>Maybe you already have additional info?</p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix admin_chat">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>
-                                                                            It is to early to provide some kind of estimation
-                                                                            here. We need user stories.
-                                                                        </p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>
-                                                                            We are just writing up the user stories now so
-                                                                            will have requirements for you next week. We are
-                                                                            just writing up the user stories now so will have
-                                                                            requirements for you next week.
-                                                                        </p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <p>
-                                                                            Essentially the brief is for you guys to build an
-                                                                            iOS and android app. We will do backend and web
-                                                                            app. We have a version one mockup of the UI,
-                                                                            please see it attached. As mentioned before, we
-                                                                            would simply hand you all the assets for the UI
-                                                                            and you guys code. If you have any early questions
-                                                                            please do send them on to myself. Ill be in touch
-                                                                            in coming days when we have requirements prepared.
-                                                                            Essentially the brief is for you guys to build an
-                                                                            iOS and android app. We will do backend and web
-                                                                            app. We have a version one mockup of the UI,
-                                                                            please see it attached. As mentioned before, we
-                                                                            would simply hand you all the assets for the UI
-                                                                            and you guys code. If you have any early questions
-                                                                            please do send them on to myself. Ill be in touch
-                                                                            in coming days when we have.
-                                                                        </p>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix upload-file">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img1.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <div class="upload-file-box clearfix">
-                                                                            <div class="left">
-                                                                                <img
-                                                                                    src="{% static 'vendors/images/upload-file-img.jpg' %}"
-                                                                                    alt=""
-                                                                                />
-                                                                                <div class="overlay">
-                                                                                    <a href="#">
-                                                                                        <span
-                                                                                            ><i class="fa fa-angle-down"></i
-                                                                                        ></span>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="right">
-                                                                                <h3>Big room.jpg</h3>
-                                                                                <a href="#">Download</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="clearfix upload-file admin_chat">
-                                                                    <span class="chat-img">
-                                                                        <img src="{% static 'vendors/images/chat-img2.jpg' %}" alt="" />
-                                                                    </span>
-                                                                    <div class="chat-body clearfix">
-                                                                        <div class="upload-file-box clearfix">
-                                                                            <div class="left">
-                                                                                <img
-                                                                                    src="{% static 'vendors/images/upload-file-img.jpg' %}"
-                                                                                    alt=""
-                                                                                />
-                                                                                <div class="overlay">
-                                                                                    <a href="#">
-                                                                                        <span
-                                                                                            ><i class="fa fa-angle-down"></i
-                                                                                        ></span>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="right">
-                                                                                <h3>Big room.jpg</h3>
-                                                                                <a href="#">Download</a>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="chat_time">09:40PM</div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="chat-footer">
-                                                           
-                                                            <div class="chat_text_area">
-                                                                <textarea placeholder="Type your message…"></textarea>
-                                                            </div>
-                                                            <div class="chat_send">
-                                                                <button class="btn btn-link" type="submit">
-                                                                    <i class="icon-copy ion-paper-airplane"></i>
-                                                                </button>
+
+															<li class="weight-500 col-md-6">
+																<h4 class="text-blue h5 mb-20">
+																</h4>
+																<div class="form-group">
+																	<label>Brand</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="text"
+																		value="{{i.product.brand}}"
+                                                                        readonly
+																	/>
+																</div>
+																<div class="form-group">
+																	<label>Model Number</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="text"
+																		value="{{i.product.model_no}}"
+                                                                        readonly
+																	/>
+																</div>
+																<div class="form-group">
+																	<label>Requested Date</label>
+																	<input
+																		class="form-control form-control-lg"
+																		type="text"
+																		value="{{i.product.date |date:"jS M Y" }}"
+                                                                        readonly
+																	/>
+																</div>
+															</li>
+														</ul>
+                                                        {% endfor %}
+
+                                                        <div style="text-align:center;"> *********************************************************************************** </div>
+                                                        <div style="text-align: center;">
+                                                            <h5 style="text-align:center;color: rgb(253, 148, 29);">Finish Work</h5>
+
+                                                            <button type="button" class="btn btn-danger">Finish Work</button>
+                                                            <div>
+                                                                <p></p>
+                                                                <button type="button" class="btn btn-success">Yes</button>
+                                                                <button type="button" class="btn btn-danger">No</button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
 											</div>
 											<!-- Setting Tab End -->
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+
+											<!-- Edit Details Area -->
+											<div
+												class="tab-pane fade height-100-p show active"
+												id="edittab"
+												role="tabpanel"
+											>
+												<div class="profile-setting">
+													<form action="{% url 'Service_Details_Update' %}" method="post" enctype="multipart/form-data">
+														<ul class="profile-edit-list row">
+															<li class="weight-500 col-md-6">
+																{% for i in product %}
+																<div class="form-group">
+																	<label>Issues</label>
+																	<textarea class="form-control"  readonly>{{i.product.issues}}</textarea>
+																</div>
+                                                                {% endfor %}
+																
+															</li>
+															
+														</ul>
+													</form>
+												</div>
+											</div>
+
+
+                                            
+
+
+
 
 										</div>
+                                        
 									</div>
 								</div>
 							</div>

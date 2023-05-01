@@ -15,6 +15,7 @@ class Product(models.Model):
     description=models.TextField(blank=True)
     original_price=models.DecimalField(max_digits=20,decimal_places=2,null=True)
     selling_price=models.DecimalField(max_digits=20,decimal_places=2,null=True)
+    optimized_price=models.DecimalField(max_digits=20,decimal_places=2,null=True)
     image=models.ImageField(upload_to='product',blank=True)
     stock=models.IntegerField()
     available=models.BooleanField(default=True)

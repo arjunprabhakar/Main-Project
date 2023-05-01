@@ -134,34 +134,16 @@
 		<div class="main-container" style="margin-left:-260px;margin-top:-50px;">
 			
 			<div class="xs-pd-20-10 pd-ltr-20">
-				<div class="card-box pd-20 height-100-p mb-30" style="height: 300px;">
-					<div class="row align-items-center">
-						<div class="col-md-4">
-							<img src="{% static 'vendors/images/banner-img.png' %}" alt="" />
-						</div>
-						<div class="col-md-8">
-							<h4 class="font-20 weight-500 mb-10 text-capitalize">
-								Welcome
-								<div class="weight-600 font-30 text-blue">{{user}}!</div>
-							</h4>
-							<p class="font-18 max-width-600">
-								<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-								hic non repellendus debitis iure, doloremque assumenda. Autem
-								modi, corrupti, nobis ea iure fugiat, veniam non quaerat
-								mollitia animi error corporis. -->
-							</p>
-						</div>
-					</div>
-				</div>
+				
 				
 
-				<div class="row pb-10">
+				<div class="row pb-10" >
 					<div class="col-xl-3 col-lg-3 col-md-6 mb-20">
 						<div class="card-box height-100-p widget-style3">
-							<div class="d-flex flex-wrap">
-								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">New Service Request</div>
-									<div class="font-14 text-secondary weight-500">
+							<div class="d-flex flex-wrap" >
+								<div class="widget-data" >
+									<div class="weight-700 font-24 text-dark">New Service</div>
+									<div class="font-14 text-secondary weight-500" style="height: 60px;">
 						            _______________________________________
 									</div>
 								</div>
@@ -186,12 +168,13 @@
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
 									<div class="weight-700 font-24 text-dark">View Request's</div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="font-14 text-secondary weight-500" style="height: 60px;"> 
 										______________________________________
 									</div>
 								</div>
 								<div class="widget-icon" onclick="return showrequest()" >
-									<div class="icon" data-color="#ff5b5b">
+									<div class="icon" data-color="#00eccf">
+									
 										<span class="icon-copy ti-arrow-right"></span>
 
 										<script>
@@ -211,8 +194,8 @@
 						<div class="card-box height-100-p widget-style3">
 							<div class="d-flex flex-wrap">
 								<div class="widget-data">
-									<div class="weight-700 font-24 text-dark">View Service History</div>
-									<div class="font-14 text-secondary weight-500">
+									<div class="weight-700 font-24 text-dark">Service History</div>
+									<div class="font-14 text-secondary weight-500" style="height: 60px;">
 										______________________________________
 									</div>
 								</div>
@@ -400,21 +383,25 @@
 							<th scope="col">Sl No</th>
 							<th scope="col">Category</th>
 							<th scope="col">Brand</th>
+							<th scope="col">Model</th>
 							<th scope="col">Requested Date</th>
-							<th scope="col">Status</th>
+							<th  colspan="2"></th>
 							<!-- <th scope="col">Action</th> -->
 						</tr>
 					</thead>
 					<tbody>
-						
+						{% for i in requested_product %}
 						<tr class="table-danger">
-							<th scope="row">1</th>
-							<td>Laptop</td>
-							<td>HP</td>
-							<td>12-01-2022</td>
-							<td style="color:green;">Accepted</td>
-							<!-- <td><span class="badge badge-success">Chat With Servicer</span></td> -->
-						</tr>
+							<td scope="row">{{forloop.counter}}</td>
+							<td>{{i.category}}</td>
+							<td>{{i.brand}}</td>
+							<td>{{i.model}}</td>
+							<td>{{i.date}}</td>
+							<td>
+								<a><button type="button" class="btn btn-primary">Primary</button></a> 
+								<a><button type="button" class="btn btn-danger">Remove</button></a> </td>
+							</tr>
+						{% endfor %}
 						
 					</tbody>
 				</table>

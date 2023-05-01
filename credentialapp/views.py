@@ -416,6 +416,7 @@ def View_Service(request):
     if 'email' in request.session:
         user=request.session['email']
         category=Category.objects.all()
+        requested_product=Servicer_Product.objects.filter(user_id=user,status=0)
        
         if request.method=='POST':
             cat = request.POST.get('category');
@@ -431,6 +432,7 @@ def View_Service(request):
         data={
             'user':user,
             'category':category,
+            'requested_product':requested_product,
         }
         return render(request,"Customer_Service/Service.html",data)
     else:
@@ -531,15 +533,17 @@ def Service_Details_Update(request):
     else:
         return redirect(login)
     
-# Servicer main page for the  Accepted request 
+# Servicer main page for the  Accepted request (that is for main service page)
 def Service_Product(request):
     if 'email' in request.session:
         email=request.session['email']
-        user=tbl_Accepted_product.objects.filter(Servicer_id=email,status=0)
+        user=log_user.objects.filter(email=email)
+        product=tbl_Accepted_product.objects.filter(Servicer_id=email,status=0)
         status=tbl_Accepted_product_status.objects.order_by('-id')
-        if user:
+        if product:
             data={
                 'user':user,
+                'product':product,
                 'status':status,
             }
             return render(request,"Service/Service_Product.html",data)
@@ -586,6 +590,14 @@ def Service_Status(request,id):
             status_msg = request.POST.get('status_msg');
             tbl_Accepted_product_status(Servicer_id=id,status_head=status_head,status_message=status_msg).save()
             return redirect(Service_Product)
+    else:
+        return redirect(login)
+    
+
+# for apply leave
+def Apply_Leave(request):
+    if 'email' in request.session:
+        return render(request,'Service/apply_leave.html')
     else:
         return redirect(login)
 

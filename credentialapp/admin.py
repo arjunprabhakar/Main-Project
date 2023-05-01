@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.db.models import F
 import csv
 from django.core.mail import send_mail
-from credentialapp.models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status
+from credentialapp.models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status, user_address
 from hashlib import sha256
 from django.template.loader import render_to_string
 import re
@@ -30,10 +30,10 @@ class ServiceAdmin(admin.ModelAdmin):
         recepient_list = [obj.email]
         htmlgen = 'Welcome to SmartStore...! \n Your Login Credential Is \n Email:'+obj.email+'\n Password:'+password1+'\nLogin Here : http://127.0.0.1:8000/login/'
         send_mail(subject,htmlgen,from_email,recepient_list)
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        qs = qs.filter(type=1)
-        return qs
+    # def get_queryset(self, request):
+    #     qs = super().get_queryset(request)
+    #     qs = qs.filter(type=1)
+    #     return qs
     
 admin.site.register(log_user,ServiceAdmin)
 # admin.site.register(Servicer_Product)
@@ -57,14 +57,14 @@ admin.site.register(log_user,ServiceAdmin)
 class UserAdmin(admin.ModelAdmin):
     list_display=['name','phone_no']
     # actions = [export_users]
-    def has_add_permission(self, request, obj=None):
-        return False
+    # def has_add_permission(self, request, obj=None):
+    #     return False
 
-    def has_change_permission(self, request, obj=None):
-        return False
+    # def has_change_permission(self, request, obj=None):
+    #     return False
 
-    def has_delete_permission(self, request, obj=None):
-        return False
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
     verbose_name_plural = "Customer Details"
 admin.site.register(reg_user,UserAdmin)
     
@@ -82,8 +82,9 @@ class UserAdmin(admin.ModelAdmin):
     #     return False
     # verbose_name_plural = "Customer Details"
 admin.site.register(Servicer_Details,UserAdmin)
-# admin.site.register(tbl_Accepted_product)
-# admin.site.register(Servicer_Product)
+admin.site.register(tbl_Accepted_product)
+admin.site.register(Servicer_Product)
+# admin.site.register(user_address)
 # admin.site.register(tbl_Accepted_product_status)
 
 

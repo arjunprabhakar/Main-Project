@@ -141,6 +141,7 @@ import io
 import urllib
 from django.utils.html import format_html
 
+admin.site.register(tbl_Review)
 
 class ReviewInline(admin.TabularInline):
 
@@ -175,9 +176,6 @@ class ReviewInline(admin.TabularInline):
             return sentiment_score
         return None
 
-    
-
-    
     positive_sentiment_score.short_description = 'Positive Sentiment Score'
     negative_sentiment_score.short_description = 'Negative Sentiment Score'
     neutral_sentiment_score.short_description = 'Neutral Sentiment Score'
@@ -197,11 +195,11 @@ class SentimentInline(admin.TabularInline):
     def sentiment_graph(self, obj):
         avg_pos_score = obj.avg_pos_score
         avg_neg_score = obj.avg_neg_score
-        avg_neu_score = obj.avg_neu_score
+        # avg_neu_score = obj.avg_neu_score
 
         # create a bar plot with positive and negative scores
         fig, ax = plt.subplots()
-        ax.bar(['Positive', 'Negative','Neutral'], [avg_pos_score, avg_neg_score, avg_neu_score], color=['red', 'blue','green'])
+        ax.bar(['Positive', 'Negative'], [avg_pos_score, avg_neg_score], color=['red', 'blue'])
         # ax.hist([positive_score, negative_score], bins=10, color=['green', 'red'])
         # set the title and labels
         ax.set_title('Sentiment Analysis')
@@ -212,8 +210,8 @@ class SentimentInline(admin.TabularInline):
         buffer = io.BytesIO()
         fig.savefig(buffer, format='png')
         buffer.seek(0)
-        import base64
 
+        import base64
         # encode the buffer as base64
         image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
         from django.utils.safestring import mark_safe
@@ -264,5 +262,4 @@ class ProductAdmin(admin.ModelAdmin):
     sentiment_score_avg.short_description = 'Sentiment Score (Avg)'
     
 admin.site.register(Product, ProductAdmin)
-
-
+admin.site.register(Sentiment)

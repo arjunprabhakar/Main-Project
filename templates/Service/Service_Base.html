@@ -95,7 +95,7 @@
 					data-toggle="header_search"
 				></div>
 				<div class="header-search">
-					<form>
+					<!-- <form>
 						<div class="form-group mb-0">
 							<i class="dw dw-search2 search-icon"></i>
 							<input
@@ -112,90 +112,11 @@
 								</div>
 							</div>
 						</div>
-					</form>
+					</form> -->
 				</div>
 			</div>
 			<div class="header-right">
 				
-				<div class="user-notification">
-					<div class="dropdown">
-						<a
-							class="dropdown-toggle no-arrow"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-						>
-							<i class="icon-copy dw dw-notification"></i>
-							<span class="badge notification-active"></span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<div class="notification-list mx-h-350 customscroll">
-								<ul>
-									<li>
-										<a href="#">
-											<img src="{% static 'vendors/images/img.jpg' %}" alt="" />
-											<h3>John Doe</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{% static 'vendors/images/photo1.jpg' %}" alt="" />
-											<h3>Lea R. Frith</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{% static 'vendors/images/photo2.jpg' %}" alt="" />
-											<h3>Erik L. Richards</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{% static 'vendors/images/photo3.jpg' %}" alt="" />
-											<h3>John Doe</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{% static 'vendors/images/photo4.jpg' %}" alt="" />
-											<h3>Renee I. Hansen</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="{% static 'vendors/images/img.jpg' %}" alt="" />
-											<h3>Vicki M. Coleman</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="user-info-dropdown">
 					<div class="dropdown">
 						<a
@@ -403,7 +324,7 @@
 
 		<div class="left-side-bar">
 			<div class="brand-logo">
-				<a href="#">
+				<a href="{% url 'Service' %}">
 					<h3  display: inline-block;>Smart</h3><h3 class="dark-logo" display: inline-block; style="color:rgb(255, 123, 0);margin-left:3px;;">Store</h3>
 
 				</a>
@@ -415,25 +336,37 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 						<li class="dropdown">
-							<a href="{% url 'Service' %}" class="dropdown-toggle">
-								<span class="micon bi bi-house"></span
-								><span class="mtext">Home</span>
-							</a>					
-						</li>
-                        <li class="dropdown">
-							<a href="{% url 'Service_Profile' %}" class="dropdown-toggle">
+							<a  class="dropdown-toggle">
 								<span class="micon bi bi-person"></span
-								><span class="mtext">Profile</span>
-							</a>					
+								><span class="mtext">Account</span>
+							</a>
+							<ul class="submenu">
+								<li ><a href="{% url 'Service_Profile' %}">Profile</a></li>
+							</ul>					
 						</li>
+                        
+						<!-- // for leave -->
+						<li class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle">
+								<span class="micon bi bi-calendar4-week"></span
+								><span class="mtext">Leave</span>
+							</a>
+							<ul class="submenu">
+								<li><a href="{% url 'Apply_Leave' %}">Apply Leave</a></li>
+								<li><a href="#">View Live Status</a></li>
+							</ul>
+						</li>
+
+
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
 								<span class="micon bi bi-table"></span
 								><span class="mtext">Service</span>
 							</a>
 							<ul class="submenu">
-								<li><a href="#">New Request</a></li>
-								<li><a href="#">Accepted Request</a></li>
+								<li><a href="{% url 'Service_Product' %}">Active Work</a></li>
+								<li><a href="#">New Work</a></li>
+								<li><a href="#">Service history</a></li>
 							</ul>
 						</li>				
 					</ul>
@@ -458,10 +391,6 @@
 		<script src="{% static 'vendors/scripts/dashboard3.js' %}"></script>
 		<script src="src/plugins/cropperjs/dist/cropper.js"></script>
 		<!-- Google Tag Manager (noscript) -->
-
-
-
-
 		<noscript
 			><iframe
 				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
@@ -470,6 +399,5 @@
 				style="display: none; visibility: hidden"
 			></iframe
 		></noscript>
-		<!-- End Google Tag Manager (noscript) -->
 	</body>
 </html>

@@ -1,0 +1,191 @@
+{% extends 'Service/Service_Base.html' %}
+{% load static %}
+{% block content %}
+		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="{% static 'css/apply_leave.css' %}"> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    .aa{
+        height: 40px;
+        border-radius:5px;
+        color:red;
+        border-color: #000;
+        text-align: center;
+    }
+    .bb{
+        height: 40px;
+        border-radius:5px;
+    }
+
+	.ui-datepicker-header {
+      
+      color: rgb(24, 22, 22);
+      
+    }
+
+    .ui-datepicker-prev, .ui-datepicker-next {
+  background-color: #0074d9;
+  color: white;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-size: 18px;
+  line-height: 1;
+  
+}
+
+.ui-datepicker-prev::before {
+  content: "<<";
+  margin-right: 5px;
+}
+
+.ui-datepicker-next::before {
+  content: ">>";
+  margin-left: 5px;
+}
+
+    .ui-datepicker-prev, .ui-datepicker-next {
+      background-color: #0074d9;
+      color: white;
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+    }
+
+    .ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+      background-color: #003d5c;
+      cursor: pointer;
+    }
+	
+
+    .ui-datepicker-calendar td a {
+      color: #ea1717;
+    }
+
+    .ui-datepicker-calendar td a:hover {
+      background-color: #340ba3;
+    }
+
+    .ui-datepicker-current-day {
+      background-color: #813df5;
+      color: #fff;
+    }
+
+    .ui-datepicker-unselectable {
+      color: #bbb;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+	  
+
+    }
+
+</style>
+<script>
+    $(function () {
+        var selectedDates = [];
+        // Initialize the datepicker
+        
+        $("#calendar").datepicker({
+            onSelect: function (date) {
+                // Check if the date has already been selected
+                if (selectedDates.includes(date)) {
+                    alert("You have already selected this date.");
+                } else {
+                    // Add the selected date to the list of selected dates
+                    selectedDates.push(date);
+                    // Create an input field for the selected date and append it to the selected-dates div
+                    $("#selected-dates").append("<input class='aa' type='text' name='apply_date' value='" + date + "' format='YYYY-MM-DD' readonly>   <input class='bb' type='text' id='reason_id' name='reason_"+ date +"' placeholder='Reason' onclick='return enable()'>  <br><br>");
+                }
+            }
+        });
+    });
+
+
+    function enable(){
+        document.getElementById('btn').style.display="block";
+    }
+</script>
+
+		<div class="main-container">
+			<div class="pd-ltr-20 xs-pd-20-10">
+				<div class="min-height-200px">
+					<div class="page-header">
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="title">
+									<h4>Apply Leave</h4>
+								</div>
+								<nav aria-label="breadcrumb" role="navigation">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="{% url 'Service' %}">Home</a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">
+											Leave
+										</li>
+									</ol>
+								</nav>
+							</div>
+							<div class="col-md-6 col-sm-12 text-right">
+								<div class="dropdown">
+									<a
+										class="btn btn-primary "
+										href="#"
+										role="button"
+									>
+										Total Leaves Taken : 5/10
+									</a>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pd-20 card-box mb-30">
+						<div class="clearfix">
+							<h4 class="text-blue h4">Select Date</h4>
+							<!-- <p class="mb-30">jQuery Step wizard</p> -->
+						</div>
+						<div class="wizard-content">
+							
+
+
+							<div class="col-12 col-sm-6" style="display:inline-block;">
+								<div class="form-group">
+									<div>
+										<div id="calendar"></div>
+									</div>
+								</div>
+							</div>
+							<div style="display: inline-block;">
+								<label for="selected-dates"
+									style="background-color:rgb(113, 149, 247);width:410px;text-align:center;color:#fff;font-weight:bold;height:30px;">Selected
+									dates</label>
+								<form action="#" method="post" enctype="multipart/form-data"
+									onsubmit="return validateform();">
+									{% csrf_token %}
+						
+									<div id="selected-dates"></div>
+
+									<div class="col-12">
+										<button type="submit" id="btn" class="btn btn-success" style="display:none;">Apply</button>
+									</div>
+						
+								</form>
+						
+							</div>
+
+
+
+
+
+						</div>
+					</div>
+
+
+
+
+					{% endblock %}
