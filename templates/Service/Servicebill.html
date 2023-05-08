@@ -1,0 +1,163 @@
+{% extends 'Service/Service_Base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="mobile-menu-overlay"></div>
+
+		   <div class="main-container">
+			 <div class="pd-ltr-20 xs-pd-20-10">
+				<div class="min-height-200px">
+					<div class="page-header">
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="title">
+									<h4>Invoice</h4>
+								</div>
+								<nav aria-label="breadcrumb" role="navigation">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="index.html">Home</a>
+										</li>
+										<li class="breadcrumb-item active" aria-current="page">
+											Form
+										</li>
+									</ol>
+								</nav>
+							</div>
+							<div class="col-md-6 col-sm-12 text-right">
+								<div class="dropdown">
+
+
+                            <a  class="btn btn-primary" href="#">Download Bill</a>
+
+
+
+
+
+
+
+
+                                </div>
+							</div>
+						</div>
+					</div>
+					
+                    <div class="invoice-wrap">
+						<div class="invoice-box">
+							<div class="invoice-header">
+								<div class="logo text-center">
+									<img src="vendors/images/deskapp-logo.png" alt="" />
+								</div>
+							</div>
+							<h4 class="text-center mb-5 weight-600">Smart<span style="color: rgb(255, 153, 0);"> Store</span> </h4>
+							<h6 class="text-center">Service Invoice</h6>
+							<div class="row pb-30">
+								<div class="col-md-6">
+									<p class="font-14 mb-5">
+										Date Issued: <strong class="weight-600">10 Jan 2018</strong>
+									</p>
+									<p class="font-14 mb-5">
+										Invoice No: <strong class="weight-600">4556</strong>
+									</p>
+								</div>
+								<div class="col-md-6">
+									<div class="text-right">
+										<p class="font-14 mb-5">Customer Name : Arjun P P</p>
+										<p class="font-14 mb-5">Email : arjun@gmail.com</p>
+										<p class="font-14 mb-5">Phone : 8301014276</p>
+									</div>
+								</div>
+							</div>
+							<div class="invoice-desc pb-30">
+								
+								<div class="invoice-desc-body">
+									
+                    
+                                <table class="table">
+                                    <thead>
+                                        <tr class="invoice-desc-head clearfix"><th colspan="3" style="text-align: center;">Parts Details</th></tr>
+                                            <tr class="invoice-desc ">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Spare Name</th>
+                                            <th scope="col">Amount</th>
+                                        </tr>
+
+
+                                        
+                                    </thead>
+                                    <tbody>
+                                    
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Sreen</td>
+                                            <td>1000</td>
+                                        </tr>
+                                    
+
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Sreen</td>
+                                            <td>1000</td>
+                                        </tr>
+
+                                        <tr class="invoice-desc-head clearfix"><th colspan="3" style="text-align: center;">Labour Charge Details</th></tr>
+
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td></td>
+                                            <td>1000</td>
+                                        </tr>
+                                    
+                                    </tbody>
+                                </table>
+								</div>
+								<div class="invoice-desc-footer">
+									<div class="invoice-desc-head clearfix">
+										<div class="invoice-sub">Sub Total</div>
+										<div class="invoice-rate">GST</div>
+										<div class="invoice-subtotal">Grand Total</div>
+									</div>
+									<div class="invoice-desc-body">
+										<ul>
+											<li class="clearfix">
+												<div class="invoice-sub">
+													<p class="font-14 mb-5">
+														Labour charge:
+														<strong class="weight-600">₹2000</strong>
+													</p>
+													<p class="font-14 mb-5">
+														parts: <strong class="weight-600">₹4000</strong>
+													</p>
+												</div>
+												<div class="invoice-rate font-10 weight-600">
+													₹56
+												</div>
+												<div class="invoice-subtotal">
+													<span class="weight-600 font-24 text-danger"
+														>₹8000</span  
+													>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+
+
+
+        <div class="footer-wrap pd-20 mb-20 card-box" style="font-weight:bold;color:rgb(255, 106, 0);margin-top:60px;">
+            Smart Store
+        </div>
+
+ 
+  
+
+{% endblock %}

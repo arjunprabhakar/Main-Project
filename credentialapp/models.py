@@ -53,7 +53,14 @@ class user_address(models.Model):
 
 
 
-#Customer Address Table
+
+
+#  *********************************  Servicer Module Models **************************************
+
+
+
+
+#Servicer Details Table
 class Servicer_Details(models.Model):
     user=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
@@ -93,6 +100,37 @@ class tbl_Accepted_product(models.Model):
     product=models.ForeignKey(Servicer_Product,on_delete=models.CASCADE)
     status=models.BooleanField(default=0)
     accepted_date=models.DateTimeField(auto_now_add=True,null=True)
+    work_hour=models.IntegerField(null=True)
+    service_bill=models.FileField(upload_to='Service_Bill',blank=True)
+
+
+
+# for service bill generation
+class tbl_ServiceBill(models.Model):
+    Servicer=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
+    Accepted_product=models.ForeignKey(Servicer_Product,on_delete=models.CASCADE)
+    sparepart=models.CharField(max_length=300,null=True)
+    amount=models.DecimalField(max_digits=20,decimal_places=2,null=True)
+    status=models.BooleanField(default=0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Servicer Accepted Product

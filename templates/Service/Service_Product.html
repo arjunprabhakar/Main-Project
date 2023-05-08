@@ -41,7 +41,7 @@
 													data-toggle="tab"
 													href="#setting"
 													role="tab"
-													>Product Details</a
+													>General</a
 												>
 											</li>
                                             <li class="nav-item">
@@ -67,7 +67,7 @@
 										</ul>
 										<div class="tab-content">
 											
-											<div class="tab-pane fade" id="tasks" role="tabpanel">
+											<!-- <div class="tab-pane fade" id="tasks" role="tabpanel">
 												<div class="pd-20 profile-task-wrap">
 													<div class="container pd-0">
                                                         <form method="post" action="#">
@@ -107,7 +107,140 @@
 													</div>
 												</div>
 											</div>
-											<!-- Tasks Tab End -->
+											 -->
+
+
+
+
+
+											 <div class="tab-pane fade" id="tasks" role="tabpanel" style="height: 900px;">
+												<div class="pd-20 profile-task-wrap">
+												  <div class="container pd-0">
+
+
+
+
+
+
+
+
+										
+
+
+
+
+
+
+
+
+
+													<div class="form-group">
+													  <label>Select Option</label>
+													  <select class="form-control" id="select-form">
+														<option >Select Option</option>
+														<option value="add-spare-part-form">Add Spare Part Details</option>
+														<option value="add-another-form">Add work hours</option>
+													  </select>
+													</div>
+
+
+													<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+										  
+													<form id="add-spare-part-form" method="post" action="{% url 'service_Bill' %}" style="display:none">
+														{% csrf_token %}
+														<ul class="profile-edit-list row">
+														<li class="weight-500 col-md-6">
+														  <h4 class="text-blue h5 mb-20">Add Spare Part Details</h4>
+														  <div class="amount-group">
+															<div  style="display: flex;">
+																<div class="form-group" style="margin-right: 10px;">
+																<label>Spare Part Name</label>
+																{% for i in product %}
+																<input  name="product" value="{{i.id}}" type="text" style="display:none;"/>
+																{% endfor %}
+																<input class="form-control form-control-lg" name="spare" type="text" style="width:350px;"/>
+																</div>
+																<div class="form-group">
+																<label>Amount</label>
+																<input class="form-control form-control-lg" name="amount" type="text" style="width:100px;"/>
+																</div>
+																<a class="add-more" style="font-size: 30px;margin-bottom:-200px;color:green;cursor: pointer;" title="Add More"> + </a>
+														     </div>
+														  </div><br>
+
+														  <div class="form-group mb-0">
+															<input type="submit" class="btn btn-primary" value="Submit" />
+														  </div>
+														</li>
+													  </ul>
+													</form>
+
+
+													<script>
+														$(document).ready(function() {
+														  var max_fields = 5; // maximum number of input fields
+														  var wrapper = $(".amount-group"); // element to add new input fields to
+														  var add_button = $(".add-more"); // "Add more" anchor element
+													
+														  var count = 1; // current number of input fields
+													
+														  $(add_button).click(function(e) {
+															e.preventDefault();
+															if (count < max_fields) {
+															  count++;
+															  var new_field = $('<div  style="display: flex;"><div class="form-group"  style="margin-right: 10px;"><label>Enter spare part name</label><input name="spare" class="form-control form-control-lg" type="text" style="width:350px;"/></div>   <div class="form-group"><label>Amount</label><input name="amount" class="form-control form-control-lg" type="text" style="width:100px;"/><a class="remove-field" style="font-size:15px;margin-bottom:-200px;color:red;cursor: pointer;" title="Remove">X</a></div><div  style="display: flex;">');
+															  $(wrapper).append(new_field);
+															  $(new_field).find(".remove-field").click(function() {
+																$(this).parents('div').eq(1).remove();
+																count--;
+															  });
+															}
+														  });
+														});
+													  </script>
+
+
+
+													
+										  
+													<form id="add-another-form" method="post" action="{% url 'work_hour' %}" style="display:none">
+														{% csrf_token %}
+														<ul class="profile-edit-list row">
+														<li class="weight-500 col-md-6">
+														  <!-- <h4 class="text-blue h5 mb-20">Add work hour</h4> -->
+														  <div class="form-group">
+															<label>Add work hour in minutes</label>
+															<input class="form-control form-control-lg" type="text" name="hour"/>
+														  </div>
+														 		 {% for i in product %}
+																<input  name="product" value="{{i.id}}" type="text" style="display:none;"/>
+																{% endfor %}
+														 
+														  <div class="form-group mb-0">
+															<input type="submit" class="btn btn-primary" value="Submit" />
+														  </div>
+														</li>
+													  </ul>
+													</form>
+												  </div>
+												</div>
+											  </div>
+										  
+											  <script>
+												document.getElementById("select-form").addEventListener("change", function() {
+												  var selectedForm = document.getElementById(this.value);
+												  var otherForm = document.getElementById(this.value == "add-spare-part-form" ? "add-another-form" : "add-spare-part-form");
+												  selectedForm.style.display = "block";
+												  otherForm.style.display = "none";
+												});
+											  </script>
+											   
+											 
+
+
+									
+
+
 
 											<!-- Add Details Tab start -->
 											<div
@@ -117,9 +250,14 @@
 											>
 												<div class="profile-setting">
                                                     {% for i in product %}
+													
+
+													
                                                     <ul class="profile-edit-list row">
+														
 															<li class="weight-500 col-md-6">
 																<h4 class="text-blue h5 mb-20">
+												
 																</h4>
 																<div class="form-group">
 																	<label>Category</label>
@@ -191,17 +329,91 @@
 														</ul>
                                                         {% endfor %}
 
-                                                        <div style="text-align:center;"> *********************************************************************************** </div>
-                                                        <div style="text-align: center;">
-                                                            <h5 style="text-align:center;color: rgb(253, 148, 29);">Finish Work</h5>
 
-                                                            <button type="button" class="btn btn-danger">Finish Work</button>
-                                                            <div>
-                                                                <p></p>
-                                                                <button type="button" class="btn btn-success">Yes</button>
-                                                                <button type="button" class="btn btn-danger">No</button>
-                                                            </div>
-                                                        </div>
+
+
+
+										<h5 class="text-blue h5" style="text-align: center;">Service Bill Details</h5>
+														<!-- basic table  Start -->
+										<div class="pd-20 card-box mb-30">
+											<div class="clearfix mb-20">
+												<div class="pull-left">
+													<h5 class="text-blue h5">Total Work Hour : 2 hr</h5>
+												</div>
+												<div class="pull-right">
+                                                    {% for i in product %}
+
+													<a
+														href="{% url 'view_bill' i.id %}"
+														class="btn btn-primary"
+														
+														><i class="fa fa-file"></i> Generate Bill</a>
+
+													{% endfor %}
+												</div>
+											</div>
+											<table class="table">
+												<thead>
+													<tr>
+														<th scope="col">#</th>
+														<th scope="col">Spare Name</th>
+														<th scope="col">Amount</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% if count == 0 %}
+													<tr  style="text-align: center;"><td colspan="7">No data fount..add new</td></tr>
+													{% else %}
+													{% for i in  bill%}
+													<tr>
+														<th scope="row">{{forloop.counter}}</th>
+														<td>{{i.sparepart}}</td>
+														<td>{{i.amount}}</td>
+														<td><a href="{% url 'remove_bill_data' i.id %}"><span class="badge badge-danger" style="cursor: pointer;">Remove</span></a></td>
+													</tr>
+													{% endfor %}
+													{% endif %}
+												</tbody>
+											</table>
+										</div>
+										<!-- basic table  End -->
+
+
+
+
+
+                                                        <div style="text-align: center;">
+															<button type="button" class="btn btn-danger" id="finish-work-btn" disabled title="First generate the bill">Finish Work</button>
+															<div id="confirmation-popup" style="display: none;margin-top:20px;">
+															  <p style="font-weight:bold;">Are you sure you want to finish your work?</p>
+															  <button type="button" class="btn btn-success" id="confirm-btn">Confirm</button>
+															  <button type="button" class="btn btn-danger" id="cancel-btn">Cancel</button>
+															</div>
+														  </div>
+														  
+														  <script>
+															const finishWorkBtn = document.getElementById('finish-work-btn');
+															const confirmationPopup = document.getElementById('confirmation-popup');
+															const confirmBtn = document.getElementById('confirm-btn');
+															const cancelBtn = document.getElementById('cancel-btn');
+														  
+															finishWorkBtn.addEventListener('click', () => {
+															  confirmationPopup.style.display = 'block';
+															});
+														  
+															confirmBtn.addEventListener('click', () => {
+															  // User confirmed, do something here
+															  // For example, submit a form or redirect to a new page
+															  confirmationPopup.style.display = 'none';
+															});
+														  
+															cancelBtn.addEventListener('click', () => {
+															  // User canceled, do nothing
+															  confirmationPopup.style.display = 'none';
+															});
+														  </script>
+														  
                                                     </div>
 											</div>
 											<!-- Setting Tab End -->

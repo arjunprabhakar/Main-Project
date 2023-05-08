@@ -39,4 +39,12 @@ urlpatterns = [
     path('download_pdf/<int:id>/', views.download_pdf, name='download_pdf'),
     path('Service_Status/<int:id>/', views.Service_Status, name='Service_Status'),
     path('Apply_Leave/', views.Apply_Leave, name='Apply_Leave'),
+    path('service_Bill/', views.service_Bill, name='service_Bill'),
+    path('work_hour/', views.work_hour, name='work_hour'),
+    path('remove_bill_data/<int:id>/', views.remove_bill_data, name='remove_bill_data'),
+    path('download_bill/', views.download_bill, name='download_bill'),
+    path('view_bill/<int:id>/', views.view_bill, name='view_bill'),
+    path('send_email_with_bill/<int:id>/', views.send_email_with_bill, name='send_email_with_bill'),
+
+
 ]

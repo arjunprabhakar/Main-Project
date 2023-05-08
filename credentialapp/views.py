@@ -1,3 +1,4 @@
+from io import BytesIO
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,7 +11,7 @@ from django.db.models import Q
 from cart.models import Cart
 from category.models import Category, Subcategory
 from productapp.models import Product, tbl_Review
-from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status, user_address
+from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status, tbl_ServiceBill, user_address
 from hashlib import sha256
 
 # For Pdf Download
@@ -540,11 +541,15 @@ def Service_Product(request):
         user=log_user.objects.filter(email=email)
         product=tbl_Accepted_product.objects.filter(Servicer_id=email,status=0)
         status=tbl_Accepted_product_status.objects.order_by('-id')
+        service_bill=tbl_ServiceBill.objects.filter(Servicer_id=email,status=0)
+        count=tbl_ServiceBill.objects.filter(Servicer_id=email,status=0).count()
         if product:
             data={
                 'user':user,
                 'product':product,
                 'status':status,
+                'bill':service_bill,
+                'count':count,
             }
             return render(request,"Service/Service_Product.html",data)
         else:
@@ -602,11 +607,237 @@ def Apply_Leave(request):
         return redirect(login)
 
 
+# function for generate service bill
+def service_Bill(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        user=log_user.objects.get(email=email)
+        if request.method=='POST':
+            product=request.POST.get('product')
+            spare=request.POST.getlist('spare')
+            amount=request.POST.getlist('amount')
+            for i in range(len(spare)):
+                    tbl_ServiceBill(Servicer_id=user,Accepted_product_id=product,sparepart=spare[i],amount=amount[i]).save()
+        return redirect(Service_Product)
+    else:
+        return redirect(login)
+    
+
+# function for remove the data from the bill table
+def remove_bill_data(request,id):
+    if 'email' in request.session:
+        tbl_ServiceBill.objects.get(id=id).delete()
+        return redirect(Service_Product)
+    else:
+        return redirect(login)
+    
+
+# for updating the total work hour
+def work_hour(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        if request.method=='POST':
+            time=request.POST.get('hour')
+            product=request.POST.get('product')
+            products=tbl_Accepted_product.objects.get(Servicer_id=email,product_id=product)
+            products.work_hour=time
+            products.save()
+        return redirect(Service_Product)
+    else:
+        return redirect(login)
 
 
 
 
+from django.template.loader import get_template
+from django.http import HttpResponse
+from xhtml2pdf import pisa
+
+def download_bill(request):
+    print('*******************')
+
+    # Render the HTML template
+    template = get_template('Service/bill.html')
+    html = template.render({'foo': 'bar'})
+    # Create a file-like buffer to receive PDF data.
+    buffer = BytesIO()
+
+    # Convert HTML to PDF using xhtml2pdf
+    pdf = pisa.CreatePDF(BytesIO(html.encode('utf-8')), buffer)
+
+    # If PDF generation failed, return an error response
+    if pdf.err:
+        return HttpResponse('PDF generation failed', status=500)
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+    response = HttpResponse(buffer, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="bill.pdf"'
+    return response
 
 
 
 
+# def view_bill(request):
+#     if 'email' in request.session:
+#         return render(request,'Service/Servicebill.html')
+#     else:
+#         return redirect(login)
+
+import io
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Table, TableStyle
+from datetime import date
+
+def view_bill(request,id):
+    accepted_product=tbl_Accepted_product.objects.get(id=id,status=0)
+    service_bill=tbl_ServiceBill.objects.filter(id=accepted_product.product_id).count()
+
+    if accepted_product.work_hour != 0 or service_bill != 0 :
+        # Retrieve all service bill instances
+        bills = tbl_ServiceBill.objects.filter(id=accepted_product.product_id)
+
+        # Create a PDF buffer using StringIO
+        buffer = io.BytesIO()
+
+        # Create the PDF object, using the buffer as its "file"
+        pdf = canvas.Canvas(buffer, pagesize=letter)
+
+        # Define the invoice details
+        pdf.setFillColorRGB(0.3, 0.3, 0.3)
+        pdf.rect(50, 720, 500, 50, fill=True, stroke=False)
+
+        pdf.setFillColorRGB(1, 1, 1)
+        pdf.setFont("Helvetica-Bold", 20)
+        pdf.drawCentredString(300, 750, "Smart Store")
+
+        pdf.setFont("Helvetica", 12)
+        pdf.drawString(260, 730, "Service Invoice")
+        pdf.setFont("Helvetica", 7)
+        pdf.drawString(450, 750, "phone : 8301014276")
+        pdf.drawString(450, 740, "Email : smartstore@gmail.com")
+
+        # Draw the date on the right side of the page outside the rectangle
+        today = date.today().strftime("%B %d, %Y")
+        pdf.setFillColorRGB(0, 0, 0)  # Set text color to blue
+        pdf.setFont("Helvetica", 10)
+        pdf.drawRightString(150, 688, f"Date: {today}")
+
+        pdf.setFillColorRGB(0, 0, 0)  # Set text color to blue
+        pdf.setFont("Helvetica", 10)
+        pdf.drawRightString(530, 688, f"Customer Name: Arjun P P")
+        pdf.drawRightString(530, 676, f"Phone: 8301014273")
+        pdf.drawRightString(530, 664, f"Email: arjun@gmail.com")
+        
+        pdf.setFillColorRGB(0, 0, 0)  # Set text color to blue
+        pdf.setFont("Helvetica", 14)
+        pdf.drawRightString(355,610, f"")
+
+        col_widths = [50, 150, 100, 100]   
+        # Define the table headings
+        table_data = [["#","Spare","Rate","Quantity","Amount"]]
+        table_data.append(['','','',''])
+
+        total_amount=0
+        # Add the service bill details to the table
+        for i, bill in enumerate(bills):
+            product = bill.Accepted_product.brand
+            sparepart = bill.sparepart
+            rate = bill.amount
+            amount=rate * 2
+            serial_number = i + 1
+            total_amount=total_amount+amount
+            table_data.append([serial_number,sparepart,rate,'2',amount])
+
+        table_data.append(['', '', '','',''])
+        table_data.append(['----------------', '----------------------------------------', '----------------------------------','------------------------------','------------------------'])
+
+        table_data.append(['', '', '', 'Total Amount:', total_amount])
+        table_data.append(['', '', '',''])
+        table_data.append(['','','','Labour Charge:','2000.00'])
+        table_data.append(['','','',''])
+    
+        table_data.append(['','','','Grand Total:','20000.00'])
+
+
+        # Create the table
+        t = Table(table_data,colWidths=col_widths)
+
+        # Add style to the table
+        t.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), '#e8e8e8'),
+            ('TEXTCOLOR', (0, 0), (-1, 0), '#000000'),
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 14),
+            ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+            ('TEXTCOLOR', (0, -1), (-1, -1),'#FF723D'),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), '#ffffff'),
+            ('TEXTCOLOR', (0, 1), (-1, -1), '#000000'),
+            ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+            ('FONTSIZE', (0, 1), (-1, -1), 12),
+            ('ALIGN', (0, 1), (-1, -1), 'LEFT'),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ]))
+
+        # Get the table width and height
+        w, h = t.wrapOn(pdf, 550, 500)
+
+        # Draw the table on the PDF
+        t.drawOn(pdf, 50, 600 - h)
+        # Close the PDF object cleanly, and we're done
+        pdf.showPage()
+        pdf.save()
+
+        from django.core.files.base import ContentFile
+        from io import BytesIO
+        accepted_product = tbl_Accepted_product.objects.get(id=id)
+
+        # FileResponse sets the Content-Disposition header so that browsers
+        # present the option to save the file.
+        buffer.seek(0)
+        pdf_bytes = buffer.getvalue()
+        accepted_product.service_bill.save('invoice.pdf', ContentFile(pdf_bytes))
+            
+        response = HttpResponse(buffer, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
+    
+        return response
+    else:
+        return redirect(Service_Product)
+
+
+
+
+from django.core.mail import EmailMessage
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.conf import settings
+import os
+
+def send_email_with_bill(request, id):
+    # Get the accepted product object
+    accepted_product = tbl_Accepted_product.objects.get(id=id)
+    print('###################3')
+    # Set up the email message
+    subject = 'Smart Store Service Bill'
+    message = 'Dear Sir,\nWe hope this email finds you well.we are sending you the bill for the product service you have purchased from us.\n We appreciate your business and would like to thank you for choosing our Smart Store for your needs.\nPlease find the attached invoice.\nBest regards,\nSmart Store.\nEmail : smartstore@gmail.com\nphone:8798678898\n'
+    from_email = settings.EMAIL_HOST_USER
+    # recipient_list = 'arjunpp2023a@mca.ajce.in'  # Replace with the recipient email address
+    recipient_list = [accepted_product.Servicer.email]  # Replace with the recipient email address
+    email = EmailMessage(subject, message, from_email, recipient_list)
+
+    # Add the service bill attachment
+    if accepted_product.service_bill:
+        email.attach_file(accepted_product.service_bill.path)
+
+    # Send the email
+    try:
+        email.send()
+        return HttpResponse('Email sent successfully!')
+    except Exception as e:
+        return HttpResponse('Error sending email: {}'.format(str(e)))

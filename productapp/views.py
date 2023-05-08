@@ -149,6 +149,7 @@ def review(request, id):
             blob = TextBlob(review)
             polarity_score = blob.sentiment.polarity
             subjectivity_score = blob.sentiment.subjectivity
+            print(subjectivity_score,'############')
 
             # Get the polarity score for each sentiment
             if polarity_score > 0:
