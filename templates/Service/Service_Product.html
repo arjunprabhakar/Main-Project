@@ -26,6 +26,17 @@
 							</div>
 						</div>
 					</div>
+					<!-- For alert Message -->
+				{% include 'alert.html' %}
+
+				<script>
+					setTimeout(function(){
+					if ($('#msg').length > 0){
+						$('#msg').remove();
+						}
+					},4000)
+
+				</script>
 					<div class="row">
 						
                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30" >
@@ -338,7 +349,9 @@
 										<div class="pd-20 card-box mb-30">
 											<div class="clearfix mb-20">
 												<div class="pull-left">
-													<h5 class="text-blue h5">Total Work Hour : 2 hr</h5>
+													{% for i in product %}
+													<h5 class="text-blue h5">Total Work Hour : {{i.work_hour}} hr</h5>
+													{% endfor %}
 												</div>
 												<div class="pull-right">
                                                     {% for i in product %}
@@ -384,10 +397,18 @@
 
 
                                                         <div style="text-align: center;">
+															{% for i in product %}
+															{% if i.service_bill == "" %}
 															<button type="button" class="btn btn-danger" id="finish-work-btn" disabled title="First generate the bill">Finish Work</button>
+															{% else %}
+															<button type="button" class="btn btn-danger" id="finish-work-btn"  title="First generate the bill">Finish Work</button>
+															{% endif %}
+															{% endfor %}
 															<div id="confirmation-popup" style="display: none;margin-top:20px;">
 															  <p style="font-weight:bold;">Are you sure you want to finish your work?</p>
-															  <button type="button" class="btn btn-success" id="confirm-btn">Confirm</button>
+															{% for i in product %}
+															  <a href="{% url 'send_email_with_bill' i.id %}"><button type="button" class="btn btn-success" id="confirm-btn">Confirm</button></a>
+															 {% endfor %}
 															  <button type="button" class="btn btn-danger" id="cancel-btn">Cancel</button>
 															</div>
 														  </div>

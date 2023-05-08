@@ -654,7 +654,6 @@ from django.http import HttpResponse
 from xhtml2pdf import pisa
 
 def download_bill(request):
-    print('*******************')
 
     # Render the HTML template
     template = get_template('Service/bill.html')
@@ -679,11 +678,7 @@ def download_bill(request):
 
 
 
-# def view_bill(request):
-#     if 'email' in request.session:
-#         return render(request,'Service/Servicebill.html')
-#     else:
-#         return redirect(login)
+
 
 import io
 from django.http import HttpResponse
@@ -691,14 +686,15 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import Table, TableStyle
 from datetime import date
+from django.db.models import Q
 
 def view_bill(request,id):
     accepted_product=tbl_Accepted_product.objects.get(id=id,status=0)
-    service_bill=tbl_ServiceBill.objects.filter(id=accepted_product.product_id).count()
-
-    if accepted_product.work_hour != 0 or service_bill != 0 :
+    service_bill=tbl_ServiceBill.objects.filter(Accepted_product=accepted_product.product_id).count()
+    print(service_bill,'##############')
+    if accepted_product.work_hour != 0 or service_bill != "" :
         # Retrieve all service bill instances
-        bills = tbl_ServiceBill.objects.filter(id=accepted_product.product_id)
+        bills = tbl_ServiceBill.objects.filter(Accepted_product=accepted_product.product_id)
 
         # Create a PDF buffer using StringIO
         buffer = io.BytesIO()
@@ -808,6 +804,7 @@ def view_bill(request,id):
     
         return response
     else:
+        messages.success(request, 'First add invoice details..!')
         return redirect(Service_Product)
 
 
