@@ -1,0 +1,53 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+            <!-- Page Title -->
+            <div class="bg-light py-4">
+                <div class="container d-lg-flex justify-content-between align-items-center py-2 py-lg-4">
+                    <div class="pe-lg-4 text-center text-lg-start">
+                        <h1 class="h3 mb-0">Smart Store</h1>
+                    </div>
+                    <div class="pt-2 pt-lg-0">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+                                <li class="breadcrumb-item">
+                                    <a class="text-nowrap" href="index.html">
+                                        <i class="ri-store-2-line"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout complete</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Title -->
+
+            <!-- Content -->
+            <div class="container my-4 my-lg-10 py-0 py-sm-4 py-lg-10">
+                <div class="card py-4">
+                    <div class="card-body text-center">
+                        <h4 class="pb-4">Thank you for your order !</h4>
+                        <!-- <p class="fs-sm">Your order <span class='fw-medium'>68KV7000N92.</span> has been placed and will be processed as soon as possible.</p>
+                        <p class="fs-sm">Our manager can contact you by email or phone to confirm the order.</p>
+                        <p class="fs-sm">Now you can continue shopping or track your order.</p> -->
+                        <a class="btn btn-secondary mt-2 me-4" href="{%  url 'home'%}">Continue shopping</a>
+                        <a class="btn btn-primary d-inline-flex align-items-center mt-2" href="#">
+                            <i class="ri-list-pin-line me-2"></i>
+                            View my order
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </main>
+        <!-- Page -->
+
+{% endblock %}
+        

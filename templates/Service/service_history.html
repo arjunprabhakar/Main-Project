@@ -1,0 +1,91 @@
+{% extends 'Service/Service_Base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="title">
+                <h4>Service History</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        History
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<!-- basic table  Start -->
+<div class="pd-20 card-box mb-30">
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Model</th>
+                <th scope="col">Date</th>
+                <th scope="col">Bill</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for i in work %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.product.brand}}</td>
+                <td>{{i.product.model}}</td>
+                <td>{{i.accepted_date | date:"Y-m-d"}}</td>
+                <td><a href="{% url 'download_ServiceBill' i.id %}"><span class="badge badge-primary">Download</span></a></td>
+            </tr>
+            {% endfor %}
+            
+
+        </tbody>
+    </table>
+    <div class="collapse collapse-box" id="basic-table">
+        <div class="code-box">
+            <div class="clearfix">
+                <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"
+                    data-clipboard-target="#basic-table-code"><i class="fa fa-clipboard"></i> Copy Code</a>
+                <a href="#basic-table" class="btn btn-primary btn-sm pull-right" rel="content-y" data-toggle="collapse"
+                    role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+            </div>
+            <pre><code class="xml copy-pre" id="basic-table-code">
+<table class="table">
+<thead>
+<tr>
+<th scope="col">#</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">1</th>
+</tr>
+</tbody>
+</table>
+        </code></pre>
+        </div>
+    </div>
+</div>
+<!-- basic table  End -->
+
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+            <!-- Page Title -->
+            <div class="bg-light py-4 mb-4 mb-lg-10">
+                <div class="container d-lg-flex justify-content-between align-items-center py-2 py-lg-4">
+                    <div class="pe-lg-4 text-center text-lg-start">
+                        <h1 class="h3 mb-0" style="color: rgb(53, 53, 161);">Checkout </h1>
+                    </div>
+                    <div class="pt-2 pt-lg-0">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+                                <li class="breadcrumb-item">
+                                    <a class="text-nowrap" href="index.html">
+                                        <i class="ri-store-2-line"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap"><a href="blog-list.html">Shop</a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout shipping</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Title -->
+
+            <!-- Content -->
+            <div class="container mb-4 mb-lg-10">
+                <div class="row g-4 g-lg-10">
+                    <div class="col-lg-8">
+                        <!-- Steps -->
+                        
+
+                        <div class="border border-gray-200 rounded-3 p-4">
+                            <!-- Title -->
+                            <h6 class="border-bottom pb-4 mb-4">Choose shipping address</h6>
+                            <!-- Title -->
+                            
+                            <!-- Table-->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-borderless fs-sm mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="align-middle"></th>
+                                            <th class="align-middle"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <div class="form-check d-inline-block ms-5">
+                                                    <input class="form-check-input" type="radio" id="courier" name="shipping-method-radio" checked>
+                                                    <label class="form-check-label" for="courier"></label>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-dark fw-medium">Courier Delivery</span>
+                                                <br>
+                                                <span class="text-muted">All addresses, United States</span>
+                                                <span class="text-muted">All addresses, United States</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="align-middle">
+                                                <div class="form-check d-inline-block ms-5">
+                                                    <input class="form-check-input" type="radio" id="courier" name="shipping-method-radio" checked>
+                                                    <label class="form-check-label" for="courier"></label>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-dark fw-medium">Courier Delivery</span>
+                                                <br>
+                                                <span class="text-muted">All addresses, United States</span>
+                                                <span class="text-muted">All addresses, United States</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Table-->
+                        </div>
+
+                        <div class="d-none d-lg-flex align-items-center justify-content-between mt-8">
+                         
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card bg-light border-gray-200">
+                            <div class="card-body">
+                               
+                               
+                                
+                                <!-- Product -->
+                                <div class="mb-4">
+                                    <h4 class="h4">Order summary</h4>
+                                {% for i in item %}
+                                    
+                                    <div class="d-flex align-items-center pb-2 border-bottom">
+                                        <a class="d-block flex-shrink-0" href="#">
+                                            <img src="{{i.product.image.url}}" width="60" alt="Product">
+                                        </a>
+                                        <div class="ps-2">
+                                            <h6 class="fs-md mb-1">
+                                                <a href="#" class="link-dark link-hover-primary">{{i.product.name}}</a>
+                                            </h6>
+                                            <div class="fs-sm">
+                                                <span class="text-accent me-2">₹ {{i.product.selling_price}}</span>
+                                                <span class="text-muted">Quantity: </span>
+                                                <span class="text-muted">{{i.product_qty}}</span>
+                                                <span class="text-muted" style="margin-left:20px;color:#000;">₹ {{i.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            
+                                </div>
+                                <!-- Subtotal -->
+                                <ul class="list-unstyled fs-sm border-bottom pb-4 mb-4">
+                                    <li class="d-flex align-items-center justify-content-between mb-1">
+                                        <span class="me-2">Subtotal:</span>
+                                        <span class="text-end">₹ {{total}}</span>
+                                    </li>
+                                    <li class="d-flex align-items-center justify-content-between">
+                                        <span class="me-2">Shipping:</span>
+                                        <span class="text-end">Free</span>
+                                    </li>
+                                </ul>
+                                <!-- Subtotal -->
+
+                                <!-- Total -->
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h4 class="me-2">Total:</h4>
+                                    <h4 class="text-end">₹ {{total}}</h4>
+                                </div>
+                                <!-- Total -->
+                                <button id="rzp-button1" type="button" class="btn btn-primary w-100 mt-2">Pay with Razorpay</button>
+                            
+                            
+                            </div>
+                        </div>
+                    </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </main>
+        <!-- Page -->
+        
+        <script>
+            var options = {
+                "key": 'rzp_test_X13OlQLlw6nlxS', // Enter the Key ID generated from the Dashboard
+                "amount": "{{stotal}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Smart-Store",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+                    console.log("success")
+                    var form = document.getElementById["myform"];
+                    var a = response.razorpay_payment_id;
+                    window.location.href = 'http://127.0.0.1:8000/paymentdone?order_id=${response.razorpay_order_id}&cust_id=${response.customer}&payment_id='+a
+
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.description);
+            });
+            document.getElementById('rzp-button1').onclick = function(e){
+                console.log("button click");
+                rzp1.open();
+                e.preventDefault();
+            }
+            </script>
+{% endblock %}
+      

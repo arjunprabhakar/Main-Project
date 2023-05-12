@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from cart.models import Cart
+from cart.models import Cart, OrderPlaced
 from category.models import Category, Subcategory
 from productapp.models import Product, tbl_Review
 from .models import Servicer_Details, Servicer_Product, reg_user,log_user, tbl_Accepted_product, tbl_Accepted_product_status, tbl_ServiceBill, user_address
@@ -27,7 +27,7 @@ def demo(request):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
     product=Product.objects.all()
-    return render(request,"index.html",{'category':category,'subcategory':subcategory,'product':product})
+    return render(request,"Customer/index.html",{'category':category,'subcategory':subcategory,'product':product})
 
 # Login Form
 def login(request):
@@ -56,7 +56,7 @@ def login(request):
             messages.success(request, 'Email or Password Incorrect..!!')
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
-    return render(request,'login.html',{'category':category,'subcategory':subcategory})
+    return render(request,'Customer/login.html',{'category':category,'subcategory':subcategory})
 
 # Function for OTP Generation
 def generateOTP() :
@@ -108,7 +108,7 @@ def register(request):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
     # session=request.session['email']
-    return render(request, 'registration.html',{'category':category,'subcategory':subcategory})
+    return render(request, 'Customer/registration.html',{'category':category,'subcategory':subcategory})
  
 # Otp Verification
 def verify_otp(request):
@@ -147,7 +147,7 @@ def home(request):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,'home.html',{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'product':product})
+        return render(request,'Customer/home.html',{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'product':product})
     messages.success(request, ' Please Login!!')
     return redirect(login)
 
@@ -162,10 +162,12 @@ def logout(request):
 def profile(request):
     if 'email' in request.session:
         email = request.session['email']
+        address=user_address.objects.filter(user_id=email)
+        order=OrderPlaced.objects.filter(user_id=email)
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
+        service_product=Servicer_Product.objects.filter(user_id=email)
         user=reg_user.objects.get(email_id=email)
-        address=user_address.objects.filter(user_id=email)
         cart=Cart.objects.filter(user_id=email)
         cart_count=0
         for i in cart:
@@ -175,22 +177,26 @@ def profile(request):
               'category':category,
               'subcategory':subcategory,
               'address':address,
-              'user':user}
-        return render(request,"Test.html",data)
+              'user':user,
+              'order':order,
+              'service_product':service_product,}
+        return render(request,"Customer/profile.html",data)
     messages.success(request, 'Sign in..!!')
     return redirect(login)
 
 # Add Shipping Address
 def useraddress(request):
+    print('##################')
     if request.method=='POST':
         fname=request.POST.get('fname');
         lname=request.POST.get('lname');
         email=request.POST.get('email');
         phone = request.POST.get('phn');
+        state = request.POST.get('state');
+        district = request.POST.get('district');
         hname = request.POST.get('hname');
         street = request.POST.get('street');
         city = request.POST.get('city');
-        district = request.POST.get('district');
         pin = request.POST.get('pin');
         print(fname)
         if 'email' in request.session:
@@ -200,7 +206,7 @@ def useraddress(request):
                 messages.success(request, 'Please Remove The Existing Address then add new address..!')
                 return redirect(profile)
             else:
-                address=user_address(user_id=user,fname=fname,lname=lname,email=email,phone_no=phone,hname=hname,street=street,city=city,district=district,pin=pin)
+                address=user_address(user_id=user,fname=fname,lname=lname,email=email,phone_no=phone,hname=hname,street=street,city=city,district=district,state=state,pin=pin)
                 address.save()
                 messages.success(request, 'Address Added Successfully...')
                 return redirect('profile')
@@ -347,6 +353,7 @@ def search_products(request):
 def category_product(request,id):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
+    sub_category=Subcategory.objects.get(id=id)
     if "email" in request.session:
         email = request.session['email']
         product=Product.objects.filter(subcategory=id)
@@ -354,10 +361,10 @@ def category_product(request,id):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,'category.html',{'cart_count':cart_count,'product':product,'category':category,'subcategory':subcategory,'email':email})
+        return render(request,'Customer/category.html',{'sub_category':sub_category,'cart_count':cart_count,'product':product,'category':category,'subcategory':subcategory,'email':email})
     else:
         product=Product.objects.filter(subcategory=id)
-        return render(request,'category.html',{'product':product,'category':category,'subcategory':subcategory})
+        return render(request,'Customer/category.html',{'sub_category':sub_category,'product':product,'category':category,'subcategory':subcategory})
             
 # Forgot Password
 def forgotpassword(request):
@@ -416,9 +423,6 @@ def new_password(request):
 def View_Service(request):
     if 'email' in request.session:
         user=request.session['email']
-        category=Category.objects.all()
-        requested_product=Servicer_Product.objects.filter(user_id=user,status=0)
-       
         if request.method=='POST':
             cat = request.POST.get('category');
             brand = request.POST.get('brand');
@@ -429,13 +433,7 @@ def View_Service(request):
             issue = request.POST.get('issue');
             Servicer_Product(user_id=user,category=cat,brand=brand,
                              model=model,model_no=model_no,waranty=waranty,bill=bill,issues=issue).save()
-            return redirect(View_Service)
-        data={
-            'user':user,
-            'category':category,
-            'requested_product':requested_product,
-        }
-        return render(request,"Customer_Service/Service.html",data)
+        return redirect(profile)
     else:
         return redirect(login)
 
@@ -551,6 +549,7 @@ def Service_Product(request):
                 'bill':service_bill,
                 'count':count,
             }
+
             return render(request,"Service/Service_Product.html",data)
         else:
             messages.success(request, 'You have no active work...!!')
@@ -639,7 +638,7 @@ def work_hour(request):
         if request.method=='POST':
             time=request.POST.get('hour')
             product=request.POST.get('product')
-            products=tbl_Accepted_product.objects.get(Servicer_id=email,product_id=product)
+            products=tbl_Accepted_product.objects.get(Servicer_id=email,id=product)
             products.work_hour=time
             products.save()
         return redirect(Service_Product)
@@ -801,7 +800,6 @@ def view_bill(request,id):
             
         response = HttpResponse(buffer, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
-    
         return response
     else:
         messages.success(request, 'First add invoice details..!')
@@ -819,7 +817,6 @@ import os
 def send_email_with_bill(request, id):
     # Get the accepted product object
     accepted_product = tbl_Accepted_product.objects.get(id=id)
-    print('###################3')
     # Set up the email message
     subject = 'Smart Store Service Bill'
     message = 'Dear Sir,\nWe hope this email finds you well.we are sending you the bill for the product service you have purchased from us.\n We appreciate your business and would like to thank you for choosing our Smart Store for your needs.\nPlease find the attached invoice.\nBest regards,\nSmart Store.\nEmail : smartstore@gmail.com\nphone:8798678898\n'
@@ -834,7 +831,66 @@ def send_email_with_bill(request, id):
 
     # Send the email
     try:
+        accepted_product.status=1
+        accepted_product.work_done=1
+        accepted_product.save()
+        bill=tbl_ServiceBill.objects.filter(Accepted_product_id=accepted_product.product_id)
+        print(accepted_product.id,'##################')
+        for i in bill:
+            i.status=1
+            i.save()
         email.send()
-        return HttpResponse('Email sent successfully!')
+        messages.success(request, 'Successfully the work Finished ..!')
+        return redirect(Service)
     except Exception as e:
         return HttpResponse('Error sending email: {}'.format(str(e)))
+
+
+
+
+
+# for view the service history of a servicer
+def service_history(request):
+    if 'email' in request.session:
+        user=request.session['email']
+        work=tbl_Accepted_product.objects.filter(Servicer_id=user,work_done=1)
+        data={'work':work}
+        return render(request,'Service/service_history.html',data)
+    else:
+        return redirect(login)
+    
+
+
+# servicer download the service bill
+def download_ServiceBill(request,id):
+    if 'email' in request.session:
+        pdf_file = get_object_or_404(tbl_Accepted_product, id=id)
+        return FileResponse(pdf_file.service_bill, as_attachment=True)
+    else:
+        return redirect(login)
+    
+
+
+
+# Change Password
+def servicer_change_password(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        user=log_user.objects.get(email=email)
+        if request.method =="POST":
+            old_password=request.POST.get('oldpass')
+            new_password=request.POST.get('newpass');
+            new_pswd=sha256(new_password.encode()).hexdigest()
+            pswd=sha256(old_password.encode()).hexdigest()
+
+            if pswd == user.password:
+                user.password=new_pswd 
+                user.save()
+                print("Password updated Successfully")
+                messages.success(request, 'Password updated Successfully...')
+                return redirect('Service_Profile')
+            else:
+                messages.success(request, 'Incorrect Password ...')
+                print("Incorrect Password")
+                return redirect('Service_Profile')
+        return redirect('login')

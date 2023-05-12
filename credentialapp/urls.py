@@ -45,6 +45,11 @@ urlpatterns = [
     path('download_bill/', views.download_bill, name='download_bill'),
     path('view_bill/<int:id>/', views.view_bill, name='view_bill'),
     path('send_email_with_bill/<int:id>/', views.send_email_with_bill, name='send_email_with_bill'),
+    path('service_history/', views.service_history, name='service_history'),
+    
+    
+    path('download_ServiceBill/<int:id>/', views.download_ServiceBill, name='download_ServiceBill'),
+    path('servicer_change_password/', views.servicer_change_password, name='servicer_change_password'),
 
 
 ]

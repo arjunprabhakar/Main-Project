@@ -1,0 +1,100 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<script>
+    function validateform()
+     {
+         var a=document.getElementById('email').value.trim();
+         var b=document.getElementById('pass').value.trim();
+         if(a=="")
+            {
+                document.getElementById('eml').innerHTML="Enter Email";
+                return false;
+            }
+            if(a.indexOf('@')<=0){
+                document.getElementById('eml').innerHTML="Invalid  Email Address";
+                return false;
+            }     
+            if ((a.charAt(a.length-4)!='.') && (a.charAt(a.length-3)!='.')) {
+                document.getElementById('eml').innerHTML="Enter Email";
+                return false;
+            }
+            if(b=="")
+            {
+                document.getElementById('pss').innerHTML="Enter Password";
+                return false;
+            }
+     }
+     function onclear(){
+            document.getElementById('eml').innerHTML="";
+            document.getElementById('pss').innerHTML="";
+     }
+     </script>
+
+
+<div class="container py-10 my-10">
+    <div class="row g-10 g-lg-5">
+        
+<!-- For Alert Message -->
+{% include 'alert.html' %}
+
+<script>
+	setTimeout(function(){
+	  if ($('#msg').length > 0){
+		$('#msg').remove();
+		}
+	  },1000)
+
+</script>
+<!-- End Alert -->
+        <div class="col-12 col-lg-6">
+            <div class="card border-0 shadow">
+                
+                <div class="card-body" style="height: 400px;">
+                    <h4 class="border-bottom pb-4 mb-4">Sign in</h4>
+                    
+                    <form  action="" method="post" id="contactForm" novalidate="novalidate" onsubmit="return validateform();">
+						{% csrf_token %}
+                        <div class="input-group mb-4">
+                            <input class="form-control" type="email" id="email" name="email" placeholder="E-mail" onclick=" return onclear()">
+                            <br>
+                            <br><span id="eml" style="color: red;"></span>
+
+                        </div>
+                        <div class="input-group mb-4">
+                            <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" onclick=" return onclear()">
+                            <br>
+                            <br>
+                                <span id="pss" style="color: red;"></span>
+
+                        </div>
+                        <div class="d-flex flex-wrap align-items-center justify-content-between">
+                            <div class="form-check">
+                                <a class="nav-link-inline fs-sm" href="{% url 'register' %}">Create Account?</a>
+
+                            </div>
+                            <a class="nav-link-inline fs-sm" href="{% url 'forgotpassword' %}">Forgot password?</a>
+                        </div>
+                        <hr class="my-4">
+                        <div class="text-end">
+                            <button  class="btn btn-primary" type="submit">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 pt-0 pt-lg-4" >
+            <img class="d-inline-block align-middle" src="{% static 'smart/assets/img/login.jpg' %}" width="660" style="height: 395px;margin-top: -13px;border-radius:10px;margin-left:-10px;" alt="Cerdit Cards">
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

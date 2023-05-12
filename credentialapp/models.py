@@ -41,6 +41,7 @@ class user_address(models.Model):
     street = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     district=models.CharField(max_length=200)
+    state=models.CharField(max_length=200,null=True)
     pin=models.CharField(max_length=200)
 
 
@@ -99,9 +100,10 @@ class tbl_Accepted_product(models.Model):
     Servicer=models.ForeignKey(log_user,on_delete=models.CASCADE,verbose_name='Email')
     product=models.ForeignKey(Servicer_Product,on_delete=models.CASCADE)
     status=models.BooleanField(default=0)
+    work_done=models.BooleanField(default=0)
     accepted_date=models.DateTimeField(auto_now_add=True,null=True)
     work_hour=models.IntegerField(null=True)
-    service_bill=models.FileField(upload_to='Service_Bill',null=True,default=0)
+    service_bill=models.FileField(upload_to='Service_Bill',null=True)
 
 
 

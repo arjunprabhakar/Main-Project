@@ -1,0 +1,769 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<div class="bg-light py-4 mb-4 mb-lg-10">
+    <div class="container d-lg-flex justify-content-between align-items-center py-2 py-lg-4">
+        <div class="pe-lg-4 text-center text-lg-start">
+            <h1 class="h3 mb-0">Smart Store</h1>
+        </div>
+        <div class="pt-2 pt-lg-0">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+                    <li class="breadcrumb-item">
+                        <a class="text-nowrap" href="index.html">
+                            <i class="ri-store-2-line"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item text-nowrap"><a href="blog-list.html">Shop</a>
+                    </li>
+                    <li class="breadcrumb-item text-nowrap active" aria-current="page">Product page</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Page Title -->
+
+<!-- Product Card -->
+<div class="container">
+    <div class="shadow-lg rounded-3 p-10 pb-8 mb-10">
+        <div class="row g-5 g-lg-10">
+
+
+
+            <!-- Product gallery -->
+            <div class="col-lg-7">
+                <div class="swiper-gallery">
+                    <div class="swiper swiper-gallery-body product-gallery">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="swiper-gallery-image">
+                                    <img src="{{product.image.url}}" />
+                                </div>
+                            </div>
+                            
+                            {% for i in image %}
+                                <div class="swiper-slide">
+                                    <div class="swiper-gallery-image">
+                                        <img src="{{i.image.url}}"/>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+
+                        </div>
+                    </div>
+                    <div thumbsSlider="" class="swiper swiper-gallery-body product-gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            
+                            {% for i in image %}
+                                <div class="swiper-slide">
+                                    <div class="swiper-gallery-thumb-image">
+                                        <img src="{{i.image.url}}" />
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Product gallery -->
+
+            <!-- Product details -->
+            <div class="col-lg-5">
+                <div class="product-details">
+                    <h5 class="product-title fs-4">
+                        <a href="#">{{product.name}}</a>
+                    </h5>
+
+                    <div class="d-flex align-items-center border-bottom pb-2 mb-2">
+                        <span class="star-rating star-4 fs-6 align-middle"></span>
+                        <span class="d-inline-block fs-sm ms-2">4.7 by 35 Reviews</span>
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="product-price mb-3">
+                        <div class="row g-2">
+                            <div class="col-auto d-flex flex-column justify-content-center">
+                                <span class="text-accent fs-2">₹{{product.selling_price}}</span>
+                            </div>
+                            <div class="col d-flex flex-column justify-content-center">
+                                <del class="text-muted"><span class="fs-sm">₹{{product.original_price}}</span></del>
+                                <span class="text-danger fs-sm mt-n1">Stock : {{product.stock}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Price -->
+
+                    
+
+                    <div class="d-flex align-items-center">
+                      
+
+                        <!-- Button -->
+                        <a class="btn btn-primary d-flex align-items-center justify-content-center w-100" href="{%  url 'add_cart' product.id %}">
+                            <i class="ri-shopping-cart-2-line"></i>
+                            <span class="d-none d-sm-inline ms-2">Add to Cart</span>
+                        </a>
+                        <!-- Button -->
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex pt-2 mb-4">
+                        <div class="w-50 me-3">
+                            <a class="btn btn-secondary d-block w-100" href="{%  url 'add_wishlist' product.id %}">
+                                <span class="d-none d-sm-inline">Add to </span>
+                                Wishlist
+                            </a>
+                        </div>
+                        <div class="w-50">
+                            <button class="btn btn-secondary d-block w-100" type="button">
+                                Compare
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+
+                    <!-- Info List -->
+                    <h5 class="h6 mb-3 py-2 border-bottom"><i class="ri-information-line text-muted fs-lg align-middle me-2"></i>Short description</h5>
+
+                    <p>{{product.description}}</p>
+                    <!-- Info List -->
+                </div>
+            </div>
+            <!-- Product details -->
+        </div>
+    </div>
+</div>
+<!-- Product Card -->
+
+<!-- Product Description -->
+<div class="container">
+    <div class="border border-gray-200 rounded-3 mb-10">
+        <ul class="nav nav-tabs mb-0"role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-selected="true">Description</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab" aria-selected="false">Specifications</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-selected="false">Reviews ({{count}})</button>
+            </li>
+        </ul>
+
+        <div class="p-5 p-md-8">
+            <div class="tab-content">
+                <!-- Description Tab -->
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <h5>Which Apple Watch is right for you?</h5>
+                    <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga doloremque commodi maxime nulla quidem explicabo tempore, laboriosam iusto nemo eos odit ducimus, eveniet et exercitationem earum dicta accusantium esse error?
+                    Odit corrupti tenetur quidem autem molestiae, dolor perferendis et nisi distinctio, vel labore. Esse repellat velit mollitia, voluptatibus doloremque corporis aut suscipit quas voluptate ad illo, voluptates, explicabo nulla et.
+                    Asperiores aperiam est eum ullam.</p>
+
+                    <img src="assets/img/shop/watches.png" alt="" class="img-fluid d-block mx-auto my-5">
+
+                    <p class="mb-0">Aut, dolores. Earum repudiandae ut consectetur. Ipsa minima corrupti nulla asperiores laboriosam vitae dolorum earum consequatur ipsum voluptatibus odio nobis laborum, dignissimos quas, laudantium odit natus mollitia aut, maxime iure.
+                    Facilis, vitae quos eius delectus officiis, aliquid, debitis ad mollitia magni vero corrupti architecto. Iste odit eligendi adipisci, exercitationem, minus at reprehenderit dolor excepturi non sint possimus hic distinctio. Nostrum.
+                    Incidunt ipsam aut at amet optio libero dolorem dolores officiis perferendis error.</p>
+                </div>
+                <!-- Description Tab -->
+                
+                <!-- Specs Tab -->
+                <div class="tab-pane fade" id="specs" role="tabpanel">
+                    <div class="row g-10">
+                        <div class="col-12 col-md-6">
+                            <h6 class="text-accent border-bottom pb-2 mb-2">General specs</h6>
+                            <ul class="list-unstyled fs-sm pb-2">
+                                <li class="d-flex justify-content-between"><span class="text-muted">Model:</span><span>Apple Smartwatch</span></li>
+                                <li class="d-flex justify-content-between"><span class="text-muted">Connection interface:</span><span>Bluetooth v 5.0</span></li>                                            
+                                <li class="d-flex justify-content-between"><span class="text-muted">Gadget OS:</span><span>WatchOS</span></li>
+                            </ul>
+                            <h6 class="text-accent border-bottom pb-2 mb-2">Telephony</h6>
+                            <ul class="list-unstyled fs-sm pb-2">
+                                <li class="d-flex justify-content-between">
+                                    <span class="text-muted">Calls and alerts:</span>
+                                    <div class="d-inline-flex flex-column align-items-end">
+                                        <span>Call notifications</span>
+                                        <span>SMS notifications</span>
+                                        <span>Built-in microphone</span>
+                                        <span>Built-in speaker</span>
+                                        <span>SOS function</span>
+                                    </div>
+                                </li>                                            
+                            </ul>
+                            <h6 class="text-accent border-bottom pb-2 mb-2">Sports and Tourism</h6>
+                            <ul class="list-unstyled fs-sm mb-0">
+                                <li class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted">Measurements:</span>
+                                    <div class="d-inline-flex flex-column align-items-end">
+                                        <span>Heart rate</span>
+                                        <span>ECG</span>
+                                        <span>Footsteps</span>
+                                        <span>Movement speed</span>
+                                        <span>Calories</span>
+                                        <span>Alarm clock</span>
+                                    </div>
+                                </li>                                            
+                                <li class="d-flex justify-content-between">
+                                    <span class="text-muted">Navigation:</span>
+                                    <div class="d-inline-flex flex-column align-items-end">
+                                        <span>GPS</span>
+                                        <span>GLONASS</span>
+                                        <span>Compass</span>
+                                        <span>Altimeter</span>
+                                        <span>Barometer</span>
+                                    </div>
+                                </li>                                            
+                            </ul>                                        
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h6 class="text-accent border-bottom pb-2 mb-2">Display</h6>
+                            <ul class="list-unstyled fs-sm pb-2 mb-0">
+                                <li class="d-flex justify-content-between"><span class="text-muted">Display type:</span><span>Sensor</span></li>
+                                <li class="d-flex justify-content-between"><span class="text-muted">Screen resolution:</span><span>484x396</span></li>
+                                <li class="d-flex justify-content-between"><span class="text-muted">Screen type:</span><span>Glass</span></li>
+                            </ul>
+                            <h6 class="text-accent border-bottom pb-2 mb-2">Hardware</h6>
+                            <ul class="list-unstyled fs-sm pb-2">
+                                <li class="d-flex justify-content-between"><span class="text-muted">RAM:</span><span>1Gb</span></li>
+                                <li class="d-flex justify-content-between mb-2"><span class="text-muted">Storage:</span><span>32Gb</span></li>
+                                <li class="d-flex justify-content-between">
+                                    <span class="text-muted">Additionally:</span>
+                                    <div class="d-inline-flex flex-column align-items-end">
+                                        <span>Player</span>
+                                        <span>Light sensor</span>
+                                        <span>Wi-Fi 4</span>
+                                        <span>NFC</span>
+                                        <span>Accelerometer</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <h6 class="text-accent border-bottom pb-2 mb-2">Battery</h6>
+                            <ul class="list-unstyled fs-sm pb-2">
+                                <li class="d-flex justify-content-between"><span class="text-muted">Battery:</span><span>Li-Ion</span></li>
+                                <li class="d-flex justify-content-between"><span class="text-muted">Battery life:</span><span>18h</span></li>
+                            </ul>
+                            <h6 class="text-accent border-bottom pb-2 mb-2">Dimensions</h6>
+                            <ul class="list-unstyled fs-sm pb-2">
+                                <li class="d-flex justify-content-between"><span class="text-muted">Dimensions:</span><span>45x38x11mm</span></li>
+                                <li class="d-flex justify-content-between"><span class="text-muted">Weight:</span><span>39g</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Specs Tab -->
+
+               
+               
+               
+               
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="row g-4 g-md-10">
+                        <div class="col-12 col-md-7">
+
+
+
+                            {% for i in review %}
+                                <!-- Comment -->
+                                <div class="card shadow border-0 mb-5">
+                                    <div class="card-body">
+                                        <div class="row g-0">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <a class="blog-article-meta-link" href="#" style="font-size:20px;font-weight:bold;">
+                                                        <i class="ri-user-line" ></i>
+                                                </a>
+                                                <!-- Avatar -->
+                                            </div>
+                                            <div class="col">
+                                                <!-- Name -->
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h6 class="mb-0 fs-base" style="margin-left:5px;margin-top: 5px;">{{i.user}}</h6>
+                                                    <span class="star-rating star-{{i.rating}}"></span>
+                                                </div>
+                                                <!-- Name -->
+                                
+                                                <!-- Comment -->
+                                                <p class="fs-md mb-2">{{i.review}}</p>
+                                                <!-- Comment -->
+                                
+                                                <!-- Meta -->
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <!-- Date -->
+                                                    <a href="#" class="d-flex align-items-center blog-article-meta-link"><i class="ri-calendar-line me-2"></i>{{i.date|date:"j M, Y"}}</a>
+                                                    <!-- Date -->
+                                
+                                                    <!-- Actions -->
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="likes me-3">
+                                                        
+                                                        </span>
+                                                        <span class="dislikes">
+                                                        
+                                                        </span>
+                                                    </div>
+                                                    <!-- Actions -->
+                                                </div>
+                                                <!-- Meta -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Comment -->
+                            {% endfor %}
+
+
+
+                            
+                        </div>
+
+                        <div class="col-12 col-md-5">
+                            <div class="card bg-light border-gray-200">
+                                <div class="card-body">
+                                    <h4 class="mb-2">Add review</h4>
+                                    <form class="needs-validation" method="post" novalidate action="{% url 'review' product.id %}">
+								        {% csrf_token %}
+                                        <div class="mb-4">
+                                            <label class="form-label" for="review-rating">Your rating</label>
+                                            <select class="form-select" required id="review-rating" name="rate">
+                                                <option value="5">5 stars</option>
+                                                <option value="4">4 stars</option>
+                                                <option value="3">3 stars</option>
+                                                <option value="2">2 stars</option>
+                                                <option value="1">1 star</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label" for="review-text">Review<span>*</span></label>
+                                            <textarea class="form-control" name="message" rows="5" required id="review-text"></textarea>
+                                            <div class="invalid-feedback">Please leave your review.</div>
+                                        </div>                                                    
+                                        <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Reviews Tab -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Description -->
+
+<!-- Slider -->
+<div class="container mb-4 mb-lg-10">
+    <!-- Heading -->
+    <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom border-gray-300 pb-4 mb-4">
+        <h2 class="h3 mb-0 me-2">Recently viewed</h2>
+        <div class="ms-0">
+            <ul class="nav">
+                <li class="nav-item me-3">                                
+                    <button class="btn btn-link recently-swiper-button-prev nav-link link-info link-hover-primary p-0" type="button" title="Previous">
+                        <i class="ri-arrow-left-s-line fs-4"></i>
+                    </button>
+                </li>
+                <li class="nav-item">                                
+                    <button class="btn btn-link recently-swiper-button-next nav-link link-info link-hover-primary p-0" type="button" title="Next">
+                        <i class="ri-arrow-right-s-line fs-4"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Heading -->
+
+    <!-- Slider -->
+    <div class="recently-swiper m-n4">
+        <div class="swiper recently-swiper-body p-4">
+            <div class="swiper-wrapper">
+                <!-- Swiper Slide -->
+                <div class="swiper-slide">
+                    <div class="card card-product h-100">
+                        <!-- Badges -->
+                        <div class="product-badges">
+                            <span class="badge bg-danger">15%</span>
+                            <span class="badge bg-info">New</span>
+                        </div>
+                        <!-- Badges -->
+
+                        <!-- Buttons -->
+                        <div class="product-buttons">
+                            <button class="btn-product btn-wishlist" type="button" data-bs-toggle="button" autocomplete="off" title="Add to wishlist"><i class="ri-heart-line"></i></button>
+                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                <i class="ri-repeat-line"></i>
+                            </a>
+                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                        </div>
+                        <!-- Buttons -->
+
+                        <!-- Preview Image -->
+                        <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="#">
+                            <img class="img-fluid" src="assets/img/product-card/product-redmi-note.png" alt="Product">
+                        </a>
+                        <!-- Preview Image -->
+
+                        <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 rounded-3 py-4">
+                            <!-- Product Category -->
+                            <a class="product-category d-block link-dark fs-sm pb-1" href="#">Smartphones</a>
+                            <!-- Product Category -->
+
+                            <!-- Product Title -->
+                            <h3 class="product-title flex-grow-1">
+                                <a href="#">Redmi Note 10S 128GB Pebble White</a>
+                            </h3>
+                            <!-- Product Title -->
+
+                            <!-- Star Rating -->
+                            <span class="star-rating star-8"></span>
+                            <!-- Star Rating -->
+
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger d-block mb-n2 fs-5">$349
+                                    </span>
+
+                                    <del class="text-muted"><small>$499</small></del>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Button -->
+                                <button class="btn btn-sm btn-outline-primary py-1 px-3" title="Add to cart" type="button"><i class="ri-shopping-cart-line fs-5"></i></button>
+                                <!-- Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swiper Slide -->
+
+                <!-- Swiper Slide -->
+                <div class="swiper-slide">
+                    <div class="card card-product h-100">
+                        <!-- Badges -->
+                        <div class="product-badges">
+                            <span class="badge bg-danger">16%</span>
+                            <span class="badge bg-success">Top</span>
+                        </div>
+                        <!-- Badges -->
+
+                        <!-- Buttons -->
+                        <div class="product-buttons">
+                            <button class="btn-product btn-wishlist" type="button" data-bs-toggle="button" autocomplete="off" title="Add to wishlist"><i class="ri-heart-line"></i></button>
+                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                <i class="ri-repeat-line"></i>
+                            </a>
+                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                        </div>
+                        <!-- Buttons -->
+
+                        <!-- Preview Image -->
+                        <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="#">
+                            <img class="img-fluid" src="assets/img/product-card/product-dell-latitude.png" alt="Product">
+                        </a>
+                        <!-- Preview Image -->
+
+                        <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 rounded-3 py-4">
+                            <!-- Product Category -->
+                            <a class="product-category d-block link-dark fs-sm pb-1" href="#">Notebooks</a>
+                            <!-- Product Category -->
+
+                            <!-- Product Title -->
+                            <h3 class="product-title flex-grow-1">
+                                <a href="#">Dell Latitude 5420 Ultrabook</a>
+                            </h3>
+                            <!-- Product Title -->
+
+                            <!-- Star Rating -->
+                            <span class="star-rating star-8"></span>
+                            <!-- Star Rating -->
+
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger d-block mb-n2 fs-5">$1299
+                                    </span>
+
+                                    <del class="text-muted"><small>$1499</small></del>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Button -->
+                                <button class="btn btn-sm btn-outline-primary py-1 px-3" title="Add to cart" type="button"><i class="ri-shopping-cart-line fs-5"></i></button>
+                                <!-- Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swiper Slide -->
+
+                <!-- Swiper Slide -->
+                <div class="swiper-slide">
+                    <div class="card card-product h-100">
+                        <!-- Badges -->
+                        <div class="product-badges">
+                            <span class="badge bg-danger">8%</span>
+                            <span class="badge bg-success">Top</span>
+                        </div>
+                        <!-- Badges -->
+
+                        <!-- Buttons -->
+                        <div class="product-buttons">
+                            <button class="btn-product btn-wishlist" type="button" data-bs-toggle="button" autocomplete="off" title="Add to wishlist"><i class="ri-heart-line"></i></button>
+                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                <i class="ri-repeat-line"></i>
+                            </a>
+                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                        </div>
+                        <!-- Buttons -->
+
+                        <!-- Preview Image -->
+                        <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="#">
+                            <img class="img-fluid" src="assets/img/product-card/product-samsung-vr.png" alt="Product">
+                        </a>
+                        <!-- Preview Image -->
+
+                        <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 rounded-3 py-4">
+                            <!-- Product Category -->
+                            <a class="product-category d-block link-dark fs-sm pb-1" href="#">VR Headsets</a>
+                            <!-- Product Category -->
+
+                            <!-- Product Title -->
+                            <h3 class="product-title flex-grow-1">
+                                <a href="#">Samsung Gear VR Headset</a>
+                            </h3>
+                            <!-- Product Title -->
+
+                            <!-- Star Rating -->
+                            <span class="star-rating star-8"></span>
+                            <!-- Star Rating -->
+
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger d-block mb-n2 fs-5">$399
+                                    </span>
+
+                                    <del class="text-muted"><small>$449</small></del>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Button -->
+                                <button class="btn btn-sm btn-outline-primary py-1 px-3" title="Add to cart" type="button"><i class="ri-shopping-cart-line fs-5"></i></button>
+                                <!-- Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swiper Slide -->
+
+                <!-- Swiper Slide -->
+                <div class="swiper-slide">
+                    <div class="card card-product h-100">
+                        <!-- Badges -->
+                        <div class="product-badges">
+                            <span class="badge bg-danger">13%</span>
+                            <span class="badge bg-info">New</span>
+                        </div>
+                        <!-- Badges -->
+
+                        <!-- Buttons -->
+                        <div class="product-buttons">
+                            <button class="btn-product btn-wishlist" type="button" data-bs-toggle="button" autocomplete="off" title="Add to wishlist"><i class="ri-heart-line"></i></button>
+                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                <i class="ri-repeat-line"></i>
+                            </a>
+                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                        </div>
+                        <!-- Buttons -->
+
+                        <!-- Preview Image -->
+                        <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="#">
+                            <img class="img-fluid" src="assets/img/product-card/product-xiaomi-tracker.png" alt="Product">
+                        </a>
+                        <!-- Preview Image -->
+
+                        <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 rounded-3 py-4">
+                            <!-- Product Category -->
+                            <a class="product-category d-block link-dark fs-sm pb-1" href="#">Fitness Trackers</a>
+                            <!-- Product Category -->
+
+                            <!-- Product Title -->
+                            <h3 class="product-title flex-grow-1">
+                                <a href="#">Xiaomi Redmi Smart Band Pro Black</a>
+                            </h3>
+                            <!-- Product Title -->
+
+                            <!-- Star Rating -->
+                            <span class="star-rating star-8"></span>
+                            <!-- Star Rating -->
+
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger d-block mb-n2 fs-5">$49
+                                    </span>
+
+                                    <del class="text-muted"><small>$99</small></del>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Button -->
+                                <button class="btn btn-sm btn-outline-primary py-1 px-3" title="Add to cart" type="button"><i class="ri-shopping-cart-line fs-5"></i></button>
+                                <!-- Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swiper Slide -->
+
+                <!-- Swiper Slide -->
+                <div class="swiper-slide">
+                    <div class="card card-product h-100">
+                        <!-- Badges -->
+                        <div class="product-badges">
+                            <span class="badge bg-danger">20%</span>
+                            <span class="badge bg-success">Top</span>
+                        </div>
+                        <!-- Badges -->
+
+                        <!-- Buttons -->
+                        <div class="product-buttons">
+                            <button class="btn-product btn-wishlist" type="button" data-bs-toggle="button" autocomplete="off" title="Add to wishlist"><i class="ri-heart-line"></i></button>
+                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                <i class="ri-repeat-line"></i>
+                            </a>
+                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                        </div>
+                        <!-- Buttons -->
+
+                        <!-- Preview Image -->
+                        <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="#">
+                            <img class="img-fluid" src="assets/img/product-card/product-kardon-speaker.png" alt="Product">
+                        </a>
+                        <!-- Preview Image -->
+
+                        <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 rounded-3 py-4">
+                            <!-- Product Category -->
+                            <a class="product-category d-block link-dark fs-sm pb-1" href="#">Speakers</a>
+                            <!-- Product Category -->
+
+                            <!-- Product Title -->
+                            <h3 class="product-title flex-grow-1">
+                                <a href="#">Harman Kardon Onyx Studio 7 Blue</a>
+                            </h3>
+                            <!-- Product Title -->
+
+                            <!-- Star Rating -->
+                            <span class="star-rating star-8"></span>
+                            <!-- Star Rating -->
+
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger d-block mb-n2 fs-5">$149
+                                    </span>
+
+                                    <del class="text-muted"><small>$199</small></del>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Button -->
+                                <button class="btn btn-sm btn-outline-primary py-1 px-3" title="Add to cart" type="button"><i class="ri-shopping-cart-line fs-5"></i></button>
+                                <!-- Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swiper Slide -->
+
+                <!-- Swiper Slide -->
+                <div class="swiper-slide">
+                    <div class="card card-product h-100">
+                        <!-- Badges -->
+                        <div class="product-badges">
+                            <span class="badge bg-danger">15%</span>
+                            <span class="badge bg-info">New</span>
+                        </div>
+                        <!-- Badges -->
+
+                        <!-- Buttons -->
+                        <div class="product-buttons">
+                            <button class="btn-product btn-wishlist" type="button" data-bs-toggle="button" autocomplete="off" title="Add to wishlist"><i class="ri-heart-line"></i></button>
+                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                <i class="ri-repeat-line"></i>
+                            </a>
+                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                        </div>
+                        <!-- Buttons -->
+
+                        <!-- Preview Image -->
+                        <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="#">
+                            <img class="img-fluid" src="assets/img/product-card/product-beats-earphones.png" alt="Product">
+                        </a>
+                        <!-- Preview Image -->
+
+                        <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 rounded-3 py-4">
+                            <!-- Product Category -->
+                            <a class="product-category d-block link-dark fs-sm pb-1" href="#">Earphones</a>
+                            <!-- Product Category -->
+
+                            <!-- Product Title -->
+                            <h3 class="product-title flex-grow-1">
+                                <a href="#">Beats Studio Buds Earphones White</a>
+                            </h3>
+                            <!-- Product Title -->
+
+                            <!-- Star Rating -->
+                            <span class="star-rating star-8"></span>
+                            <!-- Star Rating -->
+
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger d-block mb-n2 fs-5">$249
+                                    </span>
+
+                                    <del class="text-muted"><small>$299</small></del>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Button -->
+                                <button class="btn btn-sm btn-outline-primary py-1 px-3" title="Add to cart" type="button"><i class="ri-shopping-cart-line fs-5"></i></button>
+                                <!-- Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swiper Slide -->
+            </div>
+        </div>
+    </div>
+    <!-- Slider -->
+</div>
+</main>
+<!-- Slider -->
+
+{% endblock %}

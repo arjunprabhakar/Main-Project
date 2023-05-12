@@ -187,6 +187,7 @@
 											{% endif %}
 											<li class="nav-item">
 												<a
+													id="c_pass"
 													class="nav-link "
 													data-toggle="tab"
 													href="#tasks"
@@ -335,37 +336,44 @@
 											<div class="tab-pane fade" id="tasks" role="tabpanel">
 												<div class="pd-20 profile-task-wrap">
 													<div class="container pd-0">
-														<!-- Change Password start -->
-														<div class="form-group">
-															<label>Old Password</label>
-															<input
-																class="form-control form-control-lg"
-																type="password"
-																name="oldpass"
-															/>
-														</div>
-														<div class="form-group">
-															<label>New Password</label>
-															<input
-																class="form-control form-control-lg"
-																type="password"
-																name="newpass"
-															/>
-														</div>
-														<div class="form-group">
-															<label>Confirm Password</label>
-															<input
-																class="form-control form-control-lg"
-																type="password"
-															/>
-														</div>
-														<div class="form-group mb-0">
-															<input
-																type="submit"
-																class="btn btn-primary"
-																value="Update"
-															/>
-														</div>
+														<form method="post" action="{% url 'servicer_change_password' %}">														<!-- Change Password start -->
+														{% csrf_token %}
+															<div class="form-group">
+																<label>Old Password</label>
+																<input
+																	class="form-control form-control-lg"
+																	type="password"
+																	name="oldpass"
+																	id="oldpasss"
+																/>
+															</div>
+															<div class="form-group">
+																<label>New Password</label>
+																<input
+																	class="form-control form-control-lg"
+																	type="password"
+																	name="newpass"
+																	id="newpasss"
+																/>
+															</div>
+															<div class="form-group">
+																<label>Confirm Password</label>
+																<input
+																	class="form-control form-control-lg"
+																	type="password"
+																	id="cpasss"
+																/>
+															</div>
+															<div class="form-group mb-0">
+																<input
+																	type="submit"
+																	class="btn btn-primary"
+																	value="Update"
+																	id="passsubmitt"
+																/>
+															</div>
+														</form>
+
 														
 														<!-- Change Password End -->
 													</div>
@@ -394,6 +402,7 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="fname"
+																		id="first_name"
 																	/>
 																</div>
 																<div class="form-group">
@@ -402,12 +411,14 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="lname"
+																		id="last_name"
 																		
 																	/>
 																</div>
 																<div class="form-group">
 																	<label>Email</label>
 																	<input
+
 																		class="form-control form-control-lg"
 																		type="tel"
 																		value="{{email}}"
@@ -420,6 +431,7 @@
 																		class="form-control form-control-lg"
 																		type="tel"
 																		name="phone"
+																		id="phone_number"
 																	/>
 																</div>
 																
@@ -439,6 +451,7 @@
 																		data-style="btn-outline-secondary btn-lg"
 																		title="Not Chosen"
 																		name="category"
+																		id="select_category"
 																	>
 																	
 																	{% for i in category %}
@@ -453,6 +466,7 @@
 																		type="submit"
 																		class="btn btn-primary"
 																		value="Save"
+																		id="save_data"
 																	/>
 																</div>
 															</li>
@@ -466,6 +480,7 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="hname"
+																		id="house_name"
 																	/>
 																</div>
 																<div class="form-group">
@@ -474,6 +489,7 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="street"
+																		id="street_id"
 																	/>
 																</div>
 																<div class="form-group">
@@ -482,6 +498,7 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="city"
+																		id="city_id"
 																	/>
 																</div>
 																<div class="form-group">
@@ -490,6 +507,7 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="pin"
+																		id="pin_id"
 																	/>
 																</div>
 																<div class="form-group">
@@ -499,6 +517,7 @@
 																		data-style="btn-outline-secondary btn-lg"
 																		title="Not Chosen"
 																		name="district"
+																		id="district_id"
 																	>
 																		<option>Thrissur</option>
 																		<option>Kozhikode</option>
@@ -536,6 +555,7 @@
 																		type="text"
 																		name="fname"
 																		value="{{user.fname}}"
+																		id="first_name"
 																	/>
 																</div>
 																<div class="form-group">
@@ -544,6 +564,7 @@
 																		class="form-control form-control-lg"
 																		type="text"
 																		name="lname"
+																		id="last_name"
 																		value="{{user.lname}}"
 
 																		
@@ -589,6 +610,7 @@
 																		type="submit"
 																		class="btn btn-primary"
 																		value="Update"
+																		id="edit_submitt"
 																	/>
 																</div>
 															</li>

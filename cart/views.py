@@ -72,7 +72,7 @@ def view_cart(request):
             cart_count=cart_count+ i.product_qty
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
-        return render(request,"cart.html",{'cart_count':cart_count,'cart':cart,'email':email,'total':total,'category':category,'subcategory':subcategory})
+        return render(request,"Customer/cart.html",{'cart_count':cart_count,'cart':cart,'email':email,'total':total,'category':category,'subcategory':subcategory})
     return redirect(login)
     
 # Remove Items From Cart
@@ -108,7 +108,7 @@ def view_wishlist(request):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,"wishlist.html",{'cart_count':cart_count,'carts':carts,'cart':cart,'email':email,'category':category,'subcategory':subcategory})
+        return render(request,"Customer/wishlist.html",{'cart_count':cart_count,'carts':carts,'cart':cart,'email':email,'category':category,'subcategory':subcategory})
     return redirect(login)
 
 # Remove Items From Wishlist
@@ -149,7 +149,7 @@ def checkout(request):
         if order_status == 'created':
             payment = Payment(person=users,amount=total,razorpay_order_id = order_id,razorpay_payment_status = order_status)
         payment.save()
-        return render(request,"checkout.html",{'stotal':stotal,'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
+        return render(request,"Customer/checkout.html",{'stotal':stotal,'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
     return redirect(login)
 
 def payment_done(request):
@@ -181,7 +181,7 @@ def payment_success(request):
         order=OrderPlaced.objects.filter(user_id=email)
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
-        return render(request,"Payment_Success.html",{'email':email,'address':address,'order':order,'category':category,'subcategory':subcategory})
+        return render(request,"Customer/PaymentSuccess.html",{'email':email,'address':address,'order':order,'category':category,'subcategory':subcategory})
     else:
         return redirect(login)
     

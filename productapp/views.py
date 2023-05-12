@@ -59,7 +59,7 @@ def singleproduct(request,id):
               'review':review,
               'image':image
               }
-        return render(request,"single-product.html",data)
+        return render(request,"Customer/singleproduct.html",data)
 
 
 

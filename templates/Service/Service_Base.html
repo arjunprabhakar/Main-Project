@@ -124,16 +124,18 @@
 							href="#"
 							role="button"
 							data-toggle="dropdown"
+							id="users_account"
 						>
 							<span class="user-icon">
 								<img src="{% static 'vendors/images/photo1.jpg' %}" alt="" />
 							</span>
 							<span class="user-name">{{email}}</span>
+							
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 						>
-							<a class="dropdown-item" href="{% url 'Service_Profile' %}"
+							<a id="users_prof" class="dropdown-item" href="{% url 'Service_Profile' %}"
 								><i class="dw dw-user1"></i> Profile</a
 							>
 							<!-- <a class="dropdown-item" href="profile.html"
@@ -336,17 +338,17 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 						<li class="dropdown">
-							<a  class="dropdown-toggle">
+							<a  class="dropdown-toggle" id="accountt">
 								<span class="micon bi bi-person"></span
 								><span class="mtext">Account</span>
 							</a>
 							<ul class="submenu">
-								<li ><a href="{% url 'Service_Profile' %}">Profile</a></li>
+								<li ><a id="profilee" href="{% url 'Service_Profile' %}">Profile</a></li>
 							</ul>					
 						</li>
                         
 						<!-- // for leave -->
-						<li class="dropdown">
+						<!-- <li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
 								<span class="micon bi bi-calendar4-week"></span
 								><span class="mtext">Leave</span>
@@ -355,7 +357,7 @@
 								<li><a href="{% url 'Apply_Leave' %}">Apply Leave</a></li>
 								<li><a href="#">View Live Status</a></li>
 							</ul>
-						</li>
+						</li> -->
 
 
 						<li class="dropdown">
@@ -366,7 +368,7 @@
 							<ul class="submenu">
 								<li><a href="{% url 'Service_Product' %}">Active Work</a></li>
 								<li><a href="#">New Work</a></li>
-								<li><a href="#">Service history</a></li>
+								<li><a href="{% url 'service_history' %}">Service history</a></li>
 							</ul>
 						</li>				
 					</ul>

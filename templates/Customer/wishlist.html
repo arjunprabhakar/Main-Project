@@ -1,0 +1,88 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+            <!-- Page Title -->
+            <div class="bg-light py-4 mb-4 mb-lg-10">
+                <div class="container d-lg-flex justify-content-between align-items-center py-2 py-lg-4">
+                    <div class="pe-lg-4 text-center text-lg-start">
+                        <h1 class="h3 mb-0">Wishlist</h1>
+                    </div>
+                    <div class="pt-2 pt-lg-0">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+                                <li class="breadcrumb-item">
+                                    <a class="text-nowrap" href="index.html">
+                                        <i class="ri-store-2-line"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Wishlist</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Title -->
+
+            <!-- Content -->
+            <div class="container mb-4 mb-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Title -->
+                        <h6 class="border-bottom pb-4 mb-4">Products added to wishlist</h6>
+                        <!-- Title -->
+
+
+                    {% if not carts %}
+                        <div class="d-md-flex align-items-center justify-content-between my-4 pe-4 pb-4 border-bottom">
+                            <h3 style="margin-left:40%;" >
+                                Cart is Empty
+                            </h3>
+                        </div>
+                    {% else %}
+                    {%for cart in carts %}
+                    {% if cart.user_id == email %}
+
+                        <!-- Item -->
+                        <div class="d-md-flex align-items-center justify-content-between my-4 pe-4 pb-4 border-bottom">
+                            <div class="d-md-flex align-items-center text-center text-md-start">
+                                <a class="d-inline-block flex-shrink-0 mx-auto me-md-4" href="{%  url 'singleproduct' cart.product.id %}">
+                                    <img src="{{cart.product.image.url}}" width="150" style="height:90px;" alt="Product">
+                                </a>
+                                <div class="py-2">
+                                    <h3 class="product-title fs-base mb-3">
+                                        <a href="#">{{ cart.product.name }}  ({{ cart.product.subcategory.name }})</a>
+                                    </h3>
+                                 
+                                    <span class="star-rating star-8 align-middle"></span>
+                                    <a href="#" class="nav-link-base fs-sm">Reviews</a>
+                                </div>
+                            </div>
+                            <div class="pt-2 pt-md-0 ps-md-4 mx-auto mx-md-0 text-center text-md-end text-nowrap">                                
+                                <div class="fs-lg text-accent mb-2">₹{{ cart.product.selling_price }}</div>
+                                <a href="{%  url 'add_cart' cart.product.id %}" type="button" class="btn btn-sm btn-primary">Add to Cart</a>
+                                <a href="{%  url 'de_wishlist' cart.id %}" type="button" class="btn btn-sm btn-primary">Remove</a>
+                            </div>
+                        </div>
+                        <!-- Item -->
+
+                        {% endif %}
+                            
+                        {% endfor %}
+
+                    {% endif %}
+                    <a style="margin-left: 40%;" href="{%  url 'home'%}" type="button" class="btn btn-sm btn-success">Continue Shopping</a>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </main>
+        <!-- Page -->
+
+{% endblock %}
+        

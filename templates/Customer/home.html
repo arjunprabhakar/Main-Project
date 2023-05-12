@@ -1,0 +1,551 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+            <!-- Hero Section -->
+            <section class="hero py-3 py-lg-4">
+                <div class="container">
+                    <div class="hero-swiper">
+                        <div class="swiper hero-swiper-body">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="hero-grid">
+                                        <div class="hero-grid-item hero-grid-item-md">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-md-notebooks.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-cameras.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item hero-grid-item-lg d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-lg-smartphones.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-processors.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-power.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-headphones.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-flash.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-controllers.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="hero-grid">
+                                        <div class="hero-grid-item hero-grid-item-md">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-md-smartphones.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-mousepads.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item hero-grid-item-lg d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-lg-ultrabooks.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-games.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-bag.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-monitors.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-powerbanks.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-pc.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="hero-grid">
+                                        <div class="hero-grid-item hero-grid-item-md">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-md-tablets.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-mobo.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item hero-grid-item-lg d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-lg-consoles.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-cases.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-mouse.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-speakers.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-cooler.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                        <div class="hero-grid-item d-none d-lg-block">
+                                            <a href="#"><img src="{% static 'smart/assets/img/product-grid/card-sm-cables.png' %}" alt="" class="img-cover w-100 h-100"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-swiper-button hero-swiper-button-prev"></div>
+                        <div class="hero-swiper-button hero-swiper-button-next"></div>
+                        <div class="hero-swiper-pagination">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Hero Section -->
+
+            <!-- Benefits -->
+            <div class="benefits">
+                <div class="container my-10">
+                    <div class="row g-4 g-lg-0 gx-lg-4">
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="d-flex align-items-start">
+                                <span class="icon-shipping-boat text-accent me-4" style="font-size:3rem;"></span>
+                                <div class="d-flex flex-column">
+                                    <h6 class="mt-1 mb-1 fs-md">Free Shipping</h6>
+                                    <span class="text-muted fs-ms">Free shipping on orders over 150$</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="d-flex align-items-start">
+                                <span class="icon-support-24 text-accent me-4" style="font-size:3rem;"></span>
+                                <div class="d-flex flex-column">
+                                    <h6 class="mt-1 mb-1 fs-md">Online Support</h6>
+                                    <span class="text-muted fs-ms">Online support 24 hours a day</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="d-flex align-items-start">
+                                <span class="icon-coupon text-accent me-4" style="font-size:3rem;"></span>
+                                <div class="d-flex flex-column">
+                                    <h6 class="mt-1 mb-1 fs-md">Member Discount</h6>
+                                    <span class="text-muted fs-ms">Discount for regular customers</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="d-flex align-items-start">
+                                <span class="icon-money-return text-accent me-4" style="font-size:3rem;"></span>
+                                <div class="d-flex flex-column">
+                                    <h6 class="mt-1 mb-1 fs-md">Money Return</h6>
+                                    <span class="text-muted fs-ms">Moneyback guarantee under 14 days</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Benefits -->
+
+            <!-- Product Cards -->
+            <div class="container pt-0 pt-sm-5">
+                <!-- Heading -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom border-gray-300 pb-4 mb-4">
+                    <h2 class="h3 mb-0 me-2">Trending products</h2>
+                    <div class="ms-n4"><a class="btn btn-link link-info link-hover-primary d-flex align-items-center" href="#">View All<i class="ri-arrow-right-line ms-1"></i></a></div>
+                </div>
+                <!-- Heading -->
+
+                <!-- Product Cards -->
+                <div class="row pt-2 mx-n2">
+
+
+
+
+
+                    {% for i in product %}
+                    
+                    <!-- Product Card -->
+                    <div class="col-sm-6 col-md-4 col-lg-3 px-2 mb-4">
+                        <div class="card card-product h-100">
+                            <!-- Badges -->
+                            <div class="product-badges">
+                                <span class="badge bg-danger">{{i.percentage}}%</span>
+                                <span class="badge bg-success">Trending</span>
+                            </div>
+                            <!-- Badges -->
+
+                            <!-- Buttons -->
+                            <div class="product-buttons">
+                               <a class="btn-product btn-wishlist" href="{%  url 'add_wishlist' i.id %}"> <i class="ri-heart-line"></i></a>
+                                <a class="btn-product btn-compare" href="#" title="Compare product">
+                                    <i class="ri-repeat-line"></i>
+                                </a>
+                                <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                    <i class="ri-eye-line"></i>
+                                </a>
+                            </div>
+                            <!-- Buttons -->
+
+                            <!-- Preview Image -->
+                            <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="{%  url 'singleproduct' i.id %}">
+                                <img class="img-fluid" style="height: 250px;" src="{{i.image.url}}" alt="Product">
+                            </a>
+                            <!-- Preview Image -->
+
+                            <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 py-3">
+                                <!-- Product Category -->
+                                <a class="product-category d-block link-dark fs-sm pb-1" href="#">{{i.category}}</a>
+                                <!-- Product Category -->
+
+                                <!-- Product Title -->
+                                <h3 class="product-title flex-grow-1">
+                                    <a href="#">{{i.name}}</a>
+                                </h3>
+                                <!-- Product Title -->
+
+                                <!-- Star Rating -->
+                                <span class="star-rating star-8"></span>
+                                <!-- Star Rating -->
+
+                                <!-- Product Price -->
+                                <div class="product-price">
+                                    <span class="text-danger fs-5">₹{{i.selling_price}}<del class="text-muted ms-1"><small>₹{{i.original_price}}</small></del>
+                                    </span>
+                                </div>
+                                <!-- Product Price -->
+
+                                <!-- Product Meta -->
+                                <span class="product-meta text-muted fs-xs">
+                                     <span>{{i.stock}}</span> left in stock
+                                </span>
+                                <!-- Product Meta -->
+                            </div>
+
+                            <!-- Product Addon -->
+                            <div class="card-body product-addon">
+                                <!-- Button -->
+                                <a href="{%  url 'add_cart' i.id %}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center w-100" ><i class="ri-shopping-cart-2-line me-2"></i>Add to Cart</a>
+                                <!-- Button -->
+
+                                <hr class="my-4 d-none d-lg-block">
+
+                                <!-- Product Details -->
+                                <div class="product-details d-none d-lg-block fs-sm">
+                                    <ul class="m-0 ps-4">
+                                        <li>Screen: 5.8"</li>
+                                        <li>Hardware: 6 cores, 4 Gb</li>
+                                        <li>OS: Android OS</li>
+                                    </ul>
+                                </div>
+                                <!-- Product Details -->
+                            </div>
+                            <!-- Product Addon -->
+                        </div>
+                        <hr class="d-sm-none">
+                    </div>
+                    <!-- Product Card -->
+
+                    {% endfor %}
+
+                    
+                    
+                    
+                </div>
+                <!-- Product Cards -->
+            </div>
+            <!-- Product Cards -->
+
+            <!-- Banner -->
+            <div class="container py-4 py-lg-10">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-sm-flex justify-content-between align-items-center bg-light overflow-hidden border rounded-1">
+                            <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
+                                <h6 class="fs-xs text-info text-uppercase mb-2">Weekend Discount</h6>
+                                <h3 class="fw-medium mb-2">New iPad Pro Collection</h3>
+                                <h6 class="fs-base fw-normal text-nowrap mb-4">Don't miss the great offer.</h6>
+                                <a class="btn btn-primary btn-shadow" href="#">Shop Now</a>
+                            </div>
+                            <img class="d-block ms-auto" src="{% static 'smart/assets/img/shop/banner.png' %}" alt="Shop Converse">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Banner -->
+
+            <!-- Brand Slider -->
+            <div class="barnd-logos py-4 py-lg-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="barnd-swiper">
+                            <div class="swiper brand-swiper-body">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/04.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/05.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/03.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/06.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/02.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/01.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/07.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div><a class="d-block bg-white py-4 py-sm-3 px-2" href="#">
+                                            <img class="d-block mx-auto" src="{% static 'smart/assets/img/shop/brands/08.png' %}" style="width: 165px;" alt="Brand Logo">
+                                        </a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Brand Slider -->
+
+            <!-- Product Widgets -->
+            <section class="container py-4 py-lg-10">
+                <div class="row">
+                    <!-- Featured Products -->
+                    <div class="col-md-4 col-sm-6 mb-2 py-3">
+                        <div class="widget">
+                            <h3 class="widget-title">Featured Products</h3>
+
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/01.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Wireless Beats Headphones</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$349</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/03.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Fitbit Activity Tracker</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$159</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/02.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Samsung Note 20</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$849</span>
+                                    </div>
+                                </div>
+                            </div>
+                                                        
+                            <div class="d-flex align-items-center py-2">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/04.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Apple TV 4k</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$299</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a class="link-info link-hover-primary fs-sm d-flex align-items-center ms-1" href="#">View All<i class="ri-arrow-right-line fs-sm ms-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Featured Products -->
+            
+                    <!-- Best-Selling Products -->
+                    <div class="col-md-4 col-sm-6 mb-2 py-3">
+                        <div class="widget">
+                            <h3 class="widget-title">Best-Selling Products</h3>
+
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/05.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">iPhone 12 Purple 64Gb</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$899</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/06.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Noise Cancelling Headphones</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$259</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/07.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Apple iMac 2021</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$259</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/08.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Huawei Freebuds Pro</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$349</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a class="link-info link-hover-primary fs-sm d-flex align-items-center ms-1" href="#">View All<i class="ri-arrow-right-line fs-sm ms-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Best-Selling Products -->
+                                
+                    <!-- Top Rated Products -->
+                    <div class="col-md-4 col-sm-6 mb-2 py-3">
+                        <div class="widget">
+                            <h3 class="widget-title">Top Rated Products</h3>
+
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/09.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Smart Watch 7</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$349</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/10.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Xiaomi Redmi 10</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$449</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2 border-bottom">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/11.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">Wireless Game Controller</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$99</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center py-2">
+                                <a class="d-block flex-shrink-0" href="#">
+                                    <img src="{% static 'smart/assets/img/shop/widgets/12.png' %}" width="64" alt="Product">
+                                </a>
+                                <div class="ps-2">
+                                    <h6 class="widget-product-title mb-1">
+                                        <a href="#">AirPods Wireless Headphones</a>
+                                    </h6>
+                                    <div class="widget-product-meta">
+                                        <span class="text-accent">$249</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a class="link-info link-hover-primary fs-sm d-flex align-items-center ms-1" href="#">View All<i class="ri-arrow-right-line fs-sm ms-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Top Rated Products -->
+                </div>
+            </section>
+            <!-- Product Widgets -->
+        </main>
+        <!-- Page -->
+
+{% endblock %}
+        
