@@ -1,0 +1,851 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+            <!-- Page Title -->
+            <div class="bg-light py-4 mb-4 mb-lg-10">
+                <div class="container d-lg-flex justify-content-between align-items-center py-2 py-lg-4">
+                    <div class="pe-lg-4 text-center text-lg-start">
+                        <h1 class="h3 mb-0">{{sub_category.category.name}}</h1>
+                    </div>
+                    <div class="pt-2 pt-lg-0">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+                                <li class="breadcrumb-item">
+                                    <a class="text-nowrap" href="index.html">
+                                        <i class="ri-store-2-line"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap"><a href="blog-list.html">Shop</a>
+                                </li>
+                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Category left sidebar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Title -->
+
+            <!-- Product Category -->
+            <div class="container">
+                <div class="row g-lg-4">
+                    <!-- Sidebar -->
+                    <section class="col-lg-4">
+                        <div class="offcanvas offcanvas-collapse offcanvas-start rounded-3 shadow" id="category-sidebar" style="max-width: 23rem;">
+                            <div class="offcanvas-header align-items-center shadow-sm">
+                                <h2 class="h5 mb-0">Filters</h2>
+                                <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body p-lg-8">
+                                <!-- Categories -->
+                                <div class="widget widget-categories pb-5 mb-5 border-bottom">
+                                    <h3 class="widget-title">Categories</h3>
+                                    <div class="accordion mt-n2" id="shop-categories">
+                                        <!-- Computers -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <a class="accordion-button" href="#category-computers" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="category-computers">Computers</a>
+                                            </h3>
+                                            <div class="accordion-collapse collapse show" id="category-computers" data-bs-parent="#shop-categories">
+                                                <div class="accordion-body">
+                                                    <div class="widget widget-links border-start">
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Accessories</span>
+                                                                    <span class="fs-xs text-muted ms-2">414</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Computer Cases</span>
+                                                                    <span class="fs-xs text-muted ms-2">138</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Processors</span>
+                                                                    <span class="fs-xs text-muted ms-2">162</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Video Cards</span>
+                                                                    <span class="fs-xs text-muted ms-2">235</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Memory</span>
+                                                                    <span class="fs-xs text-muted ms-2">245</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Motherboards</span>
+                                                                    <span class="fs-xs text-muted ms-2">189</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Power Supplies</span>
+                                                                    <span class="fs-xs text-muted ms-2">228</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Sound Cards</span>
+                                                                    <span class="fs-xs text-muted ms-2">92</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Other</span>
+                                                                    <span class="fs-xs text-muted ms-2">267</span>
+                                                                </a>
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Computers -->
+
+                                        <!-- Cameras -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <a class="accordion-button collapsed" href="#category-cameras" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-cameras">Cameras &amp; Photography</a>
+                                            </h3>
+                                            <div class="accordion-collapse collapse" id="category-cameras" data-bs-parent="#shop-categories">
+                                                <div class="accordion-body">
+                                                    <div class="widget widget-links border-start">
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Action Cameras</span>
+                                                                    <span class="fs-xs text-muted ms-2">436</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Camcorders</span>
+                                                                    <span class="fs-xs text-muted ms-2">352</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Camera Drones</span>
+                                                                    <span class="fs-xs text-muted ms-2">189</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Digital Cameras</span>
+                                                                    <span class="fs-xs text-muted ms-2">68</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Camera Consumables</span>
+                                                                    <span class="fs-xs text-muted ms-2">72</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Other</span>
+                                                                    <span class="fs-xs text-muted ms-2">137</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Cameras -->
+
+                                        <!-- Mobiles & Tablets -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <a class="accordion-button collapsed" href="#category-mobiles" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-mobiles">
+                                                    Mobiles &amp; Tablets
+                                                </a>
+                                            </h3>
+                                            <div class="accordion-collapse collapse" id="category-mobiles" data-bs-parent="#shop-categories">
+                                                <div class="accordion-body">
+                                                    <div class="widget widget-links border-start">
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Smartphones</span>
+                                                                    <span class="fs-xs text-muted ms-2">325</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Tablets</span>
+                                                                    <span class="fs-xs text-muted ms-2">64</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Refurbished</span>
+                                                                    <span class="fs-xs text-muted ms-2">92</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Cases</span>
+                                                                    <span class="fs-xs text-muted ms-2">173</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Accessories</span>
+                                                                    <span class="fs-xs text-muted ms-2">96</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Other</span>
+                                                                    <span class="fs-xs text-muted ms-2">475</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Mobiles & Tablets -->
+
+                                        <!-- TV & Audio -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <a class="accordion-button collapsed" href="#category-tv" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-tv">
+                                                    TV &amp; Audio
+                                                </a>
+                                            </h3>
+                                            <div class="accordion-collapse collapse" id="category-tv" data-bs-parent="#shop-categories">
+                                                <div class="accordion-body">
+                                                    <div class="widget widget-links border-start">
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Accessories</span>
+                                                                    <span class="fs-xs text-muted ms-2">173</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Televisions</span>
+                                                                    <span class="fs-xs text-muted ms-2">325</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Headphones</span>
+                                                                    <span class="fs-xs text-muted ms-2">64</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Speakers</span>
+                                                                    <span class="fs-xs text-muted ms-2">92</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Other</span>
+                                                                    <span class="fs-xs text-muted ms-2">475</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- TV & Audio -->
+
+                                        <!-- Entertainment -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <a class="accordion-button collapsed" href="#category-entertainment" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-entertainment">
+                                                    Entertainment
+                                                </a>
+                                            </h3>
+                                            <div class="accordion-collapse collapse" id="category-entertainment" data-bs-parent="#shop-categories">
+                                                <div class="accordion-body">
+                                                    <div class="widget widget-links border-start">
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Accessories</span>
+                                                                    <span class="fs-xs text-muted ms-2">273</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Consoles</span>
+                                                                    <span class="fs-xs text-muted ms-2">348</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Video Games</span>
+                                                                    <span class="fs-xs text-muted ms-2">164</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item border-bottom pb-2">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Music</span>
+                                                                    <span class="fs-xs text-muted ms-2">192</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="widget-list-item">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
+                                                                    <span>Other</span>
+                                                                    <span class="fs-xs text-muted ms-2">435</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Entertainment -->
+
+                                    </div>
+                                </div>
+                                <!-- Categories -->
+
+                                <!-- Price Range Slider -->
+                                <div class="widget pb-5 mb-5 border-bottom">
+                                    <h3 class="widget-title">Price</h3>
+                                    <div class="widget-range-slider" data-start-min="500" data-start-max="1500" data-min="0" data-max="2000" data-step="1">
+                                        <div class="range-slider"></div>
+                                        <div class="input-group input-group-sm">
+                                            <input class="form-control range-slider-input-min" type="text">
+                                            <span class="input-group-text text-muted user-select-none">$</span>
+                                            <input class="form-control range-slider-input-max" type="text">
+                                            <span class="input-group-text text-muted user-select-none">$</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Price Range Slider -->
+
+                                <!-- Brand -->
+                                <div class="widget widget-filter pb-5 mb-5 border-bottom">
+                                    <h3 class="widget-title">Brand</h3>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <input class="widget-filter-input form-control" type="text" placeholder="Search">
+                                        <span class="input-group-text" id="blog-search-addon"><i class="ri-search-line"></i></span>
+                                    </div>
+                                    <ul class="widget-list widget-filter-list pt-1" style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-apple">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-apple">Apple</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">167</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-asus">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-asus">Asus</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">52</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-dell">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-dell">Dell</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">38</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-gigabyte">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-gigabyte">Gigabyte</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">124</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-intel">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-intel">Intel</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">268</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-msi">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-msi">MSI</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">98</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-vinga">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-vinga">Vinga</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">311</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-acer">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-acer">Acer</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">160</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-artline">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-artline">Artline</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">46</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-evolve">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-evolve">Evolve</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">23</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-hp">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-hp">HP</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">76</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-lenovo">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-lenovo">Lenovo</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">168</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-samsung">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-samsung">Samsung</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">25</span>
+                                        </li>
+                                        <li class="widget-filter-item d-flex justify-content-between align-items-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="brand-zotac">
+                                                <label class="form-check-label widget-filter-item-label" for="brand-zotac">Zotac</label>
+                                            </div>
+                                            <span class="fs-xs text-muted ms-2">184</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Brand -->
+                                
+                                <!-- Trend -->
+                                <div class="widget pb-5 mb-5 border-bottom">
+                                    <h3 class="widget-title">Trend</h3>
+                                    <ul class="widget-list pt-1">
+                                        <li class="mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-powerful">
+                                                <label class="form-check-label" for="trend-powerful">Powerful</label>
+                                            </div>
+                                        </li>
+                                        <li class="mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-intel">
+                                                <label class="form-check-label" for="trend-intel">Intel Platform</label>
+                                            </div>
+                                        </li>
+                                        <li class="mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-gaming">
+                                                <label class="form-check-label" for="trend-gaming">Gaming</label>
+                                            </div>
+                                        </li>
+                                        <li class="mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-office">
+                                                <label class="form-check-label" for="trend-office">Office</label>
+                                            </div>
+                                        </li>
+                                        <li class="mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-image">
+                                                <label class="form-check-label" for="trend-image">Image</label>
+                                            </div>
+                                        </li>
+                                        <li class="mb-1">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-image">
+                                                <label class="form-check-label" for="trend-image">Ultrathin</label>
+                                            </div>
+                                        </li>
+                                        <li class="mb-0">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="trend-autonomy">
+                                                <label class="form-check-label" for="trend-autonomy">Good Autonomy</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Trend -->
+
+                                <!-- Color -->
+                                <div class="widget">
+                                    <h3 class="widget-title">Color</h3>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color10" checked>
+                                            <label class="form-option-label rounded-circle" for="color10">
+                                                <span class="form-option-color rounded-circle" title="Blue" style="background-color: #9ab2f8;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color11">
+                                            <label class="form-option-label rounded-circle" for="color11">
+                                                <span class="form-option-color rounded-circle" title="Red" style="background-color: #f58c8c;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color12">
+                                            <label class="form-option-label rounded-circle" for="color12">
+                                                <span class="form-option-color rounded-circle" title="Orange" style="background-color: #f5ad8c;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color13">
+                                            <label class="form-option-label rounded-circle" for="color13">
+                                                <span class="form-option-color rounded-circle" title="Yellow" style="background-color: #f5e58c;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color14">
+                                            <label class="form-option-label rounded-circle" for="color14">
+                                                <span class="form-option-color rounded-circle" title="Green" style="background-color: #85e299;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color15">
+                                            <label class="form-option-label rounded-circle" for="color15">
+                                                <span class="form-option-color rounded-circle" title="Silver" style="background-color: #e8e9ee;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color16">
+                                            <label class="form-option-label rounded-circle" for="color16">
+                                                <span class="form-option-color rounded-circle" title="White" style="background-color: #fcfcfd;"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline text-center">
+                                            <input class="form-check-input" type="radio" name="radioColor2" id="color17">
+                                            <label class="form-option-label rounded-circle" for="color17">
+                                                <span class="form-option-color rounded-circle" title="Black" style="background-color: #676769;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Color -->
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Sidebar -->
+
+                    <!-- Content -->
+                    <aside class="col-lg-8">
+                        <!-- Swiper Heading -->
+                        
+                        <!-- Swiper Heading -->
+
+                        
+                        <!-- Slider -->
+
+                        <!-- Toolbar -->
+                        <div class="card bg-light border-gray-200 mt-5 mb-10">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <form class="row row-cols-auto g-4 align-items-center me-3">
+                                        <!-- <div class="col">
+                                            <div class="row g-2">
+                                                <label for="sorting" class="col-auto col-form-label d-none d-sm-block">Sort by:</label>
+                                                <div class="col-auto">
+                                                    <select class="form-select" id="sorting">
+                                                        <option selected>Name</option>
+                                                        <option>Rating</option>
+                                                        <option>Price &uarr;</option>
+                                                        <option>Price &darr;</option>
+                                                        <option>Popularity</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        <!-- <div class="col d-none d-sm-block">
+                                            <div class="row g-2">
+                                                <label for="unitsPerPage" class="col-auto col-form-label d-none d-sm-block">Show:</label>
+                                                <div class="col-auto">
+                                                    <select class="form-select" id="unitsPerPage">
+                                                        <option selected>10</option>
+                                                        <option value="1">20</option>
+                                                        <option value="2">30</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </form>
+
+                                    <ul class="nav nav-pills flex-nowrap" id="pills-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active py-2 px-3" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                                <i class="ri-function-line fs-5"></i>
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link py-2 px-3" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                <i class="ri-list-check fs-5"></i>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Toolbar -->
+
+                        <!-- Heading -->
+                        <!-- Heading -->
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <!-- Product Grid -->
+                           
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <!-- Product Cards -->
+                                <div class="row pt-2 mx-n2 mb-4 mb-sm-8">
+                                    <!-- Product -->
+                                    
+                                    
+                                    
+                                    
+					            {% for product in product %}
+                                    <div class="col-sm-6 col-md-4 px-2 mb-4">
+                                        <div class="card card-product h-100">
+                                            <!-- Badges -->
+                                            <div class="product-badges">
+                                                <span class="badge bg-danger">{{product.percentage}}%</span>
+                                                <!-- <span class="badge bg-success">Top</span> -->
+                                            </div>
+                                            <!-- Badges -->
+
+                                            <!-- Buttons -->
+                                            <div class="product-buttons">
+                                                <a class="btn-product" href="{%  url 'add_wishlist' product.id %}"  title="Add to wishlist"><i class="ri-heart-line"></i></a>
+                                                </a>
+                                                <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                                    <i class="ri-eye-line"></i>
+                                                </a>
+                                            </div>
+                                            <!-- Buttons -->
+
+                                            <!-- Preview Image -->
+                                            <a class="card-img-top d-block overflow-hidden flex-shrink-0" href="{%  url 'singleproduct' product.id %}">
+                                                <img class="img-fluid" style="height: 200px;" src="{{product.image.url}}" alt="Product">
+                                            </a>
+                                            <!-- Preview Image -->
+
+                                            <div class="card-body d-flex flex-column align-items-start flex-grow-1 h-100 py-3">
+                                                <!-- Product Category -->
+                                                <a class="product-category d-block link-dark fs-sm pb-1" href="#">{{product.subcategory.name}}</a>
+                                                <!-- Product Category -->
+
+                                                <!-- Product Title -->
+                                                <h3 class="product-title flex-grow-1">
+                                                    <a href="#">{{product.name}}</a>
+                                                </h3>
+                                                <!-- Product Title -->
+
+                                                <!-- Star Rating -->
+                                                <span class="star-rating star-8"></span>
+                                                <!-- Star Rating -->
+
+                                                <!-- Product Price -->
+                                                <div class="product-price">
+                                                    <span class="text-danger fs-5">₹{{product.selling_price}}<del class="text-muted ms-1"><small>₹{{product.original_price}}</small></del>
+                                                    </span>
+                                                </div>
+                                                <!-- Product Price -->
+
+                                                <!-- Product Meta -->
+                                                <span class="product-meta text-muted fs-xs">
+                                                    Only <span>{{product.stock}}</span> left in stock
+                                                </span>
+                                                <!-- Product Meta -->
+                                            </div>
+
+                                            <!-- Product Addon -->
+                                            <div class="card-body product-addon">
+                                                <!-- Button -->
+                                                <a class="btn btn-primary btn-sm d-flex align-items-center justify-content-center w-100" href="{%  url 'add_cart' product.id %}"><i class="ri-shopping-cart-2-line me-2"></i>Add to Cart</a>
+                                                <!-- Button -->
+
+                                                <hr class="my-4 d-none d-lg-block">
+
+                                                <!-- Product Details -->
+                                                <div class="product-details d-none d-lg-block fs-sm">
+                                                    <ul class="m-0 ps-4">
+                                                        <!-- <li>Screen: 5.8"</li>
+                                                        <li>Hardware: 6 cores, 4 Gb</li>
+                                                        <li>OS: Android OS</li> -->
+                                                        <li>
+                                                            {{product.description}}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Product Details -->
+                                            </div>
+                                            <!-- Product Addon -->
+                                        </div>
+                                        <hr class="d-sm-none">
+                                    </div>
+                                {% endfor %}
+
+                                   
+                                    
+
+                                    <hr class="d-none d-sm-block mb-6">
+                                    
+                                    <!-- Pagination -->
+                                    <div class="d-flex justify-content-between">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#"><i class="ri-arrow-left-s-line me-1"></i>Prev</a></li>
+                                        </ul>
+                                        <ul class="pagination">
+                                            <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
+                                            <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span class="visually-hidden">(current)</span></span></li>
+                                            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">4</a></li>
+                                            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">5</a></li>
+                                        </ul>
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next<i class="ms-1 ri-arrow-right-s-line"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- Pagination -->
+                                </div>
+                                <!-- Product Cards -->                                
+                            </div>
+                            <!-- Product Grid -->
+
+
+
+
+
+                            
+                            
+                            <!-- Product List -->
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <!-- Product -->
+                                
+                                {% for i in product %}
+                                    <div class="card card-product product-list">
+                                        <!-- Badges -->
+                                        <div class="product-badges">
+                                            <span class="badge bg-danger">{{i.percentage}}%</span>
+                                            <!-- <span class="badge bg-success">Top</span> -->
+                                        </div>
+                                        <!-- Badges -->
+
+                                        <!-- Buttons -->
+                                        <div class="product-buttons">
+                                            <a class="btn-product btn-wishlist" href="{%  url 'add_wishlist' i.id %}"   title="Add to wishlist"><i class="ri-heart-line"></i></a>
+                                            <a class="btn-product btn-compare" href="#" title="Compare product">
+                                                <i class="ri-repeat-line"></i>
+                                            </a>
+                                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
+                                                <i class="ri-eye-line"></i>
+                                            </a>
+                                        </div>
+                                        <!-- Buttons -->
+
+                                        <div class="d-sm-flex align-items-center">
+                                            <!-- Preview Image -->
+                                            <a class="product-list-img d-block flex-shrink-0 mx-auto" href="{%  url 'singleproduct' i.id %}">
+                                                <img src="{{i.image.url}}" style="height:100px;" alt="Product">
+                                            </a>
+                                            <!-- Preview Image -->
+                                        
+                                            <div class="card-body">
+                                                <!-- Product Category -->
+                                                <a class="product-category d-block link-dark fs-sm pb-1" href="#">{{i.subcategory.name}}</a>
+                                                <!-- Product Category -->
+                                        
+                                                <!-- Product Title -->
+                                                <h3 class="product-title me-sm-10">
+                                                    <a href="#">{{i.name}}</a>
+                                                </h3>
+                                                <!-- Product Title -->
+                                        
+                                                <!-- Star Rating -->
+                                                <span class="star-rating star-8"></span>
+                                                <!-- Star Rating -->
+                                        
+                                                <!-- Product Price -->
+                                                <div class="product-price">
+                                                    <span class="text-danger fs-5">₹{{i.selling_price}}<del class="text-muted ms-1"><small>₹{{i.original_price}}</small></del>
+                                                    </span>
+                                                </div>
+                                                <!-- Product Price -->
+                                        
+                                                <!-- Product Meta -->
+                                                <span class="product-meta text-muted fs-xs">
+                                                    Only <span>{{i.stock}}</span> left in stock
+                                                </span>
+                                                <!-- Product Meta -->
+                                        
+                                                <!-- Button -->
+                                                <a class="btn btn-primary btn-sm d-flex align-items-center justify-content-center mt-1" href="{%  url 'add_cart' i.id %}"><i class="ri-shopping-cart-2-line me-2"></i>Add to Cart</a>
+                                                <!-- Button -->
+                                            </div>
+                                        </div>                                                                       
+                                    </div>
+                                    <!-- Product -->
+                                {% endfor %}
+                                                               
+                               
+
+                               
+
+                                <!-- Pagination -->
+                                <div class="d-flex justify-content-between mt-6">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#"><i class="ri-arrow-left-s-line me-1"></i>Prev</a></li>
+                                    </ul>
+                                    <ul class="pagination">
+                                        <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
+                                        <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span class="visually-hidden">(current)</span></span></li>
+                                        <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item d-none d-sm-block"><a class="page-link" href="#">4</a></li>
+                                        <li class="page-item d-none d-sm-block"><a class="page-link" href="#">5</a></li>
+                                    </ul>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next">Next<i class="ms-1 ri-arrow-right-s-line"></i></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Pagination -->
+                            </div>
+                            <!-- Product List -->
+                        </div>
+                    </aside>
+                    <!-- Content -->
+                </div>
+            </div>
+            <!-- Product Category -->
+        </main>
+        <!-- Page -->
+
+{% endblock %}

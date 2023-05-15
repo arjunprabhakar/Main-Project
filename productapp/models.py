@@ -22,7 +22,9 @@ class Product(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
     percentage=models.IntegerField(default=1)
-    sentiment_score=models.FloatField(default=0) 
+    sentiment_score=models.FloatField(default=0)
+    rate=models.FloatField(default=0.0)
+
     class Meta:
         ordering=('name',)
         verbose_name='product'
@@ -58,6 +60,7 @@ class tbl_Review(models.Model):
     negative_score = models.DecimalField(max_digits=3, decimal_places=2, null=True)
     neutral_score = models.DecimalField(max_digits=3, decimal_places=2, null=True)
     rating=models.FloatField()
+    rate=models.FloatField(default=0.0)
     date=models.DateTimeField(auto_now_add=True,null=True)
     class Meta:
             verbose_name_plural = "Reviews"

@@ -1,0 +1,65 @@
+{% extends 'Customer/base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<script>
+    function validateform()
+    {
+         var expr = /^[0-9]\d{3}$/;
+         var a=document.getElementById('otp').value.trim();
+         if(a=="")
+            {
+                document.getElementById('otp_error').style.display = "block";
+                document.getElementById('otp_error').innerHTML="**Please enter otp";
+                return false;
+            }
+            if(a!="" && expr.test(a)==false){
+                document.getElementById('otp_error').style.display= "block";
+                document.getElementById('otp_error').innerHTML ="Invalid otp";
+                return false;
+                        }
+                        else{
+                document.getElementById('otp_error').style.display = "none";
+                return true;
+            }
+    }
+            
+     </script>
+{% include 'alert.html' %}
+
+            <!-- Content -->
+            <div class="container py-lg-10 my-4 my-lg-10" >
+                <div class="row justify-content-center" style="margin-top:-40px;">
+                    <div class="col-md-10 col-lg-8">
+                        <h4 class="border-bottom pb-4 mb-4">Verify your email ?</h4>
+                        <span class="d-inline-block text-muted mb-4">Fill out the otp field and verify your account:</span>
+                        <ol class="list-unstyled fs-md">
+                            <li class="mb-2"><span class="text-primary me-2">1.</span>We'll send you a otp to the email.</li>
+                            <li class="mb-2"><span class="text-primary me-2">2.</span>Use the otp to verify your account</li>
+                        </ol>
+
+                        <div class="card bg-light mt-4">
+                            <form class="card-body " action="{% url 'verify_forgot_otp' %}" method="post" id="contactForm"  onsubmit="return validateform();" >
+							{% csrf_token %}
+                                
+                                <div class="mb-4">
+                                    <label class="form-label" for="recover-email">Your email address</label>
+                                    <input class="form-control" type="email"    name="email" value="{{session}}" readonly>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label" for="recover-email">Enter otp</label>
+                                    <input class="form-control" type="tel" maxlength="4"  id="otp" name="otp" onblur="return validateform()" onKeyUp="return validateform()">
+                                    <span id="otp_error" style="color: red;"></span>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Verify Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content -->
+        </main>
+        <!-- Page -->
+        {% endblock %}

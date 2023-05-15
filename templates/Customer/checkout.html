@@ -12,14 +12,13 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
                                 <li class="breadcrumb-item">
-                                    <a class="text-nowrap" href="index.html">
+                                    <a class="text-nowrap" href="{% url 'home' %}">
                                         <i class="ri-store-2-line"></i>
                                         Home
                                     </a>
                                 </li>
-                                <li class="breadcrumb-item text-nowrap"><a href="blog-list.html">Shop</a>
                                 </li>
-                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout shipping</li>
+                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout </li>
                             </ol>
                         </nav>
                     </div>
@@ -49,35 +48,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="align-middle">
-                                                <div class="form-check d-inline-block ms-5">
-                                                    <input class="form-check-input" type="radio" id="courier" name="shipping-method-radio" checked>
-                                                    <label class="form-check-label" for="courier"></label>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <span class="text-dark fw-medium">Courier Delivery</span>
-                                                <br>
-                                                <span class="text-muted">All addresses, United States</span>
-                                                <span class="text-muted">All addresses, United States</span>
-                                            </td>
-                                        </tr>
+                                        
+                                        
+                                        {% for i in address %}
+                                            <tr>
+                                                <td class="align-middle">
+                                                    <div class="form-check d-inline-block ms-5">
+                                                        <input class="form-check-input" type="radio" id="courier" name="shipping-method-radio" checked>
+                                                        <label class="form-check-label" for="courier"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class="text-dark fw-medium">{{i.fname}} {{i.lname}}</span><br>
+                                                    <span class="text-dark fw-medium">Phone : {{i.phone_no}}, Email : {{i.email}}</span>
+                                                    <br>
+                                                    <span class="text-muted">{{i.hname}}, {{i.street}}, {{i.city}}, </span>
+                                                    <span class="text-muted">{{i.district}}, {{i.state}}, {{i.pin}}</span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
 
-                                        <tr>
-                                            <td class="align-middle">
-                                                <div class="form-check d-inline-block ms-5">
-                                                    <input class="form-check-input" type="radio" id="courier" name="shipping-method-radio" checked>
-                                                    <label class="form-check-label" for="courier"></label>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <span class="text-dark fw-medium">Courier Delivery</span>
-                                                <br>
-                                                <span class="text-muted">All addresses, United States</span>
-                                                <span class="text-muted">All addresses, United States</span>
-                                            </td>
-                                        </tr>
+
+
+                                        
                                     </tbody>
                                 </table>
                             </div>

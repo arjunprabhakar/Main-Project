@@ -84,8 +84,8 @@
                     </h5>
 
                     <div class="d-flex align-items-center border-bottom pb-2 mb-2">
-                        <span class="star-rating star-4 fs-6 align-middle"></span>
-                        <span class="d-inline-block fs-sm ms-2">4.7 by 35 Reviews</span>
+                        <span class="star-rating star-{{product.rate |floatformat:0|truncatechars:1 }} fs-6 align-middle"></span>
+                        <!-- <span class="d-inline-block fs-sm ms-2">35 Reviews</span> -->
                     </div>
 
                     <!-- Product Price -->
@@ -123,16 +123,12 @@
                                 Wishlist
                             </a>
                         </div>
-                        <div class="w-50">
-                            <button class="btn btn-secondary d-block w-100" type="button">
-                                Compare
-                            </button>
-                        </div>
+                      
                     </div>
                     <!-- Buttons -->
 
                     <!-- Info List -->
-                    <h5 class="h6 mb-3 py-2 border-bottom"><i class="ri-information-line text-muted fs-lg align-middle me-2"></i>Short description</h5>
+                    <h5 class="h6 mb-3 py-2 border-bottom"><i class="ri-information-line text-muted fs-lg align-middle me-2"></i> description</h5>
 
                     <p>{{product.description}}</p>
                     <!-- Info List -->
@@ -285,13 +281,12 @@
         </div>
     </div>
 </div>
-<!-- Product Description -->
 
 <!-- Slider -->
 <div class="container mb-4 mb-lg-10">
     <!-- Heading -->
     <div class="d-flex flex-wrap align-items-center justify-content-between border-bottom border-gray-300 pb-4 mb-4">
-        <h2 class="h3 mb-0 me-2">Other products</h2>
+        <h2 class="h3 mb-0 me-2">Same category products</h2>
         <div class="ms-0">
             <ul class="nav">
                 <li class="nav-item me-3">                                
@@ -313,7 +308,6 @@
     <div class="recently-swiper m-n4">
         <div class="swiper recently-swiper-body p-4">
             <div class="swiper-wrapper">
-               
 
 
 
@@ -375,14 +369,6 @@
                         <!-- Swiper Slide -->
                     {% endfor %}
                 {% endif %}
-
-                
-
-                
-
-                
-
-                
 
                 
             </div>

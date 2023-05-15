@@ -13,14 +13,20 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
                                 <li class="breadcrumb-item">
-                                    <a class="text-nowrap" href="index.html">
+                                    {% if email in email %}
+                                    <a class="text-nowrap" href="{% url 'home' %}">
                                         <i class="ri-store-2-line"></i>
                                         Home
                                     </a>
+                                    {% else %}
+                                    <a class="text-nowrap" href="{% url 'demo' %}">
+                                        <i class="ri-store-2-line"></i>
+                                        Home
+                                    </a>
+                                    {% endif %}
                                 </li>
-                                <li class="breadcrumb-item text-nowrap"><a href="blog-list.html">Shop</a>
                                 </li>
-                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Category left sidebar</li>
+                                <li class="breadcrumb-item text-nowrap active" aria-current="page">Category </li>
                             </ol>
                         </nav>
                     </div>
@@ -44,513 +50,45 @@
                                     <h3 class="widget-title">Categories</h3>
                                     <div class="accordion mt-n2" id="shop-categories">
                                         <!-- Computers -->
-                                        <div class="accordion-item">
-                                            <h3 class="accordion-header">
-                                                <a class="accordion-button" href="#category-computers" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="category-computers">Computers</a>
-                                            </h3>
-                                            <div class="accordion-collapse collapse show" id="category-computers" data-bs-parent="#shop-categories">
-                                                <div class="accordion-body">
-                                                    <div class="widget widget-links border-start">
-                                                        <ul class="widget-list">
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Accessories</span>
-                                                                    <span class="fs-xs text-muted ms-2">414</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Computer Cases</span>
-                                                                    <span class="fs-xs text-muted ms-2">138</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Processors</span>
-                                                                    <span class="fs-xs text-muted ms-2">162</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Video Cards</span>
-                                                                    <span class="fs-xs text-muted ms-2">235</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Memory</span>
-                                                                    <span class="fs-xs text-muted ms-2">245</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Motherboards</span>
-                                                                    <span class="fs-xs text-muted ms-2">189</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Power Supplies</span>
-                                                                    <span class="fs-xs text-muted ms-2">228</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Sound Cards</span>
-                                                                    <span class="fs-xs text-muted ms-2">92</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Other</span>
-                                                                    <span class="fs-xs text-muted ms-2">267</span>
-                                                                </a>
-                                                            </li>
+                                        
+                                        
+                                        {% for i in category %}
+                                            <div class="accordion-item">
+                                                <h3 class="accordion-header">
+                                                    <a class="accordion-button" href="#category-computers" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="category-computers">{{i.name}}</a>
+                                                </h3>
+                                                <div class="accordion-collapse collapse " id="category-computers" data-bs-parent="#shop-categories">
+                                                    <div class="accordion-body">
+                                                        <div class="widget widget-links border-start">
+                                                            <ul class="widget-list">
+                                                                
+                                                                
+                                                                {% for j in subcategory %}
+                                                                    {% if i.id == j.category_id %}
+                                                                    <li class="widget-list-item border-bottom pb-2">
+                                                                        <a class="widget-list-link d-flex justify-content-between align-items-center" href="{% url 'category_product' j.id  %}">
+                                                                            <span>{{ j.name }}</span>
+                                                                        </a>
+                                                                    </li>
+                                                                {% endif %}
+                                                                {% endfor %}
+                                                                
 
 
-                                                        </ul>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- Computers -->
+                                        {% endfor %}
 
-                                        <!-- Cameras -->
-                                        <div class="accordion-item">
-                                            <h3 class="accordion-header">
-                                                <a class="accordion-button collapsed" href="#category-cameras" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-cameras">Cameras &amp; Photography</a>
-                                            </h3>
-                                            <div class="accordion-collapse collapse" id="category-cameras" data-bs-parent="#shop-categories">
-                                                <div class="accordion-body">
-                                                    <div class="widget widget-links border-start">
-                                                        <ul class="widget-list">
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Action Cameras</span>
-                                                                    <span class="fs-xs text-muted ms-2">436</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Camcorders</span>
-                                                                    <span class="fs-xs text-muted ms-2">352</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Camera Drones</span>
-                                                                    <span class="fs-xs text-muted ms-2">189</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Digital Cameras</span>
-                                                                    <span class="fs-xs text-muted ms-2">68</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Camera Consumables</span>
-                                                                    <span class="fs-xs text-muted ms-2">72</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Other</span>
-                                                                    <span class="fs-xs text-muted ms-2">137</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Cameras -->
 
-                                        <!-- Mobiles & Tablets -->
-                                        <div class="accordion-item">
-                                            <h3 class="accordion-header">
-                                                <a class="accordion-button collapsed" href="#category-mobiles" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-mobiles">
-                                                    Mobiles &amp; Tablets
-                                                </a>
-                                            </h3>
-                                            <div class="accordion-collapse collapse" id="category-mobiles" data-bs-parent="#shop-categories">
-                                                <div class="accordion-body">
-                                                    <div class="widget widget-links border-start">
-                                                        <ul class="widget-list">
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Smartphones</span>
-                                                                    <span class="fs-xs text-muted ms-2">325</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Tablets</span>
-                                                                    <span class="fs-xs text-muted ms-2">64</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Refurbished</span>
-                                                                    <span class="fs-xs text-muted ms-2">92</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Cases</span>
-                                                                    <span class="fs-xs text-muted ms-2">173</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Accessories</span>
-                                                                    <span class="fs-xs text-muted ms-2">96</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Other</span>
-                                                                    <span class="fs-xs text-muted ms-2">475</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Mobiles & Tablets -->
 
-                                        <!-- TV & Audio -->
-                                        <div class="accordion-item">
-                                            <h3 class="accordion-header">
-                                                <a class="accordion-button collapsed" href="#category-tv" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-tv">
-                                                    TV &amp; Audio
-                                                </a>
-                                            </h3>
-                                            <div class="accordion-collapse collapse" id="category-tv" data-bs-parent="#shop-categories">
-                                                <div class="accordion-body">
-                                                    <div class="widget widget-links border-start">
-                                                        <ul class="widget-list">
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Accessories</span>
-                                                                    <span class="fs-xs text-muted ms-2">173</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Televisions</span>
-                                                                    <span class="fs-xs text-muted ms-2">325</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Headphones</span>
-                                                                    <span class="fs-xs text-muted ms-2">64</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Speakers</span>
-                                                                    <span class="fs-xs text-muted ms-2">92</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Other</span>
-                                                                    <span class="fs-xs text-muted ms-2">475</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- TV & Audio -->
-
-                                        <!-- Entertainment -->
-                                        <div class="accordion-item">
-                                            <h3 class="accordion-header">
-                                                <a class="accordion-button collapsed" href="#category-entertainment" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="category-entertainment">
-                                                    Entertainment
-                                                </a>
-                                            </h3>
-                                            <div class="accordion-collapse collapse" id="category-entertainment" data-bs-parent="#shop-categories">
-                                                <div class="accordion-body">
-                                                    <div class="widget widget-links border-start">
-                                                        <ul class="widget-list">
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Accessories</span>
-                                                                    <span class="fs-xs text-muted ms-2">273</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Consoles</span>
-                                                                    <span class="fs-xs text-muted ms-2">348</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Video Games</span>
-                                                                    <span class="fs-xs text-muted ms-2">164</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item border-bottom pb-2">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Music</span>
-                                                                    <span class="fs-xs text-muted ms-2">192</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="widget-list-item">
-                                                                <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                                    <span>Other</span>
-                                                                    <span class="fs-xs text-muted ms-2">435</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Entertainment -->
 
                                     </div>
                                 </div>
                                 <!-- Categories -->
 
-                                <!-- Price Range Slider -->
-                                <div class="widget pb-5 mb-5 border-bottom">
-                                    <h3 class="widget-title">Price</h3>
-                                    <div class="widget-range-slider" data-start-min="500" data-start-max="1500" data-min="0" data-max="2000" data-step="1">
-                                        <div class="range-slider"></div>
-                                        <div class="input-group input-group-sm">
-                                            <input class="form-control range-slider-input-min" type="text">
-                                            <span class="input-group-text text-muted user-select-none">$</span>
-                                            <input class="form-control range-slider-input-max" type="text">
-                                            <span class="input-group-text text-muted user-select-none">$</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Price Range Slider -->
-
-                                <!-- Brand -->
-                                <div class="widget widget-filter pb-5 mb-5 border-bottom">
-                                    <h3 class="widget-title">Brand</h3>
-                                    <div class="input-group input-group-sm mb-3">
-                                        <input class="widget-filter-input form-control" type="text" placeholder="Search">
-                                        <span class="input-group-text" id="blog-search-addon"><i class="ri-search-line"></i></span>
-                                    </div>
-                                    <ul class="widget-list widget-filter-list pt-1" style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-apple">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-apple">Apple</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">167</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-asus">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-asus">Asus</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">52</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-dell">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-dell">Dell</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">38</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-gigabyte">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-gigabyte">Gigabyte</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">124</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-intel">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-intel">Intel</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">268</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-msi">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-msi">MSI</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">98</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-vinga">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-vinga">Vinga</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">311</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-acer">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-acer">Acer</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">160</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-artline">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-artline">Artline</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">46</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-evolve">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-evolve">Evolve</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">23</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-hp">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-hp">HP</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">76</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-lenovo">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-lenovo">Lenovo</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">168</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-samsung">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-samsung">Samsung</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">25</span>
-                                        </li>
-                                        <li class="widget-filter-item d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="brand-zotac">
-                                                <label class="form-check-label widget-filter-item-label" for="brand-zotac">Zotac</label>
-                                            </div>
-                                            <span class="fs-xs text-muted ms-2">184</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Brand -->
-                                
-                                <!-- Trend -->
-                                <div class="widget pb-5 mb-5 border-bottom">
-                                    <h3 class="widget-title">Trend</h3>
-                                    <ul class="widget-list pt-1">
-                                        <li class="mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-powerful">
-                                                <label class="form-check-label" for="trend-powerful">Powerful</label>
-                                            </div>
-                                        </li>
-                                        <li class="mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-intel">
-                                                <label class="form-check-label" for="trend-intel">Intel Platform</label>
-                                            </div>
-                                        </li>
-                                        <li class="mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-gaming">
-                                                <label class="form-check-label" for="trend-gaming">Gaming</label>
-                                            </div>
-                                        </li>
-                                        <li class="mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-office">
-                                                <label class="form-check-label" for="trend-office">Office</label>
-                                            </div>
-                                        </li>
-                                        <li class="mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-image">
-                                                <label class="form-check-label" for="trend-image">Image</label>
-                                            </div>
-                                        </li>
-                                        <li class="mb-1">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-image">
-                                                <label class="form-check-label" for="trend-image">Ultrathin</label>
-                                            </div>
-                                        </li>
-                                        <li class="mb-0">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="trend-autonomy">
-                                                <label class="form-check-label" for="trend-autonomy">Good Autonomy</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Trend -->
-
-                                <!-- Color -->
-                                <div class="widget">
-                                    <h3 class="widget-title">Color</h3>
-                                    <div class="d-flex flex-wrap">
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color10" checked>
-                                            <label class="form-option-label rounded-circle" for="color10">
-                                                <span class="form-option-color rounded-circle" title="Blue" style="background-color: #9ab2f8;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color11">
-                                            <label class="form-option-label rounded-circle" for="color11">
-                                                <span class="form-option-color rounded-circle" title="Red" style="background-color: #f58c8c;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color12">
-                                            <label class="form-option-label rounded-circle" for="color12">
-                                                <span class="form-option-color rounded-circle" title="Orange" style="background-color: #f5ad8c;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color13">
-                                            <label class="form-option-label rounded-circle" for="color13">
-                                                <span class="form-option-color rounded-circle" title="Yellow" style="background-color: #f5e58c;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color14">
-                                            <label class="form-option-label rounded-circle" for="color14">
-                                                <span class="form-option-color rounded-circle" title="Green" style="background-color: #85e299;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color15">
-                                            <label class="form-option-label rounded-circle" for="color15">
-                                                <span class="form-option-color rounded-circle" title="Silver" style="background-color: #e8e9ee;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color16">
-                                            <label class="form-option-label rounded-circle" for="color16">
-                                                <span class="form-option-color rounded-circle" title="White" style="background-color: #fcfcfd;"></span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-option form-check-inline text-center">
-                                            <input class="form-check-input" type="radio" name="radioColor2" id="color17">
-                                            <label class="form-option-label rounded-circle" for="color17">
-                                                <span class="form-option-color rounded-circle" title="Black" style="background-color: #676769;"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Color -->
                             </div>
                         </div>
                     </section>
@@ -570,33 +108,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <form class="row row-cols-auto g-4 align-items-center me-3">
-                                        <!-- <div class="col">
-                                            <div class="row g-2">
-                                                <label for="sorting" class="col-auto col-form-label d-none d-sm-block">Sort by:</label>
-                                                <div class="col-auto">
-                                                    <select class="form-select" id="sorting">
-                                                        <option selected>Name</option>
-                                                        <option>Rating</option>
-                                                        <option>Price &uarr;</option>
-                                                        <option>Price &darr;</option>
-                                                        <option>Popularity</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div> -->
-
-                                        <!-- <div class="col d-none d-sm-block">
-                                            <div class="row g-2">
-                                                <label for="unitsPerPage" class="col-auto col-form-label d-none d-sm-block">Show:</label>
-                                                <div class="col-auto">
-                                                    <select class="form-select" id="unitsPerPage">
-                                                        <option selected>10</option>
-                                                        <option value="1">20</option>
-                                                        <option value="2">30</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                       
                                     </form>
 
                                     <ul class="nav nav-pills flex-nowrap" id="pills-tab" role="tablist">
@@ -616,8 +128,7 @@
                         </div>
                         <!-- Toolbar -->
 
-                        <!-- Heading -->
-                        <!-- Heading -->
+                     
 
                         <div class="tab-content" id="pills-tabContent">
                             <!-- Product Grid -->
@@ -644,9 +155,7 @@
                                             <div class="product-buttons">
                                                 <a class="btn-product" href="{%  url 'add_wishlist' product.id %}"  title="Add to wishlist"><i class="ri-heart-line"></i></a>
                                                 </a>
-                                                <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
-                                                    <i class="ri-eye-line"></i>
-                                                </a>
+                                             
                                             </div>
                                             <!-- Buttons -->
 
@@ -762,12 +271,8 @@
                                         <!-- Buttons -->
                                         <div class="product-buttons">
                                             <a class="btn-product btn-wishlist" href="{%  url 'add_wishlist' i.id %}"   title="Add to wishlist"><i class="ri-heart-line"></i></a>
-                                            <a class="btn-product btn-compare" href="#" title="Compare product">
-                                                <i class="ri-repeat-line"></i>
-                                            </a>
-                                            <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
-                                                <i class="ri-eye-line"></i>
-                                            </a>
+                                          
+                                         
                                         </div>
                                         <!-- Buttons -->
 

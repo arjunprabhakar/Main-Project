@@ -2,6 +2,7 @@
 
 {% load static %}
 {% block content %}
+{% include 'Customer/alert.html' %}
 
             <!-- Hero Section -->
             <section class="hero py-3 py-lg-4">
@@ -104,60 +105,14 @@
             </section>
             <!-- Hero Section -->
 
-            <!-- Benefits -->
-            <div class="benefits">
-                <div class="container my-10">
-                    <div class="row g-4 g-lg-0 gx-lg-4">
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="d-flex align-items-start">
-                                <span class="icon-shipping-boat text-accent me-4" style="font-size:3rem;"></span>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mt-1 mb-1 fs-md">Free Shipping</h6>
-                                    <span class="text-muted fs-ms">Free shipping on orders over 150$</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="d-flex align-items-start">
-                                <span class="icon-support-24 text-accent me-4" style="font-size:3rem;"></span>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mt-1 mb-1 fs-md">Online Support</h6>
-                                    <span class="text-muted fs-ms">Online support 24 hours a day</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="d-flex align-items-start">
-                                <span class="icon-coupon text-accent me-4" style="font-size:3rem;"></span>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mt-1 mb-1 fs-md">Member Discount</h6>
-                                    <span class="text-muted fs-ms">Discount for regular customers</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="d-flex align-items-start">
-                                <span class="icon-money-return text-accent me-4" style="font-size:3rem;"></span>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mt-1 mb-1 fs-md">Money Return</h6>
-                                    <span class="text-muted fs-ms">Moneyback guarantee under 14 days</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Benefits -->
+           
 
             <!-- Product Cards -->
             <div class="container pt-0 pt-sm-5">
                 <!-- Heading -->
                 <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom border-gray-300 pb-4 mb-4">
-                    <h2 class="h3 mb-0 me-2">Trending products</h2>
-                    <div class="ms-n4"><a class="btn btn-link link-info link-hover-primary d-flex align-items-center" href="#">View All<i class="ri-arrow-right-line ms-1"></i></a></div>
+                    <h2 class="h3 mb-0 me-2">Products</h2>
+                    <!-- <div class="ms-n4"><a class="btn btn-link link-info link-hover-primary d-flex align-items-center" href="#">View All<i class="ri-arrow-right-line ms-1"></i></a></div> -->
                 </div>
                 <!-- Heading -->
 
@@ -176,19 +131,16 @@
                             <!-- Badges -->
                             <div class="product-badges">
                                 <span class="badge bg-danger">{{i.percentage}}%</span>
-                                <span class="badge bg-success">Trending</span>
+                                <!-- <span class="badge bg-success">Trending</span> -->
                             </div>
                             <!-- Badges -->
 
                             <!-- Buttons -->
                             <div class="product-buttons">
                                <a class="btn-product btn-wishlist" href="{%  url 'add_wishlist' i.id %}"> <i class="ri-heart-line"></i></a>
-                                <a class="btn-product btn-compare" href="#" title="Compare product">
-                                    <i class="ri-repeat-line"></i>
-                                </a>
-                                <a class="btn-product btn-view" href="#modal-quick-view" data-bs-toggle="modal" title="Quick preview">
-                                    <i class="ri-eye-line"></i>
-                                </a>
+                         
+                               
+                                
                             </div>
                             <!-- Buttons -->
 
@@ -210,7 +162,7 @@
                                 <!-- Product Title -->
 
                                 <!-- Star Rating -->
-                                <span class="star-rating star-8"></span>
+                                <span class="star-rating star-{{i.rate |floatformat:0|truncatechars:1 }}"></span>
                                 <!-- Star Rating -->
 
                                 <!-- Product Price -->
@@ -238,9 +190,8 @@
                                 <!-- Product Details -->
                                 <div class="product-details d-none d-lg-block fs-sm">
                                     <ul class="m-0 ps-4">
-                                        <li>Screen: 5.8"</li>
-                                        <li>Hardware: 6 cores, 4 Gb</li>
-                                        <li>OS: Android OS</li>
+                                        <li>{{i.description}}</li>
+                                     
                                     </ul>
                                 </div>
                                 <!-- Product Details -->
@@ -262,7 +213,7 @@
             <!-- Product Cards -->
 
             <!-- Banner -->
-            <div class="container py-4 py-lg-10">
+            <!-- <div class="container py-4 py-lg-10">
                 <div class="row">
                     <div class="col">
                         <div class="d-sm-flex justify-content-between align-items-center bg-light overflow-hidden border rounded-1">
@@ -276,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Banner -->
 
             <!-- Brand Slider -->

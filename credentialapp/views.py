@@ -17,7 +17,6 @@ from hashlib import sha256
 # For Pdf Download
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
-
 import math, random
 from django.core.mail import send_mail
 
@@ -27,7 +26,10 @@ def demo(request):
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
     product=Product.objects.all()
-    return render(request,"Customer/index.html",{'category':category,'subcategory':subcategory,'product':product})
+    context={'category':category,
+             'subcategory':subcategory,
+             'product':product}
+    return render(request,"Customer/index.html",context)
 
 # Login Form
 def login(request):
@@ -56,7 +58,9 @@ def login(request):
             messages.success(request, 'Email or Password Incorrect..!!')
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
-    return render(request,'Customer/login.html',{'category':category,'subcategory':subcategory})
+    context={'category':category,
+             'subcategory':subcategory}
+    return render(request,'Customer/login.html',context)
 
 # Function for OTP Generation
 def generateOTP() :
@@ -65,7 +69,6 @@ def generateOTP() :
      for i in range(4) :
          OTP += digits[math.floor(random.random() * 10)]
          a=OTP
-     print("swdfghjk",a)
      return OTP
 
 # User Registration
@@ -107,8 +110,9 @@ def register(request):
     
     category=Category.objects.all()
     subcategory=Subcategory.objects.all()
-    # session=request.session['email']
-    return render(request, 'Customer/registration.html',{'category':category,'subcategory':subcategory})
+    context={'category':category,
+             'subcategory':subcategory}
+    return render(request, 'Customer/registration.html',context)
  
 # Otp Verification
 def verify_otp(request):
@@ -130,7 +134,10 @@ def verify_otp(request):
         category=Category.objects.all()
         subcategory=Subcategory.objects.all()
         session=request.session['email']
-        return render(request, 'otp.html',{'category':category,'subcategory':subcategory,'session':session})
+        context={'category':category,
+                 'subcategory':subcategory,
+                 'session':session}
+        return render(request, 'Customer/otp.html',context)
     else:
         return redirect(login)
 
@@ -147,7 +154,12 @@ def home(request):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,'Customer/home.html',{'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'product':product})
+        context={'cart_count':cart_count,
+                 'email':email,
+                 'category':category,
+                 'subcategory':subcategory,
+                 'product':product}
+        return render(request,'Customer/home.html',context)
     messages.success(request, ' Please Login!!')
     return redirect(login)
 
@@ -186,7 +198,6 @@ def profile(request):
 
 # Add Shipping Address
 def useraddress(request):
-    print('##################')
     if request.method=='POST':
         fname=request.POST.get('fname');
         lname=request.POST.get('lname');
@@ -282,9 +293,16 @@ def searchbar(request):
             subcategory=Subcategory.objects.all()
             if 'email' in request.session:
                 email = request.session['email']
-                return render(request, 'search.html', {'product':products,'category':category,'subcategory':subcategory,'email':email})
+                context={'product':products,
+                         'category':category,
+                         'subcategory':subcategory,
+                         'email':email}
+                return render(request, 'Customer/search.html',context)
             else:
-              return render(request, 'search.html', {'product':products,'category':category,'subcategory':subcategory})  
+              context={'product':products,
+                       'category':category,
+                       'subcategory':subcategory}
+              return render(request, 'Customer/search.html',context)  
         else:
             messages.info(request, 'No search result!!!')
             print("No information to show")
@@ -292,21 +310,14 @@ def searchbar(request):
     subcategory=Subcategory.objects.all()
     if 'email' in request.session:
         email = request.session['email']
-        return render(request, 'search.html', {'category':category,'subcategory':subcategory,'email':email})
+        context={'category':category,
+                 'subcategory':subcategory,
+                 'email':email}
+        return render(request, 'Customer/search.html',context)
     else:
-        return render(request, 'search.html', {'category':category,'subcategory':subcategory})
-
-
-
-
-
-
-
-
-
-
-
-
+        context={'category':category,
+                 'subcategory':subcategory}
+        return render(request, 'Customer/search.html',context)
 
 
 from django.http import JsonResponse
@@ -322,7 +333,6 @@ def search_products(request):
         products = Product.objects.filter(multiple_q)
     else:
         products = Product.objects.none()
-        print("*************************")
     product_list = []
     for p in products:
         product = {
@@ -340,15 +350,6 @@ def search_products(request):
     return JsonResponse({'products': product_list})
 
 
-
-
-
-
-
-
-
-
-
 # Category wise product filtering
 def category_product(request,id):
     category=Category.objects.all()
@@ -361,14 +362,26 @@ def category_product(request,id):
         cart_count=0
         for i in cart:
             cart_count=cart_count+ i.product_qty
-        return render(request,'Customer/category.html',{'sub_category':sub_category,'cart_count':cart_count,'product':product,'category':category,'subcategory':subcategory,'email':email})
+        context={'sub_category':sub_category,
+                 'cart_count':cart_count,
+                 'product':product,
+                 'category':category,
+                 'subcategory':subcategory,
+                 'email':email}
+        return render(request,'Customer/category.html',context)
     else:
         product=Product.objects.filter(subcategory=id)
-        return render(request,'Customer/category.html',{'sub_category':sub_category,'product':product,'category':category,'subcategory':subcategory})
+        context={'sub_category':sub_category,
+                 'product':product,
+                 'category':category,
+                 'subcategory':subcategory}
+        return render(request,'Customer/category.html',context)
             
 # Forgot Password
 def forgotpassword(request):
     if request.method =="POST":
+        category=Category.objects.all()
+        subcategory=Subcategory.objects.all()
         email=request.POST.get('email')
         if log_user.objects.filter(email=email).exists():
             user=log_user.objects.get(email=email) 
@@ -383,11 +396,15 @@ def forgotpassword(request):
         else:
             messages.success(request, 'Email Not Exist ...')
             return redirect(login)
-    return render(request,'forgotpassword.html')
+    context={'category':category,
+             'subcategory':subcategory}
+    return render(request,'Customer/forgotpassword.html',context)
 
 # Verify forgot password OTP
 def verify_forgot_otp(request):
     if 'email' in request.session:
+        category=Category.objects.all()
+        subcategory=Subcategory.objects.all()
         if request.method=='POST':
             otps = request.POST.get('otp');
             email = request.POST.get('email');
@@ -397,11 +414,16 @@ def verify_forgot_otp(request):
             else:
                  messages.success(request, 'Incorrcect OTP...')
     session=request.session['email']
-    return render(request,'verify_forgot_otp.html',{'session':session})
+    context={'session':session,
+             'category':category,
+             'subcategory':subcategory}
+    return render(request,'Customer/verify_forgot_otp.html',context)
 
 # New Password via Forgot Password
 def new_password(request):
     if 'email' in request.session:
+        category=Category.objects.all()
+        subcategory=Subcategory.objects.all()
         if request.method=='POST':
             password = request.POST.get('pswd');
             pswd=sha256(password.encode()).hexdigest()
@@ -412,13 +434,20 @@ def new_password(request):
             messages.success(request, 'Password Updated Successfully ...')
             return redirect(login)
     session=request.session['email']
-    return render(request,'newpassword.html',{'session':session})
+    context={'session':session,
+             'category':category,
+              'subcategory':subcategory,}
+    return render(request,'Customer/newpassword.html',context)
 
 
 
 
 
 # *********************************** Customer Service Functions **********************************
+
+
+
+
 
 def View_Service(request):
     if 'email' in request.session:
@@ -630,6 +659,8 @@ def remove_bill_data(request,id):
     else:
         return redirect(login)
     
+
+
 
 # for updating the total work hour
 def work_hour(request):

@@ -14,12 +14,11 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
                                 <li class="breadcrumb-item">
-                                    <a class="text-nowrap" href="index.html">
+                                    <a class="text-nowrap" href="{% url 'home' %}">
                                         <i class="ri-store-2-line"></i>
                                         Home
                                     </a>
                                 </li>
-                                <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
                                 </li>
                                 <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout complete</li>
                             </ol>
@@ -38,7 +37,7 @@
                         <p class="fs-sm">Our manager can contact you by email or phone to confirm the order.</p>
                         <p class="fs-sm">Now you can continue shopping or track your order.</p> -->
                         <a class="btn btn-secondary mt-2 me-4" href="{%  url 'home'%}">Continue shopping</a>
-                        <a class="btn btn-primary d-inline-flex align-items-center mt-2" href="#">
+                        <a class="btn btn-primary d-inline-flex align-items-center mt-2" href="{% url 'profile' %}">
                             <i class="ri-list-pin-line me-2"></i>
                             View my order
                         </a>

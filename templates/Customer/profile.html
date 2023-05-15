@@ -14,10 +14,6 @@
                 {% include 'Customer/alert.html' %}
 
                
-
-
-
-
             <!-- Product Category -->
             <div class="container">
                 <div class="row g-lg-4">
@@ -190,10 +186,175 @@
 
 
             <!--##############################  -->
+
+                    <script>
+                        function validateaddress()
+                        {
+                            var firstname=document.getElementById('first_name').value.trim();
+                            var lastname=document.getElementById('last_name').value.trim();
+                            var email=document.getElementById('email').value.trim();
+                            var phone=document.getElementById('phone_number').value.trim();
+                            var state=document.getElementById('state').value.trim();
+                            var district=document.getElementById('district').value.trim();
+                            var house=document.getElementById('housename').value.trim();
+                            var street=document.getElementById('street').value.trim();
+                            var city=document.getElementById('city').value.trim();
+                            var pin=document.getElementById('pin').value.trim();
+                            var expr = /^[6-9]\d{9}$/;
+                            var pin_expr = /^[0-9]\d{5}$/;
+            
+                            if(firstname=="")
+                            {
+                                document.getElementById('firstname_error').style.display="block";
+                                document.getElementById('firstname_error').innerHTML="**Please enter first name";
+                                return false;
+                            }
+                            if (/[^a-zA-Z^\s]/.test(firstname))
+                                {
+                                    document.getElementById('firstname_error').style.display="block";
+                                    document.getElementById('firstname_error').innerHTML="**Only Alphabets Allowed";
+                                    return false;
+                                }
+                            else{
+                                    document.getElementById('firstname_error').style.display="none";
+                                }
+
+                            if(lastname=="")
+                            {
+                                document.getElementById('lastname_error').style.display="block";
+                                document.getElementById('lastname_error').innerHTML="**Please enter last name";
+                                return true;
+                            }
+                            if (/[^a-zA-Z^\s]/.test(lastname))
+                                {
+                                    document.getElementById('lastname_error').style.display="block";
+                                    document.getElementById('lastname_error').innerHTML="**Only Alphabets Allowed";
+                                    return false;
+                                }
+                            else{
+                                    document.getElementById('lastname_error').style.display="none";
+                                }
+                            
+                            if(email=="")
+                            { 
+                                document.getElementById('email_error').style.display="block";
+                                document.getElementById('email_error').innerHTML="**Please Enter Email";
+                                return false;
+                            }  
+                            if(email.indexOf('@')<=0){
+                                document.getElementById('email_error').style.display="block";
+                                document.getElementById('email_error').innerHTML="**Invalid  Email Address";
+                                return false;
+                            }     
+                            if ((email.charAt(email.length-4)!='.') && (email.charAt(email.length-3)!='.')) {
+                                document.getElementById('email_error').style.display="block";
+                                document.getElementById('email_error').innerHTML="**Invalid  Email Address";
+                                return false;
+                            }   
+                            else{
+                                document.getElementById('email_error').style.display="none";
+                            }
+                            if(phone=="")
+                            {
+                                document.getElementById('phone_error').style.display = "block";
+            
+                                document.getElementById('phone_error').innerHTML="**PleaseEnter  phone number";
+                                return false;
+                            }
+                            if(phone!="" && expr.test(phone)==false){
+                                document.getElementById('phone_error').style.display= "block";
+                                document.getElementById('phone_error').innerHTML ="Invalid Phone number";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('phone_error').style.display = "none";
+                            
+                            }
+                            if(state=="")
+                            {
+                                document.getElementById('state_error').style.display="block";
+                                document.getElementById('state_error').innerHTML="**Please select a state";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('state_error').style.display = "none";
+                            }
+
+                            if(district=="")
+                            {
+                                document.getElementById('district_error').style.display="block";
+                                document.getElementById('district_error').innerHTML="**Please select a district";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('district_error').style.display = "none";
+                            
+                            }
+
+                            if(house=="")
+                            {
+                                document.getElementById('house_error').style.display="block";
+                                document.getElementById('house_error').innerHTML="**Please enter house name";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('house_error').style.display = "none";
+                            
+                            }
+
+                            if(street=="")
+                            {
+                                document.getElementById('street_error').style.display="block";
+                                document.getElementById('street_error').innerHTML="**Please enter street name";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('street_error').style.display = "none";
+                            
+                            }
+
+                            if(city=="")
+                            {
+                                document.getElementById('city_error').style.display="block";
+                                document.getElementById('city_error').innerHTML="**Please enter city ";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('city_error').style.display = "none";
+                            
+                            }
+
+                            if(pin=="")
+                            {
+                                document.getElementById('pin_error').style.display="block";
+                                document.getElementById('pin_error').innerHTML="**Please enter pin ";
+                                return false;
+                            }
+                            if(pin!="" && pin_expr.test(pin)==false){
+                                document.getElementById('pin_error').style.display= "block";
+                                document.getElementById('pin_error').innerHTML ="Invalid pin number";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('pin_error').style.display = "none";
+                                return true;
+                            
+                            }
+                          
+                        }
+                </script>
+
                             <!-- Shipping address -->
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                 <div class="border border-gray-200 rounded-3 p-4">
-                                <form method="post" action="{% url 'useraddress' %}">
+                                <form method="post" action="{% url 'useraddress' %}" novalidate="novalidate" onsubmit="return validateaddress();">
 						        {% csrf_token %}
                                     
                                     <h6 class="pb-4 mb-4 border-bottom">Shipping address</h6>
@@ -203,14 +364,16 @@
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-fn">First Name</label>
-                                                <input class="form-control" type="text" name="fname" id="billing-fn">
+                                                <input class="form-control" type="text" name="fname" id="first_name" onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="firstname_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
         
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-ln">Last Name</label>
-                                                <input class="form-control" type="text" name="lname" id="billing-ln">
+                                                <input class="form-control" type="text" name="lname" id="last_name" onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="lastname_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -221,14 +384,16 @@
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-email">Email</label>
-                                                <input class="form-control" name="email" type="email" id="billing-email">
+                                                <input class="form-control" name="email" type="email" id="email" onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="email_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
         
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-phone">Phone Number</label>
-                                                <input class="form-control" name="phn" type="text" id="billing-phone">
+                                                <input class="form-control" name="phn" type="tel" maxlength="10" id="phone_number"  onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="phone_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -240,20 +405,20 @@
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label"  for="billing-state">State</label>
-                                                <select class="form-select" name="state" id="billing-state">
+                                                <select class="form-select" name="state" id="state" onblur="return validateaddress()" onclick="return validateaddress()" onKeyUp="return validateaddress()" onchange="return validateform()">
                                                     <option value="">Choose state</option>
                                                     <option value="Kerala">Kerala</option>
                                                     <option value="Thamilnadu">Thamilnadu</option>
                                                     <option value="Karnadaka">Karnadaka</option>
-                                                  
                                                 </select>
+                                                <span id="state_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
         
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-state">District</label>
-                                                <select class="form-select" name="district" id="billing-state">
+                                                <select class="form-select" name="district" id="district"  onblur="return validateaddress()" onclick="return validateaddress()" onKeyUp="return validateaddress()" onchange="return validateform()">
                                                     <option value="">Choose District</option>
                                                     <option value="Ernakulam">Ernakulam</option>
                                                     <option value="Wayanad">Wayanad</option>
@@ -261,6 +426,7 @@
                                                     <option value="Kollam">Kollam</option>
                                                     <option value="Kozhikode">Kozhikode</option>
                                                 </select>
+                                                <span id="district_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
         
@@ -270,14 +436,18 @@
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-email">House name/No</label>
-                                                <input class="form-control" name="hname" type="text" id="billing-email">
+                                                <input class="form-control" name="hname" type="text" id="housename" onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="house_error" style="color:red;font-size:12px;"></span>
+                                            
                                             </div>
                                         </div>
         
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-phone">Street</label>
-                                                <input class="form-control" name="street" type="text" id="billing-phone">
+                                                <input class="form-control" name="street" type="text" id="street" onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="street_error" style="color:red;font-size:12px;"></span>
+                                            
                                             </div>
                                         </div>
                                     </div>
@@ -285,14 +455,16 @@
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-email">City</label>
-                                                <input class="form-control" name="city" type="text" id="billing-email">
+                                                <input class="form-control" name="city" type="text" id="city"  onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="city_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
         
                                         <div class="col-sm-6">
                                             <div class="mb-4">
                                                 <label class="form-label" for="billing-phone">Postal code</label>
-                                                <input class="form-control" name="pin" type="text" id="billing-phone">
+                                                <input class="form-control" name="pin" type="tel" maxlength="6" id="pin" onblur="return validateaddress()" onKeyUp="return validateaddress()">
+                                                <span id="pin_error" style="color:red;font-size:12px;"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -307,7 +479,101 @@
 
             <!--##############################  -->
 
-                        <!-- Change Password -->
+
+
+                    <script>
+                        function validateservice()
+                        {
+                            var category=document.getElementById('category').value.trim();
+                            var brand=document.getElementById('brand').value.trim();
+                            var model=document.getElementById('model').value.trim();
+                            var modelno=document.getElementById('modelno').value.trim();
+                            var fileInput =document.getElementById('bill');
+                            var issue=document.getElementById('issue').value.trim();
+                            
+
+                            var file = fileInput.files[0];
+                            var allowedExtensions = /(\.pdf)$/i;
+                       
+
+                            if(category=="")
+                            {
+                                document.getElementById('category_error').style.display="block";
+                                document.getElementById('category_error').innerHTML="**Please select category ";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('category_error').style.display = "none";
+                            }
+
+
+                            // for brand validation
+                            if(brand=="")
+                            {
+                                document.getElementById('brand_error').style.display="block";
+                                document.getElementById('brand_error').innerHTML="**Please enter brand name ";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('brand_error').style.display = "none";
+                            }
+
+                            if(model=="")
+                            {
+                                document.getElementById('model_error').style.display="block";
+                                document.getElementById('model_error').innerHTML="**Please enter model name ";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('model_error').style.display = "none";
+                            }
+
+                            if(modelno=="")
+                            {
+                                document.getElementById('modelno_error').style.display="block";
+                                document.getElementById('modelno_error').innerHTML="**Please enter model number ";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('modelno_error').style.display = "none";
+                            }
+
+                            if (!file) 
+                            {
+                                document.getElementById('bill_error').style.display="block";
+                                document.getElementById('bill_error').innerHTML="**Please select bill";
+                                return false;
+                            }
+                            var fileName = file.name;
+                            var fileExtension = fileName.split('.').pop().toLowerCase();
+                            if (fileExtension !== 'pdf'){
+                                document.getElementById('bill_error').style.display="block";
+                                document.getElementById('bill_error').innerHTML="**Please select pdf file";
+                                return false;
+                            }
+                            else{
+                                document.getElementById('bill_error').style.display = "none";
+                            } 
+
+                            if(issue=="")
+                            {
+                                document.getElementById('issue_error').style.display="block";
+                                document.getElementById('issue_error').innerHTML="**Please enter the issue ";
+                                return false;
+                            }
+                            else
+                            {
+                                document.getElementById('issue_error').style.display = "none";
+                                return true;
+                            }
+                        
+                        }
+                </script>
+                        
                         <div class="tab-pane fade" id="pills-service" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <!-- Title -->
     
@@ -326,7 +592,7 @@
                                            
                                             <div class="credit-card-wrapper"></div>
                                             
-                                            <form method="post" action="{% url 'View_Service' %}" enctype="multipart/form-data">
+                                            <form method="post" action="{% url 'View_Service' %}" enctype="multipart/form-data" onsubmit="return validateservice()">
                                                 {% csrf_token %}
                                                     
 
@@ -336,19 +602,20 @@
                                                     <div class="col-sm-6">
                                                         <div class="mb-4">
                                                             <label class="form-label"  for="billing-state">Category</label>
-                                                            <select class="form-select" name="category" id="billing-state">
-                                                                <option value="">Choose state</option>
+                                                            <select class="form-select" name="category" id="category"  onblur="return validateservice()" onKeyUp="return validateservice()" onclick="return validateservice()">
+                                                                <option value="">Choose Category</option>
                                                                 {% for i in category %}
                                                                 <option >{{i.name}}</option>
                                                                 {% endfor %}
-                                                              
                                                             </select>
+                                                             <span id="category_error" style="color:red;font-size:12px;"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="mb-4">
                                                             <label class="form-label" for="billing-fn">Brand Name :</label>
-                                                            <input class="form-control" type="text" name="brand" id="billing-fn">
+                                                            <input class="form-control" type="text" name="brand" id="brand" onblur="return validateservice()" onKeyUp="return validateservice()">
+                                                             <span id="brand_error" style="color:red;font-size:12px;"></span>
                                                         </div>
                                                     </div>
                                                  
@@ -359,14 +626,16 @@
                                                         <div class="col-sm-6">
                                                             <div class="mb-4">
                                                                 <label class="form-label" for="billing-fn">Model:</label>
-                                                                <input class="form-control" type="text" name="model" id="billing-fn">
+                                                                <input class="form-control" type="text" name="model" id="model" onblur="return validateservice()" onKeyUp="return validateservice()">
+                                                                <span id="model_error" style="color:red;font-size:12px;"></span>
                                                             </div>
                                                         </div>
                         
                                                         <div class="col-sm-6">
                                                             <div class="mb-4">
                                                                 <label class="form-label" for="billing-ln">Model Number :</label>
-                                                                <input class="form-control" type="text" name="model_no" id="billing-ln">
+                                                                <input class="form-control" type="text" name="model_no" id="modelno" onblur="return validateservice()" onKeyUp="return validateservice()">
+                                                                <span id="modelno_error" style="color:red;font-size:12px;"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -377,14 +646,16 @@
                                                         <div class="col-sm-6">
                                                             <div class="mb-4">
                                                                 <label class="form-label" for="billing-email">Smart Store Purchase Bill</label>
-                                                                <input class="form-control" name="bill" type="file" id="billing-email">
+                                                                <input class="form-control" name="bill" type="file" id="bill" onblur="return validateservice()"  onKeyUp="return validateservice()" onchange="return validateservice()">
+                                                                <span id="bill_error" style="color:red;font-size:12px;"></span>
                                                             </div>
                                                         </div>
                         
                                                         <div class="col-sm-6">
                                                             <div class="mb-4">
                                                                 <label class="form-label" for="billing-phone">Issues</label>
-                                                                <input class="form-control" name="issue" type="text" id="billing-phone">
+                                                                <input class="form-control" name="issue" type="text" id="issue" onblur="return validateservice()" onKeyUp="return validateservice()">
+                                                                <span id="issue_error" style="color:red;font-size:12px;"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -465,10 +736,75 @@
 
 
 <!-- ############################## -->
+
+
+                    <script>
+                                                    
+                        function validateform()
+                        {
+                            var a=document.getElementById('oldpss').value.trim();
+                            var b=document.getElementById('pss').value.trim();
+                            var c=document.getElementById('cpss').value.trim();
+
+                            var passpatern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+                            if(a=="")
+                            {
+                                document.getElementById('ops').style.display="block";
+                                document.getElementById('ops').innerHTML="**please enter old Password";
+                                return false;
+                            }
+                            else{
+                                    document.getElementById('ops').style.display="none";            
+                                }
+                                
+                            if(b=="")
+                            {
+                                document.getElementById('ps').style.display="block";
+                                document.getElementById('ps').innerHTML="**please enter new Password";
+                                return false;
+                            }
+
+                            if (!b.match(passpatern))
+                            {
+                                document.getElementById('ps').style.display="block";
+                                document.getElementById('ps').innerHTML="**Min length 8 | One Uppercase |One lowercase | One number";
+                                return false;
+                            }
+                            else{
+                                    document.getElementById('ps').style.display="none";
+                                }
+
+                                if(c=="")
+                            {
+                                document.getElementById('cps').style.display="block";
+                                document.getElementById('cps').innerHTML="**please enter Confirm Password";
+                                return false;
+                            }
+                            else{
+                                    document.getElementById('cps').style.display="none";
+                                    
+                                }
+                                if(b!=c)
+                                {
+                                    document.getElementById('ps').style.display="block";
+                                    document.getElementById('ps').innerHTML="**Password doesn't match";
+                                    return false;
+                                }
+                                else{
+                                        document.getElementById('ps').style.display="none";
+                                        return true;
+                                    }
+                            }
+                        </script>
+
+
+
+
                              <!-- Change Password -->
                              <div class="tab-pane fade" id="pills-password" role="tabpanel" aria-labelledby="pills-profile-tab">
                                 <div class="border border-gray-200 rounded-3 p-4">
-                                    <form method="post" action="{% url 'change_password' %}">
+                                    <form method="post" action="{% url 'change_password' %}" novalidate="novalidate" onsubmit="return validateform();">
                                     {% csrf_token %}
                                         
                                         <h6 class="pb-4 mb-4 border-bottom">Change Password</h6>
@@ -477,21 +813,24 @@
                                             <div class="col-sm-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="billing-fn">Old Password</label>
-                                                    <input class="form-control" type="password" name="oldpass" id="billing-fn">
+                                                    <input class="form-control" type="password" name="oldpass" id="oldpss" onblur="return validateform()" onKeyUp="return validateform()">
+                                                    <span id="ops" style="color: red;font-size:12px;"></span>
                                                 </div>
                                             </div>
                                             
                                             <div class="col-sm-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="billing-fn">New Password</label>
-                                                    <input class="form-control" type="password" name="pass" id="billing-fn">
+                                                    <input class="form-control" type="password" name="pass" id="pss" onblur="return validateform()" onKeyUp="return validateform()">
+                                                    <span id="ps" style="color:red;font-size:12px;"></span>
                                                 </div>
                                             </div>
             
                                             <div class="col-sm-6">
                                                 <div class="mb-4">
                                                     <label class="form-label" for="billing-ln">Confirm Password</label>
-                                                    <input class="form-control" type="password" id="billing-ln">
+                                                    <input class="form-control" id="cpss" type="password" onblur="return validateform()" onKeyUp="return validateform()">
+                                                    <span id="cps" style="color:red;font-size:12px;"></span>
                                                 </div>
                                             </div>
             

@@ -1,14 +1,27 @@
 {% if messages %}
 {% for message in messages %}
+
+
+  
      <div class="alert  alert-{{ message.tags }} m-2" id="msg" role="alert">{{ message }} </div>
 
+     
+<script>
+    // Get the reference to the message element
+    const messageElement = document.getElementById('msg');
+  
+    // Show the message initially
+    messageElement.style.display = 'block';
+  
+    // Set a timeout to hide the message after 4 seconds
+    setTimeout(function() {
+      // Hide the message by setting display to 'none'
+      messageElement.style.display = 'none';
+    }, 2000);
+  </script>
 
-     <script>
-          setTimeout(function(){
-          if ($('#msg').length > 0){
-              $('#msg').remove();
-              }
-          },1000)
-      </script>
+  
+
+     
 {% endfor %}
 {% endif %}
