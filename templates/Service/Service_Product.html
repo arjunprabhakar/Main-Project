@@ -172,8 +172,12 @@
 																<input class="form-control form-control-lg" name="spare" type="text" style="width:350px;"/>
 																</div>
 																<div class="form-group">
+																<label>Quantity</label>
+																<input class="form-control form-control-lg" name="quantity" type="tel" style="width:100px;margin-right:10px;"/>
+																</div>
+																<div class="form-group">
 																<label>Amount</label>
-																<input class="form-control form-control-lg" name="amount" type="text" style="width:100px;"/>
+																<input class="form-control form-control-lg" name="amount" type="tel" style="width:100px;"/>
 																</div>
 																<a class="add-more" style="font-size: 30px;margin-bottom:-200px;color:green;cursor: pointer;" title="Add More"> + </a>
 														     </div>
@@ -199,7 +203,7 @@
 															e.preventDefault();
 															if (count < max_fields) {
 															  count++;
-															  var new_field = $('<div  style="display: flex;"><div class="form-group"  style="margin-right: 10px;"><label>Enter spare part name</label><input name="spare" class="form-control form-control-lg" type="text" style="width:350px;"/></div>   <div class="form-group"><label>Amount</label><input name="amount" class="form-control form-control-lg" type="text" style="width:100px;"/><a class="remove-field" style="font-size:15px;margin-bottom:-200px;color:red;cursor: pointer;" title="Remove">X</a></div><div  style="display: flex;">');
+															  var new_field = $('<div  style="display: flex;"><div class="form-group"  style="margin-right: 10px;"><label>Enter spare part name</label><input name="spare" class="form-control form-control-lg" type="text" style="width:350px;"/></div> <div class="form-group"><label>Quantity</label><input name="quantity" class="form-control form-control-lg" type="text" style="width:100px;margin-right:10px;"/></div>  <div class="form-group"><label>Amount</label><input name="amount" class="form-control form-control-lg" type="text" style="width:100px;"/><a class="remove-field" style="font-size:15px;margin-bottom:-200px;color:red;cursor: pointer;" title="Remove">X</a></div><div  style="display: flex;">');
 															  $(wrapper).append(new_field);
 															  $(new_field).find(".remove-field").click(function() {
 																$(this).parents('div').eq(1).remove();
@@ -371,7 +375,9 @@
 													<tr>
 														<th scope="col">#</th>
 														<th scope="col">Spare Name</th>
-														<th scope="col">Amount</th>
+														<th scope="col">Quantity</th>
+														<th scope="col">Rate</th>
+														<th scope="col">Total</th>
 														<th scope="col">Action</th>
 													</tr>
 												</thead>
@@ -383,11 +389,19 @@
 													<tr>
 														<th scope="row">{{forloop.counter}}</th>
 														<td>{{i.sparepart}}</td>
-														<td>{{i.amount}}</td>
+														<td>{{i.quantity}}</td>
+														<td>₹ {{i.amount}}</td>
+														<td>₹ {{i.total}}</td>
 														<td><a href="{% url 'remove_bill_data' i.id %}"><span class="badge badge-danger" style="cursor: pointer;">Remove</span></a></td>
 													</tr>
 													{% endfor %}
 													{% endif %}
+
+													<tr>
+													
+														<td colspan="4" style="text-align:end;color:red;font-weight:bold;font-size:17px;">Grand Total :</td>
+														<td colspan="4" style="font-weight:bold;font-size:17px;">₹ {{grandtotal}}</td>
+													</tr>
 												</tbody>
 											</table>
 										</div>

@@ -571,8 +571,13 @@ def Service_Product(request):
         status=tbl_Accepted_product_status.objects.order_by('-id')
         service_bill=tbl_ServiceBill.objects.filter(Servicer_id=email,status=0)
         count=tbl_ServiceBill.objects.filter(Servicer_id=email,status=0).count()
+
+        grandtotal=0
+        for i in service_bill:
+            grandtotal=grandtotal+i.total
         if product:
             data={
+                'grandtotal':grandtotal,
                 'user':user,
                 'product':product,
                 'status':status,
@@ -645,8 +650,10 @@ def service_Bill(request):
             product=request.POST.get('product')
             spare=request.POST.getlist('spare')
             amount=request.POST.getlist('amount')
+            quantity=request.POST.getlist('quantity')
             for i in range(len(spare)):
-                    tbl_ServiceBill(Servicer_id=user,Accepted_product_id=product,sparepart=spare[i],amount=amount[i]).save()
+                    total=float(amount[i]) * int(quantity[i])
+                    tbl_ServiceBill(Servicer_id=user,Accepted_product_id=product,sparepart=spare[i],amount=amount[i],quantity=quantity[i],total=total).save()
         return redirect(Service_Product)
     else:
         return redirect(login)
@@ -722,7 +729,6 @@ from django.db.models import Q
 def view_bill(request,id):
     accepted_product=tbl_Accepted_product.objects.get(id=id,status=0)
     service_bill=tbl_ServiceBill.objects.filter(Accepted_product=accepted_product.product_id).count()
-    print(service_bill,'##############')
     if accepted_product.work_hour != 0 or service_bill != "" :
         # Retrieve all service bill instances
         bills = tbl_ServiceBill.objects.filter(Accepted_product=accepted_product.product_id)
@@ -772,16 +778,20 @@ def view_bill(request,id):
         # Add the service bill details to the table
         for i, bill in enumerate(bills):
             product = bill.Accepted_product.brand
+            labour = bill.Accepted_product.work_hour
             sparepart = bill.sparepart
             rate = bill.amount
-            amount=rate * 2
+            quantity=bill.quantity
+            amount=rate * quantity
             serial_number = i + 1
             total_amount=total_amount+amount
-            table_data.append([serial_number,sparepart,rate,'2',amount])
+            table_data.append([serial_number,sparepart,rate,quantity,amount])
 
         table_data.append(['', '', '','',''])
         table_data.append(['----------------', '----------------------------------------', '----------------------------------','------------------------------','------------------------'])
 
+
+        labour=labour
         table_data.append(['', '', '', 'Total Amount:', total_amount])
         table_data.append(['', '', '',''])
         table_data.append(['','','','Labour Charge:','2000.00'])
