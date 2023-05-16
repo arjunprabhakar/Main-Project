@@ -6,7 +6,7 @@ from category.models import Category, Subcategory
 from credentialapp.models import log_user, user_address
 from productapp.models import Product
 from django.contrib import messages
-from credentialapp.views import login
+from credentialapp.views import login, profile
 from .models import Cart, OrderPlaced, Payment, Wishlist
 from django.contrib import messages
 from django.shortcuts import render
@@ -121,35 +121,39 @@ def checkout(request):
     if 'email' in request.session:
         email = request.session['email']
         address=user_address.objects.filter(user_id=email)
-        item=Cart.objects.filter(user_id=email)
-        total = 0
-        for i in item:
-            total +=  i.product.selling_price * i.product_qty
-        stotal=total * 100
-        category=Category.objects.all()
-        subcategory=Subcategory.objects.all()
-        email = request.session['email']
-        cart=Cart.objects.filter(user_id=email)
-        cart_count=0
-        for i in cart:
-            cart_count=cart_count+ i.product_qty
-        client = razorpay.Client(auth=(settings.RAZORPAY_API_KEY,settings.RAZORPAY_API_SECRET_KEY))
-        data = {
-        "amount": 100,
-        "currency": "INR",
-        }
-        payment_response = client.order.create(data=data)
-        print(payment_response)
-        # {'id': 'order_KiA1Iabwcd5AhC', 'entity': 'order', 'amount': 100, 'amount_paid': 0, 'amount_due': 100, 'currency': 'INR', 'receipt': None, 'offer_id': None, 'status': 'created', 'attempts': 0, 'notes': [], 'created_at': 1668918385}
-        order_id = payment_response['id']
-        request.session['order_id'] = order_id
-        order_status = payment_response['status']
-        email = request.session['email']
-        users=log_user.objects.get(email=email)
-        if order_status == 'created':
-            payment = Payment(person=users,amount=total,razorpay_order_id = order_id,razorpay_payment_status = order_status)
-        payment.save()
-        return render(request,"Customer/checkout.html",{'stotal':stotal,'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
+        if address:
+            item=Cart.objects.filter(user_id=email)
+            total = 0
+            for i in item:
+                total +=  i.product.selling_price * i.product_qty
+            stotal=total * 100
+            category=Category.objects.all()
+            subcategory=Subcategory.objects.all()
+            email = request.session['email']
+            cart=Cart.objects.filter(user_id=email)
+            cart_count=0
+            for i in cart:
+                cart_count=cart_count+ i.product_qty
+            client = razorpay.Client(auth=(settings.RAZORPAY_API_KEY,settings.RAZORPAY_API_SECRET_KEY))
+            data = {
+            "amount": 100,
+            "currency": "INR",
+            }
+            payment_response = client.order.create(data=data)
+            print(payment_response)
+            # {'id': 'order_KiA1Iabwcd5AhC', 'entity': 'order', 'amount': 100, 'amount_paid': 0, 'amount_due': 100, 'currency': 'INR', 'receipt': None, 'offer_id': None, 'status': 'created', 'attempts': 0, 'notes': [], 'created_at': 1668918385}
+            order_id = payment_response['id']
+            request.session['order_id'] = order_id
+            order_status = payment_response['status']
+            email = request.session['email']
+            users=log_user.objects.get(email=email)
+            if order_status == 'created':
+                payment = Payment(person=users,amount=total,razorpay_order_id = order_id,razorpay_payment_status = order_status)
+            payment.save()
+            return render(request,"Customer/checkout.html",{'stotal':stotal,'cart_count':cart_count,'email':email,'category':category,'subcategory':subcategory,'address':address,'item':item,'total':total})
+        else:
+            messages.success(request, 'Please add shipping address')
+            return redirect(profile)
     return redirect(login)
 
 def payment_done(request):
