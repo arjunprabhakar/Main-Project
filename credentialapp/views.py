@@ -759,11 +759,15 @@ def view_bill(request,id):
         pdf.setFont("Helvetica", 10)
         pdf.drawRightString(150, 688, f"Date: {today}")
 
+
+        user=accepted_product.product.user_id
+        customer=reg_user.objects.get(email_id=user)
         pdf.setFillColorRGB(0, 0, 0)  # Set text color to blue
         pdf.setFont("Helvetica", 10)
-        pdf.drawRightString(530, 688, f"Customer Name: Arjun P P")
-        pdf.drawRightString(530, 676, f"Phone: 8301014273")
-        pdf.drawRightString(530, 664, f"Email: arjun@gmail.com")
+        pdf.drawRightString(530, 700, f"Customer Details")
+        pdf.drawRightString(530, 688,customer.name )
+        pdf.drawRightString(530, 676,customer.phone_no)
+        pdf.drawRightString(530, 664, customer.email_id )
         
         pdf.setFillColorRGB(0, 0, 0)  # Set text color to blue
         pdf.setFont("Helvetica", 14)
@@ -778,7 +782,7 @@ def view_bill(request,id):
         # Add the service bill details to the table
         for i, bill in enumerate(bills):
             product = bill.Accepted_product.brand
-            labour = bill.Accepted_product.work_hour
+            product_id = bill.Accepted_product
             sparepart = bill.sparepart
             rate = bill.amount
             quantity=bill.quantity
@@ -790,14 +794,18 @@ def view_bill(request,id):
         table_data.append(['', '', '','',''])
         table_data.append(['----------------', '----------------------------------------', '----------------------------------','------------------------------','------------------------'])
 
+        labour=tbl_Accepted_product.objects.get(product_id=product_id)
 
-        labour=labour
+        labour=labour.work_hour
+
+        labourcharge=labour*2
         table_data.append(['', '', '', 'Total Amount:', total_amount])
         table_data.append(['', '', '',''])
-        table_data.append(['','','','Labour Charge:','2000.00'])
+        table_data.append(['','','','Labour Charge:',labourcharge])
         table_data.append(['','','',''])
-    
-        table_data.append(['','','','Grand Total:','20000.00'])
+
+        grand_total=labourcharge + total_amount
+        table_data.append(['','','','Grand Total:',grand_total])
 
 
         # Create the table
@@ -864,7 +872,7 @@ def send_email_with_bill(request, id):
     message = 'Dear Sir,\nWe hope this email finds you well.we are sending you the bill for the product service you have purchased from us.\n We appreciate your business and would like to thank you for choosing our Smart Store for your needs.\nPlease find the attached invoice.\nBest regards,\nSmart Store.\nEmail : smartstore@gmail.com\nphone:8798678898\n'
     from_email = settings.EMAIL_HOST_USER
     # recipient_list = 'arjunpp2023a@mca.ajce.in'  # Replace with the recipient email address
-    recipient_list = [accepted_product.Servicer.email]  # Replace with the recipient email address
+    recipient_list = [accepted_product.product.user.email]  # Replace with the recipient email address
     email = EmailMessage(subject, message, from_email, recipient_list)
 
     # Add the service bill attachment

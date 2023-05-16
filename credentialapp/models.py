@@ -102,7 +102,7 @@ class tbl_Accepted_product(models.Model):
     status=models.BooleanField(default=0)
     work_done=models.BooleanField(default=0)
     accepted_date=models.DateTimeField(auto_now_add=True,null=True)
-    work_hour=models.IntegerField(null=True,default=30)
+    work_hour=models.IntegerField(default=30)
     service_bill=models.FileField(upload_to='Service_Bill',null=True)
 
 
