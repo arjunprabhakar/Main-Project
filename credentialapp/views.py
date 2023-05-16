@@ -379,9 +379,10 @@ def category_product(request,id):
             
 # Forgot Password
 def forgotpassword(request):
+    category=Category.objects.all()
+    subcategory=Subcategory.objects.all()
     if request.method =="POST":
-        category=Category.objects.all()
-        subcategory=Subcategory.objects.all()
+        
         email=request.POST.get('email')
         if log_user.objects.filter(email=email).exists():
             user=log_user.objects.get(email=email) 
