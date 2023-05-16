@@ -104,6 +104,7 @@ class tbl_Accepted_product(models.Model):
     accepted_date=models.DateTimeField(auto_now_add=True,null=True)
     work_hour=models.IntegerField(default=30)
     service_bill=models.FileField(upload_to='Service_Bill',null=True)
+    service_details=models.CharField(max_length=300,null=True)
 
 
 

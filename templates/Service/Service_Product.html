@@ -151,6 +151,7 @@
 														<option >Select Option</option>
 														<option value="add-spare-part-form">Add Spare Part Details</option>
 														<option value="add-another-form">Add work hours</option>
+														<option value="add-service-details">Add dervice details</option>
 													  </select>
 													</div>
 
@@ -237,18 +238,66 @@
 														</li>
 													  </ul>
 													</form>
+
+
+
+													<form id="add-service-details" method="post" action="{% url 'add_details' %}" style="display:none">
+														{% csrf_token %}
+														<ul class="profile-edit-list row">
+														<li class="weight-500 col-md-6">
+														  <!-- <h4 class="text-blue h5 mb-20">Add work hour</h4> -->
+														  <div class="form-group">
+															<label>Add service details</label>
+															<div class="form-group">
+																<textarea class="form-control"  name="details"></textarea>
+															</div>
+														  </div>
+														 		 {% for i in product %}
+																<input  name="product" value="{{i.id}}" type="text" style="display:none;"/>
+																{% endfor %}
+														 
+														  <div class="form-group mb-0">
+															<input type="submit" class="btn btn-primary" value="Submit" />
+														  </div>
+														</li>
+													  </ul>
+													</form>
 												  </div>
 												</div>
 											  </div>
 										  
-											  <script>
+											  <!-- <script>
 												document.getElementById("select-form").addEventListener("change", function() {
 												  var selectedForm = document.getElementById(this.value);
-												  var otherForm = document.getElementById(this.value == "add-spare-part-form" ? "add-another-form" : "add-spare-part-form");
+												  var otherForm = document.getElementById(this.value == "add-spare-part-form" ?  "add-another-form" : "add-spare-part-form");
 												  selectedForm.style.display = "block";
 												  otherForm.style.display = "none";
 												});
+											  </script> -->
+
+											  <script>
+												document.getElementById("select-form").addEventListener("change", function() {
+												  var selectedForm = document.getElementById(this.value);
+												  var form1 = document.getElementById("add-spare-part-form");
+												  var form2 = document.getElementById("add-another-form");
+												  var form3 = document.getElementById("add-service-details");
+											  
+												  if (this.value === "add-spare-part-form") {
+													selectedForm.style.display = "block";
+													form2.style.display = "none";
+													form3.style.display = "none";
+												  } else if (this.value === "add-another-form") {
+													selectedForm.style.display = "block";
+													form1.style.display = "none";
+													form3.style.display = "none";
+												  } else if (this.value === "add-service-details") {
+													selectedForm.style.display = "block";
+													form1.style.display = "none";
+													form2.style.display = "none";
+												  }
+												});
 											  </script>
+											  
 											   
 											 
 

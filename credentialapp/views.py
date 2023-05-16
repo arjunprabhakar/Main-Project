@@ -685,7 +685,20 @@ def work_hour(request):
         return redirect(login)
 
 
-
+# for updating the service details
+def add_details(request):
+    if 'email' in request.session:
+        email=request.session['email']
+        if request.method=='POST':
+            details=request.POST.get('details')
+            product=request.POST.get('product')
+            products=tbl_Accepted_product.objects.get(Servicer_id=email,id=product)
+            products.service_details=details
+            products.save()
+            messages.success(request, 'Service details added successfully')
+        return redirect(Service_Product)
+    else:
+        return redirect(login)
 
 from django.template.loader import get_template
 from django.http import HttpResponse
@@ -869,10 +882,11 @@ def send_email_with_bill(request, id):
     accepted_product = tbl_Accepted_product.objects.get(id=id)
     # Set up the email message
     subject = 'Smart Store Service Bill'
-    message = 'Dear Sir,\nWe hope this email finds you well.we are sending you the bill for the product service you have purchased from us.\n We appreciate your business and would like to thank you for choosing our Smart Store for your needs.\nPlease find the attached invoice.\nBest regards,\nSmart Store.\nEmail : smartstore@gmail.com\nphone:8798678898\n'
+    message = 'Dear Sir,\nWe hope this email finds you well.we are sending you the bill for the product service you have purchased from us.\n\n Service details ....,\n\n' +accepted_product.service_details+ '\n\nWe appreciate your business and would like to thank you for choosing our Smart Store for your needs.\nPlease find the attached invoice.\nBest regards,\nSmart Store.\nEmail : smartstore@gmail.com\nphone:8798678898\n'
     from_email = settings.EMAIL_HOST_USER
     # recipient_list = 'arjunpp2023a@mca.ajce.in'  # Replace with the recipient email address
-    recipient_list = [accepted_product.product.user.email]  # Replace with the recipient email address
+    # recipient_list = [accepted_product.product.user.email]  # Replace with the recipient email address
+    recipient_list = [accepted_product.Servicer_id]  # Replace with the recipient email address
     email = EmailMessage(subject, message, from_email, recipient_list)
 
     # Add the service bill attachment
