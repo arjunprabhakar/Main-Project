@@ -885,8 +885,8 @@ def send_email_with_bill(request, id):
     message = 'Dear Sir,\nWe hope this email finds you well.we are sending you the bill for the product service you have purchased from us.\n\n Service details ....,\n\n' +accepted_product.service_details+ '\n\nWe appreciate your business and would like to thank you for choosing our Smart Store for your needs.\nPlease find the attached invoice.\nBest regards,\nSmart Store.\nEmail : smartstore@gmail.com\nphone:8798678898\n'
     from_email = settings.EMAIL_HOST_USER
     # recipient_list = 'arjunpp2023a@mca.ajce.in'  # Replace with the recipient email address
-    # recipient_list = [accepted_product.product.user.email]  # Replace with the recipient email address
-    recipient_list = [accepted_product.Servicer_id]  # Replace with the recipient email address
+    recipient_list = [accepted_product.product.user.email]  # Replace with the recipient email address
+    # recipient_list = [accepted_product.Servicer_id]  # Replace with the recipient email address
     email = EmailMessage(subject, message, from_email, recipient_list)
 
     # Add the service bill attachment
